@@ -4,7 +4,6 @@ const path = require('path');
 // Load babel
 require('./lib/babel')();
 
-
 nconf
   .argv()
   .env()
@@ -19,11 +18,30 @@ nconf
     LOG_COLOR: true
   });
 
-const { createServer, startServer } = require('./server/index');
+const createServer = require('./server/init');
+const startServer = (server) => {
+  return new Promise((resolve, reject) => {
+    server.start((err) => {
+      if (err) {
+        reject(err);
+      }
 
-startServer(createServer()).catch((err) => {
-  console.error(err);
-  console.error('Server could not be started. Aborting...');
+      resolve(server);
 
-  process.exit(1);
-});
+      console.info(`Server running at: ${server.info.uri}`);
+    });
+  });
+};
+
+const server = createServer(key => nconf.get(key), null);
+
+startServer(server)
+  .catch((err) => {
+    console.error(err);
+    console.error('Server could not be started. Aborting...');
+
+    process.exit(1);
+  });
+
+
+module.exports = server;

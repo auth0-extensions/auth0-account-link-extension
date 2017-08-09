@@ -1,10 +1,9 @@
 import Hapi from 'hapi';
-import nconf from 'nconf';
 import config from '../lib/config';
+import logger from '../lib/logger';
+import routes from './routes';
 
-config.setProvider(key => nconf.get(key) || process.env[key]);
-
-const createServer = function createServer() {
+const createServer = (cb) => {
   const server = new Hapi.Server();
 
   server.connection({
@@ -18,21 +17,26 @@ const createServer = function createServer() {
 
   // TODO: Much more configuration goes here but we'll leave it empty for now
 
+  server.register([routes], (err) => {
+    // Use the server logger.
+    logger.debug = (...args) => {
+      server.log([ 'debug' ], args.join(' '));
+    };
+    logger.info = (...args) => {
+      server.log([ 'info' ], args.join(' '));
+    };
+    logger.error = (...args) => {
+      server.log([ 'error' ], args.join(' '));
+    };
+
+    if (err) {
+      cb(err);
+    }
+
+    cb(null, server);
+  });
+
   return server;
 };
 
-const startServer = function startServer(server) {
-  return new Promise((resolve, reject) => {
-    server.start((err) => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve(server);
-
-      console.info(`Server running at: ${server.info.uri}`);
-    });
-  });
-};
-
-export { createServer, startServer };
+export default createServer;
