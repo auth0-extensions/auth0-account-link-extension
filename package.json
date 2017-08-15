@@ -63,6 +63,7 @@
     "auth0-extension-tools": "1.2.1",
     "boom": "3.2.2",
     "hapi": "13.5.0",
+    "inert": "4.0.1",
     "nconf": "^0.8.4",
     "open": "^0.0.5",
     "webtask-tools": "^3.2.0",

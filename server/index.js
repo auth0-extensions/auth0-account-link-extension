@@ -1,4 +1,6 @@
+import Path from 'path';
 import Hapi from 'hapi';
+import Inert from 'inert';
 import config from '../lib/config';
 import logger from '../lib/logger';
 import routes from './routes';
@@ -11,11 +13,24 @@ const createServer = (cb) => {
     port: config('PORT'),
     routes: {
       cors: true,
-      validate: {}
+      validate: {},
+      files: {
+        relativeTo: Path.join(__dirname, '../public')
+      }
     }
   });
 
-  // TODO: Much more configuration goes here but we'll leave it empty for now
+  server.register(Inert, () => {});
+
+  server.route({
+    method: 'GET',
+    path: '/js/{file*}',
+    handler: {
+      directory: {
+        path: __dirname + '/../public/js'
+      }
+    }
+  });
 
   server.register([routes], (err) => {
     // Use the server logger.

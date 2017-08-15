@@ -1,4 +1,5 @@
-import linkRoute from '../api/patch_link';
+//import linkActionRoute from '../api/patch_link';
+import linkRoute from '../api/get_link';
 
 const createRoute = (route, server) => server.route(route(server));
 

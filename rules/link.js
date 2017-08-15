@@ -10,7 +10,7 @@
  *  the server.
  */
 
-module.export = function (user, context, callback) {
+module.exports = function (user, context, callback) {
   var request = require('request@2.56.0');
   var Promise = require('native-or-bluebird@1.2.0');
 
@@ -18,7 +18,7 @@ module.export = function (user, context, callback) {
 
   var config = {
     endpoints: {
-      linking: 'http://localhost:3001/api/link',
+      linking: 'http://localhost:3000/link',
       userApi: auth0.baseUrl + '/users'
     },
     token: {
@@ -137,6 +137,7 @@ module.export = function (user, context, callback) {
 
   // Consider moving this logic out of the rule and into the extension
   function buildRedirectUrl(token) {
+    console.log("Here is the context", context)
     return config.endpoints.linking + '?' +
       [
         'child_token=' + token,
@@ -175,7 +176,6 @@ module.export = function (user, context, callback) {
     // in order to avoid a redirect loop. User will
     // be sent to /continue at this point. We need
     // to assign them to their primary user if so.
-    // TODO: This part needs to do work, may break out from this area.
     return context.protocol === CONTINUE_PROTOCOL;
   }
 }.toString();
