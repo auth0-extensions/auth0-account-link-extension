@@ -1,5 +1,4 @@
 /* global configuration, auth0, jwt */
-// This is the rule provided with the account linking PoC. It needs some revamping.
 /**
  *  Do NOT execute this code from anywhere within this extension.
  *  It is the rule that gets pushed up to the Auth0 Server.
@@ -24,20 +23,19 @@ module.exports = function (user, context, callback) {
     token: {
       clientId: configuration.AUTH0_CLIENT_ID,
       clientSecret: configuration.AUTH0_CLIENT_SECRET,
-      issuer: configuration.ISSUER || "https://machuga-auth0.auth0.com/"
+      issuer: configuration.ISSUER || "machuga-auth0.auth0.com"
     }
   };
 
-  // If any of these above conditions are met, fire off the callback, we don't need to proceed
-  if (shouldNotProceed(user, context)) {
-    console.log("Will not proceed");
-    return callback(null, user, context);
-  }
+  var strategy;
 
-  // Need to make sure they want to link for this to make sense
-  // This function should work because it excludes the user_id
-  // which should still be the old user at this point
-  var strategy = shouldProceedToContinue() ? continueAuth() : linkVerifiedUsers();
+  if (shouldLink()) {
+    strategy = linkAccounts();
+  } else if (shouldPrompt()) {
+    strategy = promptUser();
+  } else {
+    strategy = continueAuth();
+  }
 
   strategy.then(callbackWithSuccess).catch(callbackWithFailure);
 
@@ -46,24 +44,53 @@ module.exports = function (user, context, callback) {
    * Functions
    *
    */
+  function linkAccounts() {
+    var secondAccountToken = context.request.query.link_account_token;
+    var primaryToken = createToken(config.token, {});
+    var token = jwt.decode(secondAccountToken);
+    var uri = config.endpoints.userApi+'/'+user.user_id+'/identities';
 
-  function continueAuth() {
-    console.log('moving to continue');
-    return searchUsersWithSameEmail().then(function(users) {
-      return users[0];
-    }).then(function(user) {
-      if (user) {
-        context.primaryUser = user.user_id;
+    var reqOptions = {
+      method: 'POST',
+      url: uri,
+      headers: {
+        Authorization: 'Bearer ' + primaryToken,
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        Accept: 'application/json'
+      },
+      json: {
+        link_with: secondAccountToken
       }
+    };
+    return new Promise(function(resolve, reject) {
+      request(reqOptions, function(err, response, body) {
+        if (err) {
+          reject(err);
+        } else if (response.statusCode !== 201) {
+          console.error("Linking failed", body);
+          reject(new Error(body));
+        } else {
+          resolve(response.body);
+        }
+      });
     });
   }
 
-  function linkVerifiedUsers() {
-    console.log('linking verified users');
+  function continueAuth() {
+    console.log('moving to continue');
+    //return searchUsersWithSameEmail().then(function(users) {
+    //  return users[0];
+    //}).then(function(user) {
+    //  if (user) {
+    //    context.primaryUser = user.user_id;
+    //  }
+    //});
+  }
+
+  function promptUser() {
     return searchUsersWithSameEmail()
-      .then(onlyVerifiedUsers)
       .then(function(users) {
-        // Okay we now have verified identities.
         // If not empty, we need attempt to auth them to ensure they're who they say they are
 
         // Will we only ever have one?  Skip iteration if so
@@ -76,7 +103,6 @@ module.exports = function (user, context, callback) {
       });
   }
 
-
   function callbackWithSuccess(_) {
     callback(null, user, context);
 
@@ -84,9 +110,9 @@ module.exports = function (user, context, callback) {
   }
 
   function callbackWithFailure(err) {
+    console.error(err.message);
+    console.error(err.stack);
     callback(err, user, context);
-
-    throw err;
   }
 
   function onlyVerifiedUsers(users) {
@@ -99,7 +125,7 @@ module.exports = function (user, context, callback) {
     var options = {
       expiresInMinutes: 5,
       audience: tokenInfo.clientId,
-      issuer: tokenInfo.issuer
+      issuer: qualifyDomain(tokenInfo.issuer)
     };
 
     var userSub = {
@@ -116,7 +142,10 @@ module.exports = function (user, context, callback) {
     return new Promise(function(resolve, reject) {
       request({
         url: config.endpoints.userApi,
-        headers: { Authorization: 'Bearer ' + auth0.accessToken },
+        headers: {
+          Authorization: 'Bearer ' + auth0.accessToken,
+          Accept: 'application/json'
+        },
         qs: {
           search_engine: 'v2',
           q: 'email:"' + user.email + '" -user_id:"' + user.user_id + '"'
@@ -125,6 +154,7 @@ module.exports = function (user, context, callback) {
         if (err) {
           reject(err);
         } else if (response.statusCode !== 200) {
+          console.error("Searching failed", body);
           reject(new Error(body));
         } else {
           resolve(response);
@@ -137,7 +167,6 @@ module.exports = function (user, context, callback) {
 
   // Consider moving this logic out of the rule and into the extension
   function buildRedirectUrl(token) {
-    console.log("Here is the context", context)
     return config.endpoints.linking + '?' +
       [
         'child_token=' + token,
@@ -149,13 +178,14 @@ module.exports = function (user, context, callback) {
       ].join('&');
   }
 
-  function shouldNotProceed(user, context) {
-    // Check if email is verified, we shouldn't
-    // merge accounts if this is not the case.
-    var emailNotVerified = function() { return !user.email_verified; };
+  function shouldLink() {
+    return !!context.request.query.link_account_token;
+  }
 
+  function shouldPrompt() {
     // Check if we're inside a redirect
     // in order to avoid a redirect loop
+    // TODO: Do the linking when inside a request? Will be primary user at this point, perhaps?
     var insideRedirect = function() {
       return context.request.query.redirect_uri &&
         context.request.query.redirect_uri.indexOf(config.endpoints.linking) !== -1;
@@ -164,18 +194,22 @@ module.exports = function (user, context, callback) {
     // Check if this is not the first login of the user
     // since merging already active accounts can be a
     // destructive action
-    var notFirstLogin = function() {
-      return context.stats.loginsCount > 0;
+    var firstLogin = function() {
+      return context.stats.loginsCount === 0;
     };
 
-    return /*emailNotVerified() || */ insideRedirect(); //|| notFirstLogin();
-  }
-
-  function shouldProceedToContinue() {
     // Check if we're coming back from a redirect
     // in order to avoid a redirect loop. User will
     // be sent to /continue at this point. We need
     // to assign them to their primary user if so.
-    return context.protocol === CONTINUE_PROTOCOL;
+    var redirectingToContinue = function() {
+      return context.protocol === CONTINUE_PROTOCOL;
+    };
+
+    return !insideRedirect() && !redirectingToContinue(); /*emailNotVerified() || */  //|| notFirstLogin();
+  }
+
+  function qualifyDomain(domain) {
+    return 'https://'+domain+'/';
   }
 }.toString();
