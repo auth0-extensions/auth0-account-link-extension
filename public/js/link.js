@@ -2,7 +2,10 @@ const linkBtn = document.getElementById('link');
 const skipBtn = document.getElementById('skip');
 const params = window.Qs.parse(window.location.search, { ignoreQueryPrefix: true });
 const token = window.jwt_decode(params.child_token);
-const connections = token.targetUser.identities.map(i => i.connection);
+const connections = token.targetUsers.reduce(function(acc, user) {
+  return acc.concat(user.connections);
+}, []);
+
 const onClick = (el, fn) => el.addEventListener('click', fn);
 const authorize = (domain, qs) => {
   const query = Object.keys(qs).map((key) => `${key}=${encodeURI(qs[key])}`, []).join('&');
