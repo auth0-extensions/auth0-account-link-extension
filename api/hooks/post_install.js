@@ -12,9 +12,11 @@ module.exports = (server) => ({
     ]
   },
   handler: (req, reply) => {
-    console.log("Starting install...")
+    console.log("Starting rule installation...");
+
     install(req.pre.auth0.rules, { extensionURL: config('PUBLIC_WT_URL') })
       .then(_ => reply().code(204))
+      .then(_ => { console.log("Rule successfully installed"); })
       .catch((err) => {
         console.error("Something went wrong, ", err);
         throw err;
