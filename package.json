@@ -17,6 +17,7 @@
   "license": "MIT",
   "auth0-extension": {
     "externals": [
+      "auth0@2.6.0",
       "auth0-extension-tools@1.2.1",
       "auth0-extension-hapi-tools@1.2.0",
       "boom@3.2.2",
@@ -59,6 +60,7 @@
     "settings": {}
   },
   "dependencies": {
+    "auth0": "2.6.0",
     "auth0-extension-hapi-tools": "1.2.0",
     "auth0-extension-tools": "1.2.1",
     "boom": "3.2.2",

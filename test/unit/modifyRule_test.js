@@ -18,7 +18,7 @@ describe('Modifying Rules', function() {
 
       return install(api, {})
         .then(_ => install(api, {}))
-        .then(api.getAll)
+        .then(x => api.getAll())
         .then(function(rules) {
           expect(rules.map(r => r.id)).to.contain(1);
         });
@@ -55,7 +55,7 @@ describe('Modifying Rules', function() {
         const index = existingRules.findIndex(r => r.id === existingRule.id);
 
         if (index !== -1) {
-          existingRules[index] = updatedRule;
+          existingRules[index] = Object.assign({}, existingRules[index], updatedRule);
         }
 
         return result(existingRules);

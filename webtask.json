@@ -3,13 +3,14 @@
   "name": "auth0-account-link",
   "version": "1.0.0",
   "author": "auth0",
-  "description": "This extension gives Auth0 customers the ability to link accounts for their users",
+  "description": "This extension gives Auth0 customers the ability to allow their users to link their accounts",
   "type": "application",
   "logoUrl": "https://cdn.auth0.com/extensions/auth0-authz/assets/logo.svg",
+  "codeUrl": "https://github.com/auth0-extensions/auth0-account-link-extension",
   "initialUrlPath": "/",
-  "updateConfirmMessage": "Warning! Read the documentation about breaking changes (https://auth0.com/docs/extensions/authorization-extension) before updating the extension",
-  "uninstallConfirmMessage": "You are about to uninstall the \"Authorization Extension\". If you proceed all your data in this extension will be lost. Do you want to continue?",
-  "repository": "https://github.com/auth0/auth0-authorization-extension",
+  "updateConfirmMessage": "Warning! Read the documentation about breaking changes (https://auth0.com/docs/extensions/account-link-extension) before updating the extension",
+  "uninstallConfirmMessage": "You are about to uninstall the \"Account Link Extension\". If you proceed all your data in this extension will be lost. Do you want to continue?",
+  "repository": "https://github.com/auth0-extensions/auth0-account-link-extension",
   "keywords": [
     "auth0",
     "extension"
@@ -17,6 +18,7 @@
   "auth0": {
     "createClient": true,
     "onUninstallPath": "/.extensions/on-uninstall",
+    "onInstallPath": "/.extensions/on-install",
     "onUpdatePath": "/.extensions/on-update",
     "scopes": "read:connections read:rules create:rules update:rules delete:rules"
   }
