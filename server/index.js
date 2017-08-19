@@ -33,6 +33,16 @@ const createServer = (cb) => {
     }
   });
 
+  server.route({
+    method: 'GET',
+    path: '/css/{file*}',
+    handler: {
+      directory: {
+        path: __dirname + '/../public/css'
+      }
+    }
+  });
+
   server.register([handlers, routes], (err) => {
     // Use the server logger.
     logger.debug = (...args) => {
