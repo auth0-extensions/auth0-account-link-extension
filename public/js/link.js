@@ -22,8 +22,10 @@ onClick(linkBtn, function(e) {
   authorize(token.iss, {
     client_id: params.client,
     redirect_uri: params.redirect_uri,
-    response_type: 'code',
-    scope: 'openid',
+    response_type: params.response_type,
+    scope: params.scope,
+    state: params.state,
+    nonce: params.nonce,
     link_account_token: params.child_token,
     connection: connections[0]
   });
