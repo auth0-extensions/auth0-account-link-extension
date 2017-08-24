@@ -2,7 +2,7 @@ import config from '../lib/config';
 import createServer from './index';
 import logger from '../lib/logger';
 
-const defaultCallback = err => {
+const defaultCallback = (err) => {
   if (err) {
     logger.error('Hapi initialization failed.');
     logger.error(err);

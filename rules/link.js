@@ -55,7 +55,7 @@ export default ({extensionURL = '', username = 'Unknown'}) => {
         // since merging already active accounts can be a
         // destructive action
         function firstLogin() {
-          return context.stats.loginsCount === 0;
+          return context.stats.loginsCount <= 1;
         }
 
         // Check if we're coming back from a redirect

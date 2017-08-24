@@ -13,6 +13,6 @@ const register = (server, options, next) => {
   next();
 };
 
-register.attributes = { name: "routes" };
+register.attributes = { name: 'routes' };
 
 export default register;

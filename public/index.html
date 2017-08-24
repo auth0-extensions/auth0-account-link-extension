@@ -11,11 +11,10 @@
   </head>
   <body>
     <div id="auth0-lock-container-1" class="auth0-lock-container">
-      <div data-reactroot="" class="auth0-lock auth0-lock-opened auth0-lock-with-tabs">
+      <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs">
         <div class="auth0-lock-overlay">
           <span class="auth0-lock-badge-bottom">
             <a href="https://auth0.com/?utm_source=lock&amp;utm_campaign=badge&amp;utm_medium=widget" target="_blank" class="auth0-lock-badge">
-              <!-- react-text: 30 -->Protected with <!-- /react-text -->
               <svg width="58px" height="21px" viewBox="0 0 462 168">
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g id="logo-grey-horizontal">
@@ -43,38 +42,27 @@
               <div class="auth0-lock-cred-pane auth0-lock-quiet">
                 <div class="auth0-lock-header">
                   <div class="auth0-lock-header-bg auth0-lock-blur-support">
-                    <div class="auth0-lock-header-bg-blur" style="background-image: url(&quot;/img/badge.png&quot;);">
-
-                    </div>
-                    <div class="auth0-lock-header-bg-solid" style="background-color: rgb(234, 83, 35);">
-
-                    </div>
+                    <div class="auth0-lock-header-bg-blur"></div>
+                    <div class="auth0-lock-header-bg-solid"></div>
                   </div>
                   <div class="auth0-lock-header-welcome">
-
                     <svg class="auth0-lock-header-logo" width="52.47px" height="58px" viewBox="0 0 151 172">
                       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="logo-grey-horizontal">
                           <g id="Group">
                             <g id="LogoBadge" fill-opacity="1" fill="rgb(234, 83, 35)">
-                              <path d="M119.555,135.861 L102.705,83.997 L146.813,51.952 L92.291,51.952 L75.44,0.09 L75.435,0.076 L129.965,0.076 L146.82,51.947 L146.821,51.946 L146.835,51.938 C156.623,82.03 146.542,116.256 119.555,135.861 L119.555,135.861 Z M31.321,135.861 L31.307,135.871 L75.426,167.924 L119.555,135.862 L75.44,103.808 L31.321,135.861 L31.321,135.861 Z M4.052,51.939 L4.052,51.939 C-6.252,83.66 5.709,117.272 31.312,135.867 L31.316,135.851 L48.168,83.99 L4.07,51.951 L58.579,51.951 L75.431,0.089 L75.435,0.075 L20.902,0.075 L4.052,51.939 L4.052,51.939 Z" id="Shape">
-
-                              </path>
+                              <path d="M119.555,135.861 L102.705,83.997 L146.813,51.952 L92.291,51.952 L75.44,0.09 L75.435,0.076 L129.965,0.076 L146.82,51.947 L146.821,51.946 L146.835,51.938 C156.623,82.03 146.542,116.256 119.555,135.861 L119.555,135.861 Z M31.321,135.861 L31.307,135.871 L75.426,167.924 L119.555,135.862 L75.44,103.808 L31.321,135.861 L31.321,135.861 Z M4.052,51.939 L4.052,51.939 C-6.252,83.66 5.709,117.272 31.312,135.867 L31.316,135.851 L48.168,83.99 L4.07,51.951 L58.579,51.951 L75.431,0.089 L75.435,0.075 L20.902,0.075 L4.052,51.939 L4.052,51.939 Z" id="Shape"></path>
                             </g>
                           </g>
                         </g>
                       </g>
                     </svg>
-                    <!-- <img class="auth0-lock-header-logo" src="http://auth0.com/img/badge.png">-->
                     <div class="auth0-lock-name">Link Accounts</div>
                   </div>
                 </div>
-                <span>
-
-                </span>
                 <div style="position: relative;">
                   <span>
-                    <div class="" style="">
+                    <div class="">
                       <div style="visibility: inherit;">
                         <div class="auth0-lock-view-content">
                           <div style="position: relative;">
@@ -82,18 +70,16 @@
                               <div class="auth0-lock-content">
                                 <div class="auth0-lock-form">
                                   <div>
-                                    <div class="auth0-lock-tabs-container">
-                                      <ul class="auth0-lock-tabs">
-                                        <li class="auth0-lock-tabs-current">
-                                          <a href="#">There is an existing account with this email address</a>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                    <div class="auth0-lock-pane-separator">
-
-                                    </div>
-                                    <div>
-                                    </div>
+                                    <p>
+                                      It looks like you have another account
+                                      with the same email address. We recommend
+                                      you link these accounts.
+                                    </p>
+                                    <p class="auth0-lock-alternative">
+                                      <a class="auth0-lock-alternative-link" id="skip" href="#">
+                                        I want to skip this and create a new account. (Not recommended)
+                                      </a>
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -106,10 +92,12 @@
                 </div>
                 <div class="auth0-lock-actions">
                   <button class="auth0-lock-submit" type="button" id="link">
-                    <span class="auth0-label-submit">Link</span>
-                  </button>
-                  <button class="auth0-lock-cancel" type="button" id="skip">
-                    <span class="auth0-label-submit">Keep Separate</span>
+                    <span class="auth0-label-submit">
+                      Continue
+                      <span>
+                        <svg class="icon-text" width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Web/Submit/Active" transform="translate(-148.000000, -32.000000)" fill="#FFFFFF"><polygon id="Shape" points="148 33.4 149.4 32 155.4 38 149.4 44 148 42.6 152.6 38"></polygon></g></g></svg>
+                      </span>
+                    </span>
                   </button>
                 </div>
               </div>

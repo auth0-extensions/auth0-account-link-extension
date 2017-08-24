@@ -1,4 +1,4 @@
-import Path from 'path';
+import path from 'path';
 import Hapi from 'hapi';
 import Inert from 'inert';
 import config from '../lib/config';
@@ -16,7 +16,7 @@ const createServer = (cb) => {
       cors: true,
       validate: {},
       files: {
-        relativeTo: Path.join(__dirname, '../public')
+        relativeTo: path.join(__dirname, '../public')
       }
     }
   });
@@ -28,7 +28,7 @@ const createServer = (cb) => {
     path: '/js/{file*}',
     handler: {
       directory: {
-        path: __dirname + '/../public/js'
+        path: path.join(__dirname, '../public/js')
       }
     }
   });
@@ -38,7 +38,7 @@ const createServer = (cb) => {
     path: '/css/{file*}',
     handler: {
       directory: {
-        path: __dirname + '/../public/css'
+        path: path.join(__dirname, '../public/css')
       }
     }
   });

@@ -1,6 +1,6 @@
 module.exports = (server) => ({
   method: 'GET',
-  path: '/link',
+  path: '/',
   handler: {
     file: 'index.html'
   }

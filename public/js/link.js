@@ -13,6 +13,10 @@ const authorize = (domain, qs) => {
   window.location = `${domain}authorize?${query}`;
 };
 
+const continueAuth = () => {
+  window.location.href = token.iss+'continue?state='+params.state;
+};
+
 console.log(params);
 console.log(token);
 console.log(connections);
@@ -33,6 +37,7 @@ onClick(linkBtn, function(e) {
 
 onClick(skipBtn, function(e) {
   console.log("Skip clicked");
+  e.preventDefault();
 
-  window.location.href = token.iss+'continue?state='+params.state;
+  continueAuth();
 });
