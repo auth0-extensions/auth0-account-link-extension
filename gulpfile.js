@@ -2,7 +2,6 @@ require('babel-register')();
 
 const gulp = require('gulp');
 const util = require('gulp-util');
-const open = require('open');
 const ngrok = require('ngrok');
 const nodemon = require('gulp-nodemon');
 
@@ -33,8 +32,7 @@ gulp.task('run', () => {
     });
 
     setTimeout(() => {
-      const publicUrl = `${url.replace('https://', 'http://')}/login`;
-      open(publicUrl);
+      const publicUrl = `${url.replace('https://', 'http://')}`;
       util.log('Public Url:', publicUrl);
     }, 4000);
   });

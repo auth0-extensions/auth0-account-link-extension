@@ -895,6 +895,7 @@
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
+  display: none;
 }
 .auth0-lock.auth0-lock .auth0-global-message.auth0-global-message-error {
   background: #ff3e00;
@@ -2156,3 +2157,4 @@
 input[type="button"] {
   cursor: pointer;
 }
+

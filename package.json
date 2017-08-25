@@ -11,7 +11,9 @@
     "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
     "lint": "eslint .",
     "serve:dev": "gulp run",
-    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js"
+    "client:build": "minify --clean public/css/link.css",
+    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
+    "build": "yarn run client:build && yarn run extension:build"
   },
   "author": "Auth0",
   "license": "MIT",
@@ -94,6 +96,7 @@
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
     "gulp-util": "^3.0.8",
+    "minifier": "^0.8.1",
     "mocha": "^3.5.0",
     "ngrok": "^2.2.15",
     "nodemon": "^1.11.0",

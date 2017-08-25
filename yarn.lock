@@ -1531,6 +1531,10 @@ commander@2.9.0:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
+commander@^2.8.1:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
+
 commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -1694,6 +1698,10 @@ crypto-browserify@^3.11.0:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
+
+css-resolve-import@^0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/css-resolve-import/-/css-resolve-import-0.1.2.tgz#ff6d28ac4a175c9d57adb9d2ce6da6f916a1d535"
 
 cycle@1.0.x:
   version "1.0.3"
@@ -2371,6 +2379,10 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
+fmerge@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fmerge/-/fmerge-1.2.0.tgz#36e99d2ae255e3ee1af666b4df780553671cf692"
+
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -2885,6 +2897,13 @@ hoek@2.x.x:
 hoek@4.x.x:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.0.tgz#72d9d0754f7fe25ca2d01ad8f8f9a9449a89526d"
+
+hogan.js@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/hogan.js/-/hogan.js-3.0.2.tgz#4cd9e1abd4294146e7679e41d7898732b02c7bfd"
+  dependencies:
+    mkdirp "0.3.0"
+    nopt "1.0.10"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -3946,6 +3965,18 @@ min-document@^2.19.0:
   dependencies:
     dom-walk "^0.1.0"
 
+minifier@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/minifier/-/minifier-0.8.1.tgz#67e9333f9e25d27643bc7963e66b2dd61cf6c5b0"
+  dependencies:
+    commander "^2.8.1"
+    css-resolve-import "^0.1.1"
+    fmerge "^1.2.0"
+    glob "^7.1.1"
+    hogan.js "^3.0.2"
+    sqwish "~0.2.2"
+    uglify-js "^2.4.24"
+
 minimalistic-assert@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.0.tgz#702be2dda6b37f4836bcb3f5db56641b64a1d3d3"
@@ -3984,6 +4015,10 @@ minimist@^1.1.0, minimist@^1.2.0:
 minimist@~0.0.1:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
+
+mkdirp@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.0.tgz#1bbf5ab1ba827af23575143490426455f481fe1e"
 
 mkdirp@0.5.1, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   version "0.5.1"
@@ -4149,6 +4184,12 @@ nodemon@^1.10.2, nodemon@^1.11.0:
     undefsafe "0.0.3"
     update-notifier "0.5.0"
 
+nopt@1.0.10, nopt@~1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
+  dependencies:
+    abbrev "1"
+
 nopt@^3.0.1:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
@@ -4161,12 +4202,6 @@ nopt@^4.0.1:
   dependencies:
     abbrev "1"
     osenv "^0.1.4"
-
-nopt@~1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
-  dependencies:
-    abbrev "1"
 
 normalize-package-data@^2.3.2:
   version "2.4.0"
@@ -5281,6 +5316,10 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
+sqwish@~0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/sqwish/-/sqwish-0.2.2.tgz#00fe2668104f1228b5bb7ee739ef60121bbcb057"
+
 sshpk@^1.7.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.13.1.tgz#512df6da6287144316dc4c18fe1cf1d940739be3"
@@ -5709,7 +5748,7 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-uglify-js@^2.6, uglify-js@^2.6.1, uglify-js@^2.8.27:
+uglify-js@^2.4.24, uglify-js@^2.6, uglify-js@^2.6.1, uglify-js@^2.8.27:
   version "2.8.29"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.29.tgz#29c5733148057bb4e1f75df35b7a9cb72e6a59dd"
   dependencies:
