@@ -11,7 +11,6 @@ module.exports = (server) => ({
     <meta name="author" content="Auth0">
     <meta name="description" content="Easily link two accounts into one">
     <title>Auth0 Account Linking Extension</title>
-    <link rel="stylesheet" href="/css/link.css" />
     <link rel="shortcut icon" href="https://auth0.com/auth0-styleguide/img/favicon.png" />
     <style type="text/css">
       /* normalize.css v3.0.2 | MIT License | git.io/normalize */

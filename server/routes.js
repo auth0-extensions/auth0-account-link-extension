@@ -1,5 +1,4 @@
-//import linkActionRoute from '../api/patch_link';
-import linkRoute from '../api/get_link';
+import linkRoute from '../api/get_index';
 import onInstall from '../api/hooks/post_install';
 import onUninstall from '../api/hooks/delete_uninstall';
 
