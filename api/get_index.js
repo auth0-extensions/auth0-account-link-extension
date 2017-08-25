@@ -1,14 +1,12 @@
 import config from '../lib/config';
 
-module.exports = (server) => {
-  const stylesheetLink = config('NODE_ENV') === 'production'
-    ? 'https://cdn.auth0.com/js/auth0-account-link-extension/1.0.0/link.min.css'
-    : '/css/link.css';
-
-  return {
+module.exports = (server) => ({
     method: 'GET',
     path: '/',
     handler: (req, reply) => {
+      const stylesheetLink = config('NODE_ENV') === 'production'
+        ? 'https://cdn.auth0.com/extensions/auth0-account-link-extension/1.0.0/link.min.css'
+        : '/css/link.css';
       reply(`
 <!doctype html>
 <html class="auth0-lock-html">
@@ -226,5 +224,4 @@ module.exports = (server) => {
 </html>
 `);
     }
-  };
-};
+});
