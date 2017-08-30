@@ -3,7 +3,7 @@
 /**
  *  This file is meant to be included as a string template
  */
-export default ({extensionURL = '', username = 'Unknown'}) => {
+export default ({extensionURL = '', username = 'Unknown', clientID = '', clientSecret = ''}) => {
   const template = `function (user, context, callback) {
   console.log(LOG_TAG, 'Entered Account Link Rule');
   /**
@@ -23,9 +23,9 @@ export default ({extensionURL = '', username = 'Unknown'}) => {
       userApi: auth0.baseUrl + '/users'
     },
     token: {
-      clientId: configuration.AUTH0_CLIENT_ID,
-      clientSecret: configuration.AUTH0_CLIENT_SECRET,
-      issuer: configuration.ISSUER
+      clientId: ${clientID},
+      clientSecret: ${clientSecret},
+      issuer: auth0.domain
     }
   };
 
@@ -184,7 +184,7 @@ export default ({extensionURL = '', username = 'Unknown'}) => {
 
   // Consider moving this logic out of the rule and into the extension
   function buildRedirectUrl(token, q, errorType) {
-    var params = { 
+    var params = {
       child_token: token,
       client_id: q.client_id,
       redirect_uri: q.redirect_uri,

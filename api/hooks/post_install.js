@@ -14,7 +14,11 @@ module.exports = (server) => ({
   handler: (req, reply) => {
     console.log("Starting rule installation...");
 
-    install(req.pre.auth0.rules, { extensionURL: config('PUBLIC_WT_URL') })
+    install(req.pre.auth0.rules, {
+      extensionURL: config('PUBLIC_WT_URL'),
+      clientID: config('AUTH0_CLIENT_ID'),
+      clientSecret: config('AUTH0_CLIENT_SECRET')
+    })
       .then(_ => reply().code(204))
       .then(_ => { console.log("Rule successfully installed"); })
       .catch((err) => {
