@@ -23,8 +23,8 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
       userApi: auth0.baseUrl + '/users'
     },
     token: {
-      clientId: ${clientID},
-      clientSecret: ${clientSecret},
+      clientId: '${clientID}',
+      clientSecret: '${clientSecret}',
       issuer: auth0.domain
     }
   };
