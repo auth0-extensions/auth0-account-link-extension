@@ -13,13 +13,20 @@
   "repository": "https://github.com/auth0-extensions/auth0-account-link-extension",
   "keywords": [
     "auth0",
-    "extension"
+    "extension",
+    "account-link"
   ],
+  "secrets": {
+    "CUSTOM_CSS": {
+      "description": "Add custom styles to the linking page of the extension.",
+      "required": false,
+      "example": "https://my.cdn.com/my-css.css"
+    }
+  },
   "auth0": {
     "createClient": true,
     "onUninstallPath": "/.extensions/on-uninstall",
     "onInstallPath": "/.extensions/on-install",
-    "onUpdatePath": "/.extensions/on-update",
     "scopes": "read:connections read:rules create:rules update:rules delete:rules"
   }
 }
