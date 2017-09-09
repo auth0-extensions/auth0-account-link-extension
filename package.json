@@ -70,6 +70,7 @@
     "inert": "4.0.1",
     "nconf": "^0.8.4",
     "open": "^0.0.5",
+    "request": "2.56.0",
     "webtask-tools": "^3.2.0",
     "winston": "1.0.0"
   },
