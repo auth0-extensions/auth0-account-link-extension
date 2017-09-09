@@ -3,7 +3,9 @@ import { decode } from 'jsonwebtoken';
 import findUsersByEmail from '../lib/findUsersByEmail';
 import indexTemplate from '../templates/index';
 
-const CDN_CSS = 'https://cdn.auth0.com/extensions/auth0-account-link-extension/1.0.0/link.min.css';
+const version = require('../package.json').version;
+
+const CDN_CSS = `https://cdn.auth0.com/extensions/auth0-account-link-extension/${version}/link.min.css`;
 
 const decodeToken = (token) => (
   new Promise((resolve, reject) => {
