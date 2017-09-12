@@ -16,7 +16,7 @@ const createRequest = (options) => (
   })
 );
 
-const startServer = (configFile =  '../server/config.json') => {
+const startServer = (configFile =  '../server/config.test.json') => {
   nconf.argv().env().file(path.join(__dirname, configFile)).defaults({
     AUTH0_RTA: 'auth0.auth0.com',
     DATA_CACHE_MAX_AGE: 1000 * 10,
@@ -24,7 +24,12 @@ const startServer = (configFile =  '../server/config.json') => {
     HOSTING_ENV: 'default',
     PORT: 3001,
     USE_OAUTH2: false,
-    LOG_COLOR: true
+    LOG_COLOR: true,
+    AUTH0_DOMAIN: 'test.local.dev',
+    AUTH0_CLIENT_ID: 'AUTHO_CLIENT_ID',
+    AUTH0_CLIENT_SECRET: 'AUTHO_CLIENT_SECRET',
+    WT_URL: 'localhost:3001',
+    EXTENSION_SECRET: 'EXTENSION_SECRET'
   });
 
 
@@ -32,14 +37,11 @@ const startServer = (configFile =  '../server/config.json') => {
     const server = createServer(key => nconf.get(key), null);
 
     server.start((err) => {
-      console.log(" I AM BOOTING", server.info.uri);
       if (err) {
         reject(err);
       }
 
       resolve(server);
-
-      console.info(`Server running at: ${server.info.uri}`);
     });
   });
 };
