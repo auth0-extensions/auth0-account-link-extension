@@ -6,6 +6,7 @@
   "description": "This extension gives Auth0 customers the ability to allow their users to link their accounts",
   "type": "application",
   "logoUrl": "https://cdn.auth0.com/extensions/auth0-authz/assets/logo.svg",
+  "docsUrl": "https://auth0.com/docs/extensions/account-link",
   "codeUrl": "https://github.com/auth0-extensions/auth0-account-link-extension",
   "initialUrlPath": "/",
   "repository": "https://github.com/auth0-extensions/auth0-account-link-extension",
