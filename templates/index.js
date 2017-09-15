@@ -60,7 +60,7 @@ export default ({stylesheetLink, customCSS, currentUser, matchingUsers}) => {
                         </g>
                       </g>
                     </svg>
-                    <div class="auth0-lock-name">Link Accounts</div>
+                    <div class="auth0-lock-name">Account Linking</div>
                   </div>
                 </div>
                 <div id="error-message" class="auth0-global-message auth0-global-message-error"></div>
@@ -157,6 +157,7 @@ export default ({stylesheetLink, customCSS, currentUser, matchingUsers}) => {
             state: params.original_state,
             nonce: params.nonce,
             link_account_token: params.child_token,
+            prevent_sign_up: true,
             connection: connections[0]
           });
         });
