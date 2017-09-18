@@ -1,17 +1,14 @@
 import {expect} from 'chai';
-import { request, startServer } from '../test_helper';
-
+import { request, createServer } from '../test_helper';
+import { sign } from 'jsonwebtoken';
+import config from '../../lib/config';
 
 describe('Requesting the linking route', function() {
   describe('With an invalid token', function() {
     let server;
-    let baseUrl;
 
     before(function() {
-      return startServer().then(s => {
-        server = s;
-        baseUrl = s.info.uri;
-      });
+      server = createServer();
     });
 
     after(function() {
@@ -19,7 +16,7 @@ describe('Requesting the linking route', function() {
     });
 
     it('returns a 400 with an invalid token', function() {
-      return request({ url: baseUrl }).then(res => {
+      return server.inject({ method: 'GET', url: '/', payload: {} }).then(res => {
         expect(res.statusCode).to.eq(400);
       });
     });

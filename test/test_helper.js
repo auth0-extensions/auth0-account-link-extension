@@ -1,7 +1,7 @@
 import nconf from 'nconf';
 import path from 'path';
 import request from 'request';
-import createServer from '../server/init';
+import initServer from '../server/init';
 
 const createRequest = (options) => (
   new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ const createRequest = (options) => (
   })
 );
 
-const startServer = (configFile =  '../server/config.test.json') => {
+const createServer = (configFile =  '../server/config.test.json') => {
   nconf.argv().env().file(path.join(__dirname, configFile)).defaults({
     AUTH0_RTA: 'auth0.auth0.com',
     DATA_CACHE_MAX_AGE: 1000 * 10,
@@ -33,8 +33,12 @@ const startServer = (configFile =  '../server/config.test.json') => {
   });
 
 
+  return initServer(key => nconf.get(key), null);
+};
+
+const startServer = (configFile =  '../server/config.test.json') => {
   return new Promise((resolve, reject) => {
-    const server = createServer(key => nconf.get(key), null);
+    const server = createServer();
 
     server.start((err) => {
       if (err) {
@@ -46,7 +50,38 @@ const startServer = (configFile =  '../server/config.test.json') => {
   });
 };
 
+const fakeApiClient = () => {
+  let defaultUsers = {};
+
+  return {
+    users: {
+      getAll: () => Promise.resolve({ users: defaultUsers }),
+      get: (options) => {
+        const id = parseInt(options.id, 10) - 1;
+        return Promise.resolve(defaultUsers[id]);
+      },
+      create: (data) => {
+        defaultUsers.push(data);
+        return Promise.resolve();
+      },
+      delete: () => {
+        defaultUsers.pop();
+        return Promise.resolve();
+      },
+      update: (options, data) => {
+        const id = parseInt(options.id, 10) - 1;
+        if (data.email) defaultUsers[id].email = data.email;
+        if (data.username) defaultUsers[id].username = data.username;
+        if (data.password) defaultUsers[id].password = data.password;
+        if (data.blocked !== undefined) defaultUsers[id].blocked = data.blocked;
+        return Promise.resolve();
+      }
+    }
+  };
+};
+
 export {
   startServer,
-  createRequest as request
+  createRequest as request,
+  createServer
 };
