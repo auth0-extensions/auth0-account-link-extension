@@ -12,11 +12,13 @@ export default function(currentUser, matchingUsers) {
     var linkEl = document.getElementById('link');
     var skipEl = document.getElementById('skip');
     var connections = matchingUsers.reduce(function(acc, user) {
-      return acc.concat(user.connections);
-    }, []);
+      return acc.concat(user.identities);
+    }, []).map(function(identity) {
+      return identity.connection;
+    });
 
     var authorize = function(domain, qs) {
-      var query = Object.keys(qs)
+      var query = keysForObject(qs)
           .filter(function(key) {
             return !!qs[key];
           })
@@ -83,10 +85,8 @@ export default function(currentUser, matchingUsers) {
     var attributes = attrs || {};
     var i;
 
-    for (i in attributes) {
-      if (attributes.hasOwnProperty(i)) {
-        element.setAttribute(i, attrs[i]);
-      }
+    for (i in keysForObject(attributes)) {
+      element.setAttribute(i, attributes[i]);
     }
 
     for (i in children) {
@@ -98,5 +98,17 @@ export default function(currentUser, matchingUsers) {
 
   function text(content) {
     return document.createTextNode(content);
+  }
+
+  function keysForObject(obj) {
+    var keys = [];
+
+    for (var i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        keys.push(i);
+      }
+    }
+
+    return keys;
   }
 }
