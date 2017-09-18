@@ -48,7 +48,7 @@ export default function(currentUser, matchingUsers) {
     updateContinueUrl(skipEl, token.iss, params.state);
 
     if (params.error_type === 'accountMismatch') {
-      loydAccountMismatchError();
+      loadAccountMismatchError();
     }
   }
 
