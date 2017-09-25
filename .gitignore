@@ -5,3 +5,5 @@ server/config.json
 coverage
 .env
 dist
+tags
+TAGS
