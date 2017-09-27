@@ -4,9 +4,9 @@ import Inert from 'inert';
 import config from '../lib/config';
 import logger from '../lib/logger';
 import routes from './routes';
-import handlers from './handlers';
+import defaultHandlers from './handlers';
 
-const createServer = (cb) => {
+const createServer = (cb, handlers = defaultHandlers) => {
   const server = new Hapi.Server();
 
   server.connection({
