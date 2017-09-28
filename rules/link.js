@@ -158,7 +158,7 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
 
   function createToken(tokenInfo, targetUsers) {
     var options = {
-      expiresInMinutes: 5,
+      expiresIn: '5m',
       audience: tokenInfo.clientId,
       issuer: qualifyDomain(tokenInfo.issuer)
     };
