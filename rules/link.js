@@ -12,6 +12,7 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
   var request = require('request@2.56.0');
   var queryString = require('querystring');
   var Promise = require('native-or-bluebird@1.2.0');
+  var jwt = require('jsonwebtoken@7.1.9');
 
   var CONTINUE_PROTOCOL = 'redirect-callback';
   var LOG_TAG = '[ACCOUNT_LINK]: ';
