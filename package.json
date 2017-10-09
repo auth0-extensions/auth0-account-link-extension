@@ -8,11 +8,13 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
+    "test":
+      "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css",
-    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
+    "extension:build":
+      "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
     "build": "yarn run client:build && yarn run extension:build"
   },
   "author": "Auth0",
@@ -62,7 +64,7 @@
     "settings": {}
   },
   "dependencies": {
-    "auth0": "2.6.0",
+    "auth0": "^2.8.0",
     "auth0-extension-hapi-tools": "1.2.0",
     "auth0-extension-tools": "1.2.1",
     "boom": "3.2.2",
@@ -101,6 +103,7 @@
     "mocha": "^3.5.0",
     "ngrok": "^2.2.15",
     "nodemon": "^1.11.0",
-    "nyc": "^11.1.0"
+    "nyc": "^11.1.0",
+    "puppeteer": "^0.11.0"
   }
 }
