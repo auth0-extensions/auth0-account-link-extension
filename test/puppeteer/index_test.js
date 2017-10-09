@@ -116,6 +116,7 @@ describe('Account linking tests', () => {
 
     await page.waitForNavigation();
     expect(await usersWithSameEmailCount(testEmail)).equal(2);
+    expect(await page.url()).equal(app`/user`);
   });
 });
 
