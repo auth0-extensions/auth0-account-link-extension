@@ -23,7 +23,7 @@ const mgmtApi = new ManagementClient({
   scope: 'read:users create:users delete:users read:email_provider read:connections'
 });
 
-const app = path => `${SAMPLE_APP_BASE}${path}`;
+const app = pathUrl => `${SAMPLE_APP_BASE}${pathUrl}`;
 const wait = secs => new Promise(cont => setTimeout(cont, secs * 1000));
 
 const testEmail = 'john.doe.auth0.testing@gmail.com';
