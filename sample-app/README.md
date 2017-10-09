@@ -1,4 +1,4 @@
-# 01-Login
+# Sample App
 
 ## Running the Sample
 

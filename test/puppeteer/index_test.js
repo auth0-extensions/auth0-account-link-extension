@@ -1,18 +1,29 @@
+import fs from 'fs';
+import path from 'path';
 import puppeteer from 'puppeteer';
 import { expect } from 'chai';
 import { ManagementClient } from 'auth0';
 
+const SAMPLE_APP_BASE = 'http://localhost:3000';
+
 let page;
 let server;
 let browser;
+
+const configFileContent = fs.readFileSync(
+  path.join(__dirname, '../../server/config.test.json'),
+  'utf-8'
+);
+const config = JSON.parse(configFileContent);
+
 const mgmtApi = new ManagementClient({
-  domain: 'account-linking-testing.auth0.com',
-  clientId: '22qApOBZ9BkEf3WDIYetEiJPXswpQdmY',
-  clientSecret: 'jxrEwGhh0IXfi8t9a84SWi6eIt3yqVaJqADzZ9zuKVb7I3LC1F_RAZLM6mFU4jMa',
+  domain: config.AUTH0_DOMAIN,
+  clientId: config.AUTH0_CLIENT_ID,
+  clientSecret: config.AUTH0_CLIENT_SECRET,
   scope: 'read:users create:users delete:users read:email_provider read:connections'
 });
 
-const app = path => `http://localhost:3000${path}`;
+const app = path => `${SAMPLE_APP_BASE}${path}`;
 const wait = secs => new Promise(cont => setTimeout(cont, secs * 1000));
 
 const testEmail = 'john.doe.auth0.testing@gmail.com';
@@ -137,6 +148,6 @@ describe('Account linking tests', () => {
     await wait(1);
 
     await page.waitForNavigation();
-    expect(await page.url()).equal('http://localhost:3000/user');
+    expect(await page.url()).equal(app`/user`);
   });
 });
