@@ -1,77 +1,29 @@
-import fs from 'fs';
-import path from 'path';
 import puppeteer from 'puppeteer';
 import { expect } from 'chai';
-import { ManagementClient } from 'auth0';
+import { deleteTestUsers, usersWithSameEmailCount, wait } from './utils';
 
 const SAMPLE_APP_BASE = 'http://localhost:3000';
 
 let page;
-let server;
 let browser;
 
-const configFileContent = fs.readFileSync(
-  path.join(__dirname, '../../server/config.test.json'),
-  'utf-8'
-);
-const config = JSON.parse(configFileContent);
-
-const mgmtApi = new ManagementClient({
-  domain: config.AUTH0_DOMAIN,
-  clientId: config.AUTH0_CLIENT_ID,
-  clientSecret: config.AUTH0_CLIENT_SECRET,
-  scope: 'read:users create:users delete:users read:email_provider read:connections'
-});
-
 const app = pathUrl => `${SAMPLE_APP_BASE}${pathUrl}`;
-const wait = secs => new Promise(cont => setTimeout(cont, secs * 1000));
 
 const testEmail = 'john.doe.auth0.testing@gmail.com';
 const testPassword = 'Passw0rdLe55!';
-
-const deleteTestUsers = () =>
-  new Promise((resolve, reject) => {
-    mgmtApi.getUsers({ q: `email:"${testEmail}"` }, (err, users) => {
-      if (err) return reject(err);
-
-      if (users.length === 0) {
-        resolve();
-      }
-
-      users.forEach((user, i) => {
-        mgmtApi.deleteUser({ id: user.user_id, page: 1, per_page: 10 }, (err) => {
-          if (err) return reject(err);
-          console.log(`Test user ${user.user_id} deleted from tenant`);
-
-          if (i === users.length - 1) {
-            resolve();
-          }
-        });
-      });
-    });
-  });
-
-const usersWithSameEmailCount = email =>
-  new Promise((resolve, reject) => {
-    mgmtApi.getUsers({ q: `email:"${email}"` }, (err, users) => {
-      if (err) return reject(err);
-
-      return resolve(users.length);
-    });
-  });
 
 describe('Account linking tests', () => {
   beforeEach(async () => {
     browser = await puppeteer.launch({ headless: false, width: 1366, height: 768 });
     page = await browser.newPage();
+
+    await deleteTestUsers(testEmail).catch((e) => {
+      console.log("Couldn't delete test users. Details:", e);
+    });
   });
 
   afterEach(async () => {
     browser.close();
-
-    await deleteTestUsers().catch((e) => {
-      console.log("Couldn't delete test users. Details:", e);
-    });
   });
 
   it('detects repeated email and links account', async () => {
@@ -120,6 +72,11 @@ describe('Account linking tests', () => {
   });
 });
 
+/**
+ * Creates two users with the same email address.
+ * This procedure should result in a redirect to the
+ * account linking extension.
+ */
 async function createUsers() {
   await page.goto(app`/`);
   await page.waitForSelector('#login-button');
