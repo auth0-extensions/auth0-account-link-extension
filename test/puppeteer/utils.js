@@ -60,3 +60,17 @@ export const usersWithSameEmailCount = email =>
       return resolve(users.length);
     });
   });
+
+export const buildQueryString = ({
+  childToken = '',
+  clientId = '',
+  redirectUri = '',
+  scope = '',
+  responseType = 'code',
+  auth0Client = '',
+  originalState = '',
+  nonce = '',
+  errorType = '',
+  state = ''
+}) =>
+  `/?child_token=${childToken}&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&auth0Client=${auth0Client}&original_state=${originalState}&nonce=${nonce}&error_type=${errorType}&state=${state}`;

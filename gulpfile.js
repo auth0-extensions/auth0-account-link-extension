@@ -4,6 +4,7 @@ const gulp = require('gulp');
 const util = require('gulp-util');
 const ngrok = require('ngrok');
 const nodemon = require('gulp-nodemon');
+const patchRule = require('./lib/patchRule').default;
 
 gulp.task('run', () => {
   ngrok.connect(3001, (ngrokError, url) => {
@@ -34,6 +35,14 @@ gulp.task('run', () => {
     setTimeout(() => {
       const publicUrl = `${url.replace('https://', 'http://')}`;
       util.log('Public Url:', publicUrl);
+
+      patchRule(publicUrl)
+        .then(() => {
+          console.log('Rule patched on tenant.');
+        })
+        .catch((error) => {
+          console.log("Couldn't patch rule in tenant:", error);
+        });
     }, 4000);
   });
 });

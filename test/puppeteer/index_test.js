@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import { expect } from 'chai';
-import { deleteTestUsers, usersWithSameEmailCount, wait } from './utils';
+import { deleteTestUsers, usersWithSameEmailCount, wait, buildQueryString } from './utils';
 
 const SAMPLE_APP_BASE = 'http://localhost:3000';
 
@@ -69,6 +69,31 @@ describe('Account linking tests', () => {
     await page.waitForNavigation();
     expect(await usersWithSameEmailCount(testEmail)).equal(2);
     expect(await page.url()).equal(app`/user`);
+  });
+
+  it('shows an error when invalid token is passed', async () => {
+    const path = buildQueryString({
+      childToken: '',
+      clientId: 'som3-s3cr37-1d',
+      redirectUri: 'http://localhost:3000/callback',
+      scope: 'openid profile',
+      responseType: 'code',
+      auth0Client: '',
+      originalState: 's0m3-0riginal-s7473',
+      nonce: 's0m3-n0nc3',
+      errorType: '',
+      state: 's0m3-s7473'
+    });
+
+    await page.goto(`http://localhost:3001${path}`);
+    await wait(1);
+
+    const text = await page.evaluate(
+      () =>
+        document.querySelector('#content-container > div:nth-child(1) > p:nth-child(1)').textContent
+    );
+
+    expect(text).equal('You seem to have reached this page in error. Please try logging in again');
   });
 });
 

@@ -8,13 +8,11 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test":
-      "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 50000",
+    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css",
-    "extension:build":
-      "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
+    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
     "build": "yarn run client:build && yarn run extension:build"
   },
   "author": "Auth0",
@@ -67,6 +65,7 @@
     "auth0": "^2.8.0",
     "auth0-extension-hapi-tools": "1.2.0",
     "auth0-extension-tools": "1.2.1",
+    "bluebird": "^3.5.1",
     "boom": "3.2.2",
     "hapi": "13.5.0",
     "inert": "4.0.1",
