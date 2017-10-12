@@ -36,12 +36,13 @@ gulp.task('run', () => {
       const publicUrl = `${url.replace('https://', 'http://')}`;
       util.log('Public Url:', publicUrl);
 
+      util.log('Patching rule on tenant.');
       patchRule(publicUrl)
         .then(() => {
-          console.log('Rule patched on tenant.');
+          util.log('Rule patched on tenant.');
         })
         .catch((error) => {
-          console.log("Couldn't patch rule in tenant:", error);
+          util.log("Couldn't patch rule in tenant:", error);
         });
     }, 4000);
   });
