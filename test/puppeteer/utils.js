@@ -61,6 +61,11 @@ export const usersWithSameEmailCount = email =>
     });
   });
 
+/**
+ * Builds the extension site query string 
+ * from an object with the parameters
+ * @param {object} params
+ */
 export const buildQueryString = ({
   childToken = '',
   clientId = '',

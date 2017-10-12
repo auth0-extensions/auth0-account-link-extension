@@ -9,21 +9,20 @@ let browser;
 
 const app = pathUrl => `${SAMPLE_APP_BASE}${pathUrl}`;
 
-const testEmail = 'john.doe.auth0.testing@gmail.com';
+const testEmail = 'jane.doe.auth0.testing@gmail.com';
 const testPassword = 'Passw0rdLe55!';
 
 describe('Account linking tests', () => {
   beforeEach(async () => {
     browser = await puppeteer.launch({ headless: false, width: 1366, height: 768 });
     page = await browser.newPage();
-
-    await deleteTestUsers(testEmail).catch((e) => {
-      console.log("Couldn't delete test users. Details:", e);
-    });
   });
 
   afterEach(async () => {
     browser.close();
+    await deleteTestUsers(testEmail).catch((e) => {
+      console.log("Couldn't delete test users. Details:", e);
+    });
   });
 
   it('detects repeated email and links account', async () => {
@@ -71,7 +70,7 @@ describe('Account linking tests', () => {
     expect(await page.url()).equal(app`/user`);
   });
 
-  it('shows an error when invalid token is passed', async () => {
+  it('shows an error when invalid token is provided', async () => {
     const path = buildQueryString({
       childToken: '',
       clientId: 'som3-s3cr37-1d',
@@ -86,6 +85,18 @@ describe('Account linking tests', () => {
     });
 
     await page.goto(`http://localhost:3001${path}`);
+    await wait(1);
+
+    const text = await page.evaluate(
+      () =>
+        document.querySelector('#content-container > div:nth-child(1) > p:nth-child(1)').textContent
+    );
+
+    expect(text).equal('You seem to have reached this page in error. Please try logging in again');
+  });
+
+  it('shows an error when no parameters are provided', async () => {
+    await page.goto('http://localhost:3001');
     await wait(1);
 
     const text = await page.evaluate(
