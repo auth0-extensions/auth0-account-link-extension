@@ -32,3 +32,12 @@ yarn install
 yarn run build
 yarn run serve:dev
 ```
+
+## Running puppeteer tests
+
+In order to run the tests you'll have to [start the extension server locally](https://github.com/auth0-extensions/auth0-account-link-extension#running-in-development), fill the `config.test.json` file (normally with the same data as the `config.json` file) and run the Sample Test application located in `sample-app/` (same domain and client settings as the extension).
+
+Then, you can run the tests running:
+```bash
+yarn test
+```
