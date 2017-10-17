@@ -27,35 +27,12 @@ describe('Account linking tests', () => {
 
   it('detects repeated email and links account', async () => {
     await createUsers();
-
+    
     await page.waitForSelector('#link');
     await page.click('#link');
-
     await wait(1);
-
-    await page.waitForSelector('input[name="email"]');
-    await page.click('input[name="email"]');
-    await page.type(testEmail);
-
-    await wait(1);
-
-    await page.click('input[name="password"]');
-    await page.type(testPassword);
-
-    await wait(1);
-
-    await page.waitForSelector('.auth0-lock-submit');
-    await page.click('.auth0-lock-submit');
-
-    await wait(1);
-
-    await page.type(testEmail);
-
-    await page.click('.auth0-lock-submit');
-
-    await wait(1);
-
-    await page.waitForNavigation();
+    
+    
     expect(await usersWithSameEmailCount(testEmail)).equal(1);
     expect(await page.url()).equal(app`/user`);
   });
@@ -65,6 +42,9 @@ describe('Account linking tests', () => {
 
     await page.evaluate(() => document.querySelector('#skip').click());
 
+    await page.waitForNavigation();
+    await page.click('#allow');
+    
     await page.waitForNavigation();
     expect(await usersWithSameEmailCount(testEmail)).equal(2);
     expect(await page.url()).equal(app`/user`);

@@ -21,24 +21,25 @@ const strategy = new Auth0Strategy(
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL: process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+    callbackURL:
+      process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
   },
-  ((accessToken, refreshToken, extraParams, profile, done) =>
+  function(accessToken, refreshToken, extraParams, profile, done) {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
     // profile has all the information from the user
-    done(null, profile)
-  )
+    return done(null, profile);
+  }
 );
 
 passport.use(strategy);
 
 // you can use this section to keep a smaller payload
-passport.serializeUser((user, done) => {
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
@@ -49,7 +50,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -68,20 +69,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 // Handle auth failure error messages
-app.use((req, res, next) => {
-  if (req && req.query && req.query.error) {
-    req.flash('error', req.query.error);
-  }
-  if (req && req.query && req.query.error_description) {
-    req.flash('error_description', req.query.error_description);
-  }
-  next();
+app.use(function(req, res, next) {
+ if (req && req.query && req.query.error) {
+   req.flash("error", req.query.error);
+ }
+ if (req && req.query && req.query.error_description) {
+   req.flash("error_description", req.query.error_description);
+ }
+ next();
 });
 
 // Check logged in
-app.use((req, res, next) => {
+app.use(function(req, res, next) {
   res.locals.loggedIn = false;
-  if (req.session.passport && typeof req.session.passport.user !== 'undefined') {
+  if (req.session.passport && typeof req.session.passport.user != 'undefined') {
     res.locals.loggedIn = true;
   }
   next();
@@ -91,7 +92,7 @@ app.use('/', routes);
 app.use('/user', user);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -102,7 +103,7 @@ app.use((req, res, next) => {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
+  app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -113,7 +114,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use((err, req, res, next) => {
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
