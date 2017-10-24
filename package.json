@@ -64,7 +64,7 @@
   "dependencies": {
     "auth0": "^2.8.0",
     "auth0-extension-hapi-tools": "1.2.0",
-    "auth0-extension-tools": "1.2.1",
+    "auth0-extension-tools": "^1.2.1",
     "bluebird": "^3.5.1",
     "boom": "3.2.2",
     "hapi": "13.5.0",
