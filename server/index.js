@@ -23,6 +23,16 @@ const createServer = (cb, handlers = defaultHandlers) => {
 
   server.register(Inert, () => {});
 
+  server.register(require('vision'), (err) => {
+    server.views({
+      engines: {
+        hbs: require('handlebars')
+      },
+      relativeTo: path.join(__dirname, '../templates'),
+      path: 'server'
+    });
+  });
+
   server.route({
     method: 'GET',
     path: '/js/{file*}',
@@ -46,13 +56,13 @@ const createServer = (cb, handlers = defaultHandlers) => {
   server.register([handlers, routes], (err) => {
     // Use the server logger.
     logger.debug = (...args) => {
-      server.log([ 'debug' ], args.join(' '));
+      server.log(['debug'], args.join(' '));
     };
     logger.info = (...args) => {
-      server.log([ 'info' ], args.join(' '));
+      server.log(['info'], args.join(' '));
     };
     logger.error = (...args) => {
-      server.log([ 'error' ], args.join(' '));
+      server.log(['error'], args.join(' '));
     };
 
     if (err) {

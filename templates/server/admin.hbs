@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Auth0 Account Linking Extension Administrator</title>
+    <link rel="stylesheet" href="https://cdn.auth0.com/styleguide/core/2.0.5/core.min.css" />
+    <link rel="stylesheet" href="https://cdn.auth0.com/styleguide/components/2.0.0/components.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/material.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script>
+        window.AccountLinkingExtension = { authorizationUrl: "{{{ authorizationUrl }}}" };
+    </script>
+</head>
+<body>
+    
+<header class="site-header">
+ <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+        <span>
+            <h1 class="navbar-brand"><a href="/"><span>Auth0</span> <div class="product-name">Account Linking Extension</div></a></h1>
+        </span>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-left no-basic">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown"><span class="btn-dro" role="button" data-toggle="dropdown">More<i class="icon-budicon-460"></i></span>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="/jobs">Jobs</a>
+              </li>
+              <li><a href="/press">Press</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+    <h2>Custom Hosted Page</h2>
+
+    <textarea name="html-code" id="code-editor"></textarea>
+</main>
+
+
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/mode/xml/xml.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
