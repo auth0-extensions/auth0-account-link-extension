@@ -41,10 +41,26 @@
   </nav>
 </header>
 
-<main class="container">
-    <h2>Custom Hosted Page</h2>
+<section class="loading-state-container">
+  <div class="spinner spinner-lg is-auth0">
+    <div class="circle"></div>
+  </div>
+</section> 
 
-    <textarea name="html-code" id="code-editor"></textarea>
+<main class="container app-container">
+    <form action="">
+      <h2>Custom Hosted Page</h2>
+
+      <textarea name="html-code" id="code-editor"></textarea>
+
+      <h2>Localization</h2>
+      <div class="form-group">
+        <label for="locale">Auth0 Widget Language</label>
+        <select name="locale" class="form-control" id="available-locales"></select>
+      </div>
+
+      <button class="btn btn-primary">Submit</button>
+    </form>
 </main>
 
 

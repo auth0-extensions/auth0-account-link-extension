@@ -5,3 +5,16 @@
     font-size: 0.8em;
     width: 300px;
 }
+
+.loading-state-container {
+    text-align: center;
+    margin-top: calc(50vh - 150px)
+}
+
+.loading-state-container > *{
+    margin: 0 auto;
+}
+
+.app-container {
+    display: none;
+}

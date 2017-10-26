@@ -1,4 +1,5 @@
 import { getSettings } from '../../lib/storage';
+import locales from '../../lib/locale';
 
 module.exports = () => ({
   method: 'GET',
@@ -7,6 +8,9 @@ module.exports = () => ({
   },
   path: '/admin/settings',
   handler: (req, reply) => {
-    reply(getSettings());
+    const availableLocales = Object.keys(locales).map((locale) => {
+      return { code: locale, name: locales[locale]._name };
+    });
+    reply({ ...getSettings(), availableLocales });
   }
 });
