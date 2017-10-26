@@ -27,7 +27,17 @@ const fetchUsersFromToken = ({sub, email}) => (
 module.exports = _ => ({
   method: 'GET',
   path: '/',
+  config: {
+    auth: false
+  },
   handler: (req, reply) => {
+  
+    const state = req.state['account-linking-admin-state'];
+    console.log(state);
+    if (typeof state !== 'undefined' && state !== '') {
+      reply.redirect('/admin');
+    }
+
     const stylesheetLink = config('NODE_ENV') === 'production' ? CDN_CSS : '/css/link.css';
 
     decodeToken(req.query.child_token).then(token => {

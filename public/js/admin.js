@@ -1,7 +1,17 @@
 /* global CodeMirror */
 
 (function () {
-  var SESSION_STORAGE_TOKEN_KEY = 'com.auth0.account_linking.admin_ui.session_token';
+  function performLogin() {
+    window.location.href = '/login';
+  }
+
+  var SS_TOKEN_KEY = 'com.auth0.account_linking.admin_ui.session_token';
+
+  var token = sessionStorage.getItem(SS_TOKEN_KEY);
+  
+  if (!token) {
+    performLogin();  
+  }
 
   var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
     lineNumbers : true,
@@ -13,15 +23,18 @@
   });
   
   $.ajax({
-      url: '/admin/settings'
-  }).done(function (data) {
+      url: '/admin/settings',
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+  }).done(function (data, status) {
     editor.setValue(data.template.trim())
+  }).error(function (e) {
+    if (e.statusText === 'Unauthorized') {
+      performLogin();
+    }
   });
 
-
-  if (!sessionStorage.getItem(SESSION_STORAGE_TOKEN_KEY)) {
-    window.location.href = AccountLinkingExtension.authorizationUrl;
-  }
-
+  
 
 }());
