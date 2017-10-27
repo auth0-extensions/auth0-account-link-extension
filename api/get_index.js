@@ -33,9 +33,8 @@ module.exports = _ => ({
   handler: (req, reply) => {
   
     const state = req.state['account-linking-admin-state'];
-    console.log(state);
     if (typeof state !== 'undefined' && state !== '') {
-      return reply.redirect('/admin');
+      return reply.redirect('/admin').state('account-linking-admin-state', '');
     }
 
     const stylesheetLink = config('NODE_ENV') === 'production' ? CDN_CSS : '/css/link.css';
