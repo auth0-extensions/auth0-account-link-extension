@@ -18,3 +18,14 @@
 .app-container {
     display: none;
 }
+
+#save-result {
+    margin-left: 10px;
+}
+
+.avatar {
+    width: 30px;
+    border-radius: 50%;
+    margin-top: -2px;
+    margin-right: 2px;
+}

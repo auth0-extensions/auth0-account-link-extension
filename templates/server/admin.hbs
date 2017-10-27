@@ -27,11 +27,11 @@
         <ul class="nav navbar-nav navbar-left no-basic">
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown"><span class="btn-dro" role="button" data-toggle="dropdown">More<i class="icon-budicon-460"></i></span>
+          <li class="dropdown"><span class="btn-dro" role="button" data-toggle="dropdown">
+            <img src="" alt="" class="avatar">
+            <i class="icon-budicon-460"></i></span>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <li><a href="/jobs">Jobs</a>
-              </li>
-              <li><a href="/press">Press</a>
+              <li><a href="#" id="logout-btn">Logout</a>
               </li>
             </ul>
           </li>
@@ -59,7 +59,10 @@
         <select name="locale" class="form-control" id="available-locales"></select>
       </div>
 
-      <button class="btn btn-primary">Submit</button>
+      <span>
+        <button class="btn btn-success" id="save-changes">Save changes</button>
+        <span id="save-result"></span>
+      </span>
     </form>
 </main>
 
