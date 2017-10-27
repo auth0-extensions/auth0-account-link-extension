@@ -1,5 +1,5 @@
 import { getSettings } from '../../lib/storage';
-import locales from '../../lib/locale';
+import { allLocales as locales } from '../../lib/locale';
 
 module.exports = () => ({
   method: 'GET',
