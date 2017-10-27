@@ -59,12 +59,15 @@ module.exports = _ => ({
     }).catch(err => {
       console.error("An invalid token was provided", err);
 
-      reply(indexTemplate({
+      indexTemplate({
         stylesheetLink,
         currentUser: null,
         matchingUsers: [],
         customCSS: config('CUSTOM_CSS')
-      })).code(400);
+      }).then((template) => {
+        reply(template).code(400);
+      });
+      
     });
   }
 });

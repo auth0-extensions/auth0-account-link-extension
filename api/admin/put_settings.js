@@ -14,6 +14,8 @@ module.exports = () => ({
   },
   path: '/admin/settings',
   handler: (req, reply) => {
-    reply(setSettings(req.payload));
+    setSettings(req.payload).then((response) => {
+      reply(response);
+    });
   }
 });
