@@ -1,6 +1,9 @@
+import path from 'path';
 import config from '../lib/config';
 import createServer from './index';
 import logger from '../lib/logger';
+import { init as initStorage } from '../lib/db';
+import { FileStorageContext, WebtaskStorageContext } from 'auth0-extension-tools';
 
 const defaultCallback = (err) => {
   if (err) {
@@ -14,6 +17,13 @@ const defaultCallback = (err) => {
 const initServer = (cfg, storageContext, cb) => {
   // Set configuration provider.
   config.setProvider(key => cfg(key) || process.env[key]);
+
+  // Initialize the storage context
+  initStorage(
+    storageContext
+      ? new WebtaskStorageContext(storageContext, { force: 0 })
+      : new FileStorageContext(path.join(__dirname, '../data.json'))
+  );
 
   // Start the server.
   return createServer(cb || defaultCallback);
