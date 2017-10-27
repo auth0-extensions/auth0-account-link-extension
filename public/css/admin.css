@@ -17,6 +17,7 @@
 
 .app-container {
     display: none;
+    margin-bottom: 6em;
 }
 
 #save-result {
@@ -28,4 +29,10 @@
     border-radius: 50%;
     margin-top: -2px;
     margin-right: 2px;
+}
+
+@media screen and (max-width: 450px) {
+    .product-name {
+        display: none;
+    }
 }
