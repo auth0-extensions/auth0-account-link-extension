@@ -1,0 +1,38 @@
+.navbar-brand .product-name {
+    margin-top: -14px;
+    margin-left: 90px;
+    opacity: 0.54;
+    font-size: 0.8em;
+    width: 300px;
+}
+
+.loading-state-container {
+    text-align: center;
+    margin-top: calc(50vh - 150px)
+}
+
+.loading-state-container > *{
+    margin: 0 auto;
+}
+
+.app-container {
+    display: none;
+    margin-bottom: 6em;
+}
+
+#save-result {
+    margin-left: 10px;
+}
+
+.avatar {
+    width: 30px;
+    border-radius: 50%;
+    margin-top: -2px;
+    margin-right: 2px;
+}
+
+@media screen and (max-width: 450px) {
+    .product-name {
+        display: none;
+    }
+}

@@ -27,7 +27,16 @@ const fetchUsersFromToken = ({sub, email}) => (
 module.exports = _ => ({
   method: 'GET',
   path: '/',
+  config: {
+    auth: false
+  },
   handler: (req, reply) => {
+  
+    const state = req.state['account-linking-admin-state'];
+    if (typeof state !== 'undefined' && state !== '') {
+      return reply.redirect('/admin').state('account-linking-admin-state', '');
+    }
+
     const stylesheetLink = config('NODE_ENV') === 'production' ? CDN_CSS : '/css/link.css';
 
     decodeToken(req.query.child_token).then(token => {
@@ -49,12 +58,15 @@ module.exports = _ => ({
     }).catch(err => {
       console.error("An invalid token was provided", err);
 
-      reply(indexTemplate({
+      indexTemplate({
         stylesheetLink,
         currentUser: null,
         matchingUsers: [],
         customCSS: config('CUSTOM_CSS')
-      })).code(400);
+      }).then((template) => {
+        reply(template).code(400);
+      });
+      
     });
   }
 });
