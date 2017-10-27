@@ -126,5 +126,19 @@
   $logoutBtn.on('click', function () {
     sessionStorage.removeItem(TOKEN_KEY);
     window.location.reload();
-  })
+  });
+
+  // Save with Cmd+S / Ctrl+S
+  $(window).bind('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+      switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+          event.preventDefault();
+          $saveChangesBtn.click();
+          break;
+        default:
+          break;
+      }
+    }
+  });
 }());
