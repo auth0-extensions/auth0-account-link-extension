@@ -13,11 +13,13 @@ export default ({ stylesheetLink, customCSS, currentUser, matchingUsers }) =>
     getStorage().read().then((data) => {
       const template = data.settings ? data.settings.template : defaultTemplate;
       
-      resolve(render(template, {
-        ExtensionCSS: stylesheetTag(stylesheetLink),
-        CustomCSS: stylesheetTag(customCSS),
-        Auth0Widget: buildAuth0Widget(),
-        ExtensionScripts: buildExtensionScripts(currentUser, matchingUsers)
-      }));
+      buildAuth0Widget().then((Auth0Widget) => {
+        resolve(render(template, {
+          ExtensionCSS: stylesheetTag(stylesheetLink),
+          CustomCSS: stylesheetTag(customCSS),
+          Auth0Widget,
+          ExtensionScripts: buildExtensionScripts(currentUser, matchingUsers)
+        }));
+      });
     });
   })
