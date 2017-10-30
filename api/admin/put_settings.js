@@ -8,7 +8,10 @@ module.exports = () => ({
     validate: {
       payload: {
         template: Joi.string().required(),
-        locale: Joi.string().required()
+        locale: Joi.string().required(),
+        title: Joi.string().required(),
+        color: Joi.string().required(),
+        logoPath: Joi.string().allow('')
       }
     }
   },

@@ -5,7 +5,10 @@
   var SUCCESS_MESSAGE = 'Success! Your changes has been succesfully saved.';
   var ERROR_MESSAGE = 'Oops! An error has ocurred while trying to save your changes.';
   var TOKEN_KEY = 'com.auth0.account_linking.admin_ui.session_token';
-  
+
+  var $titleInput = $('#title_input');
+  var $logoPathInput = $('#logo_path_input');
+  var $colorInput = $('#color_input');
   var $availableLocalesSelect = $('#available-locales');
   var $appContainer = $('.app-container');
   var $loadingContainer = $('.loading-state-container');
@@ -13,7 +16,7 @@
   var $saveResult = $('#save-result');
   var $logoutBtn = $('#logout-btn');
   var $avatarImg = $('.avatar');
-  
+
   var token = sessionStorage.getItem(TOKEN_KEY);
 
   var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
@@ -24,18 +27,20 @@
     mode: 'xml',
     htmlMode: true
   });
-  
+
   function performLogin() {
     window.location.href = '/login';
   }
-  
+
   function fillSelectItem(data) {
     data.availableLocales.forEach(function (locale) {
       var isSelected = data.locale === locale.code ? 'selected' : '';
-      $availableLocalesSelect.append('<option value="' + locale.code  + '"' + isSelected + '>' + locale.name + '</option>')
+      $availableLocalesSelect.append(
+        `<option value="${locale.code}"${isSelected}>${locale.name}</option>`
+      );
     });
   }
-  
+
   function fillCodeEditor(editor, data) {
     editor.setValue(data.template.trim());
   }
@@ -44,83 +49,94 @@
     var disabledClass = 'disabled';
 
     if (setDisabled) {
-      $saveChangesBtn
-        .addClass(disabledClass)
-        .html('Saving changes...');
+      $saveChangesBtn.addClass(disabledClass).html('Saving changes...');
     } else {
-      $saveChangesBtn
-        .removeClass(disabledClass)
-        .html('Save changes');
+      $saveChangesBtn.removeClass(disabledClass).html('Save changes');
     }
   }
 
   function setSaveResult(text) {
     $saveResult.html(text);
-    
+
     setTimeout(function () {
       $saveResult.html('');
-    }, 5000);
+    }, 10000);
   }
-  
-  
+
   if (!token) {
-    performLogin();  
+    performLogin();
   }
-  
+
   editor.setSize(null, 500);
-  
+
   $.ajax({
     url: '/admin/settings',
     headers: {
-      Authorization: 'Bearer ' + token
+      Authorization: `Bearer ${token}`
     }
-  }).done(function (data, status) {
-    $loadingContainer.hide();
-    $appContainer.show();
-    
-    fillCodeEditor(editor, data);
-    fillSelectItem(data);
-  }).error(function (e) {
-    if (e.statusText === 'Unauthorized') {
-      performLogin();
-    }
-  });
+  })
+    .done(function (data) {
+      $loadingContainer.hide();
+      $appContainer.show();
+
+      fillCodeEditor(editor, data);
+      fillSelectItem(data);
+      $titleInput.val(data.title);
+      $colorInput.val(data.color);
+      $logoPathInput.val(data.logoPath);
+    })
+    .error(function (e) {
+      if (e.statusText === 'Unauthorized') {
+        performLogin();
+      }
+    });
 
   $.ajax({
     url: '/admin/user',
     headers: {
-      Authorization: 'Bearer ' + token
+      Authorization: `Bearer ${token}`
     }
-  }).done(function (data, status) {
-    $avatarImg.attr('src', data.avatar);
-  }).error(function (e) {
-    if (e.statusText === 'Unauthorized') {
-      performLogin();
-    }
-  });
-  
-  $saveChangesBtn.on('click', function(e) {
+  })
+    .done(function (data, status) {
+      $avatarImg.attr('src', data.avatar);
+    })
+    .error(function (e) {
+      if (e.statusText === 'Unauthorized') {
+        performLogin();
+      }
+    });
+
+  $saveChangesBtn.on('click', function (e) {
     e.preventDefault();
 
     setSaveButtonDisabled(true);
-    
+
     $.ajax({
       url: '/admin/settings',
       method: 'PUT',
       data: {
         template: editor.getValue(),
-        locale: $availableLocalesSelect.val()
+        locale: $availableLocalesSelect.val(),
+        logoPath: $logoPathInput.val(),
+        color: $colorInput.val(),
+        title: $titleInput.val()
       },
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: `Bearer ${token}`
       }
-    }).done(function (data, status) {
-      setSaveResult(SUCCESS_MESSAGE);
-      setSaveButtonDisabled(false);
-    }).error(function (err) {
-      setSaveResult(ERROR_MESSAGE + err);
-      setSaveButtonDisabled(false);
-    });
+    })
+      .done(function (data, status) {
+        setSaveResult(SUCCESS_MESSAGE);
+        setSaveButtonDisabled(false);
+      })
+      .error(function (err) {
+        if (typeof err.responseJSON.message !== 'undefined') {
+          setSaveResult(`${ERROR_MESSAGE} <code>${err.responseJSON.message}</code>`);
+        } else {
+          setSaveResult(ERROR_MESSAGE);
+        }
+        setSaveButtonDisabled(false);
+      });
   });
 
   $logoutBtn.on('click', function () {
@@ -129,7 +145,7 @@
   });
 
   // Save with Cmd+S / Ctrl+S
-  $(window).bind('keydown', function(event) {
+  $(window).bind('keydown', function (event) {
     if (event.ctrlKey || event.metaKey) {
       switch (String.fromCharCode(event.which).toLowerCase()) {
         case 's':
