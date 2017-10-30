@@ -1768,6 +1768,11 @@
     transition-delay: 0.5s;
     box-shadow: 0 0 40px 4px rgba(0,0,0,0.3);
   }
+
+  .auth0-lock.auth0-lock-outlined .auth0-lock-widget {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
 }
 @media screen and (max-width: 480px) {
   .auth0-lock.auth0-lock.auth0-lock-opened .auth0-lock-widget {
