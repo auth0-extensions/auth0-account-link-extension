@@ -9,7 +9,7 @@ export default (hideOverlay = false) =>
       getSettings().then(settings => {
         resolve(`
             <div id="auth0-lock-container-1" class="auth0-lock-container">
-                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs">
+                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${hideOverlay ? 'auth0-lock-outlined' : ''}">
                     ${hideOverlay
     ? ''
     : `
