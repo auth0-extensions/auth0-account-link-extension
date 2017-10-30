@@ -10,7 +10,7 @@ module.exports = () => ({
         template: Joi.string().required(),
         locale: Joi.string().required(),
         title: Joi.string().required(),
-        color: Joi.string().required(),
+        color: Joi.string().regex(/^#[A-Fa-f0-9]{6}/).required(),
         logoPath: Joi.string().allow('')
       }
     }
