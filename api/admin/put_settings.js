@@ -1,6 +1,9 @@
 import Joi from 'joi';
 import { setSettings } from '../../lib/storage';
 
+const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+const colorRegex = /^#[A-Fa-f0-9]{6}/;
+
 module.exports = () => ({
   method: 'PUT',
   config: {
@@ -10,8 +13,8 @@ module.exports = () => ({
         template: Joi.string().required(),
         locale: Joi.string().required(),
         title: Joi.string().required(),
-        color: Joi.string().regex(/^#[A-Fa-f0-9]{6}/).required(),
-        logoPath: Joi.string().allow('')
+        color: Joi.string().regex(colorRegex).required(),
+        logoPath: Joi.string().regex(urlRegex).allow('')
       }
     }
   },
