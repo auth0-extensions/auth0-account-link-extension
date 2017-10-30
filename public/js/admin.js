@@ -2,7 +2,7 @@
 /* global CodeMirror, $ */
 
 (function () {
-  var SUCCESS_MESSAGE = 'Success! Your changes has been succesfully saved.';
+  var SUCCESS_MESSAGE = 'Success! Your changes has been successfully saved.';
   var ERROR_MESSAGE = 'Oops! An error has ocurred while trying to save your changes.';
   var TOKEN_KEY = 'com.auth0.account_linking.admin_ui.session_token';
 
@@ -55,11 +55,28 @@
     }
   }
 
-  function setSaveResult(text) {
+  function setSaveResult(text, options) {
+    $saveResult.removeClass('alert-danger');
+    $saveResult.removeClass('alert-success');
+
     $saveResult.html(text);
+    $saveResult.show();
+
+    if (options && options.error) {
+      $saveResult.addClass('alert-danger');
+    } else {
+      $saveResult.addClass('alert-success');
+    }
 
     setTimeout(function () {
       $saveResult.html('');
+      $saveResult.hide();
+
+      if (options.error) {
+        $saveResult.removeClass('alert-danger');
+      } else {
+        $saveResult.removeClass('alert-success');
+      }
     }, 10000);
   }
 
@@ -126,14 +143,16 @@
       }
     })
       .done(function (data, status) {
-        setSaveResult(SUCCESS_MESSAGE);
+        setSaveResult(`<h4>${SUCCESS_MESSAGE}</h4>`);
         setSaveButtonDisabled(false);
       })
       .error(function (err) {
         if (typeof err.responseJSON.message !== 'undefined') {
-          setSaveResult(`${ERROR_MESSAGE} <code>${err.responseJSON.message}</code>`);
+          setSaveResult(`<h4>${ERROR_MESSAGE}</h4> <p>${err.responseJSON.message}</p>`, {
+            error: true
+          });
         } else {
-          setSaveResult(ERROR_MESSAGE);
+          setSaveResult(`<h4>${ERROR_MESSAGE}</h4>`, { error: true });
         }
         setSaveButtonDisabled(false);
       });
