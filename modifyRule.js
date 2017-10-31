@@ -6,14 +6,14 @@ const RULE_NAME = 'auth0-account-link-extension';
 const findIn = rules => rules.find(rule => rule.name === RULE_NAME);
 
 // Allowing partial application to make usage with promises nicer
-const persistRule = ({create, update}, generatedRule) => (rules = []) => {
+const persistRule = (api, generatedRule) => (rules = []) => {
   const existingRule = rules.find(rule => rule.name === RULE_NAME);
 
   if (existingRule) {
-    return update({ id: existingRule.id }, generatedRule);
+    return api.update({ id: existingRule.id }, generatedRule);
   }
 
-  return create({ stage: RULE_STAGE, ...generatedRule });
+  return api.create({ stage: RULE_STAGE, ...generatedRule });
 };
 
 const destroyRule = (api) => (rules = []) => {
