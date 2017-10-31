@@ -7,7 +7,7 @@ import initServer from '../server/index';
 import config from '../lib/config';
 
 const fakeApiClient = () => {
-  let defaultUsers = {};
+  const defaultUsers = {};
 
   return {
     users: {
@@ -36,7 +36,7 @@ const fakeApiClient = () => {
   };
 };
 
-const createRequest = (options) => (
+const createRequest = options =>
   new Promise((resolve, reject) => {
     request(options, (err, res, body) => {
       if (err) {
@@ -46,14 +46,13 @@ const createRequest = (options) => (
 
       resolve(res);
     });
-  })
-);
+  });
 
 const mockHandlers = (server, options, next) => {
   server.decorate('server', 'handlers', {
     managementClient: {
       assign: 'auth0',
-      method: function(req, res) {
+      method(req, res) {
         res(fakeApiClient());
       }
     },
@@ -69,30 +68,33 @@ const mockHandlers = (server, options, next) => {
 
 mockHandlers.attributes = { name: 'handlers' };
 
-const createServer = (configFile =  '../server/config.test.json') => {
-  nconf.argv().env().file(path.join(__dirname, configFile)).defaults({
-    AUTH0_RTA: 'auth0.auth0.com',
-    DATA_CACHE_MAX_AGE: 1000 * 10,
-    NODE_ENV: 'test',
-    HOSTING_ENV: 'default',
-    PORT: 3001,
-    USE_OAUTH2: false,
-    LOG_COLOR: true,
-    AUTH0_DOMAIN: 'test.local.dev',
-    AUTH0_CLIENT_ID: 'AUTHO_CLIENT_ID',
-    AUTH0_CLIENT_SECRET: 'AUTHO_CLIENT_SECRET',
-    WT_URL: 'localhost:3001',
-    EXTENSION_SECRET: 'EXTENSION_SECRET'
-  });
-
+const createServer = (configFile = '../server/config.test.json') => {
+  nconf
+    .argv()
+    .env()
+    .file(path.join(__dirname, configFile))
+    .defaults({
+      AUTH0_RTA: 'auth0.auth0.com',
+      DATA_CACHE_MAX_AGE: 1000 * 10,
+      NODE_ENV: 'test',
+      HOSTING_ENV: 'default',
+      PORT: 3001,
+      USE_OAUTH2: false,
+      LOG_COLOR: true,
+      AUTH0_DOMAIN: 'test.local.dev',
+      AUTH0_CLIENT_ID: 'AUTHO_CLIENT_ID',
+      AUTH0_CLIENT_SECRET: 'AUTHO_CLIENT_SECRET',
+      WT_URL: 'localhost:3001',
+      EXTENSION_SECRET: 'EXTENSION_SECRET'
+    });
 
   config.setProvider(key => nconf.get(key));
 
   return initServer(() => {}, mockHandlers);
 };
 
-const startServer = (configFile =  '../server/config.test.json') => {
-  return new Promise((resolve, reject) => {
+const startServer = (configFile = '../server/config.test.json') =>
+  new Promise((resolve, reject) => {
     const server = createServer();
 
     server.start((err) => {
@@ -103,7 +105,6 @@ const startServer = (configFile =  '../server/config.test.json') => {
       resolve(server);
     });
   });
-};
 
 const createToken = (user) => {
   const options = {
@@ -112,18 +113,13 @@ const createToken = (user) => {
     issuer: 'https://auth0.example.com'
   };
 
-  var userSub = {
+  const userSub = {
     sub: user.user_id,
     email: user.email,
     base: 'auth0.example.com/api/v2'
   };
 
   return sign(userSub, config('AUTH0_CLIENT_SECRET'), options);
-}
-
-export {
-  startServer,
-  createRequest as request,
-  createServer,
-  createToken
 };
+
+export { startServer, createRequest as request, createServer, createToken };

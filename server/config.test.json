@@ -1,0 +1,14 @@
+{
+  "AUTH0_RTA": "auth0.auth0.com",
+  "DATA_CACHE_MAX_AGE": 10000,
+  "NODE_ENV": "test",
+  "HOSTING_ENV": "default",
+  "PORT": 3001,
+  "USE_OAUTH2": false,
+  "LOG_COLOR": true,
+  "AUTH0_DOMAIN": "account-linking-testing.local.dev",
+  "AUTH0_CLIENT_ID": "iAsec-6IaWtJmJhsMz2HR1tPDOvN72Zr",
+  "AUTH0_CLIENT_SECRET": "8FLdS-ryDdf0Btipy8UjPGSAABjgiuzlWKKQ2L3QPjYaLNjcXzpUt2tkjJ94wkQT",
+  "WT_URL": "localhost:3001",
+  "EXTENSION_SECRET": "d2h8f03wghjti404-gjfeqihu0cre"
+}
