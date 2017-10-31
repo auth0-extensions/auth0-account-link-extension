@@ -3,14 +3,14 @@ import getCurrentLocale from '../../lib/locale';
 import svgDimensions from '../../lib/svgDimensions';
 import { getSettings } from '../../lib/storage';
 
-export default (hideOverlay = false) =>
+export default () =>
   new Promise(resolve => {
     getCurrentLocale().then(t => {
       getSettings().then(settings => {
         resolve(`
             <div id="auth0-lock-container-1" class="auth0-lock-container">
-                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${hideOverlay ? 'auth0-lock-outlined' : ''}">
-                    ${hideOverlay
+                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${settings.removeOverlay ? 'auth0-lock-outlined' : ''}">
+                    ${settings.removeOverlay
     ? ''
     : `
                         <div class="auth0-lock-overlay">
