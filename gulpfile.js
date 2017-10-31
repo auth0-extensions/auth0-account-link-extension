@@ -1,10 +1,14 @@
 require('babel-register')();
 
+
 const gulp = require('gulp');
 const util = require('gulp-util');
 const ngrok = require('ngrok');
 const nodemon = require('gulp-nodemon');
-const patchRule = require('./lib/patchRule').default;
+const { install } = require('./modifyRule')
+const managementAdapter = require('./lib/managementAdapter');
+const ManagementClientAdapter = managementAdapter.default;
+const { getCurrentConfig } = managementAdapter;
 
 gulp.task('run', () => {
   ngrok.connect(3001, (ngrokError, url) => {
@@ -37,13 +41,21 @@ gulp.task('run', () => {
       util.log('Public Url:', publicUrl);
 
       util.log('Patching rule on tenant.');
-      patchRule(publicUrl)
-        .then(() => {
-          util.log('Rule patched on tenant.');
+      getCurrentConfig().then((config) => {
+        const adapter = new ManagementClientAdapter(config);
+        install(adapter, {
+          extensionURL: publicUrl,
+          username: 'Development',
+          clientID: config.AUTH0_CLIENT_ID,
+          clientSecret: config.AUTH0_CLIENT_SECRET
         })
-        .catch((error) => {
-          util.log("Couldn't patch rule in tenant:", error);
-        });
+          .then(() => {
+            util.log('Rule patched on tenant.');
+          })
+          .catch((error) => {
+            util.log("Couldn't patch rule in tenant:", error);
+          });
+      });
     }, 4000);
   });
 });
