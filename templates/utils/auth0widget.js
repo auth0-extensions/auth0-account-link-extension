@@ -63,7 +63,7 @@ export default (hideOverlay = false) =>
                                 </svg>
 
                                 `}
-                                <div class="auth0-lock-name">${settings.title !== '' ? settings.title : t.accountLinking}</div>
+                                <div class="auth0-lock-name">${settings.title !== '' ? settings.title : t('accountLinking')}</div>
                                 </div>
                             </div>
                             <div id="error-message" class="auth0-global-message auth0-global-message-error"></div>
@@ -78,11 +78,11 @@ export default (hideOverlay = false) =>
                                             <div class="auth0-lock-form" id="content-container">
                                                 <div>
                                                 <p id="message">
-                                                    ${t.introduction}
+                                                    ${t('introduction')}
                                                 </p>
                                                 <p class="auth0-lock-alternative">
                                                     <a class="auth0-lock-alternative-link" id="skip" href="#">
-                                                    ${t.skipAlternativeLink}
+                                                    ${t('skipAlternativeLink')}
                                                     </a>
                                                 </p>
                                                 </div>
@@ -98,7 +98,7 @@ export default (hideOverlay = false) =>
                             <div class="auth0-lock-actions">
                                 <button class="auth0-lock-submit" ${settings.color !== '' ? `style="background-color: ${settings.color}"` : '' } type="button" id="link">
                                 <span class="auth0-label-submit">
-                                    <span id="label-value">${t.continue}</span>
+                                    <span id="label-value">${t('continue')}</span>
                                     <span>
                                     <svg class="icon-text" width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Web/Submit/Active" transform="translate(-148.000000, -32.000000)" fill="#FFFFFF"><polygon id="Shape" points="148 33.4 149.4 32 155.4 38 149.4 44 148 42.6 152.6 38"></polygon></g></g></svg>
                                     </span>
@@ -114,8 +114,8 @@ export default (hideOverlay = false) =>
             <script>
                 window.Auth0AccountLinkingExtension = window.Auth0AccountLinkingExtension || {};
                 window.Auth0AccountLinkingExtension.locale = {
-                    pageMismatchError: '${t.pageMismatchError}',
-                    sameEmailAddressError: '${t.sameEmailAddressError}'
+                    pageMismatchError: '${t('pageMismatchError')}',
+                    sameEmailAddressError: '${t('sameEmailAddressError')}'
                 }
             </script>
             `);
