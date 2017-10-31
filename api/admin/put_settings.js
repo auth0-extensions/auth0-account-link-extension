@@ -14,7 +14,8 @@ module.exports = () => ({
         locale: Joi.string().required(),
         title: Joi.string().required(),
         color: Joi.string().regex(colorRegex).required(),
-        logoPath: Joi.string().regex(urlRegex).allow('')
+        logoPath: Joi.string().regex(urlRegex).allow(''),
+        removeOverlay: Joi.bool().default(false)
       }
     }
   },

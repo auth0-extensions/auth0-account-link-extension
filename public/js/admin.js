@@ -9,6 +9,7 @@
   var $titleInput = $('#title_input');
   var $logoPathInput = $('#logo_path_input');
   var $colorInput = $('#color_input');
+  var $removeOverlayCheck = $('#remove_overlay');
   var $availableLocalesSelect = $('#available-locales');
   var $appContainer = $('.app-container');
   var $loadingContainer = $('.loading-state-container');
@@ -101,6 +102,8 @@
       $titleInput.val(data.title);
       $colorInput.val(data.color);
       $logoPathInput.val(data.logoPath);
+      
+      $removeOverlayCheck.prop('checked', data.removeOverlay || false);
     })
     .error(function (e) {
       if (e.statusText === 'Unauthorized') {
@@ -136,7 +139,8 @@
         locale: $availableLocalesSelect.val(),
         logoPath: $logoPathInput.val(),
         color: $colorInput.val(),
-        title: $titleInput.val()
+        title: $titleInput.val(),
+        removeOverlay: $removeOverlayCheck.is(':checked')
       },
       headers: {
         Authorization: `Bearer ${token}`
