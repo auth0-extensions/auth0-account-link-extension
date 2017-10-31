@@ -2,8 +2,10 @@ node_modules
 .DS_Store
 .nyc_output
 server/config.json
+server/config.test.json
 coverage
 .env
 dist
 tags
 TAGS
+data.json
