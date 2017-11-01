@@ -23,7 +23,7 @@ export default function(currentUser, matchingUsers) {
             return !!qs[key];
           })
           .map(function (key) {
-            return key + '=' + encodeURI(qs[key]);
+            return key + '=' + encodeURIComponent(qs[key]);
           }).join('&');
 
       window.location = domain + 'authorize?' + query;
