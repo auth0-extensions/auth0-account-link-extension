@@ -1,6 +1,6 @@
 {
   "name": "auth0-account-link-extension",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Auth0 Account Link Extension",
   "main": "index.js",
   "engines": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
+    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css",
@@ -23,7 +23,7 @@
       "auth0-extension-tools@1.2.1",
       "auth0-extension-hapi-tools@1.2.0",
       "boom@3.2.2",
-      "bluebird@3.4.6",
+      "bluebird@3.5.0",
       "compression@1.4.4",
       "delegates@0.1.0",
       "depd@1.0.1",
@@ -62,15 +62,23 @@
     "settings": {}
   },
   "dependencies": {
-    "auth0": "2.6.0",
+    "auth0": "^2.8.0",
     "auth0-extension-hapi-tools": "1.2.0",
-    "auth0-extension-tools": "1.2.1",
+    "auth0-extension-tools": "^1.2.1",
     "boom": "3.2.2",
+    "handlebars": "^4.0.11",
     "hapi": "13.5.0",
+    "hapi-auth-jwt2": "^7.0.1",
     "inert": "4.0.1",
+    "joi": "^13.0.1",
+    "jsonwebtoken": "^8.1.0",
+    "jwks-rsa": "^1.2.1",
+    "md5": "^2.2.1",
+    "micromustache": "^5.2.0",
     "nconf": "^0.8.4",
     "open": "^0.0.5",
     "request": "2.56.0",
+    "vision": "^4.1.1",
     "webtask-tools": "^3.2.0",
     "winston": "1.0.0"
   },
@@ -101,6 +109,7 @@
     "mocha": "^3.5.0",
     "ngrok": "^2.2.15",
     "nodemon": "^1.11.0",
-    "nyc": "^11.1.0"
+    "nyc": "^11.1.0",
+    "puppeteer": "^0.11.0"
   }
 }
