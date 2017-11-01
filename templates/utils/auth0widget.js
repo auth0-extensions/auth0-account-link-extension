@@ -3,16 +3,16 @@ import getCurrentLocale from '../../lib/locale';
 import svgDimensions from '../../lib/svgDimensions';
 import { getSettings } from '../../lib/storage';
 
-export default () =>
+export default dynamicSettings =>
   new Promise(resolve => {
-    getCurrentLocale().then(t => {
-      getSettings().then(settings => {
-        resolve(`
+    getSettings().then(storedSettings => {
+      const settings = Object.assign(storedSettings, dynamicSettings);
+      const t = getCurrentLocale(settings.locale);
+
+      resolve(`
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${settings.removeOverlay ? 'auth0-lock-outlined' : ''}">
-                    ${settings.removeOverlay
-    ? ''
-    : `
+                    ${settings.removeOverlay ? '' : `
                         <div class="auth0-lock-overlay">
                             <span class="auth0-lock-badge-bottom">
                             <a href="https://auth0.com/?utm_source=lock&amp;utm_campaign=badge&amp;utm_medium=widget" target="_blank" class="auth0-lock-badge">
@@ -44,11 +44,11 @@ export default () =>
                                 <div class="auth0-lock-header-bg-solid"></div>
                                 </div>
                                 <div class="auth0-lock-header-welcome">
-                                ${settings.logoPath !== '' ? `
+                                ${settings.logoPath !== ''
+    ? `
 
                                 <img src='${settings.logoPath}' class="auth0-lock-header-logo" />
-                                
-                                ` : `
+    ` : `
 
                                 <svg class="auth0-lock-header-logo" width="52.47px" height="58px" viewBox="0 0 151 172">
                                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -96,7 +96,7 @@ export default () =>
                                 </span>
                             </div>
                             <div class="auth0-lock-actions">
-                                <button class="auth0-lock-submit" ${settings.color !== '' ? `style="background-color: ${settings.color}"` : '' } type="button" id="link">
+                                <button class="auth0-lock-submit" ${settings.color !== '' ? `style="background-color: ${settings.color}"` : ''} type="button" id="link">
                                 <span class="auth0-label-submit">
                                     <span id="label-value">${t('continue')}</span>
                                     <span>
@@ -119,6 +119,5 @@ export default () =>
                 }
             </script>
             `);
-      });
     });
   });
