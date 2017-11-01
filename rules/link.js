@@ -18,6 +18,9 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
   var LOG_TAG = '[ACCOUNT_LINK]: ';
   console.log(LOG_TAG, 'Entered Account Link Rule');
 
+  // 'query' can be undefined when using '/oauth/token' to log in
+  context.request.query = context.request.query || {};
+
   var config = {
     endpoints: {
       linking: '${extensionURL.replace(/\/$/g, '')}',
