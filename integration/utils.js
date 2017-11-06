@@ -3,7 +3,7 @@ import path from 'path';
 import { ManagementClient } from 'auth0';
 
 const configFileContent = fs.readFileSync(
-  path.join(__dirname, '../../server/config.test.json'),
+  path.join(__dirname, '../server/config.test.json'),
   'utf-8'
 );
 const config = JSON.parse(configFileContent);
@@ -17,14 +17,14 @@ const mgmtApi = new ManagementClient({
 
 /**
  * Waits X seconds and resolves.
- * @param {number} secs 
+ * @param {number} secs
  */
 export const wait = (secs = 1) => new Promise(cont => setTimeout(cont, secs * 1000));
 
 /**
  * Looks up for the test-created users and
  * removes them from the tenant.
- * @param {string} email 
+ * @param {string} email
  */
 export const deleteTestUsers = email =>
   new Promise((resolve, reject) => {
@@ -48,9 +48,9 @@ export const deleteTestUsers = email =>
   });
 
 /**
- * Looks for users with the same email 
+ * Looks for users with the same email
  * and returns the count of them.
- * @param {string} email 
+ * @param {string} email
  */
 export const usersWithSameEmailCount = email =>
   new Promise((resolve, reject) => {
@@ -62,7 +62,7 @@ export const usersWithSameEmailCount = email =>
   });
 
 /**
- * Builds the extension site query string 
+ * Builds the extension site query string
  * from an object with the parameters
  * @param {object} params
  */

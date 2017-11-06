@@ -16,13 +16,14 @@ describe('Account linking tests', () => {
   beforeEach(async () => {
     browser = await puppeteer.launch({ headless: false, width: 1366, height: 768 });
     page = await browser.newPage();
+
+    await deleteTestUsers(testEmail).catch((e) => {
+      console.log("Couldn't delete test users. Details:", e);
+    });
   });
 
   afterEach(async () => {
     browser.close();
-    await deleteTestUsers(testEmail).catch((e) => {
-      console.log("Couldn't delete test users. Details:", e);
-    });
   });
 
   it('detects repeated email and links account', async () => {
