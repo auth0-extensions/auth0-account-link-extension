@@ -8,11 +8,13 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 50000",
+    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
+    "test:integration": "nyc --require babel-register --require babel-polyfill mocha integration --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css",
-    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
+    "extension:build":
+      "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
     "build": "yarn run client:build && yarn run extension:build"
   },
   "author": "Auth0",
