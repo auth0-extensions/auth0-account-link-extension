@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { init, get } from '../../lib/db';
 
 describe('DB Tests', () => {
-  it('throws an error if I try to gey an nonexistent DB', () => {
+  it('throws an error if I try to get an nonexistent DB', () => {
     init(null);
     expect(() => get()).to.throw('The DB has not been initialized.');
   });
