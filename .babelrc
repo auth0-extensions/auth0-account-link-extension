@@ -1,19 +1,10 @@
 {
-  "presets": [
-    "es2017",
-    "es2016",
-    "es2015"
-  ],
+  "presets": ["es2017", "es2016", "es2015"],
   "env": {
     "development": {
       "presets": []
     }
   },
-  "plugins": [
-    "transform-runtime",
-    "transform-object-rest-spread"
-  ],
-  "ignore": [
-    "./node_modules/**/*.js"
-  ]
+  "plugins": ["transform-runtime", "transform-object-rest-spread"],
+  "ignore": ["./node_modules/**/*.js"]
 }

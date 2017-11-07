@@ -1,12 +1,12 @@
 require('babel-register')();
 
-
 const gulp = require('gulp');
 const util = require('gulp-util');
 const ngrok = require('ngrok');
 const nodemon = require('gulp-nodemon');
-const { install } = require('./modifyRule')
+const { install } = require('./modifyRule');
 const managementAdapter = require('./lib/managementAdapter');
+
 const ManagementClientAdapter = managementAdapter.default;
 const { getCurrentConfig } = managementAdapter;
 

@@ -1,6 +1,6 @@
 import { handlers } from 'auth0-extension-hapi-tools';
 import config from '../lib/config';
-import logger from '../lib/logger';
+import logger from '../lib/console';
 
 const register = (server, options, next) => {
   server.decorate('server', 'handlers', {
