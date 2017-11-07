@@ -32,7 +32,7 @@ describe('Account linking tests', () => {
 
     await page.waitForSelector('#link');
     await page.click('#link');
-    await wait(1);
+    await wait(3);
 
     expect(await usersWithSameEmailCount(testEmail)).equal(1);
     expect(await page.url()).equal(app`/user`);
