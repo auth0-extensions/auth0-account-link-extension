@@ -1,4 +1,4 @@
-/* eslint-disable no-var, func-names, prefer-arrow-callback */
+/* eslint-disable */
 /* global CodeMirror, $ */
 
 (function () {

@@ -1,5 +1,3 @@
-import tools from 'auth0-extension-tools';
-import config from '../../lib/config';
 import avatarUrl from '../../lib/avatar';
 
 module.exports = () => ({

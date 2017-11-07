@@ -1,5 +1,6 @@
+/* eslint-disable no-param-reassign */
+
 import Boom from 'boom';
-import crypto from 'crypto';
 import jwksRsa from 'jwks-rsa';
 import jwt from 'jsonwebtoken';
 import * as tools from 'auth0-extension-hapi-tools';
@@ -8,9 +9,7 @@ import config from '../lib/config';
 
 const scopes = [{ value: 'openid' }, { value: 'profile' }];
 
-
 module.exports.register = (server, options, next) => {
-  
   const jwtOptions = {
     dashboardAdmin: {
       key: config('EXTENSION_SECRET'),
@@ -91,7 +90,7 @@ module.exports.register = (server, options, next) => {
                 return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
               }
 
-              decoded.payload.scope = scopes.map(scope => scope.value); // eslint-disable-line no-param-reassign
+              decoded.payload.scope = scopes.map(scope => scope.value);
               return callback(null, true, decoded.payload);
             }
           );
