@@ -128,11 +128,9 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
   function promptUser() {
     return searchUsersWithSameEmail().then(function transformUsers(users) {
       
-      users = users.filter(function(u) {
+      return users.filter(function(u) {
         return u.user_id !== user.user_id;
-      });
-      
-      return users.map(function(user) {
+      }).map(function(user) {
         return {
           userId: user.user_id,
           email: user.email,
