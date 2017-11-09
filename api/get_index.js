@@ -67,11 +67,11 @@ module.exports = _ => ({
       console.error("An invalid token was provided", err);
 
       indexTemplate({
+        dynamicSettings,
         stylesheetLink,
         currentUser: null,
         matchingUsers: [],
-        customCSS: config('CUSTOM_CSS'),
-        dynamicSettings  
+        customCSS: config('CUSTOM_CSS')
       }).then((template) => {
         reply(template).code(400);
       });
