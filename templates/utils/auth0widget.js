@@ -1,7 +1,53 @@
 /* eslint-disable arrow-parens */
 import getCurrentLocale from '../../lib/locale';
-import svgDimensions from '../../lib/svgDimensions';
 import { getSettings } from '../../lib/storage';
+import svgDimensions from '../../lib/svgDimensions';
+import lockOverlay, { lockOutlineClass } from './lockOverlay';
+
+const getLogo = (settings) => {
+  if (settings.logoPath !== '') {
+    return `<img src='${settings.logoPath}' class="auth0-lock-header-logo" />`;
+  }
+
+  return `
+    <svg class="auth0-lock-header-logo" width="52.47px" height="58px" viewBox="0 0 151 172">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="logo-grey-horizontal">
+                <g id="Group">
+                <g id="LogoBadge" fill-opacity="1" fill="rgb(234, 83, 35)">
+                    <path d="${svgDimensions.badge}" id="Shape"></path>
+                </g>
+                </g>
+            </g>
+        </g>
+    </svg>`;
+};
+
+const getTitle = (settings, t) => {
+  if (settings.title !== '') {
+    return settings.title;
+  }
+
+  return t('accountLinking');
+};
+
+const getSubmitButton = (settings, t) => {
+  let colorStyle = '';
+
+  if (settings.color !== '') {
+    colorStyle = `style="background-color: ${settings.color}"`;
+  }
+
+  return `
+    <button class="auth0-lock-submit" ${colorStyle} type="button" id="link">
+      <span class="auth0-label-submit">
+        <span id="label-value">${t('continue')}</span>
+        <span>
+          <svg class="icon-text" width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Web/Submit/Active" transform="translate(-148.000000, -32.000000)" fill="#FFFFFF"><polygon id="Shape" points="148 33.4 149.4 32 155.4 38 149.4 44 148 42.6 152.6 38"></polygon></g></g></svg>
+        </span>
+      </span>
+    </button>`;
+};
 
 export default dynamicSettings =>
   new Promise(resolve => {
@@ -11,29 +57,8 @@ export default dynamicSettings =>
 
       resolve(`
             <div id="auth0-lock-container-1" class="auth0-lock-container">
-                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${settings.removeOverlay ? 'auth0-lock-outlined' : ''}">
-                    ${settings.removeOverlay ? '' : `
-                        <div class="auth0-lock-overlay">
-                            <span class="auth0-lock-badge-bottom">
-                            <a href="https://auth0.com/?utm_source=lock&amp;utm_campaign=badge&amp;utm_medium=widget" target="_blank" class="auth0-lock-badge">
-                                <svg width="58px" height="21px" viewBox="0 0 462 168">
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="logo-grey-horizontal">
-                                    <g id="Group">
-                                        <g id="LogoText" transform="translate(188.000000, 41.500000)" fill="#D0D2D3">
-                                        <path d="${svgDimensions.text}" id="Shape"></path>
-                                        </g>
-                                        <g id="LogoBadge" fill-opacity="0.4" fill="#FFFFFF">
-                                        <path d="${svgDimensions.badge}" id="Shape"></path>
-                                        </g>
-                                    </g>
-                                    </g>
-                                </g>
-                                </svg>
-                            </a>
-                            </span>
-                        </div>
-                    `}
+                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(settings.removeOverlay)}">
+                    ${lockOverlay(settings.removeOverlay)}
                     <div class="auth0-lock-center">
                         <form class="auth0-lock-widget">
                         <div class="auth0-lock-widget-container">
@@ -44,26 +69,8 @@ export default dynamicSettings =>
                                 <div class="auth0-lock-header-bg-solid"></div>
                                 </div>
                                 <div class="auth0-lock-header-welcome">
-                                ${settings.logoPath !== ''
-    ? `
-
-                                <img src='${settings.logoPath}' class="auth0-lock-header-logo" />
-    ` : `
-
-                                <svg class="auth0-lock-header-logo" width="52.47px" height="58px" viewBox="0 0 151 172">
-                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="logo-grey-horizontal">
-                                            <g id="Group">
-                                            <g id="LogoBadge" fill-opacity="1" fill="rgb(234, 83, 35)">
-                                                <path d="${svgDimensions.badge}" id="Shape"></path>
-                                            </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-
-                                `}
-                                <div class="auth0-lock-name">${settings.title !== '' ? settings.title : t('accountLinking')}</div>
+                                  ${getLogo(settings)}
+                                  <div class="auth0-lock-name">${getTitle(settings, t)}</div>
                                 </div>
                             </div>
                             <div id="error-message" class="auth0-global-message auth0-global-message-error"></div>
@@ -96,14 +103,7 @@ export default dynamicSettings =>
                                 </span>
                             </div>
                             <div class="auth0-lock-actions">
-                                <button class="auth0-lock-submit" ${settings.color !== '' ? `style="background-color: ${settings.color}"` : ''} type="button" id="link">
-                                <span class="auth0-label-submit">
-                                    <span id="label-value">${t('continue')}</span>
-                                    <span>
-                                    <svg class="icon-text" width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Web/Submit/Active" transform="translate(-148.000000, -32.000000)" fill="#FFFFFF"><polygon id="Shape" points="148 33.4 149.4 32 155.4 38 149.4 44 148 42.6 152.6 38"></polygon></g></g></svg>
-                                    </span>
-                                </span>
-                                </button>
+                                ${getSubmitButton(settings, t)}
                             </div>
                             </div>
                         </div>

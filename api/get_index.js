@@ -49,11 +49,11 @@ module.exports = _ => ({
     decodeToken(req.query.child_token).then(token => {
       fetchUsersFromToken(token).then(({currentUser, matchingUsers}) => {
         reply(indexTemplate({
+          dynamicSettings,
           stylesheetLink,
           currentUser,
           matchingUsers,
-          customCSS: config('CUSTOM_CSS'),
-          dynamicSettings
+          customCSS: config('CUSTOM_CSS')
         }));
       })
       .catch(err => {
