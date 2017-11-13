@@ -41,28 +41,35 @@ module.exports = () => ({
     const dynamicSettings = {};
 
     if (req.query.locale) dynamicSettings.locale = req.query.locale;
-    if (req.query.color) dynamicSettings.color = '#' + req.query.color;
+    if (req.query.color) dynamicSettings.color = `#${req.query.color}`;
     if (req.query.title) dynamicSettings.title = req.query.title;
     if (req.query.logoPath) dynamicSettings.logoPath = req.query.logoPath;
 
-    decodeToken(req.query.child_token).then(token => {
-      fetchUsersFromToken(token).then(({currentUser, matchingUsers}) => {
-        reply(indexTemplate({
-          dynamicSettings,
-          stylesheetLink,
-          currentUser,
-          matchingUsers,
-          customCSS: config('CUSTOM_CSS')
-        }));
-      })
-      .catch(err => {
-        const state = req.query.state;
-        console.error("An error was encountered: ", err);
-        console.info(`Redirecting to failed link to /continue: ${token.iss}continue?state=${req.query.state}`);
+    decodeToken(req.query.child_token)
+      .then((token) => {
+        fetchUsersFromToken(token)
+          .then(({ currentUser, matchingUsers }) => {
+            reply(
+              indexTemplate({
+                dynamicSettings,
+                stylesheetLink,
+                currentUser,
+                matchingUsers,
+                customCSS: config('CUSTOM_CSS')
+              })
+            );
+          })
+          .catch((err) => {
+            const state = req.query.state;
+            console.error('An error was encountered: ', err);
+            console.info(
+              `Redirecting to failed link to /continue: ${token.iss}continue?state=${req.query
+                .state}`
+            );
 
-        reply.redirect(`${token.iss}continue?state=${state}`);
-      });
-    })
+            reply.redirect(`${token.iss}continue?state=${state}`);
+          });
+      })
       .catch((err) => {
         logger.error('An invalid token was provided', err);
 
@@ -75,5 +82,6 @@ module.exports = () => ({
         }).then((template) => {
           reply(template).code(400);
         });
+      });
   }
 });
