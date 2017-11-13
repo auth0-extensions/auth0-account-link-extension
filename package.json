@@ -8,15 +8,12 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test":
-      "nyc --require babel-register --require babel-polyfill mocha test --recursive",
-    "test:integration":
-      "mocha integration --compilers js:babel-core/register --recursive --timeout 50000",
+    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
+    "test:integration": "mocha integration --compilers js:babel-core/register --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css",
-    "extension:build":
-      "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
+    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
     "build": "yarn run client:build && yarn run extension:build"
   },
   "author": "Auth0",
@@ -90,6 +87,7 @@
     "auth0-extensions-cli": "^1.0.5",
     "babel": "^6.23.0",
     "babel-core": "^6.25.0",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",

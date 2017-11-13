@@ -1,9 +1,11 @@
+/* eslint-disable global-require */
+
 import path from 'path';
 import Hapi from 'hapi';
 import Inert from 'inert';
 import jwt from 'hapi-auth-jwt2';
 import config from '../lib/config';
-import logger from '../lib/logger';
+import logger from '../lib/console';
 import routes from './routes';
 import defaultHandlers from './handlers';
 import auth from './auth';
@@ -25,7 +27,7 @@ const createServer = (cb, handlers = defaultHandlers) => {
 
   server.register([jwt, Inert], () => {});
 
-  server.register(require('vision'), (err) => {
+  server.register(require('vision'), () => {
     server.views({
       engines: {
         hbs: require('handlebars')

@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import Joi from 'joi';
 import { setSettings } from '../../lib/storage';
 
@@ -13,8 +15,12 @@ module.exports = () => ({
         template: Joi.string().required(),
         locale: Joi.string().required(),
         title: Joi.string().required(),
-        color: Joi.string().regex(colorRegex).required(),
-        logoPath: Joi.string().regex(urlRegex).allow(''),
+        color: Joi.string()
+          .regex(colorRegex)
+          .required(),
+        logoPath: Joi.string()
+          .regex(urlRegex)
+          .allow(''),
         removeOverlay: Joi.bool().default(false)
       }
     }
