@@ -61,8 +61,8 @@ module.exports = () => ({
           })
           .catch((err) => {
             const state = req.query.state;
-            console.error('An error was encountered: ', err);
-            console.info(
+            logger.error('An error was encountered: ', err);
+            logger.info(
               `Redirecting to failed link to /continue: ${token.iss}continue?state=${req.query
                 .state}`
             );
