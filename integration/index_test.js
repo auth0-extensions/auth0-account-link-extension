@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import puppeteer from 'puppeteer';
 import { expect } from 'chai';
 import { deleteTestUsers, usersWithSameEmailCount, wait, buildQueryString } from './utils';
@@ -16,23 +17,23 @@ describe('Account linking tests', () => {
   beforeEach(async () => {
     browser = await puppeteer.launch({ headless: false, width: 1366, height: 768 });
     page = await browser.newPage();
-  });
 
-  afterEach(async () => {
-    browser.close();
     await deleteTestUsers(testEmail).catch((e) => {
       console.log("Couldn't delete test users. Details:", e);
     });
   });
 
+  afterEach(async () => {
+    browser.close();
+  });
+
   it('detects repeated email and links account', async () => {
     await createUsers();
-    
+
     await page.waitForSelector('#link');
     await page.click('#link');
-    await wait(1);
-    
-    
+    await wait(3);
+
     expect(await usersWithSameEmailCount(testEmail)).equal(1);
     expect(await page.url()).equal(app`/user`);
   });
@@ -44,7 +45,7 @@ describe('Account linking tests', () => {
 
     await page.waitForNavigation();
     await page.click('#allow');
-    
+
     await page.waitForNavigation();
     expect(await usersWithSameEmailCount(testEmail)).equal(2);
     expect(await page.url()).equal(app`/user`);
