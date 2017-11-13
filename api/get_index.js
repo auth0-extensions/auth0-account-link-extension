@@ -39,9 +39,17 @@ module.exports = _ => ({
 
     const stylesheetLink = config('NODE_ENV') === 'production' ? CDN_CSS : '/css/link.css';
 
+    const dynamicSettings = {};
+
+    if (req.query.locale) dynamicSettings.locale = req.query.locale;
+    if (req.query.color) dynamicSettings.color = '#' + req.query.color;
+    if (req.query.title) dynamicSettings.title = req.query.title;
+    if (req.query.logoPath) dynamicSettings.logoPath = req.query.logoPath;
+
     decodeToken(req.query.child_token).then(token => {
       fetchUsersFromToken(token).then(({currentUser, matchingUsers}) => {
         reply(indexTemplate({
+          dynamicSettings,
           stylesheetLink,
           currentUser,
           matchingUsers,
@@ -59,6 +67,7 @@ module.exports = _ => ({
       console.error("An invalid token was provided", err);
 
       indexTemplate({
+        dynamicSettings,
         stylesheetLink,
         currentUser: null,
         matchingUsers: [],

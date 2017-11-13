@@ -8,12 +8,12 @@ import buildExtensionScripts from './utils/extensionScripts';
 
 const stylesheetTag = href => (href ? `<link rel="stylesheet" href="${href}" />` : '');
 
-export default ({ stylesheetLink, customCSS, currentUser, matchingUsers }) =>
+export default ({ stylesheetLink, customCSS, currentUser, matchingUsers, dynamicSettings }) =>
   new Promise((resolve) => {
     getStorage().read().then((data) => {
       const template = data.settings ? data.settings.template : defaultTemplate;
       
-      buildAuth0Widget().then((Auth0Widget) => {
+      buildAuth0Widget(dynamicSettings).then((Auth0Widget) => {
         resolve(render(template, {
           ExtensionCSS: stylesheetTag(stylesheetLink),
           CustomCSS: stylesheetTag(customCSS),
