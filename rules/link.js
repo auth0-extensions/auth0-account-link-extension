@@ -21,7 +21,8 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
   var config = {
     endpoints: {
       linking: '${extensionURL.replace(/\/$/g, '')}',
-      userApi: auth0.baseUrl + '/users'
+      userApi: auth0.baseUrl + '/users',
+      usersByEmailApi: auth0.baseUrl + '/users-by-email'
     },
     token: {
       clientId: '${clientID}',
@@ -126,7 +127,10 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
 
   function promptUser() {
     return searchUsersWithSameEmail().then(function transformUsers(users) {
-      return users.map(function(user) {
+      
+      return users.filter(function(u) {
+        return u.user_id !== user.user_id;
+      }).map(function(user) {
         return {
           userId: user.user_id,
           email: user.email,
@@ -175,10 +179,9 @@ export default ({extensionURL = '', username = 'Unknown', clientID = '', clientS
 
   function searchUsersWithSameEmail() {
     return apiCall({
-      url: config.endpoints.userApi,
+      url: config.endpoints.usersByEmailApi,
       qs: {
-        search_engine: 'v2',
-        q: 'email:"' + user.email + '" -user_id:"' + user.user_id + '"'
+        email: user.email
       }
     });
   }
