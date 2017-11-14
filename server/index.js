@@ -27,16 +27,6 @@ const createServer = (cb, handlers = defaultHandlers) => {
 
   server.register([jwt, Inert], () => {});
 
-  server.register(require('vision'), () => {
-    server.views({
-      engines: {
-        hbs: require('handlebars')
-      },
-      relativeTo: path.join(__dirname, '../templates'),
-      path: 'server'
-    });
-  });
-
   server.route({
     method: 'GET',
     path: '/js/{file*}',
