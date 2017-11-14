@@ -1,6 +1,6 @@
 const nconf = require('nconf');
 const path = require('path');
-const logger = require('./lib/console').default;
+const logger = require('./lib/logger');
 
 // Load babel
 require('./lib/babel')();

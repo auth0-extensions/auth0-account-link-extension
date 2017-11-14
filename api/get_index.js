@@ -2,7 +2,7 @@ import { decode } from 'jsonwebtoken';
 import config from '../lib/config';
 import findUsersByEmail from '../lib/findUsersByEmail';
 import indexTemplate from '../templates/index';
-import logger from '../lib/console';
+import logger from '../lib/logger';
 
 const version = require('../package.json').version;
 

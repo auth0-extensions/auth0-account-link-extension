@@ -1,6 +1,6 @@
 import { install } from '../../modifyRule';
 import config from '../../lib/config';
-import logger from '../../lib/console';
+import logger from '../../lib/logger';
 
 module.exports = server => ({
   method: 'POST',
@@ -13,7 +13,7 @@ module.exports = server => ({
     ]
   },
   handler: (req, reply) => {
-    logger.log('Starting rule installation...');
+    logger.info('Starting rule installation...');
 
     install(req.pre.auth0.rules, {
       extensionURL: config('PUBLIC_WT_URL'),
@@ -22,7 +22,7 @@ module.exports = server => ({
     })
       .then(() => reply().code(204))
       .then(() => {
-        logger.log('Rule successfully installed');
+        logger.info('Rule successfully installed');
       })
       .catch((err) => {
         logger.error('Something went wrong, ', err);

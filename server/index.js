@@ -5,7 +5,7 @@ import Hapi from 'hapi';
 import Inert from 'inert';
 import jwt from 'hapi-auth-jwt2';
 import config from '../lib/config';
-import logger from '../lib/console';
+import logger from '../lib/logger';
 import routes from './routes';
 import defaultHandlers from './handlers';
 import auth from './auth';
