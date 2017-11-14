@@ -1,3 +1,5 @@
+import template from '../../templates/server/admin';
+
 module.exports = () => ({
   method: 'GET',
   path: '/admin',
@@ -5,6 +7,6 @@ module.exports = () => ({
     auth: false
   },
   handler: (req, reply) => {
-    reply.view('admin');
+    reply(template);
   }
 });
