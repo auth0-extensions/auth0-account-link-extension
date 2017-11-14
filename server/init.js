@@ -2,7 +2,7 @@ import path from 'path';
 import { FileStorageContext, WebtaskStorageContext } from 'auth0-extension-tools';
 import config from '../lib/config';
 import createServer from './index';
-import logger from '../lib/console';
+import logger from '../lib/logger';
 import { init as initStorage } from '../lib/db';
 
 const defaultCallback = (err) => {
