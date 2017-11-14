@@ -3,6 +3,7 @@ import config from '../lib/config';
 import findUsersByEmail from '../lib/findUsersByEmail';
 import indexTemplate from '../templates/index';
 import logger from '../lib/console';
+import vision from 'vision';
 
 const version = require('../package.json').version;
 

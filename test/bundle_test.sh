@@ -1,6 +1,9 @@
 #! /bin/bash
-BUILD_OUTPUT=$(yarn extension:build)
-ERROR_COUNT=$($BUILD_OUTPUT | grep -i error -c)
 
-echo $BUILD_OUTPUT
+ERROR_COUNT=$(yarn extension:build | grep ERROR -c)
+
+if [ "$ERROR_COUNT" -ne "0" ]; then
+    echo "Unbuildable extension.";
+fi
+
 exit $ERROR_COUNT
