@@ -2892,16 +2892,6 @@ gulplog@^1.0.0:
   dependencies:
     glogg "^1.0.0"
 
-handlebars@^4.0.11:
-  version "4.0.11"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.11.tgz#630a35dfe0294bc281edae6ffc5d329fc7982dcc"
-  dependencies:
-    async "^1.4.0"
-    optimist "^0.6.1"
-    source-map "^0.4.4"
-  optionalDependencies:
-    uglify-js "^2.6"
-
 handlebars@^4.0.3:
   version "4.0.10"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.10.tgz#3d30c718b09a3d96f23ea4cc1f403c4d3ba9ff4f"
@@ -3743,20 +3733,19 @@ jwa@^1.1.4:
     ecdsa-sig-formatter "1.0.9"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.1.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.2.0.tgz#b7e925b9eac0722ad8634ad6a7e97c7daed3d4c8"
+jwks-rsa@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.1.1.tgz#f9ae815f4a5923e0745f7739bf60c4e0e6012a52"
   dependencies:
-    "@types/express-jwt" "0.0.34"
     debug "^2.2.0"
     limiter "^1.1.0"
     lru-memoizer "^1.6.0"
-    ms "^2.0.0"
+    ms "^0.7.1"
     request "^2.73.0"
 
-jwks-rsa@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.2.1.tgz#9949100f5643821107787de2947d46f875f6ab5a"
+jwks-rsa@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.2.0.tgz#b7e925b9eac0722ad8634ad6a7e97c7daed3d4c8"
   dependencies:
     "@types/express-jwt" "0.0.34"
     debug "^2.2.0"
