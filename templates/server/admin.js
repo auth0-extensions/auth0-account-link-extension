@@ -1,3 +1,4 @@
+export default `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,3 +98,4 @@
 <script src="/js/admin.js"></script>
 </body>
 </html>
+`;
