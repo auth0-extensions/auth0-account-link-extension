@@ -35,4 +35,4 @@ jobs:
 
       # run tests!
       - run: yarn test
-      - run: yarn extension:build
+      - run: ./test/bundle_test.sh
