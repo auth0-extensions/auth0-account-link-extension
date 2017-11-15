@@ -1,6 +1,6 @@
 import { uninstall } from '../../modifyRule';
 import config from '../../lib/config';
-import logger from '../../lib/console';
+import logger from '../../lib/logger';
 
 module.exports = server => ({
   method: 'DELETE',
@@ -13,7 +13,7 @@ module.exports = server => ({
     ]
   },
   handler: (req, reply) => {
-    logger.log('Starting uninstall...');
+    logger.info('Starting uninstall...');
 
     Promise.all([
       uninstall(req.pre.auth0.rules),
