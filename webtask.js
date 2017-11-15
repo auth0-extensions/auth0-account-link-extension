@@ -1,6 +1,6 @@
 import tools from 'auth0-extension-hapi-tools';
 import hapiApp from './server/init';
-import logger from './lib/console';
+import logger from './lib/logger';
 import config from './lib/config';
 
 const createServer = tools.createServer((wtConfig, wtStorage) => {
