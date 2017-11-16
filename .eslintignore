@@ -1,0 +1,6 @@
+node_modules/**
+integration/**
+sample-app/**
+build/**
+test/**
+dist/**

@@ -1,3 +1,7 @@
+/* eslint-disable */
+// Ignoring this file since it has to be written in ES5
+// and eslint is configured to lint ES6.
+
 export default function(currentUser, matchingUsers) {
   var params = window.Qs.parse(window.location.search, { ignoreQueryPrefix: true });
 
@@ -47,6 +51,7 @@ export default function(currentUser, matchingUsers) {
       });
     });
 
+
     updateContinueUrl(skipEl, token.iss, params.state);
 
     if (params.error_type === 'accountMismatch') {
@@ -63,7 +68,7 @@ export default function(currentUser, matchingUsers) {
     containerEl.appendChild(
       el('div', {}, [
         el('p', {}, [
-          text('You seem to have reached this page in error. Please try logging in again')
+          text(window.Auth0AccountLinkingExtension.locale.pageMismatchError || 'You seem to have reached this page in error. Please try logging in again')
         ])
       ])
     );
@@ -73,7 +78,7 @@ export default function(currentUser, matchingUsers) {
 
   function loadAccountMismatchError() {
     var messageEl = document.getElementById('error-message');
-    var msg = "Accounts must have matching email addresses. Please try again.";
+    var msg = window.Auth0AccountLinkingExtension.locale.sameEmailAddressError || "Accounts must have matching email addresses. Please try again.";
 
     messageEl.innerHTML = msg;
     messageEl.style.display = 'block';

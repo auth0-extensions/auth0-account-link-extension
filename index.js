@@ -1,5 +1,6 @@
 const nconf = require('nconf');
 const path = require('path');
+const logger = require('./lib/logger');
 
 // Load babel
 require('./lib/babel')();
@@ -19,8 +20,9 @@ nconf
   });
 
 const createServer = require('./server/init');
-const startServer = (server) => {
-  return new Promise((resolve, reject) => {
+
+const startServer = server =>
+  new Promise((resolve, reject) => {
     server.start((err) => {
       if (err) {
         reject(err);
@@ -28,20 +30,17 @@ const startServer = (server) => {
 
       resolve(server);
 
-      console.info(`Server running at: ${server.info.uri}`);
+      logger.info(`Server running at: ${server.info.uri}`);
     });
   });
-};
 
 const server = createServer(key => nconf.get(key), null);
 
-startServer(server)
-  .catch((err) => {
-    console.error(err);
-    console.error('Server could not be started. Aborting...');
+startServer(server).catch((err) => {
+  logger.error(err);
+  logger.error('Server could not be started. Aborting...');
 
-    process.exit(1);
-  });
-
+  process.exit(1);
+});
 
 module.exports = server;

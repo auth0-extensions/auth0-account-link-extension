@@ -1383,7 +1383,7 @@
   width: 100%;
   height: 70px;
   overflow: hidden;
-  border-radius: 0 0 0px 5px;
+  border-radius: 0 0 5px 5px;
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
   color: #fff;
@@ -1766,7 +1766,12 @@
     transition: transform 0.6s, opacity 0.6s, -webkit-transform 0.6s;
     -webkit-transition-delay: 0.5s;
     transition-delay: 0.5s;
-    box-shadow: 0 0 40px 4px #111118;
+    box-shadow: 0 0 40px 4px rgba(0,0,0,0.3);
+  }
+
+  .auth0-lock.auth0-lock-outlined .auth0-lock-widget {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
   }
 }
 @media screen and (max-width: 480px) {

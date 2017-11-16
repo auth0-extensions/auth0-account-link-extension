@@ -6,17 +6,17 @@ const RULE_NAME = 'auth0-account-link-extension';
 const findIn = rules => rules.find(rule => rule.name === RULE_NAME);
 
 // Allowing partial application to make usage with promises nicer
-const persistRule = ({create, update}, generatedRule) => (rules = []) => {
+const persistRule = (api, generatedRule) => (rules = []) => {
   const existingRule = rules.find(rule => rule.name === RULE_NAME);
 
   if (existingRule) {
-    return update({ id: existingRule.id }, generatedRule);
+    return api.update({ id: existingRule.id }, generatedRule);
   }
 
-  return create({ stage: RULE_STAGE, ...generatedRule });
+  return api.create({ stage: RULE_STAGE, ...generatedRule });
 };
 
-const destroyRule = (api) => (rules = []) => {
+const destroyRule = api => (rules = []) => {
   const existingRule = findIn(rules);
 
   if (existingRule) {
@@ -29,6 +29,6 @@ const install = (api, config) => {
 
   return api.getAll().then(persistRule(api, rule));
 };
-const uninstall = (api) => api.getAll().then(destroyRule(api));
+const uninstall = api => api.getAll().then(destroyRule(api));
 
 export { install, uninstall };

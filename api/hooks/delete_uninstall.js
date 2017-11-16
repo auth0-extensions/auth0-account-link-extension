@@ -1,7 +1,8 @@
 import { uninstall } from '../../modifyRule';
 import config from '../../lib/config';
+import logger from '../../lib/logger';
 
-module.exports = (server) => ({
+module.exports = server => ({
   method: 'DELETE',
   path: '/.extensions/on-uninstall',
   config: {
@@ -12,15 +13,15 @@ module.exports = (server) => ({
     ]
   },
   handler: (req, reply) => {
-    console.log("Starting uninstall...");
+    logger.info('Starting uninstall...');
 
     Promise.all([
       uninstall(req.pre.auth0.rules),
-      req.pre.auth0.deleteClient({ client_id: config('AUTH0_CLIENT_ID')})
+      req.pre.auth0.deleteClient({ client_id: config('AUTH0_CLIENT_ID') })
     ])
-      .then(_ => reply().code(204))
+      .then(() => reply().code(204))
       .catch((err) => {
-        console.error("Something went wrong while uninstalling Account Link Extension: ", err);
+        logger.error('Something went wrong while uninstalling Account Link Extension: ', err);
 
         // Swallow the error so we do not break the experience for the user
         reply().code(204);
