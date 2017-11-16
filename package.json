@@ -1,14 +1,15 @@
 {
   "name": "auth0-account-link-extension",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "description": "Auth0 Account Link Extension",
   "main": "index.js",
   "engines": {
-    "node": "7.1"
+    "node": "6.9"
   },
   "scripts": {
     "start": "node ./index.js",
     "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
+    "test:integration": "mocha integration --compilers js:babel-core/register --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css",
@@ -19,11 +20,11 @@
   "license": "MIT",
   "auth0-extension": {
     "externals": [
-      "auth0@2.6.0",
+      "auth0@2.8.0",
       "auth0-extension-tools@1.2.1",
       "auth0-extension-hapi-tools@1.2.0",
       "boom@3.2.2",
-      "bluebird@3.4.6",
+      "bluebird@3.5.0",
       "compression@1.4.4",
       "delegates@0.1.0",
       "depd@1.0.1",
@@ -33,6 +34,9 @@
       "express-jwt@3.1.0",
       "iconv-lite@0.4.10",
       "hapi@13.5.0",
+      "hapi-auth-jwt2@7.0.1",
+      "jwks-rsa@1.1.1",
+      "joi@9.0.4",
       "lodash@3.10.1",
       "lru-cache@2.6.4",
       "mime-db@1.10.0",
@@ -62,12 +66,16 @@
     "settings": {}
   },
   "dependencies": {
-    "auth0": "2.6.0",
+    "auth0": "^2.8.0",
     "auth0-extension-hapi-tools": "1.2.0",
-    "auth0-extension-tools": "1.2.1",
+    "auth0-extension-tools": "^1.2.1",
     "boom": "3.2.2",
     "hapi": "13.5.0",
+    "hapi-auth-jwt2": "7.0.1",
     "inert": "4.0.1",
+    "joi": "9.0.4",
+    "jsonwebtoken": "^8.1.0",
+    "jwks-rsa": "1.1.1",
     "nconf": "^0.8.4",
     "open": "^0.0.5",
     "request": "2.56.0",
@@ -78,6 +86,7 @@
     "auth0-extensions-cli": "^1.0.5",
     "babel": "^6.23.0",
     "babel-core": "^6.25.0",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
@@ -101,6 +110,7 @@
     "mocha": "^3.5.0",
     "ngrok": "^2.2.15",
     "nodemon": "^1.11.0",
-    "nyc": "^11.1.0"
+    "nyc": "^11.1.0",
+    "puppeteer": "^0.11.0"
   }
 }

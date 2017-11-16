@@ -1,10 +1,14 @@
+/* eslint-disable global-require */
+
 import path from 'path';
 import Hapi from 'hapi';
 import Inert from 'inert';
+import jwt from 'hapi-auth-jwt2';
 import config from '../lib/config';
 import logger from '../lib/logger';
 import routes from './routes';
 import defaultHandlers from './handlers';
+import auth from './auth';
 
 const createServer = (cb, handlers = defaultHandlers) => {
   const server = new Hapi.Server();
@@ -21,11 +25,12 @@ const createServer = (cb, handlers = defaultHandlers) => {
     }
   });
 
-  server.register(Inert, () => {});
+  server.register([jwt, Inert], () => {});
 
   server.route({
     method: 'GET',
     path: '/js/{file*}',
+    config: { auth: false },
     handler: {
       directory: {
         path: path.join(__dirname, '../public/js')
@@ -36,6 +41,7 @@ const createServer = (cb, handlers = defaultHandlers) => {
   server.route({
     method: 'GET',
     path: '/css/{file*}',
+    config: { auth: false },
     handler: {
       directory: {
         path: path.join(__dirname, '../public/css')
@@ -43,16 +49,16 @@ const createServer = (cb, handlers = defaultHandlers) => {
     }
   });
 
-  server.register([handlers, routes], (err) => {
+  server.register([auth, handlers, routes], (err) => {
     // Use the server logger.
     logger.debug = (...args) => {
-      server.log([ 'debug' ], args.join(' '));
+      server.log(['debug'], args.join(' '));
     };
     logger.info = (...args) => {
-      server.log([ 'info' ], args.join(' '));
+      server.log(['info'], args.join(' '));
     };
     logger.error = (...args) => {
-      server.log([ 'error' ], args.join(' '));
+      server.log(['error'], args.join(' '));
     };
 
     if (err) {
