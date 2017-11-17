@@ -1,7 +1,9 @@
-/* eslint-disable */
 /* global CodeMirror, $ */
+/* eslint-disable */
+// Ignoring this file since it has to be written in ES5
+// and eslint is configured to lint ES6.
 
-(function () {
+export default function() {
   var SUCCESS_MESSAGE = 'Success! Your changes has been successfully saved.';
   var ERROR_MESSAGE = 'Oops! An error has ocurred while trying to save your changes.';
   var TOKEN_KEY = 'com.auth0.account_linking.admin_ui.session_token';
@@ -34,7 +36,7 @@
   }
 
   function fillSelectItem(data) {
-    data.availableLocales.forEach(function (locale) {
+    data.availableLocales.forEach(function(locale) {
       var isSelected = data.locale === locale.code ? 'selected' : '';
       $availableLocalesSelect.append(
         `<option value="${locale.code}"${isSelected}>${locale.name}</option>`
@@ -69,7 +71,7 @@
       $saveResult.addClass('alert-success');
     }
 
-    setTimeout(function () {
+    setTimeout(function() {
       $saveResult.html('');
       $saveResult.hide();
 
@@ -93,7 +95,7 @@
       Authorization: `Bearer ${token}`
     }
   })
-    .done(function (data) {
+    .done(function(data) {
       $loadingContainer.hide();
       $appContainer.show();
 
@@ -102,10 +104,10 @@
       $titleInput.val(data.title);
       $colorInput.val(data.color);
       $logoPathInput.val(data.logoPath);
-      
+
       $removeOverlayCheck.prop('checked', data.removeOverlay || false);
     })
-    .error(function (e) {
+    .error(function(e) {
       if (e.statusText === 'Unauthorized') {
         performLogin();
       }
@@ -117,16 +119,16 @@
       Authorization: `Bearer ${token}`
     }
   })
-    .done(function (data, status) {
+    .done(function(data, status) {
       $avatarImg.attr('src', data.avatar);
     })
-    .error(function (e) {
+    .error(function(e) {
       if (e.statusText === 'Unauthorized') {
         performLogin();
       }
     });
 
-  $saveChangesBtn.on('click', function (e) {
+  $saveChangesBtn.on('click', function(e) {
     e.preventDefault();
 
     setSaveButtonDisabled(true);
@@ -146,11 +148,11 @@
         Authorization: `Bearer ${token}`
       }
     })
-      .done(function (data, status) {
+      .done(function(data, status) {
         setSaveResult(`<h4>${SUCCESS_MESSAGE}</h4>`);
         setSaveButtonDisabled(false);
       })
-      .error(function (err) {
+      .error(function(err) {
         if (typeof err.responseJSON.message !== 'undefined') {
           setSaveResult(`<h4>${ERROR_MESSAGE}</h4> <p>${err.responseJSON.message}</p>`, {
             error: true
@@ -162,13 +164,13 @@
       });
   });
 
-  $logoutBtn.on('click', function () {
+  $logoutBtn.on('click', function() {
     sessionStorage.removeItem(TOKEN_KEY);
     window.location.reload();
   });
 
   // Save with Cmd+S / Ctrl+S
-  $(window).bind('keydown', function (event) {
+  $(window).bind('keydown', function(event) {
     if (event.ctrlKey || event.metaKey) {
       switch (String.fromCharCode(event.which).toLowerCase()) {
         case 's':
@@ -180,4 +182,4 @@
       }
     }
   });
-}());
+}
