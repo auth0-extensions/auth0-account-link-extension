@@ -1,3 +1,5 @@
+import adminJS from '../../public/admin';
+
 export default `
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +97,7 @@ export default `
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/mode/xml/xml.js"></script>
-<script src="/js/admin.js"></script>
+<script>(${adminJS.toString()})()</script>
 </body>
 </html>
 `;
