@@ -1,6 +1,6 @@
 import adminJS from '../../public/admin';
 
-export default `
+export default ({stylesheetTag}) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +12,10 @@ export default `
     <link rel="stylesheet" href="https://cdn.auth0.com/styleguide/components/2.0.0/components.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/material.min.css">
-    <link rel="stylesheet" href="/css/admin.css">
+    ${stylesheetTag}
 </head>
 <body>
-    
+
 <header class="site-header">
  <nav class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -50,7 +50,7 @@ export default `
   <div class="spinner spinner-lg is-auth0">
     <div class="circle"></div>
   </div>
-</section> 
+</section>
 
 <main class="container app-container">
     <form action="">
@@ -87,7 +87,6 @@ export default `
         <input type="checkbox" id="remove_overlay"/> Remove widget's overlay
       </div>
 
-      
       <button class="btn btn-success" id="save-changes">Save changes</button>
     </form>
 </main>
