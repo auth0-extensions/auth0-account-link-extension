@@ -3,10 +3,7 @@ import config from '../lib/config';
 import findUsersByEmail from '../lib/findUsersByEmail';
 import indexTemplate from '../templates/index';
 import logger from '../lib/logger';
-
-const version = require('../package.json').version;
-
-const CDN_CSS = `https://cdn.auth0.com/extensions/auth0-account-link-extension/${version}/link.min.css`;
+import stylesheet from '../lib/stylesheet';
 
 const decodeToken = token =>
   new Promise((resolve, reject) => {
@@ -36,7 +33,9 @@ module.exports = () => ({
       return;
     }
 
-    const stylesheetLink = config('NODE_ENV') === 'production' ? CDN_CSS : '/css/link.css';
+    const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
+    const stylesheetTag = stylesheetHelper.tag('link');
+    const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'));
 
     const dynamicSettings = {};
 
@@ -52,10 +51,10 @@ module.exports = () => ({
             reply(
               indexTemplate({
                 dynamicSettings,
-                stylesheetLink,
+                stylesheetTag,
                 currentUser,
                 matchingUsers,
-                customCSS: config('CUSTOM_CSS')
+                customCSSTag
               })
             );
           })
@@ -75,10 +74,10 @@ module.exports = () => ({
 
         indexTemplate({
           dynamicSettings,
-          stylesheetLink,
+          stylesheetTag,
           currentUser: null,
           matchingUsers: [],
-          customCSS: config('CUSTOM_CSS')
+          customCSSTag
         }).then((template) => {
           reply(template).code(400);
         });
