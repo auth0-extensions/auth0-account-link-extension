@@ -13,16 +13,14 @@ const render = (template, locals = {}) => {
   return template.replace(VAR_REGEX, (match, name) => locals[name] || '');
 };
 
-const stylesheetTag = href => (href ? `<link rel="stylesheet" href="${href}" />` : '');
-
-export default ({ stylesheetLink, customCSS, currentUser, matchingUsers, dynamicSettings }) =>
+export default ({ stylesheetTag, customCSSTag , currentUser, matchingUsers, dynamicSettings }) =>
   Promise.all([buildAuth0Widget(dynamicSettings), getStorage().read()])
     .then(([widget, data]) => {
       const template = data.settings ? data.settings.template : defaultTemplate;
 
       return render(template, {
-        ExtensionCSS: stylesheetTag(stylesheetLink),
-        CustomCSS: stylesheetTag(customCSS),
+        ExtensionCSS: stylesheetTag,
+        CustomCSS: customCSSTag,
         Auth0Widget: widget,
         ExtensionScripts: buildExtensionScripts(currentUser, matchingUsers)
       });

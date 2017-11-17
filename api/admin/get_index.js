@@ -1,4 +1,6 @@
 import template from '../../templates/server/admin';
+import config from '../../lib/config';
+import stylesheet from '../../lib/stylesheet';
 
 module.exports = () => ({
   method: 'GET',
@@ -7,6 +9,8 @@ module.exports = () => ({
     auth: false
   },
   handler: (req, reply) => {
-    reply(template);
+    const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
+
+    reply(template({ stylesheetTag: stylesheetHelper.tag('admin') }));
   }
 });
