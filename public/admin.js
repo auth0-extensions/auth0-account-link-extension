@@ -8,6 +8,7 @@ export default function() {
   var ERROR_MESSAGE = 'Oops! An error has ocurred while trying to save your changes.';
   var TOKEN_KEY = 'com.auth0.account_linking.admin_ui.session_token';
 
+  var baseURL = $('base').attr('href');
   var $titleInput = $('#title_input');
   var $logoPathInput = $('#logo_path_input');
   var $colorInput = $('#color_input');
@@ -32,7 +33,7 @@ export default function() {
   });
 
   function performLogin() {
-    window.location.href = '/login';
+    window.location.href = baseURL+'/login';
   }
 
   function fillSelectItem(data) {
@@ -90,7 +91,7 @@ export default function() {
   editor.setSize(null, 500);
 
   $.ajax({
-    url: '/admin/settings',
+    url: baseURL+'/admin/settings',
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -114,7 +115,7 @@ export default function() {
     });
 
   $.ajax({
-    url: '/admin/user',
+    url: baseURL+'/admin/user',
     headers: {
       Authorization: `Bearer ${token}`
     }
