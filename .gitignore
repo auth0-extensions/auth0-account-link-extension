@@ -5,7 +5,8 @@ server/config.json
 server/config.test.json
 coverage
 .env
-dist
+dist/*
+!dist/.gitkeep
 tags
 TAGS
 data.json
