@@ -32,7 +32,7 @@ export default function() {
   });
 
   function performLogin() {
-    window.location.href = '/login';
+    window.location.href = 'login';
   }
 
   function fillSelectItem(data) {
@@ -90,7 +90,7 @@ export default function() {
   editor.setSize(null, 500);
 
   $.ajax({
-    url: '/admin/settings',
+    url: 'admin/settings',
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -114,7 +114,7 @@ export default function() {
     });
 
   $.ajax({
-    url: '/admin/user',
+    url: 'admin/user',
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -134,7 +134,7 @@ export default function() {
     setSaveButtonDisabled(true);
 
     $.ajax({
-      url: '/admin/settings',
+      url: 'admin/settings',
       method: 'PUT',
       data: {
         template: editor.getValue(),

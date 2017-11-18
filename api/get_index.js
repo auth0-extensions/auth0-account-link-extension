@@ -29,7 +29,7 @@ module.exports = () => ({
   handler: (req, reply) => {
     const linkingState = req.state['account-linking-admin-state'];
     if (typeof linkingState !== 'undefined' && linkingState !== '') {
-      reply.redirect('/admin').state('account-linking-admin-state', '');
+      reply.redirect('admin').state('account-linking-admin-state', '');
       return;
     }
 
