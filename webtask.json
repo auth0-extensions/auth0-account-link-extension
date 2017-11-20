@@ -1,7 +1,7 @@
 {
   "title": "Auth0 Account Link",
   "name": "auth0-account-link",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "auth0",
   "description": "This extension gives Auth0 customers the ability to allow their users to link their accounts",
   "type": "application",
@@ -9,11 +9,7 @@
   "docsUrl": "https://auth0.com/docs/extensions/account-link",
   "initialUrlPath": "/login",
   "repository": "https://github.com/auth0-extensions/auth0-account-link-extension",
-  "keywords": [
-    "auth0",
-    "extension",
-    "account-link"
-  ],
+  "keywords": ["auth0", "extension", "account-link"],
   "secrets": {
     "CUSTOM_CSS": {
       "description": "Add custom styles to the linking page of the extension.",
