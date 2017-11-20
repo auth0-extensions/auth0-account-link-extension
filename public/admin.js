@@ -135,7 +135,7 @@ export default function() {
     setSaveButtonDisabled(true);
 
     $.ajax({
-      url: '/admin/settings',
+      url: baseURL+'/admin/settings',
       method: 'PUT',
       data: {
         template: editor.getValue(),
