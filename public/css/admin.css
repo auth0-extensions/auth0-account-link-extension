@@ -6,6 +6,10 @@
   width: 300px;
 }
 
+#locale-menu .list-group-item {
+  cursor: pointer;
+}
+
 .loading-state-container {
   text-align: center;
   margin-top: calc(50vh - 150px);
