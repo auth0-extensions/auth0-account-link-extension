@@ -29,8 +29,8 @@ ${header}
             <h2 id="locale-title"></h2>
 
             <table id="locale-management-table" class="table table-striped">
-                    <th>Name</th>
-                    <th>Message</th>
+                    <th class="header" width="20%">Name</th>
+                    <th class="header" width="80%">Message</th>
             </table>
 
             <button id="locale-management-submit" class="btn btn-primary">Save changes</button>
