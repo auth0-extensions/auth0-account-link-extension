@@ -26,6 +26,14 @@ ${header}
         
         </div>
         <div class="col-sm-8" id="locale-detail">
+            <h2 id="locale-title"></h2>
+
+            <table id="locale-management-table" class="table table-striped">
+                    <th>Name</th>
+                    <th>Message</th>
+            </table>
+
+            <button id="locale-management-submit" class="btn btn-primary">Save changes</button>
         </div>
     </div>
 </main>
