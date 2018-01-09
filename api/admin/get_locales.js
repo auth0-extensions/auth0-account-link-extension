@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import { getSettings } from '../../lib/storage';
-import { allLocales } from '../../lib/locale';
+import { getSettings, getLocales } from '../../lib/storage';
 
 module.exports = () => ({
   method: 'GET',
@@ -10,8 +9,8 @@ module.exports = () => ({
   },
   path: '/admin/locales',
   handler: (req, reply) => {
-    getSettings().then((settings) => {
-      reply(allLocales);
+    getLocales().then((locales) => {
+      reply(locales);
     });
   }
 });
