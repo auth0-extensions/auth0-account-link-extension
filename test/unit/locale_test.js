@@ -18,22 +18,25 @@ const sampleLocales = {
 };
 
 describe('Locale tests', () => {
-  it('returns a function on initialization', () => {
-    const t = resolveLocale('en', sampleLocales);
-
-    expect(typeof t).to.equal('function');
+  it('returns a function on initialization', (done) => {
+    resolveLocale('en', sampleLocales).then((t) => {
+      expect(typeof t).to.equal('function')
+      done();
+    });
   });
 
-  it('returns the correct string', () => {
-    const t = resolveLocale('es', sampleLocales);
-
-    expect(t('a')).to.equal('es-a');
+  it('returns the correct string', (done) => {
+    resolveLocale('es', sampleLocales).then((t) => {;
+      expect(t('a')).to.equal('es-a');
+      done();
+    });
   });
 
-  it('fallbacks to first locale if single string not found', () => {
-    const t = resolveLocale('es', sampleLocales);
-
-    expect(t('c')).to.equal('en-c');
+  it('fallbacks to first locale if single string not found', (done) => {
+    resolveLocale('es', sampleLocales).then((t) => {;
+      expect(t('c')).to.equal('en-c');
+      done();
+    });
   });
 
   it("each locale has a '_name' field", () => {
