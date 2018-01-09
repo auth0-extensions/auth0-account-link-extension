@@ -14,6 +14,27 @@ export default function() {
   var baseURL = $('base').attr('href');
   var $appContainer = $('.app-container');
   var $loadingContainer = $('.loading-state-container');
+  var $avatarImg = $('.avatar');
+  var token = sessionStorage.getItem(TOKEN_KEY);
+  
+  $.ajax({
+    url: baseURL + '/admin/user',
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  })
+    .done(function(data, status) {
+      $avatarImg.attr('src', data.avatar);
+    })
+    .error(function(e) {
+      if (e.statusText === 'Unauthorized') {
+        performLogin();
+      }
+    });
+
+  function performLogin() {
+    window.location.href = baseURL + '/login';
+  }
 
   function mainAdminPanel() {
     var $titleInput = $('#title_input');
@@ -24,9 +45,6 @@ export default function() {
     var $saveChangesBtn = $('#save-changes');
     var $saveResult = $('#save-result');
     var $logoutBtn = $('#logout-btn');
-    var $avatarImg = $('.avatar');
-
-    var token = sessionStorage.getItem(TOKEN_KEY);
 
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
       lineNumbers: true,
@@ -37,15 +55,11 @@ export default function() {
       htmlMode: true
     });
 
-    function performLogin() {
-      window.location.href = baseURL + '/login';
-    }
-
     function fillSelectItem(data) {
       data.availableLocales.forEach(function(locale) {
         var isSelected = data.locale === locale.code ? 'selected' : '';
         $availableLocalesSelect.append(
-          '<option value="' + locale.code + '"${isSelected}>' + locale.name + '</option>'
+          '<option value="' + locale.code + '" ' + isSelected + '>' + locale.name + '</option>'
         );
       });
     }
@@ -119,20 +133,6 @@ export default function() {
         }
       });
 
-    $.ajax({
-      url: baseURL + '/admin/user',
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    })
-      .done(function(data, status) {
-        $avatarImg.attr('src', data.avatar);
-      })
-      .error(function(e) {
-        if (e.statusText === 'Unauthorized') {
-          performLogin();
-        }
-      });
 
     $saveChangesBtn.on('click', function(e) {
       e.preventDefault();
@@ -191,28 +191,31 @@ export default function() {
   }
 
   function localeAdminPanel() {
-    var token = sessionStorage.getItem(TOKEN_KEY);
     var $localeMenu = $('#locale-menu');
     var $localeDetail = $('#locale-detail');
     var $localeTitle = $('#locale-title');
     var $managementTable = $('#locale-management-table');
+    var $managementSubmit = $('#locale-management-submit');
 
     function hydrateMenu() {
       for (var key in locales) {
         $localeMenu.append('<li class="list-group-item" data-locale-name="' + key + '">' + locales[key]._name + '</li>')
       }
       listenForMenuClicks();
+      
+      // Select first menu item by default
+      $('#locale-menu li')[0].click();      
     }
 
     function hydrateDetail() {
       var locale = locales[selectedLocale];
-      $('tr:not(th)').remove();
+      $('tr:not(tr.header)').remove();
       
       $localeTitle.html(locale._name);
 
       for (var messageName in locale) {
         if (messageName !== '_name') {
-          $managementTable.append('<tr><td>' + messageName + '</td><td><input class="form-control" value="' + locale[messageName] + '" /></td>')
+          $managementTable.append('<tr><td id="key">' + messageName + '</td><td><input class="form-control" value="' + locale[messageName] + '" /></td>')
         }
       }
     }
@@ -244,6 +247,39 @@ export default function() {
         $loadingContainer.hide();
         alert(err);
       });
+
+    $managementSubmit.on('click', function () {
+      var editedLocale = { _name: locales[selectedLocale]._name };
+
+      $managementTable.find('tr').each(function() {
+        var key = $(this).find('#key').html();
+        var message = $(this).find('input').val();
+        editedLocale[key] = message;
+      })
+
+      locales[selectedLocale] = editedLocale;
+
+      $.ajax({
+        url: baseURL + '/admin/locales',
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSONStringify(locales),
+        processData: false,
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+        .done(function(data, status) {
+          toastr.success('You have successfully saved your locales.', 'Success!')
+        })
+        .error(function(err) {
+          if (typeof err.responseJSON.message !== 'undefined') {
+            toastr.error(err.responseJSON.message, 'Error')
+          } else {
+            toastr.error('Please try again later.', 'Error')
+          }
+        });
+    });
   }
 
   switch (window.location.pathname) {

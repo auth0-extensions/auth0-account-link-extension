@@ -6,6 +6,10 @@
   width: 300px;
 }
 
+#locale-title {
+  margin-top: 0px;
+}
+
 #locale-menu .list-group-item {
   cursor: pointer;
 }
