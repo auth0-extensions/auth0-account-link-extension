@@ -198,6 +198,8 @@ export default function() {
     var $managementSubmit = $('#locale-management-submit');
 
     function hydrateMenu() {
+      $localeMenu.find('li').remove();
+
       for (var key in locales) {
         $localeMenu.append('<li class="list-group-item" data-locale-name="' + key + '">' + locales[key]._name + '</li>')
       }
@@ -279,7 +281,19 @@ export default function() {
             toastr.error('Please try again later.', 'Error')
           }
         });
-    });
+
+      });
+    $('#add-new-locale').on('click', function(e) {
+      e.preventDefault();
+      var $newLocaleNameInput = $('#add-new-locale-name');
+
+      var newLocaleId = makeid();
+      var newLocaleName = $newLocaleNameInput.val();
+      locales[newLocaleId] = ObjectAssign({}, locales.en, { _name: `${newLocaleName} (Custom)` });
+      
+      hydrateMenu();
+      $newLocaleNameInput.val('');
+    })
   }
 
   switch (window.location.pathname) {
