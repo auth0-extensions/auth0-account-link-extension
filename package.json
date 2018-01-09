@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive",
+    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 5000",
     "test:integration": "mocha integration --compilers js:babel-core/register --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
