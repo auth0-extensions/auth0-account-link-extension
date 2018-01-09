@@ -14,6 +14,7 @@ export default ({ stylesheetTag, baseURL }) => `
     <link rel="stylesheet" href="https://cdn.auth0.com/styleguide/components/2.0.0/components.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     ${stylesheetTag}
 </head>
 <body>
@@ -22,9 +23,22 @@ ${header}
 
 <main class="container app-container">
     <div class="row">
-        <div class="col-sm-4 list-group" id="locale-menu">
-        
+        <div class="col-sm-4">
+            <div class=" list-group" id="locale-menu">
+            </div>
+            <div class="text-center">
+            <div class="input-group">
+                <input id="add-new-locale-name" class="form-control" placeholder="Add new locale" />
+                <span class="input-group-btn">
+                    <button id="add-new-locale" class="btn btn-primary" type="button">Add</button>
+                </span>
+            </div>
+                
+                
+            </div>
         </div>
+        
+        
         <div class="col-sm-8" id="locale-detail">
             <h2 id="locale-title"></h2>
 

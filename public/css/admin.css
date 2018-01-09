@@ -14,6 +14,10 @@
   cursor: pointer;
 }
 
+#add-new-locale {
+  height: 46px;
+}
+
 .loading-state-container {
   text-align: center;
   margin-top: calc(50vh - 150px);
