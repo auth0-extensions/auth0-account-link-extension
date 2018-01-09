@@ -194,6 +194,8 @@ export default function() {
     var token = sessionStorage.getItem(TOKEN_KEY);
     var $localeMenu = $('#locale-menu');
     var $localeDetail = $('#locale-detail');
+    var $localeTitle = $('#locale-title');
+    var $managementTable = $('#locale-management-table');
 
     function hydrateMenu() {
       for (var key in locales) {
@@ -204,7 +206,15 @@ export default function() {
 
     function hydrateDetail() {
       var locale = locales[selectedLocale];
-      console.log('locale', locale);
+      $('tr:not(th)').remove();
+      
+      $localeTitle.html(locale._name);
+
+      for (var messageName in locale) {
+        if (messageName !== '_name') {
+          $managementTable.append('<tr><td>' + messageName + '</td><td><input class="form-control" value="' + locale[messageName] + '" /></td>')
+        }
+      }
     }
 
     function listenForMenuClicks() {
