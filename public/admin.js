@@ -201,7 +201,7 @@ export default function() {
       $localeMenu.find('li').remove();
 
       for (var key in locales) {
-        $localeMenu.append('<li class="list-group-item" data-locale-name="' + key + '">' + locales[key]._name + '</li>')
+        $localeMenu.append(`<li class="list-group-item" data-locale-name="${key}">${locales[key]._name}</li>`)
       }
       listenForMenuClicks();
       

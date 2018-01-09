@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import { getSettings } from '../../lib/storage';
-import { allLocales as locales } from '../../lib/locale';
+import { getSettings, getLocales } from '../../lib/storage';
 
 module.exports = () => ({
   method: 'GET',
@@ -9,7 +8,8 @@ module.exports = () => ({
     auth: 'jwt'
   },
   path: '/admin/settings',
-  handler: (req, reply) => {
+  handler: async (req, reply) => {
+    const locales = await getLocales();
     const availableLocales = Object.keys(locales).map(locale => ({
       code: locale,
       name: locales[locale]._name

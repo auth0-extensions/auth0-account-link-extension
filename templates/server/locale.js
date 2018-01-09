@@ -27,14 +27,12 @@ ${header}
             <div class=" list-group" id="locale-menu">
             </div>
             <div class="text-center">
-            <div class="input-group">
-                <input id="add-new-locale-name" class="form-control" placeholder="Add new locale" />
-                <span class="input-group-btn">
-                    <button id="add-new-locale" class="btn btn-primary" type="button">Add</button>
-                </span>
-            </div>
-                
-                
+                <div class="input-group">
+                    <input id="add-new-locale-name" class="form-control" placeholder="Add new locale" />
+                    <span class="input-group-btn">
+                        <button id="add-new-locale" class="btn btn-primary" type="button">Add</button>
+                    </span>
+                </div>
             </div>
         </div>
         

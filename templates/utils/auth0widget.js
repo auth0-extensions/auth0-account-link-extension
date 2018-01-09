@@ -53,9 +53,9 @@ export default dynamicSettings =>
   new Promise(resolve => {
     getSettings().then(storedSettings => {
       const settings = Object.assign(storedSettings, dynamicSettings);
-      const t = getCurrentLocale(settings.locale);
+      getCurrentLocale(settings.locale).then((t) => {
 
-      resolve(`
+        resolve(`
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(settings.removeOverlay)}">
                     ${lockOverlay(settings.removeOverlay)}
@@ -119,5 +119,9 @@ export default dynamicSettings =>
                 }
             </script>
             `);
+
+      });
+
+      
     });
   });
