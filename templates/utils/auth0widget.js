@@ -4,7 +4,7 @@ import { getSettings } from '../../lib/storage';
 import svgDimensions from '../../lib/svgDimensions';
 import lockOverlay, { lockOutlineClass } from './lockOverlay';
 
-const getLogo = (settings) => {
+const getLogo = settings => {
   if (settings.logoPath !== '') {
     return `<img src='${settings.logoPath}' class="auth0-lock-header-logo" />`;
   }
@@ -50,14 +50,13 @@ const getSubmitButton = (settings, t) => {
 };
 
 export default dynamicSettings =>
-  new Promise(resolve => {
-    getSettings().then(storedSettings => {
-      const settings = Object.assign(storedSettings, dynamicSettings);
-      getCurrentLocale(settings.locale).then((t) => {
-
-        resolve(`
+  getSettings().then(storedSettings => {
+    const settings = Object.assign(storedSettings, dynamicSettings);
+    return getCurrentLocale(settings.locale).then(t => `
             <div id="auth0-lock-container-1" class="auth0-lock-container">
-                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(settings.removeOverlay)}">
+                <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(
+    settings.removeOverlay
+  )}">
                     ${lockOverlay(settings.removeOverlay)}
                     <div class="auth0-lock-center">
                         <form class="auth0-lock-widget">
@@ -119,9 +118,4 @@ export default dynamicSettings =>
                 }
             </script>
             `);
-
-      });
-
-      
-    });
   });
