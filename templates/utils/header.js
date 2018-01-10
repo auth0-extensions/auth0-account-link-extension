@@ -6,7 +6,7 @@ export default `
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button>
         <span>
-            <h1 class="navbar-brand"><a href="/"><span>Auth0</span> <div class="product-name">Account Linking Extension</div></a></h1>
+            <h1 class="navbar-brand"><a href="/admin"><span>Auth0</span> <div class="product-name">Account Linking Extension</div></a></h1>
         </span>
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse">
