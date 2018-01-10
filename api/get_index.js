@@ -4,6 +4,7 @@ import findUsersByEmail from '../lib/findUsersByEmail';
 import indexTemplate from '../templates/index';
 import logger from '../lib/logger';
 import stylesheet from '../lib/stylesheet';
+import getIdentityProviderPublicName from '../lib/idProviders';
 
 const decodeToken = token =>
   new Promise((resolve, reject) => {
@@ -29,7 +30,7 @@ module.exports = () => ({
   handler: (req, reply) => {
     const linkingState = req.state['account-linking-admin-state'];
     if (typeof linkingState !== 'undefined' && linkingState !== '') {
-      reply.redirect(config('PUBLIC_WT_URL')+'/admin').state('account-linking-admin-state', '');
+      reply.redirect(`${config('PUBLIC_WT_URL')}/admin`).state('account-linking-admin-state', '');
       return;
     }
 
@@ -48,13 +49,19 @@ module.exports = () => ({
       .then((token) => {
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
+            const rawIdentities = matchingUsers.length > 0 ? matchingUsers[0].identities : [];
+            const identities = rawIdentities
+              .map(id => id.provider)
+              .map(getIdentityProviderPublicName);
+
             reply(
               indexTemplate({
                 dynamicSettings,
                 stylesheetTag,
                 currentUser,
                 matchingUsers,
-                customCSSTag
+                customCSSTag,
+                identities
               })
             );
           })
@@ -62,8 +69,9 @@ module.exports = () => ({
             const state = req.query.state;
             logger.error('An error was encountered: ', err);
             logger.info(
-              `Redirecting to failed link to /continue: ${token.iss}continue?state=${req.query
-                .state}`
+              `Redirecting to failed link to /continue: ${token.iss}continue?state=${
+                req.query.state
+              }`
             );
 
             reply.redirect(`${token.iss}continue?state=${state}`);
