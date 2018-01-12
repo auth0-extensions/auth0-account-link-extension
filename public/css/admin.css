@@ -6,6 +6,18 @@
   width: 300px;
 }
 
+#locale-title {
+  margin-top: 0px;
+}
+
+#locale-menu .list-group-item {
+  cursor: pointer;
+}
+
+#add-new-locale {
+  height: 46px;
+}
+
 .loading-state-container {
   text-align: center;
   margin-top: calc(50vh - 150px);
