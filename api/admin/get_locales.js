@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import { getSettings, getLocales } from '../../lib/storage';
+import { getLocales } from '../../lib/storage';
 
 module.exports = () => ({
   method: 'GET',
@@ -8,9 +8,5 @@ module.exports = () => ({
     auth: 'jwt'
   },
   path: '/admin/locales',
-  handler: (req, reply) => {
-    getLocales().then((locales) => {
-      reply(locales);
-    });
-  }
+  handler: (req, reply) => getLocales().then(reply)
 });
