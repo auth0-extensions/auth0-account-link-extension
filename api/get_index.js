@@ -5,6 +5,7 @@ import indexTemplate from '../templates/index';
 import logger from '../lib/logger';
 import stylesheet from '../lib/stylesheet';
 import getIdentityProviderPublicName from '../lib/idProviders';
+import humanizeArray from '../lib/humanize';
 
 const decodeToken = token =>
   new Promise((resolve, reject) => {
@@ -53,6 +54,7 @@ module.exports = () => ({
             const identities = rawIdentities
               .map(id => id.provider)
               .map(getIdentityProviderPublicName);
+            const humanizedIdentities = humanizeArray(identities, 'or');
 
             reply(
               indexTemplate({
@@ -61,7 +63,7 @@ module.exports = () => ({
                 currentUser,
                 matchingUsers,
                 customCSSTag,
-                identities
+                identities: humanizedIdentities
               })
             );
           })
