@@ -49,7 +49,7 @@ const getSubmitButton = (settings, t) => {
     </button>`;
 };
 
-export default dynamicSettings =>
+export default (dynamicSettings, identities) =>
   getSettings().then(storedSettings => {
     const settings = Object.assign(storedSettings, dynamicSettings);
     return getCurrentLocale(settings.locale).then(t => `
@@ -84,7 +84,7 @@ export default dynamicSettings =>
                                             <div class="auth0-lock-form" id="content-container">
                                                 <div>
                                                 <p id="message">
-                                                    ${t('introduction')}
+                                                    ${t('introduction')} ${t('identities').replace('{{identities}}', identities)}.
                                                 </p>
                                                 <p class="auth0-lock-alternative">
                                                     <a class="auth0-lock-alternative-link" id="skip" href="#">
