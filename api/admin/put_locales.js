@@ -8,9 +8,5 @@ module.exports = () => ({
     auth: 'jwt'
   },
   path: '/admin/locales',
-  handler: (req, reply) => {
-    setLocales(req.payload).then((response) => {
-      reply(response);
-    });
-  }
+  handler: (req, reply) => setLocales(req.payload).then(reply)
 });
