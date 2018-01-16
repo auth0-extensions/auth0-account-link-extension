@@ -6,6 +6,8 @@ import logger from '../lib/logger';
 import stylesheet from '../lib/stylesheet';
 import getIdentityProviderPublicName from '../lib/idProviders';
 import humanizeArray from '../lib/humanize';
+import resolveLocale from '../lib/locale';
+import { getSettings } from '../lib/storage';
 
 const decodeToken = token =>
   new Promise((resolve, reject) => {
@@ -50,22 +52,26 @@ module.exports = () => ({
       .then((token) => {
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
-            const rawIdentities = matchingUsers.length > 0 ? matchingUsers[0].identities : [];
-            const identities = rawIdentities
-              .map(id => id.provider)
-              .map(getIdentityProviderPublicName);
-            const humanizedIdentities = humanizeArray(identities, 'or');
+            getSettings().then((settings) => {
+              resolveLocale(settings.locale).then((t) => {
+                const rawIdentities = matchingUsers.length > 0 ? matchingUsers[0].identities : [];
+                const identities = rawIdentities
+                  .map(id => id.provider)
+                  .map(getIdentityProviderPublicName);
+                const humanizedIdentities = humanizeArray(identities, t('or'));
 
-            reply(
-              indexTemplate({
-                dynamicSettings,
-                stylesheetTag,
-                currentUser,
-                matchingUsers,
-                customCSSTag,
-                identities: humanizedIdentities
-              })
-            );
+                reply(
+                  indexTemplate({
+                    dynamicSettings,
+                    stylesheetTag,
+                    currentUser,
+                    matchingUsers,
+                    customCSSTag,
+                    identities: humanizedIdentities
+                  })
+                );
+              });
+            });
           })
           .catch((err) => {
             const state = req.query.state;
