@@ -59,7 +59,7 @@ export default function() {
       data.availableLocales.forEach(function(locale) {
         var isSelected = data.locale === locale.code ? 'selected' : '';
         $availableLocalesSelect.append(
-          '<option value="' + locale.code + '" ' + isSelected + '>' + locale.name + '</option>'
+          `<option value="${locale.code}" ${isSelected}>${locale.name}</option>`
         );
       });
     }
