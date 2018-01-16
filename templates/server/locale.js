@@ -46,6 +46,16 @@ ${header}
             </table>
 
             <button id="locale-management-submit" class="btn btn-primary">Save changes</button>
+            
+            <hr/>
+            
+            <div class="panel panel-danger">
+                <div class="panel-heading">Remove locale</div>
+                <div class="panel-body">
+                    <p>Once removed, you cannot undo this change.</p>
+                    <a class="btn btn-danger" id="remove-locale-btn">Remove locale</a>
+                </div>
+            </p>
         </div>
     </div>
 </main>
