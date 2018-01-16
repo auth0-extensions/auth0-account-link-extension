@@ -9,7 +9,7 @@
     "skipAlternativeLink": "I want to skip this and create a new account. (Not recommended)",
     "sameEmailAddressError": "Accounts must have matching email addresses. Please try again.",
     "identities": "You may sign in with {{identities}} to link accounts",
-    "or_notation": "or"
+    "or": "or"
   },
 
   "es": {
@@ -24,6 +24,6 @@
     "sameEmailAddressError":
       "Las cuentas deben tener la misma dirección de correo electrónico. Por favor intenta nuevamente.",
     "identities": "Puedes iniciar sesión con {{identities}} para vincular las cuentas",
-    "or_notation": "o"
+    "or": "o"
   }
 }
