@@ -5,7 +5,7 @@
 
 export default function() {
   var locales = {};
-  var selectedLocale = "";
+  var selectedLocale = '';
 
   var SUCCESS_MESSAGE = 'Success! Your changes has been successfully saved.';
   var ERROR_MESSAGE = 'Oops! An error has ocurred while trying to save your changes.';
@@ -16,7 +16,7 @@ export default function() {
   var $loadingContainer = $('.loading-state-container');
   var $avatarImg = $('.avatar');
   var token = sessionStorage.getItem(TOKEN_KEY);
-  
+
   $.ajax({
     url: baseURL + '/admin/user',
     headers: {
@@ -59,7 +59,7 @@ export default function() {
       data.availableLocales.forEach(function(locale) {
         var isSelected = data.locale === locale.code ? 'selected' : '';
         $availableLocalesSelect.append(
-          '<option value="' + locale.code + '" ' + isSelected + '>' + locale.name + '</option>'
+          `<option value="${locale.code}" ${isSelected}>${locale.name}</option>`
         );
       });
     }
@@ -133,7 +133,6 @@ export default function() {
         }
       });
 
-
     $saveChangesBtn.on('click', function(e) {
       e.preventDefault();
 
@@ -155,16 +154,19 @@ export default function() {
         }
       })
         .done(function(data, status) {
-          setSaveResult("<h4>" + SUCCESS_MESSAGE + "</h4>");
+          setSaveResult('<h4>' + SUCCESS_MESSAGE + '</h4>');
           setSaveButtonDisabled(false);
         })
         .error(function(err) {
           if (typeof err.responseJSON.message !== 'undefined') {
-            setSaveResult("<h4>" + ERROR_MESSAGE + "</h4> <p>" + err.responseJSON.message + "</p>", {
-              error: true
-            });
+            setSaveResult(
+              '<h4>' + ERROR_MESSAGE + '</h4> <p>' + err.responseJSON.message + '</p>',
+              {
+                error: true
+              }
+            );
           } else {
-            setSaveResult("<h4>" + ERROR_MESSAGE + "</h4>", { error: true });
+            setSaveResult('<h4>' + ERROR_MESSAGE + '</h4>', { error: true });
           }
           setSaveButtonDisabled(false);
         });
@@ -197,70 +199,7 @@ export default function() {
     var $managementTable = $('#locale-management-table');
     var $managementSubmit = $('#locale-management-submit');
 
-    function hydrateMenu() {
-      $localeMenu.find('li').remove();
-
-      for (var key in locales) {
-        $localeMenu.append(`<li class="list-group-item" data-locale-name="${key}">${locales[key]._name}</li>`)
-      }
-      listenForMenuClicks();
-      
-      // Select first menu item by default
-      $('#locale-menu li')[0].click();      
-    }
-
-    function hydrateDetail() {
-      var locale = locales[selectedLocale];
-      $('tr:not(tr.header)').remove();
-      
-      $localeTitle.html(locale._name);
-
-      for (var messageName in locale) {
-        if (messageName !== '_name') {
-          $managementTable.append('<tr><td id="key">' + messageName + '</td><td><input class="form-control" value="' + locale[messageName] + '" /></td>')
-        }
-      }
-    }
-
-    function listenForMenuClicks() {
-      $('.list-group-item').on('click', function () {
-        $(this).addClass('active');
-        $(this).siblings().removeClass('active');
-        selectedLocale = $(this).attr('data-locale-name');
-        hydrateDetail();
-      });
-    }
-
-    $.ajax({
-      url: baseURL + '/admin/locales',
-      method: 'GET',
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-      .done(function(data, status) {
-        $loadingContainer.hide();
-        $appContainer.show();
-        
-        locales = data;
-        hydrateMenu();
-      })
-      .error(function(err) {
-        $loadingContainer.hide();
-        alert(err);
-      });
-
-    $managementSubmit.on('click', function () {
-      var editedLocale = { _name: locales[selectedLocale]._name };
-
-      $managementTable.find('tr').each(function() {
-        var key = $(this).find('#key').html();
-        var message = $(this).find('input').val();
-        editedLocale[key] = message;
-      })
-
-      locales[selectedLocale] = editedLocale;
-
+    function saveChanges() {
       $.ajax({
         url: baseURL + '/admin/locales',
         method: 'PUT',
@@ -272,17 +211,97 @@ export default function() {
         }
       })
         .done(function(data, status) {
-          toastr.success('You have successfully saved your locales.', 'Success!')
+          toastr.success('You have successfully saved your locales.', 'Success!');
         })
         .error(function(err) {
           if (typeof err.responseJSON.message !== 'undefined') {
-            toastr.error(err.responseJSON.message, 'Error')
+            toastr.error(err.responseJSON.message, 'Error');
           } else {
-            toastr.error('Please try again later.', 'Error')
+            toastr.error('Please try again later.', 'Error');
           }
         });
+    }
 
+    function hydrateMenu() {
+      $localeMenu.find('li').remove();
+
+      for (var key in locales) {
+        $localeMenu.append(
+          `<li class="list-group-item" data-locale-name="${key}">${locales[key]._name}</li>`
+        );
+      }
+      listenForMenuClicks();
+
+      // Select first menu item by default
+      $('#locale-menu li')[0].click();
+    }
+
+    function hydrateDetail() {
+      var locale = locales[selectedLocale];
+      $('tr:not(tr.header)').remove();
+
+      $localeTitle.html(locale._name);
+
+      for (var messageName in locale) {
+        if (messageName !== '_name') {
+          $managementTable.append(
+            '<tr><td id="key">' +
+              messageName +
+              '</td><td><input class="form-control" value="' +
+              locale[messageName] +
+              '" /></td>'
+          );
+        }
+      }
+    }
+
+    function listenForMenuClicks() {
+      $('.list-group-item').on('click', function() {
+        $(this).addClass('active');
+        $(this)
+          .siblings()
+          .removeClass('active');
+        selectedLocale = $(this).attr('data-locale-name');
+        hydrateDetail();
       });
+    }
+
+    $.ajax({
+      url: baseURL + '/admin/locales',
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    })
+      .done(function(data, status) {
+        $loadingContainer.hide();
+        $appContainer.show();
+
+        locales = data;
+        hydrateMenu();
+      })
+      .error(function(err) {
+        $loadingContainer.hide();
+        alert(err);
+      });
+
+    $managementSubmit.on('click', function() {
+      var editedLocale = { _name: locales[selectedLocale]._name };
+
+      $managementTable.find('tr').each(function() {
+        var key = $(this)
+          .find('#key')
+          .html();
+        var message = $(this)
+          .find('input')
+          .val();
+        editedLocale[key] = message;
+      });
+
+      locales[selectedLocale] = editedLocale;
+      saveChanges();
+    });
+
     $('#add-new-locale').on('click', function(e) {
       e.preventDefault();
       var $newLocaleNameInput = $('#add-new-locale-name');
@@ -290,10 +309,20 @@ export default function() {
       var newLocaleId = makeid();
       var newLocaleName = $newLocaleNameInput.val();
       locales[newLocaleId] = ObjectAssign({}, locales.en, { _name: `${newLocaleName} (Custom)` });
-      
+
       hydrateMenu();
       $newLocaleNameInput.val('');
-    })
+    });
+
+    $('#remove-locale-btn').on('click', function(e) {
+      e.preventDefault();
+
+      if (confirm('Are you sure?')) {
+        delete locales[selectedLocale];
+        hydrateMenu();
+        saveChanges();
+      }
+    });
   }
 
   switch (window.location.pathname) {
