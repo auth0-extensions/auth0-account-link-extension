@@ -4,6 +4,8 @@ import { getSettings } from '../../lib/storage';
 import svgDimensions from '../../lib/svgDimensions';
 import lockOverlay, { lockOutlineClass } from './lockOverlay';
 
+const identitiesRegex = new RegExp(/\{\{(\s+)?identities(\s+)?\}\}/);
+
 const getLogo = settings => {
   if (settings.logoPath !== '') {
     return `<img src='${settings.logoPath}' class="auth0-lock-header-logo" />`;
@@ -49,14 +51,14 @@ const getSubmitButton = (settings, t) => {
     </button>`;
 };
 
-export default dynamicSettings =>
+export default (dynamicSettings, identities) =>
   getSettings().then(storedSettings => {
     const settings = Object.assign(storedSettings, dynamicSettings);
     return getCurrentLocale(settings.locale).then(t => `
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(
-    settings.removeOverlay
-  )}">
+        settings.removeOverlay
+      )}">
                     ${lockOverlay(settings.removeOverlay)}
                     <div class="auth0-lock-center">
                         <form class="auth0-lock-widget">
@@ -84,7 +86,7 @@ export default dynamicSettings =>
                                             <div class="auth0-lock-form" id="content-container">
                                                 <div>
                                                 <p id="message">
-                                                    ${t('introduction')}
+                                                    ${t('introduction')} ${t('identities').replace(identitiesRegex, identities)}.
                                                 </p>
                                                 <p class="auth0-lock-alternative">
                                                     <a class="auth0-lock-alternative-link" id="skip" href="#">
