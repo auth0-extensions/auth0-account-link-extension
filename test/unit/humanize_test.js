@@ -10,21 +10,21 @@ describe('Humanizer Tests', () => {
         expect(result).to.equal('a, b and c');
     });
 
-    it('represents an array of two elements as a readable sentense using defaults', () => {
+    it('represents an array of two elements as a readable sentence using defaults', () => {
         const testArray = ['a', 'b'];
         const result = humanizeArray(testArray);
 
         expect(result).to.equal('a and b');
     });
 
-    it('represents an array of two elements as a readable sentense using a given beforeLast', () => {
+    it('represents an array of two elements as a readable sentence using a given beforeLast', () => {
         const testArray = ['a', 'b'];
         const result = humanizeArray(testArray, 'or');
 
         expect(result).to.equal('a or b');
     });
 
-    it('represents an array of two elements as a readable sentense using a given beforeLast and oxfordComma', () => {
+    it('represents an array of two elements as a readable sentence using a given beforeLast and oxfordComma', () => {
         const testArray = ['a', 'b'];
         const result = humanizeArray(testArray, 'or', ',');
 
