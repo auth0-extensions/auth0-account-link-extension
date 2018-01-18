@@ -7,7 +7,7 @@ export default function(currentUser, matchingUsers) {
 
   try {
     loadLinkPage(window.jwt_decode(params.child_token));
-  } catch(e) {
+  } catch (e) {
     console.error(e);
     loadInvalidTokenPage();
   }
@@ -15,20 +15,23 @@ export default function(currentUser, matchingUsers) {
   function loadLinkPage(token) {
     var linkEl = document.getElementById('link');
     var skipEl = document.getElementById('skip');
-    var connections = matchingUsers.reduce(function(acc, user) {
-      return acc.concat(user.identities);
-    }, []).map(function(identity) {
-      return identity.connection;
-    });
+    var connections = matchingUsers
+      .reduce(function(acc, user) {
+        return acc.concat(user.identities);
+      }, [])
+      .map(function(identity) {
+        return identity.connection;
+      });
 
     var authorize = function(domain, qs) {
       var query = keysForObject(qs)
-          .filter(function(key) {
-            return !!qs[key];
-          })
-          .map(function (key) {
-            return key + '=' + encodeURIComponent(qs[key]);
-          }).join('&');
+        .filter(function(key) {
+          return !!qs[key];
+        })
+        .map(function(key) {
+          return key + '=' + encodeURIComponent(qs[key]);
+        })
+        .join('&');
 
       window.location = domain + 'authorize?' + query;
     };
@@ -45,12 +48,12 @@ export default function(currentUser, matchingUsers) {
         scope: params.scope,
         state: params.original_state,
         nonce: params.nonce,
+        audience: params.audience,
         link_account_token: params.child_token,
         prevent_sign_up: true,
         connection: connections[0]
       });
     });
-
 
     updateContinueUrl(skipEl, token.iss, params.state);
 
@@ -68,21 +71,26 @@ export default function(currentUser, matchingUsers) {
     containerEl.appendChild(
       el('div', {}, [
         el('p', {}, [
-          text(window.Auth0AccountLinkingExtension.locale.pageMismatchError || 'You seem to have reached this page in error. Please try logging in again')
+          text(
+            window.Auth0AccountLinkingExtension.locale.pageMismatchError ||
+              'You seem to have reached this page in error. Please try logging in again'
+          )
         ])
       ])
     );
 
     linkEl.disabled = true;
-  };
+  }
 
   function loadAccountMismatchError() {
     var messageEl = document.getElementById('error-message');
-    var msg = window.Auth0AccountLinkingExtension.locale.sameEmailAddressError || "Accounts must have matching email addresses. Please try again.";
+    var msg =
+      window.Auth0AccountLinkingExtension.locale.sameEmailAddressError ||
+      'Accounts must have matching email addresses. Please try again.';
 
     messageEl.innerHTML = msg;
     messageEl.style.display = 'block';
-  };
+  }
 
   function el(tagName, attrs, childEls) {
     var element = document.createElement(tagName);
