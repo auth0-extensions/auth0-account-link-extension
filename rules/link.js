@@ -198,6 +198,7 @@ export default ({ extensionURL = '', username = 'Unknown', clientID = '', client
   function buildRedirectUrl(token, q, errorType) {
     var params = {
       child_token: token,
+      audience: q.audience,
       client_id: q.client_id,
       redirect_uri: q.redirect_uri,
       scope: q.scope,
