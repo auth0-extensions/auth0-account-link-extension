@@ -1,16 +1,15 @@
 {
   "en": {
     "_name": "English",
-    "pageMismatchError":
-      "You seem to have reached this page in error. Please try logging in again",
+    "pageMismatchError": "You seem to have reached this page in error. Please try logging in again",
     "continue": "Continue",
     "accountLinking": "Account Linking",
     "introduction":
       "It looks like you have another account with the same email address. We recommend you link these accounts.",
-    "skipAlternativeLink":
-      "I want to skip this and create a new account. (Not recommended)",
-    "sameEmailAddressError":
-      "Accounts must have matching email addresses. Please try again."
+    "skipAlternativeLink": "I want to skip this and create a new account. (Not recommended)",
+    "sameEmailAddressError": "Accounts must have matching email addresses. Please try again.",
+    "identities": "You may sign in with {{identities}} to link accounts",
+    "or": "or"
   },
 
   "es": {
@@ -21,9 +20,10 @@
     "accountLinking": "Vinculación de cuentas",
     "introduction":
       "Parece que ya tienes otra cuenta con la misma dirección de correo electrónico. Recomendamos que vincules las cuentas.",
-    "skipAlternativeLink":
-      "Quiero saltar esto y crear una nueva cuenta. (No recomendado)",
+    "skipAlternativeLink": "Quiero saltar esto y crear una nueva cuenta. (No recomendado)",
     "sameEmailAddressError":
-      "Las cuentas deben tener la misma dirección de correo electrónico. Por favor intenta nuevamente."
+      "Las cuentas deben tener la misma dirección de correo electrónico. Por favor intenta nuevamente.",
+    "identities": "Puedes iniciar sesión con {{identities}} para vincular las cuentas",
+    "or": "o"
   }
 }
