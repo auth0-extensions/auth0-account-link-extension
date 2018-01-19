@@ -32,6 +32,13 @@ export default ({ extensionURL = '', username = 'Unknown', clientID = '', client
     }
   };
 
+  // If the user does not have an e-mail account,
+  // just continue the authentication flow.
+  // See auth0-extensions/auth0-account-link-extension#33
+  if (user.email === undefined) {
+    return callback(null, user, context);
+  }
+
   createStrategy().then(callbackWithSuccess).catch(callbackWithFailure);
 
   function createStrategy() {
