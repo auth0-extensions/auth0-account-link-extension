@@ -13,8 +13,8 @@ const render = (template, locals = {}) => {
   return template.replace(VAR_REGEX, (match, name) => locals[name] || '');
 };
 
-export default ({ stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities }) =>
-  Promise.all([buildAuth0Widget(dynamicSettings, identities), getStorage().read()])
+export default ({ stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities, locale }) =>
+  Promise.all([buildAuth0Widget(dynamicSettings, identities, locale), getStorage().read()])
     .then(([widget, data]) => {
       const template = data.settings ? data.settings.template : defaultTemplate;
 

@@ -53,7 +53,9 @@ module.exports = () => ({
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
             getSettings().then((settings) => {
-              resolveLocale(settings.locale).then((t) => {
+              const matchingLocale = matchingUsers[0].user_metadata.locale || null;
+              const locale = matchingLocale || settings.locale;
+              resolveLocale(locale).then((t) => {
                 const rawIdentities = matchingUsers.length > 0 ? matchingUsers[0].identities : [];
                 const identities = rawIdentities
                   .map(id => id.provider)
@@ -67,7 +69,8 @@ module.exports = () => ({
                     currentUser,
                     matchingUsers,
                     customCSSTag,
-                    identities: humanizedIdentities
+                    identities: humanizedIdentities,
+                    locale
                   })
                 );
               });
