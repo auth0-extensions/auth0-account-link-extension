@@ -1182,7 +1182,7 @@ boom@4.x.x:
   dependencies:
     hoek "4.x.x"
 
-boom@5.x.x, boom@^5.1.0:
+boom@5.x.x:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/boom/-/boom-5.2.0.tgz#5dd9da6ee3a5f302077436290cb717d3f4a54e02"
   dependencies:
@@ -2910,14 +2910,6 @@ hapi-auth-jwt2@7.0.1:
     cookie "^0.3.1"
     jsonwebtoken "^7.0.0"
 
-hapi-auth-jwt2@^7.0.1:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/hapi-auth-jwt2/-/hapi-auth-jwt2-7.3.0.tgz#96dd2a09480e9cc94f365d1baec68cd5bc597a37"
-  dependencies:
-    boom "^5.1.0"
-    cookie "^0.3.1"
-    jsonwebtoken "^7.4.1"
-
 hapi@13.5.0:
   version "13.5.0"
   resolved "https://registry.yarnpkg.com/hapi/-/hapi-13.5.0.tgz#a5ffbcac57d370c733c81b1ac074c4f13767ecb3"
@@ -3672,16 +3664,6 @@ jsonwebtoken@^5.7.0:
 jsonwebtoken@^7.0.0, jsonwebtoken@^7.1.9:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.2.tgz#571b903c07e875c0fc59203d1ac78667d80e09cd"
-  dependencies:
-    joi "^6.10.1"
-    jws "^3.1.4"
-    lodash.once "^4.0.0"
-    ms "^2.0.0"
-    xtend "^4.0.1"
-
-jsonwebtoken@^7.4.1:
-  version "7.4.3"
-  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.3.tgz#77f5021de058b605a1783fa1283e99812e645638"
   dependencies:
     joi "^6.10.1"
     jws "^3.1.4"
