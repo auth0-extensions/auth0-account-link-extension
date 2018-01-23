@@ -19,7 +19,7 @@ export default ({ stylesheetTag, baseURL }) => `
 </head>
 <body>
 
-${header}
+${header(baseURL)}
 
 <main class="container app-container">
     <div class="row">
