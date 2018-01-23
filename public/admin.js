@@ -325,12 +325,11 @@ export default function() {
     });
   }
 
-  switch (window.location.pathname) {
-    case '/admin':
-      return mainAdminPanel();
-      break;
-    case '/admin/locale':
-      return localeAdminPanel();
-      break;
-  }
+  var path = window.location.pathname;
+  
+  if (path.endsWith('/admin')) {
+    return mainAdminPanel();
+  } else if (path.endsWith('/admin/locale')) {
+    return localeAdminPanel();
+  } 
 }
