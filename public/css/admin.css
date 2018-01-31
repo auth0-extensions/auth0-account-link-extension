@@ -19,7 +19,7 @@
 }
 
 .add-new-locale-input {
-  display: inline-block !important;
+  display: inline-block;
 }
 
 .add-new-locale-input:nth-child(1) {
@@ -133,7 +133,7 @@
   background-color: #263238;
   // background-color: transparent;
   color: rgba(233, 237, 237, 1);
-  font-family: 'Roboto mono', Menlo, Monaco, monospace;
+  font-family: "Roboto mono", Menlo, Monaco, monospace;
   margin-left: -14px;
   line-height: 1.6;
   border-radius: 3px;
