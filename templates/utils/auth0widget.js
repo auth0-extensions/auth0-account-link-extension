@@ -51,10 +51,10 @@ const getSubmitButton = (settings, t) => {
     </button>`;
 };
 
-export default (dynamicSettings, identities) =>
+export default (dynamicSettings, identities, locale = 'en') =>
   getSettings().then(storedSettings => {
     const settings = Object.assign(storedSettings, dynamicSettings);
-    return getCurrentLocale(settings.locale).then(t => `
+    return getCurrentLocale(locale).then(t => `
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(
         settings.removeOverlay

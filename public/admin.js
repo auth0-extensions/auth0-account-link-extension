@@ -198,6 +198,22 @@ export default function() {
     var $localeTitle = $('#locale-title');
     var $managementTable = $('#locale-management-table');
     var $managementSubmit = $('#locale-management-submit');
+    var $addNewLocaleButton = $('#add-new-locale');
+    var $newLocaleNameInput = $('#add-new-locale-name');
+    var $newLocaleCodeInput = $('#add-new-locale-code');
+    var $newLocaleHelpButton = $('#help-button');
+    var $newLocaleHelpContent = $('#help-button-content');
+
+    $newLocaleHelpButton.on('mouseover', () => {
+      $newLocaleHelpContent.show();
+      $newLocaleHelpContent.animate({opacity: 1,top: "-=20"}, 300);
+    });
+
+    $newLocaleHelpButton.on('mouseleave', () => {
+      setTimeout(() => {
+        $newLocaleHelpContent.animate({opacity: 0,top: "+=20"}, 300, () => $newLocaleHelpContent.hide());
+      }, 300);
+    })
 
     function saveChanges() {
       $.ajax({
@@ -302,16 +318,16 @@ export default function() {
       saveChanges();
     });
 
-    $('#add-new-locale').on('click', function(e) {
+    $addNewLocaleButton.on('click', function(e) {
       e.preventDefault();
-      var $newLocaleNameInput = $('#add-new-locale-name');
 
-      var newLocaleId = makeid();
+      var newLocaleId = $newLocaleCodeInput.val();
       var newLocaleName = $newLocaleNameInput.val();
       locales[newLocaleId] = ObjectAssign({}, locales.en, { _name: `${newLocaleName} (Custom)` });
 
       hydrateMenu();
       $newLocaleNameInput.val('');
+      $newLocaleCodeInput.val('');
     });
 
     $('#remove-locale-btn').on('click', function(e) {
