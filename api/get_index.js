@@ -6,7 +6,7 @@ const logger = require('../lib/logger');
 const stylesheet = require('../lib/stylesheet');
 const getIdentityProviderPublicName = require('../lib/idProviders');
 const humanizeArray = require('../lib/humanize');
-const resolveLocale = require('../lib/locale');
+const { resolveLocale } = require('../lib/locale');
 const { getSettings } = require('../lib/storage');
 
 const decodeToken = token =>

@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-const getCurrentLocale = require('../../lib/locale');
+const { resolveLocale } = require('../../lib/locale');
 const { getSettings } = require('../../lib/storage');
 const svgDimensions = require('../../lib/svgDimensions');
 const lockOverlay = require('./lockOverlay');
@@ -55,7 +55,7 @@ const getSubmitButton = (settings, t) => {
 module.exports = (dynamicSettings, identities, locale = 'en') =>
   getSettings().then(storedSettings => {
     const settings = Object.assign(storedSettings, dynamicSettings);
-    return getCurrentLocale(locale).then(t => `
+    return resolveLocale(locale).then(t => `
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(
     settings.removeOverlay

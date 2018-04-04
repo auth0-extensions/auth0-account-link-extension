@@ -7,8 +7,7 @@ const nodemon = require('gulp-nodemon');
 const { install } = require('./modifyRule');
 const managementAdapter = require('./lib/managementAdapter');
 
-const ManagementClientAdapter = managementAdapter.default;
-const { getCurrentConfig } = managementAdapter;
+const { ManagementClientAdapter, getCurrentConfig } = managementAdapter;
 
 gulp.task('run', () => {
   ngrok.connect(3001, (ngrokError, url) => {
