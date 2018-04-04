@@ -1,4 +1,3 @@
-require('babel-polyfill');
 const puppeteer = require('puppeteer');
 const { expect } = require('chai');
 const { deleteTestUsers, usersWithSameEmailCount, wait, buildQueryString } = require('./utils');
