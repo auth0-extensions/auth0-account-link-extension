@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:6.10
+      - image: node:carbon
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -34,5 +34,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
+      - run: yarn run lint
       - run: yarn test
       - run: ./test/bundle_test.sh

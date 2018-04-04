@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "nyc mocha test --recursive --timeout 5000",
+    "test": "nyc --all mocha test --recursive --timeout 5000",
     "test:integration": "mocha integration --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
