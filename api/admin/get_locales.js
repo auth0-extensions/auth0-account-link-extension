@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import { getLocales } from '../../lib/storage';
+const { getLocales } = require('../../lib/storage');
 
 module.exports = () => ({
   method: 'GET',

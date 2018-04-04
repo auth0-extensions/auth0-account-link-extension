@@ -1,6 +1,6 @@
 /* global describe, beforeEach, it */
-import {expect} from 'chai';
-import generateTemplate from '../../rules/link';
+const {expect} = require('chai');
+const generateTemplate = require('../../rules/link');
 
 describe('Generating Link Rule', function() {
   const args = {

@@ -1,4 +1,4 @@
-import avatarUrl from '../../lib/avatar';
+const avatarUrl = require('../../lib/avatar');
 
 module.exports = () => ({
   method: 'GET',

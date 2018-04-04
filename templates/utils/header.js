@@ -1,4 +1,4 @@
-export default baseURL => `
+module.exports = baseURL => `
 <header class="site-header">
  <nav class="navbar navbar-default" role="navigation">
     <div class="container">

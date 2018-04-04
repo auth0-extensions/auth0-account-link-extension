@@ -1,9 +1,9 @@
-import path from 'path';
-import { FileStorageContext, WebtaskStorageContext } from 'auth0-extension-tools';
-import config from '../lib/config';
-import createServer from './index';
-import logger from '../lib/logger';
-import { init as initStorage } from '../lib/db';
+const path = require('path');
+const { FileStorageContext, WebtaskStorageContext } = require('auth0-extension-tools');
+const config = require('../lib/config');
+const createServer = require('./index');
+const logger = require('../lib/logger');
+const initStorage = require('../lib/db').init;
 
 const defaultCallback = (err) => {
   if (err) {

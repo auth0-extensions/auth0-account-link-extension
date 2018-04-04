@@ -1,5 +1,5 @@
-import {expect} from 'chai';
-import { install, uninstall } from '../../modifyRule';
+const {expect} = require('chai');
+const { install, uninstall } = require('../../modifyRule');
 
 describe('Modifying Rules', function() {
   describe('Installing a rule', function() {

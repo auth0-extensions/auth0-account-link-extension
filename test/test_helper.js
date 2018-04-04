@@ -1,10 +1,10 @@
-import nconf from 'nconf';
-import path from 'path';
-import request from 'request';
-import { sign } from 'jsonwebtoken';
-import { handlers } from 'auth0-extension-hapi-tools';
-import initServer from '../server/index';
-import config from '../lib/config';
+const nconf = require('nconf');
+const path = require('path');
+const request = require('request');
+const { sign } = require('jsonwebtoken');
+const { handlers } = require('auth0-extension-hapi-tools');
+const initServer = require('../server/index');
+const config = require('../lib/config');
 
 const fakeApiClient = () => {
   const defaultUsers = {};
@@ -122,4 +122,4 @@ const createToken = (user) => {
   return sign(userSub, config('AUTH0_CLIENT_SECRET'), options);
 };
 
-export { startServer, createRequest as request, createServer, createToken };
+module.exports = { startServer, createRequest as request, createServer, createToken };

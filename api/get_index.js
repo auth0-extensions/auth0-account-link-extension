@@ -1,13 +1,13 @@
-import { decode } from 'jsonwebtoken';
-import config from '../lib/config';
-import findUsersByEmail from '../lib/findUsersByEmail';
-import indexTemplate from '../templates/index';
-import logger from '../lib/logger';
-import stylesheet from '../lib/stylesheet';
-import getIdentityProviderPublicName from '../lib/idProviders';
-import humanizeArray from '../lib/humanize';
-import resolveLocale from '../lib/locale';
-import { getSettings } from '../lib/storage';
+const { decode } = require('jsonwebtoken');
+const config = require('../lib/config');
+const findUsersByEmail = require('../lib/findUsersByEmail');
+const indexTemplate = require('../templates/index');
+const logger = require('../lib/logger');
+const stylesheet = require('../lib/stylesheet');
+const getIdentityProviderPublicName = require('../lib/idProviders');
+const humanizeArray = require('../lib/humanize');
+const resolveLocale = require('../lib/locale');
+const { getSettings } = require('../lib/storage');
 
 const decodeToken = token =>
   new Promise((resolve, reject) => {

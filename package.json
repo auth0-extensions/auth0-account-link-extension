@@ -4,69 +4,23 @@
   "description": "Auth0 Account Link Extension",
   "main": "index.js",
   "engines": {
-    "node": "6.9"
+    "node": ">=6.9"
   },
   "scripts": {
     "start": "node ./index.js",
-    "test":
-      "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 5000",
-    "test:integration":
-      "mocha integration --compilers js:babel-core/register --recursive --timeout 50000",
+    "test": "nyc --require babel-register --require babel-polyfill mocha test --recursive --timeout 5000",
+    "test:integration": "mocha integration --compilers js:babel-core/register --recursive --timeout 50000",
     "lint": "eslint .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean public/css/link.css && minify --clean public/css/admin.css",
-    "extension:build":
-      "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
+    "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
     "build": "yarn run client:build && yarn run extension:build"
   },
   "author": "Auth0",
   "license": "MIT",
   "auth0-extension": {
-    "externals": [
-      "auth0@2.8.0",
-      "auth0-extension-tools@1.2.1",
-      "auth0-extension-hapi-tools@1.2.0",
-      "boom@3.2.2",
-      "bluebird@3.5.0",
-      "compression@1.4.4",
-      "delegates@0.1.0",
-      "depd@1.0.1",
-      "destroy@1.0.3",
-      "ejs@2.3.1",
-      "express@4.12.4",
-      "express-jwt@3.1.0",
-      "iconv-lite@0.4.10",
-      "hapi@13.5.0",
-      "hapi-auth-jwt2@7.0.1",
-      "jwks-rsa@1.1.1",
-      "joi@9.0.4",
-      "lodash@3.10.1",
-      "lru-cache@2.6.4",
-      "mime-db@1.10.0",
-      "moment@2.10.3",
-      "morgan@1.5.3",
-      "ms@0.7.1",
-      "nconf@0.8.4",
-      "open@0.0.5",
-      "qs@3.1.0",
-      "raw-body@2.1.0",
-      "read-all-stream@2.1.2",
-      "request@2.56.0",
-      "superagent@1.2.0",
-      "type-check@0.3.1",
-      "winston@1.0.0",
-      "xml2js@0.4.8",
-      "auth0@2.1.0",
-      "lru-memoizer@1.10.0",
-      "node-uuid@1.4.3",
-      "jade@1.10.0",
-      "jsonwebtoken@7.1.9",
-      "debug@2.2.0",
-      "body-parser@1.12.4",
-      "mime-types@2.0.12",
-      "webtask-tools"
-    ],
-    "settings": {}
+    "nodeTarget": "8.9.0",
+    "bundleModules": false
   },
   "dependencies": {
     "auth0": "^2.8.0",
@@ -86,7 +40,7 @@
     "winston": "1.0.0"
   },
   "devDependencies": {
-    "auth0-extensions-cli": "^1.0.5",
+    "auth0-extensions-cli": "https://github.com/kusold/auth0-extensions-cli.git#ecma-8",
     "babel": "^6.23.0",
     "babel-core": "^6.25.0",
     "babel-plugin-transform-es2015-parameters": "^6.24.1",

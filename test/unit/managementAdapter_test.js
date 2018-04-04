@@ -1,8 +1,9 @@
 /* eslint-disable no-prototype-builtins */
 
-import path from 'path';
-import { expect } from 'chai';
-import ManagementAdapter, { getCurrentConfig } from '../../lib/managementAdapter';
+const path = require('path');
+const { expect } = require('chai');
+const ManagementAdapter = require('../../lib/managementAdapter');
+const { getCurrentConfig } = require('../../lib/managementAdapter');
 
 const configPath = path.join(__dirname, '../../server/config.test.json');
 

@@ -1,4 +1,4 @@
-import generateTemplate from './rules/link';
+const generateTemplate = require('./rules/link');
 
 const RULE_STAGE = 'login_success';
 const RULE_NAME = 'auth0-account-link-extension';
@@ -31,4 +31,4 @@ const install = (api, config) => {
 };
 const uninstall = api => api.getAll().then(destroyRule(api));
 
-export { install, uninstall };
+module.exports = { install, uninstall };
