@@ -122,4 +122,4 @@ const createToken = (user) => {
   return sign(userSub, config('AUTH0_CLIENT_SECRET'), options);
 };
 
-module.exports = { startServer, createRequest as request, createServer, createToken };
+module.exports = { startServer, request: createRequest, createServer, createToken };

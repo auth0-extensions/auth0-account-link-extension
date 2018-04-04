@@ -2,8 +2,7 @@
 
 const path = require('path');
 const { expect } = require('chai');
-const ManagementAdapter = require('../../lib/managementAdapter');
-const { getCurrentConfig } = require('../../lib/managementAdapter');
+const { ManagementClientAdapter, getCurrentConfig } = require('../../lib/managementAdapter');
 
 const configPath = path.join(__dirname, '../../server/config.test.json');
 
@@ -20,7 +19,7 @@ describe('Management API adapter', () => {
 
   it('Adapter initializes correctly', (done) => {
     getCurrentConfig(configPath).then((config) => {
-      const adapter = new ManagementAdapter(config);
+      const adapter = new ManagementClientAdapter(config);
 
       expect(typeof adapter.client).to.equal('object');
 
