@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import avatar from '../../lib/avatar';
+const { expect } = require('chai');
+const avatar = require('../../lib/avatar');
 
 describe('Avatar test', () => {
   it('returns the correct gravatar string', (done) => {

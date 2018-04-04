@@ -1,8 +1,9 @@
 /* eslint-disable arrow-parens */
-import getCurrentLocale from '../../lib/locale';
-import { getSettings } from '../../lib/storage';
-import svgDimensions from '../../lib/svgDimensions';
-import lockOverlay, { lockOutlineClass } from './lockOverlay';
+const getCurrentLocale = require('../../lib/locale');
+const { getSettings } = require('../../lib/storage');
+const svgDimensions = require('../../lib/svgDimensions');
+const lockOverlay = require('./lockOverlay');
+const { lockOutlineClass } = require('./lockOverlay');
 
 const identitiesRegex = new RegExp(/\{\{(\s+)?identities(\s+)?\}\}/);
 
@@ -51,7 +52,7 @@ const getSubmitButton = (settings, t) => {
     </button>`;
 };
 
-export default (dynamicSettings, identities, locale = 'en') =>
+module.exports = (dynamicSettings, identities, locale = 'en') =>
   getSettings().then(storedSettings => {
     const settings = Object.assign(storedSettings, dynamicSettings);
     return getCurrentLocale(locale).then(t => `

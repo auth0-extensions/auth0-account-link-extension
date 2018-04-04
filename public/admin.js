@@ -3,7 +3,7 @@
 // Ignoring this file since it has to be written in ES5
 // and eslint is configured to lint ES6.
 
-export default function() {
+module.exports = function() {
   var locales = {};
   var selectedLocale = '';
 

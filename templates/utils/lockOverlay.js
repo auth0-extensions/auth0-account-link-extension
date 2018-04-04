@@ -1,8 +1,8 @@
-import svgDimensions from '../../lib/svgDimensions';
+const svgDimensions = require('../../lib/svgDimensions');
 
-export const lockOutlineClass = (hide = false) => (hide ? 'auth0-lock-outlined' : '');
+const lockOutlineClass = (hide = false) => (hide ? 'auth0-lock-outlined' : '');
 
-export default function lockOverlay(hide = false) {
+function lockOverlay(hide = false) {
   if (hide) {
     return '';
   }
@@ -29,3 +29,6 @@ export default function lockOverlay(hide = false) {
         </span>
     </div>`;
 }
+
+module.exports = lockOverlay;
+module.exports.lockOutlineClass = lockOutlineClass;
