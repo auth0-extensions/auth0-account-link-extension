@@ -10,3 +10,6 @@ dist/*
 tags
 TAGS
 data.json
+*.swp
+yarn-error.log
+secrets
