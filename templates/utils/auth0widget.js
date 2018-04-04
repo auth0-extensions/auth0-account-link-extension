@@ -58,8 +58,8 @@ module.exports = (dynamicSettings, identities, locale = 'en') =>
     return getCurrentLocale(locale).then(t => `
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(
-        settings.removeOverlay
-      )}">
+    settings.removeOverlay
+  )}">
                     ${lockOverlay(settings.removeOverlay)}
                     <div class="auth0-lock-center">
                         <form class="auth0-lock-widget">
