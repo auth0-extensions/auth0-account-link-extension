@@ -24,7 +24,7 @@ Update the configuration file under `./server/config.json`:
   "AUTH0_DOMAIN": "me.auth0.com",
   "AUTH0_CLIENT_ID": "myclientid",
   "AUTH0_CLIENT_SECRET": "myclientsecret",
-  "WT_URL": "http://localhost:3000"
+  "WT_URL": "http://localhost:3000",
   "AUTH0_CALLBACK_URL": "http://localhost:3000/callback"
 }
 ```
