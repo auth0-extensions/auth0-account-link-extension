@@ -85,7 +85,7 @@
     "winston": "1.0.0"
   },
   "devDependencies": {
-    "auth0-extensions-cli": "https://github.com/kusold/auth0-extensions-cli.git#ecma-8",
+    "auth0-extensions-cli": "1.1.0",
     "chai": "^4.1.0",
     "eslint": "^4.3.0",
     "eslint-config-auth0": "^11.0.0",
