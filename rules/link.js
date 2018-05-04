@@ -116,7 +116,7 @@ module.exports = ({ extensionURL = '', username = 'Unknown', clientID = '', clie
           method: 'POST',
           url: uri,
           headers: {
-            Authorization: 'Bearer ' + createToken(config.token),
+            Authorization: 'Bearer ' + auth0.accessToken,
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache'
           },

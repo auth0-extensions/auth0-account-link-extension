@@ -1,5 +1,6 @@
 const linkRoute = require('../api/get_index');
 const onInstall = require('../api/hooks/post_install');
+const onUpdate = require('../api/hooks/put_update');
 const onUninstall = require('../api/hooks/delete_uninstall');
 const metaRoute = require('../api/get_meta');
 const getAdminIndex = require('../api/admin/get_index');
@@ -15,6 +16,7 @@ const createRoute = (route, server) => server.route(route(server));
 const register = (server, options, next) => {
   createRoute(linkRoute, server);
   createRoute(onInstall, server);
+  createRoute(onUpdate, server);
   createRoute(onUninstall, server);
   createRoute(metaRoute, server);
   createRoute(getAdminIndex, server);
