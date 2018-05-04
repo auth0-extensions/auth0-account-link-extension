@@ -38,6 +38,7 @@
       "express@4.12.4",
       "hapi-auth-jwt2@7.0.1",
       "hapi@13.5.0",
+      "hoek@4.1.0",
       "iconv-lite@0.4.10",
       "jade@1.10.0",
       "joi@9.0.4",
