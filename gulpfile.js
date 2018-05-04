@@ -8,7 +8,7 @@ const managementAdapter = require('./lib/managementAdapter');
 const { ManagementClientAdapter, getCurrentConfig } = managementAdapter;
 
 gulp.task('run', () => {
-  ngrok.connect(3001, (ngrokError, url) => {
+  ngrok.connect(3000, (ngrokError, url) => {
     if (ngrokError) {
       throw ngrokError;
     }
