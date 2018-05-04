@@ -22,6 +22,7 @@
     "createClient": true,
     "onUninstallPath": "/.extensions/on-uninstall",
     "onInstallPath": "/.extensions/on-install",
+    "onUpdatePath": "/.extensions/on-install",
     "scopes":
       "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
   }
