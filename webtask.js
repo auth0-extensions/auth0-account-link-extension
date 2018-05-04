@@ -1,7 +1,7 @@
-import tools from 'auth0-extension-hapi-tools';
-import hapiApp from './server/init';
-import logger from './lib/logger';
-import config from './lib/config';
+const tools = require('auth0-extension-hapi-tools');
+const hapiApp = require('./server/init');
+const logger = require('./lib/logger');
+const config = require('./lib/config');
 
 const createServer = tools.createServer((wtConfig, wtStorage) => {
   logger.info('Starting Account Link Extension - Version:', process.env.CLIENT_VERSION);

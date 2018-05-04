@@ -1,6 +1,6 @@
-import { uninstall } from '../../modifyRule';
-import config from '../../lib/config';
-import logger from '../../lib/logger';
+const { uninstall } = require('../../modifyRule');
+const config = require('../../lib/config');
+const logger = require('../../lib/logger');
 
 module.exports = server => ({
   method: 'DELETE',

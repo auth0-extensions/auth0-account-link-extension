@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import stylesheet from '../../lib/stylesheet';
+const { expect } = require('chai');
+const stylesheet = require('../../lib/stylesheet');
 
 describe('Stylesheet helper', () => {
   it('generates a tag when filename provided', () => {

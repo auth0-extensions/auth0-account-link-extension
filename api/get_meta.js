@@ -1,4 +1,4 @@
-import metadata from '../webtask.json';
+const metadata = require('../webtask.json');
 
 module.exports = () => ({
   method: 'GET',

@@ -1,8 +1,9 @@
 /* eslint-disable arrow-parens */
-import getCurrentLocale from '../../lib/locale';
-import { getSettings } from '../../lib/storage';
-import svgDimensions from '../../lib/svgDimensions';
-import lockOverlay, { lockOutlineClass } from './lockOverlay';
+const { resolveLocale } = require('../../lib/locale');
+const { getSettings } = require('../../lib/storage');
+const svgDimensions = require('../../lib/svgDimensions');
+const lockOverlay = require('./lockOverlay');
+const { lockOutlineClass } = require('./lockOverlay');
 
 const identitiesRegex = new RegExp(/\{\{(\s+)?identities(\s+)?\}\}/);
 
@@ -51,14 +52,14 @@ const getSubmitButton = (settings, t) => {
     </button>`;
 };
 
-export default (dynamicSettings, identities, locale = 'en') =>
+module.exports = (dynamicSettings, identities, locale = 'en') =>
   getSettings().then(storedSettings => {
     const settings = Object.assign(storedSettings, dynamicSettings);
-    return getCurrentLocale(locale).then(t => `
+    return resolveLocale(locale).then(t => `
             <div id="auth0-lock-container-1" class="auth0-lock-container">
                 <div class="auth0-lock auth0-lock-opened auth0-lock-with-tabs ${lockOutlineClass(
-        settings.removeOverlay
-      )}">
+    settings.removeOverlay
+  )}">
                     ${lockOverlay(settings.removeOverlay)}
                     <div class="auth0-lock-center">
                         <form class="auth0-lock-widget">

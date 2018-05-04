@@ -1,7 +1,7 @@
-import scripts from '../utils/scripts';
-import header from '../utils/header';
+const scripts = require('../utils/scripts');
+const header = require('../utils/header');
 
-export default ({ stylesheetTag, baseURL }) => `
+module.exports = ({ stylesheetTag, baseURL }) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>

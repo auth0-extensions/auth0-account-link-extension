@@ -1,4 +1,4 @@
-export default `
+module.exports = `
 <!doctype html>
 <html class="auth0-lock-html">
   <head>
