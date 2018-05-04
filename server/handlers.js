@@ -1,6 +1,6 @@
-import { handlers } from 'auth0-extension-hapi-tools';
-import config from '../lib/config';
-import logger from '../lib/logger';
+const { handlers } = require('auth0-extension-hapi-tools');
+const config = require('../lib/config');
+const logger = require('../lib/logger');
 
 const register = (server, options, next) => {
   server.decorate('server', 'handlers', {
@@ -22,4 +22,4 @@ const register = (server, options, next) => {
 
 register.attributes = { name: 'handlers' };
 
-export default register;
+module.exports = register;

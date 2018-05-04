@@ -1,8 +1,8 @@
-import {expect} from 'chai';
-import { request, createServer, createToken } from '../test_helper';
-import { sign } from 'jsonwebtoken';
-import config from '../../lib/config';
-import metadata from '../../webtask.json';
+const {expect} = require('chai');
+const { request, createServer, createToken } = require('../test_helper');
+const { sign } = require('jsonwebtoken');
+const config = require('../../lib/config');
+const metadata = require('../../webtask.json');
 
 describe('Requesting the metadata route', function() {
   let server;

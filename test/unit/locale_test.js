@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
-import { expect } from 'chai';
-import resolveLocale, { allLocales } from '../../lib/locale';
+const { expect } = require('chai');
+const { resolveLocale, allLocales } = require('../../lib/locale');
 
 const sampleLocales = {
   en: {

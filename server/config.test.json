@@ -11,5 +11,6 @@
   "AUTH0_CLIENT_SECRET":
     "jxrEwGhh0IXfi8t9a84SWi6eIt3yqVaJqADzZ9zuKVb7I3LC1F_RAZLM6mFU4jMa",
   "WT_URL": "http://localhost:3001",
+  "AUTH0_CALLBACK_URL": "http://localhost:3001/callback",
   "EXTENSION_SECRET": "d2h8f03wghjti404-gjfeqihu0cre"
 }

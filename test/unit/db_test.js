@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { expect } from 'chai';
-import { init, get } from '../../lib/db';
+const _ = require('lodash');
+const { expect } = require('chai');
+const { init, get } = require('../../lib/db');
 
 describe('DB Tests', () => {
   it('throws an error when fetching from an invalid DB', () => {

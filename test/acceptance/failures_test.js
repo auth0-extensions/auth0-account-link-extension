@@ -1,10 +1,10 @@
-import path from 'path';
-import { expect } from 'chai';
-import { sign } from 'jsonwebtoken';
-import { FileStorageContext } from 'auth0-extension-tools';
-import { request, createServer } from '../test_helper';
-import config from '../../lib/config';
-import { init as initStorage } from '../../lib/db';
+const path = require('path');
+const { expect } = require('chai');
+const { sign } = require('jsonwebtoken');
+const { FileStorageContext } = require('auth0-extension-tools');
+const { request, createServer } = require('../test_helper');
+const config = require('../../lib/config');
+const initStorage = require('../../lib/db').init;
 
 describe('Requesting the linking route', function() {
   describe('With an invalid token', function() {

@@ -1,6 +1,6 @@
-import template from '../../templates/server/admin';
-import config from '../../lib/config';
-import stylesheet from '../../lib/stylesheet';
+const template = require('../../templates/server/admin');
+const config = require('../../lib/config');
+const stylesheet = require('../../lib/stylesheet');
 
 module.exports = () => ({
   method: 'GET',

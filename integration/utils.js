@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { ManagementClient } from 'auth0';
+const fs = require('fs');
+const path = require('path');
+const { ManagementClient } = require('auth0');
 
 const configFileContent = fs.readFileSync(
   path.join(__dirname, '../server/config.test.json'),
@@ -19,14 +19,14 @@ const mgmtApi = new ManagementClient({
  * Waits X seconds and resolves.
  * @param {number} secs
  */
-export const wait = (secs = 1) => new Promise(cont => setTimeout(cont, secs * 1000));
+const wait = (secs = 1) => new Promise(cont => setTimeout(cont, secs * 1000));
 
 /**
  * Looks up for the test-created users and
  * removes them from the tenant.
  * @param {string} email
  */
-export const deleteTestUsers = email =>
+const deleteTestUsers = email =>
   new Promise((resolve, reject) => {
     mgmtApi.getUsers({ q: `email:"${email}"` }, (err, users) => {
       if (err) return reject(err);
@@ -52,7 +52,7 @@ export const deleteTestUsers = email =>
  * and returns the count of them.
  * @param {string} email
  */
-export const usersWithSameEmailCount = email =>
+const usersWithSameEmailCount = email =>
   new Promise((resolve, reject) => {
     mgmtApi.getUsers({ q: `email:"${email}"` }, (err, users) => {
       if (err) return reject(err);
@@ -66,7 +66,7 @@ export const usersWithSameEmailCount = email =>
  * from an object with the parameters
  * @param {object} params
  */
-export const buildQueryString = ({
+const buildQueryString = ({
   childToken = '',
   clientId = '',
   redirectUri = '',
@@ -79,3 +79,11 @@ export const buildQueryString = ({
   state = ''
 }) =>
   `/?child_token=${childToken}&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&auth0Client=${auth0Client}&original_state=${originalState}&nonce=${nonce}&error_type=${errorType}&state=${state}`;
+
+module.exports = {
+  wait,
+  deleteTestUsers,
+  usersWithSameEmailCount,
+  buildQueryString
+};
+
