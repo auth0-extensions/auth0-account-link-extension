@@ -110,22 +110,36 @@ export default ({ extensionURL = '', username = 'Unknown', clientID = '', client
           return user;
         }
 
-        var uri = config.endpoints.userApi+'/'+user.user_id+'/identities';
+        var linkUri = config.endpoints.userApi+'/'+user.user_id+'/identities';
+        var headers = {
+          Authorization: 'Bearer ' + auth0.accessToken,
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        };
 
         return apiCall({
-          method: 'POST',
-          url: uri,
-          headers: {
-            Authorization: 'Bearer ' + auth0.accessToken,
-            'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache'
-          },
-          json: { link_with: secondAccountToken }
-        }).then(function(_) {
-          // TODO: Ask about this
-          console.info(LOG_TAG, 'Successfully linked accounts for user: ', user.email);
-          return _;
-        });
+          method: 'GET',
+          url: config.endpoints.userApi+'/'+decodedToken.sub+'?fields=identities',
+          headers: headers
+        })
+          .then(function(secondaryUser) {
+            var provider = secondaryUser &&
+              secondaryUser.identities &&
+              secondaryUser.identities[0] &&
+              secondaryUser.identities[0].provider;
+
+            return apiCall({
+              method: 'POST',
+              url: linkUri,
+              headers,
+              json: { user_id: decodedToken.sub, provider: provider }
+            });
+          })
+          .then(function(_) {
+            // TODO: Ask about this
+            console.info(LOG_TAG, 'Successfully linked accounts for user: ', user.email);
+            return _;
+          });
       });
   }
 
