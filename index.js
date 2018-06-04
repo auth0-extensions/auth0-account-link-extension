@@ -2,9 +2,6 @@ const nconf = require('nconf');
 const path = require('path');
 const logger = require('./lib/logger');
 
-// Load babel
-require('./lib/babel')();
-
 nconf
   .argv()
   .env()

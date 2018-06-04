@@ -1,7 +1,6 @@
-import 'babel-polyfill';
-import puppeteer from 'puppeteer';
-import { expect } from 'chai';
-import { deleteTestUsers, usersWithSameEmailCount, wait, buildQueryString } from './utils';
+const puppeteer = require('puppeteer');
+const { expect } = require('chai');
+const { deleteTestUsers, usersWithSameEmailCount, wait, buildQueryString } = require('./utils');
 
 const SAMPLE_APP_BASE = 'http://localhost:3000';
 

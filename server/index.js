@@ -1,14 +1,14 @@
 /* eslint-disable global-require */
 
-import path from 'path';
-import Hapi from 'hapi';
-import Inert from 'inert';
-import jwt from 'hapi-auth-jwt2';
-import config from '../lib/config';
-import logger from '../lib/logger';
-import routes from './routes';
-import defaultHandlers from './handlers';
-import auth from './auth';
+const path = require('path');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const jwt = require('hapi-auth-jwt2');
+const config = require('../lib/config');
+const logger = require('../lib/logger');
+const routes = require('./routes');
+const defaultHandlers = require('./handlers');
+const auth = require('./auth');
 
 const createServer = (cb, handlers = defaultHandlers) => {
   const server = new Hapi.Server();
@@ -71,4 +71,4 @@ const createServer = (cb, handlers = defaultHandlers) => {
   return server;
 };
 
-export default createServer;
+module.exports = createServer;

@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 
-import Boom from 'boom';
-import jwksRsa from 'jwks-rsa';
-import jwt from 'jsonwebtoken';
-import * as tools from 'auth0-extension-hapi-tools';
+const Boom = require('boom');
+const jwksRsa = require('jwks-rsa');
+const jwt = require('jsonwebtoken');
+const tools = require('auth0-extension-hapi-tools');
 
-import config from '../lib/config';
+const config = require('../lib/config');
 
 const scopes = [{ value: 'openid' }, { value: 'profile' }];
 
