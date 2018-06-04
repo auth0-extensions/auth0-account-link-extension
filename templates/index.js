@@ -1,8 +1,8 @@
-import defaultTemplate from './utils/defaultTemplate';
-import { get as getStorage } from '../lib/db';
+const defaultTemplate = require('./utils/defaultTemplate');
+const getStorage = require('../lib/db').get;
 
-import buildAuth0Widget from './utils/auth0widget';
-import buildExtensionScripts from './utils/extensionScripts';
+const buildAuth0Widget = require('./utils/auth0widget');
+const buildExtensionScripts = require('./utils/extensionScripts');
 
 const VAR_REGEX = /\{\{\s*(.*?)\s*\}\}/g;
 const render = (template, locals = {}) => {
@@ -13,8 +13,10 @@ const render = (template, locals = {}) => {
   return template.replace(VAR_REGEX, (match, name) => locals[name] || '');
 };
 
-export default ({ stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities }) =>
-  Promise.all([buildAuth0Widget(dynamicSettings, identities), getStorage().read()])
+module.exports = ({
+  stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities, locale
+}) =>
+  Promise.all([buildAuth0Widget(dynamicSettings, identities, locale), getStorage().read()])
     .then(([widget, data]) => {
       const template = data.settings ? data.settings.template : defaultTemplate;
 

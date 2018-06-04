@@ -1,7 +1,7 @@
 {
   "title": "Auth0 Account Link",
   "name": "auth0-account-link",
-  "version": "2.1.1",
+  "version": "2.3.0",
   "author": "auth0",
   "description":
     "This extension gives Auth0 customers the ability to allow their users to link their accounts",
@@ -22,6 +22,7 @@
     "createClient": true,
     "onUninstallPath": "/.extensions/on-uninstall",
     "onInstallPath": "/.extensions/on-install",
+    "onUpdatePath": "/.extensions/on-install",
     "scopes":
       "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
   }

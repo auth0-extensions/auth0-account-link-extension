@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { expect } from 'chai';
-import humanizeArray from '../../lib/humanize';
+const _ = require('lodash');
+const { expect } = require('chai');
+const humanizeArray = require('../../lib/humanize');
 
 describe('Humanizer Tests', () => {
     it('represents an array of string as a readable sentence using defaults', () => {

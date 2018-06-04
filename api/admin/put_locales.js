@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 
-import { setLocales } from '../../lib/storage';
+const { setLocales } = require('../../lib/storage');
 
 module.exports = () => ({
   method: 'PUT',

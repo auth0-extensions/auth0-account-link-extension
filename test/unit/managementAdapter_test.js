@@ -1,8 +1,8 @@
 /* eslint-disable no-prototype-builtins */
 
-import path from 'path';
-import { expect } from 'chai';
-import ManagementAdapter, { getCurrentConfig } from '../../lib/managementAdapter';
+const path = require('path');
+const { expect } = require('chai');
+const { ManagementClientAdapter, getCurrentConfig } = require('../../lib/managementAdapter');
 
 const configPath = path.join(__dirname, '../../server/config.test.json');
 
@@ -19,7 +19,7 @@ describe('Management API adapter', () => {
 
   it('Adapter initializes correctly', (done) => {
     getCurrentConfig(configPath).then((config) => {
-      const adapter = new ManagementAdapter(config);
+      const adapter = new ManagementClientAdapter(config);
 
       expect(typeof adapter.client).to.equal('object');
 

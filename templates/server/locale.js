@@ -1,7 +1,21 @@
-import scripts from '../utils/scripts';
-import header from '../utils/header';
+const scripts = require('../utils/scripts');
+const header = require('../utils/header');
 
-export default ({ stylesheetTag, baseURL }) => `
+const addNewLocaleHelp = `
+    <span id="help-button">?</span>
+    <div class="help-container">
+        <div id="help-button-content">
+            <h5>Adding a new locale</h5>
+            <p>You can add custom locales for your users to use. You will need to specify the following data:</p>
+            <ul>
+                <li><strong>ISO Code</strong>: ISO 639-1 Complaint Locale Code. i.e.: es, en, pt.</li>
+                <li><strong>Name</strong>: A friendly name for the locale. i.e.: Spanish, English, Portuguese.</li>
+            </ul>
+        </div>
+    </div>
+`;
+
+module.exports = ({ stylesheetTag, baseURL }) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,9 +40,11 @@ ${header(baseURL)}
         <div class="col-sm-4">
             <div class=" list-group" id="locale-menu">
             </div>
-            <div class="text-center">
+            <div>
+                <h4>Add new locale ${addNewLocaleHelp}</h4>
                 <div class="input-group">
-                    <input id="add-new-locale-name" class="form-control" placeholder="Add new locale" />
+                    <input id="add-new-locale-code" class="add-new-locale-input form-control" placeholder="Code" />
+                    <input id="add-new-locale-name" class="add-new-locale-input form-control" placeholder="Name" />
                     <span class="input-group-btn">
                         <button id="add-new-locale" class="btn btn-primary" type="button">Add</button>
                     </span>

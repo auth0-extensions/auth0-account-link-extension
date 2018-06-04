@@ -1,6 +1,6 @@
-import adminJS from '../../public/admin';
+const adminJS = require('../../public/admin');
 
-export default `
+module.exports = `
 <script>
 var JSONStringify = JSON.stringify;
 var ObjectAssign = Object.assign;

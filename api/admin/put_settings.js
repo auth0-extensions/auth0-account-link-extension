@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 
-import Joi from 'joi';
-import { setSettings } from '../../lib/storage';
+const Joi = require('joi');
+const { setSettings } = require('../../lib/storage');
 
 const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
 const colorRegex = /^#[A-Fa-f0-9]{6}/;
