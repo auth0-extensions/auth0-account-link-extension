@@ -21,7 +21,7 @@ const initServer = (cfg, storageContext, cb) => {
   // Initialize the storage context
   initStorage(
     storageContext
-      ? new WebtaskStorageContext(storageContext, { force: 0 })
+      ? new WebtaskStorageContext(storageContext, { force: 1 })
       : new FileStorageContext(path.join(__dirname, '../data.json'))
   );
 
