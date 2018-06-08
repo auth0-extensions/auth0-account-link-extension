@@ -965,33 +965,17 @@ atob@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.0.tgz#ab2b150e51d7b122b9efc8d7340c06b6c41076bc"
 
-auth0-extension-hapi-tools@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/auth0-extension-hapi-tools/-/auth0-extension-hapi-tools-1.2.0.tgz#67ccc8fe2e6f7518e2f486bc88aeebc449359625"
+auth0-extension-hapi-tools@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/auth0-extension-hapi-tools/-/auth0-extension-hapi-tools-1.2.2.tgz#188c138c1cb0039f4b87e665d82029f9ae21843a"
   dependencies:
-    auth0-extension-tools "1.2.0"
+    auth0-extension-tools "^1.3.0"
     boom "3.2.2"
     hapi-auth-jwt2 "7.0.1"
+    jsonwebtoken "7.1.9"
     webtask-tools "^3.1.1"
 
-auth0-extension-tools@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/auth0-extension-tools/-/auth0-extension-tools-1.2.0.tgz#cc673fb39902b00db777ec02fc880cb1ba805990"
-  dependencies:
-    async "2.1.2"
-    auth0 "^2.3.1"
-    bluebird "^3.4.1"
-    jsonwebtoken "^7.1.9"
-    jwks-rsa "^1.1.1"
-    lodash "^4.15.0"
-    lru-memoizer "^1.7.0"
-    ms "^0.7.1"
-    node-uuid "^1.4.7"
-    promise-retry "^1.1.1"
-    superagent "^2.2.0"
-    webtask-tools "^2.2.0"
-
-auth0-extension-tools@^1.2.1:
+auth0-extension-tools@1.3.1, auth0-extension-tools@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/auth0-extension-tools/-/auth0-extension-tools-1.3.1.tgz#c4a8bbf40f290907721e10f43c7aedeadfa69313"
   dependencies:
@@ -1008,9 +992,9 @@ auth0-extension-tools@^1.2.1:
     superagent "^2.2.0"
     webtask-tools "^2.2.0"
 
-auth0-extensions-cli@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/auth0-extensions-cli/-/auth0-extensions-cli-1.1.0.tgz#22fd31971ffccff32645036c192ee9ef04d22f73"
+auth0-extensions-cli@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/auth0-extensions-cli/-/auth0-extensions-cli-1.1.2.tgz#9d6fc2816edb6e354989873f23448a72645064a2"
   dependencies:
     "@babel/core" "^7.0.0-beta.44"
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.44"
@@ -1037,14 +1021,6 @@ auth0-extensions-cli@1.1.0:
     semver "5.5.0"
     uglifyjs-webpack-plugin "^1.2.4"
     webpack "^4.4.1"
-
-auth0@^2.3.1:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/auth0/-/auth0-2.7.0.tgz#1a3bdb437b7b2590648c0d492bc4541de11b5dd8"
-  dependencies:
-    bluebird "^2.10.2"
-    request "^2.81.0"
-    rest-facade "^1.5.0"
 
 auth0@^2.8.0, auth0@^2.9.1:
   version "2.9.1"
@@ -2351,6 +2327,12 @@ ecc-jsbn@~0.1.1:
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
   dependencies:
     jsbn "~0.1.0"
+
+ecdsa-sig-formatter@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.10.tgz#1c595000f04a8897dfb85000892a0f4c33af86c3"
+  dependencies:
+    safe-buffer "^5.0.1"
 
 ecdsa-sig-formatter@1.0.9:
   version "1.0.9"
@@ -4323,6 +4305,16 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
 
+jsonwebtoken@7.1.9:
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.1.9.tgz#847804e5258bec5a9499a8dc4a5e7a3bae08d58a"
+  dependencies:
+    joi "^6.10.1"
+    jws "^3.1.3"
+    lodash.once "^4.0.0"
+    ms "^0.7.1"
+    xtend "^4.0.1"
+
 jsonwebtoken@^5.7.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-5.7.0.tgz#1c90f9a86ce5b748f5f979c12b70402b4afcddb4"
@@ -4397,6 +4389,14 @@ jwa@^1.1.4:
     ecdsa-sig-formatter "1.0.9"
     safe-buffer "^5.0.1"
 
+jwa@^1.1.5:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.1.6.tgz#87240e76c9808dbde18783cf2264ef4929ee50e6"
+  dependencies:
+    buffer-equal-constant-time "1.0.1"
+    ecdsa-sig-formatter "1.0.10"
+    safe-buffer "^5.0.1"
+
 jwks-rsa@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.1.1.tgz#f9ae815f4a5923e0745f7739bf60c4e0e6012a52"
@@ -4424,6 +4424,13 @@ jws@^3.0.0, jws@^3.1.4:
   dependencies:
     base64url "^2.0.0"
     jwa "^1.1.4"
+    safe-buffer "^5.0.1"
+
+jws@^3.1.3:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/jws/-/jws-3.1.5.tgz#80d12d05b293d1e841e7cb8b4e69e561adcf834f"
+  dependencies:
+    jwa "^1.1.5"
     safe-buffer "^5.0.1"
 
 kilt@2.x.x:
@@ -6326,7 +6333,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-request@^2.55.0, request@^2.73.0, request@^2.81.0, request@^2.83.0, request@^2.85.0:
+request@^2.55.0, request@^2.73.0, request@^2.81.0, request@^2.83.0:
   version "2.85.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.85.0.tgz#5a03615a47c61420b3eb99b7dba204f83603e1fa"
   dependencies:
@@ -6349,6 +6356,31 @@ request@^2.55.0, request@^2.73.0, request@^2.81.0, request@^2.83.0, request@^2.8
     qs "~6.5.1"
     safe-buffer "^5.1.1"
     stringstream "~0.0.5"
+    tough-cookie "~2.3.3"
+    tunnel-agent "^0.6.0"
+    uuid "^3.1.0"
+
+request@^2.87.0:
+  version "2.87.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.87.0.tgz#32f00235cd08d482b4d0d68db93a829c0ed5756e"
+  dependencies:
+    aws-sign2 "~0.7.0"
+    aws4 "^1.6.0"
+    caseless "~0.12.0"
+    combined-stream "~1.0.5"
+    extend "~3.0.1"
+    forever-agent "~0.6.1"
+    form-data "~2.3.1"
+    har-validator "~5.0.3"
+    http-signature "~1.2.0"
+    is-typedarray "~1.0.0"
+    isstream "~0.1.2"
+    json-stringify-safe "~5.0.1"
+    mime-types "~2.1.17"
+    oauth-sign "~0.8.2"
+    performance-now "^2.1.0"
+    qs "~6.5.1"
+    safe-buffer "^5.1.1"
     tough-cookie "~2.3.3"
     tunnel-agent "^0.6.0"
     uuid "^3.1.0"
@@ -6399,7 +6431,7 @@ resolve@^1.1.7:
   dependencies:
     path-parse "^1.0.5"
 
-rest-facade@^1.10.0, rest-facade@^1.5.0:
+rest-facade@^1.10.0:
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/rest-facade/-/rest-facade-1.10.1.tgz#a9b030ff50df28c9ea1a2719f94e369c47167d20"
   dependencies:
