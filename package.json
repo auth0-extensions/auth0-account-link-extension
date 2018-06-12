@@ -1,6 +1,6 @@
 {
   "name": "auth0-account-link-extension",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Auth0 Account Link Extension",
   "main": "index.js",
   "engines": {
@@ -57,7 +57,7 @@
       "qs@3.1.0",
       "raw-body@2.1.0",
       "read-all-stream@2.1.2",
-      "request@2.87.0",
+      "request@2.81.0",
       "superagent@1.2.0",
       "type-check@0.3.1",
       "webtask-tools",
@@ -78,7 +78,7 @@
     "jwks-rsa": "1.1.1",
     "nconf": "^0.8.4",
     "open": "^0.0.5",
-    "request": "^2.87.0",
+    "request": "^2.81.0",
     "webtask-tools": "^3.2.0",
     "winston": "1.0.0"
   },
