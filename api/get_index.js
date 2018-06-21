@@ -53,7 +53,8 @@ module.exports = () => ({
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
             getSettings().then((settings) => {
-              const locale = matchingUsers[0].user_metadata.locale || settings.locale;
+              const userMetadata = (matchingUsers[0] && matchingUsers[0].user_metadata) || {};
+              const locale = userMetadata.locale || settings.locale;
               resolveLocale(locale).then((t) => {
                 const rawIdentities = matchingUsers.length > 0 ? matchingUsers[0].identities : [];
                 const identities = rawIdentities
