@@ -2,7 +2,7 @@ pipeline {
     agent {
         label 'crew-keystone'
     }
-    tools { nodejs '6.10.3' }
+    tools { nodejs '8.11.3' }
     stages {
         stage('Checkout') {
           steps {
@@ -40,19 +40,6 @@ pipeline {
       always {
         // Let's wipe out the workspace before we finish!
         deleteDir()
-      }
-
-      success {
-        slackSend channel: '#crew-apollo-feed',
-                  color: 'good',
-                  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-      }
-
-      failure {
-        slackSend channel: '#crew-apollo-feed',
-                  color: 'danger',
-                  message: "The pipeline ${currentBuild.fullDisplayName} has failed."
-
       }
     }
 
