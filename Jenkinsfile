@@ -1,6 +1,8 @@
 pipeline {
-    agent any
-    tools { nodejs 'node-v6.10.3' }
+    agent {
+        label 'crew-keystone'
+    }
+    tools { nodejs '6.10.3' }
     stages {
         stage('Checkout') {
           steps {
@@ -20,7 +22,7 @@ pipeline {
           }
         }
 
-        stage('Build') { 
+        stage('Build') {
             steps {
                 sh 'yarn run build'
             }
