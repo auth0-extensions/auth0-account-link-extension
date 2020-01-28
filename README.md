@@ -15,7 +15,6 @@ with an existing registered with the same email address from a different provide
 
 ## Running in Development
 
-
 Update the configuration file under `./server/config.json`:
 
 ```json
@@ -32,6 +31,7 @@ Update the configuration file under `./server/config.json`:
 Then you can run the extension:
 
 ```bash
+nvm use 8
 yarn install
 yarn run build
 yarn run serve:dev
@@ -45,3 +45,22 @@ Then, you can run the tests running:
 ```bash
 yarn test
 ```
+
+## Release Process
+
+Deployment is currently done using this tool: https://auth0-extensions.us8.webtask.io/extensions-deploy
+
+First bump the version in `package.json` and in `webtask.json`
+
+Then build the extension:
+
+```bash
+nvm use 8
+yarn install
+yarn run build
+```
+
+Bundle file is found in `/dist`
+Asset CSS files are found in `/dist/assets`
+
+Follow the instructions in the deployment tool.  This tool will also automatically generate a PR in the `auth0-extensions` repo.  Only after the PR is merged will the extension be available in production.  Before merging the PR you can use this tool to test the upgrade: https://github.com/auth0-extensions/auth0-extension-update-tester by overriding the `extensions.json` file that is fetched by the dashboard.
