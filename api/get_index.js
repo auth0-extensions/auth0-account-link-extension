@@ -1,4 +1,5 @@
 const { decode } = require('jsonwebtoken');
+const _ = require('lodash');
 const config = require('../lib/config');
 const findUsersByEmail = require('../lib/findUsersByEmail');
 const indexTemplate = require('../templates/index');
@@ -31,12 +32,10 @@ module.exports = () => ({
     auth: false
   },
   handler: (req, reply) => {
-    const linkingState = req.state['account-linking-admin-state'];
-    if (typeof linkingState !== 'undefined' && linkingState !== '') {
-      reply.redirect(`${config('PUBLIC_WT_URL')}/admin`).state('account-linking-admin-state', '');
-      return;
-    }
-
+   if (_.isEmpty(req.query)) {
+    reply.redirect(`${config('PUBLIC_WT_URL')}/admin`);
+    return;
+   }
     const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
     const stylesheetTag = stylesheetHelper.tag('link');
     const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'));
