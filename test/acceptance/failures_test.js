@@ -20,7 +20,7 @@ describe('Requesting the linking route', function() {
     });
 
     it('returns a 400 with an invalid token', function() {
-      return server.inject({ method: 'GET', url: '/', payload: {} }).then(res => {
+      return server.inject({ method: 'GET', url: '/?foo=bar', payload: {} }).then(res => {
         expect(res.statusCode).to.eq(400);
       });
     });
