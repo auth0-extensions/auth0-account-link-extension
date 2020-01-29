@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 
 const path = require('path');
-const Hapi = require('hapi');
+const Hapi = require('@auth0/hapi');
 const Inert = require('inert');
 const jwt = require('hapi-auth-jwt2');
 const config = require('../lib/config');

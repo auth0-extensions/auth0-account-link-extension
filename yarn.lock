@@ -2,6 +2,43 @@
 # yarn lockfile v1
 
 
+"@auth0/hapi@13.5.1":
+  version "13.5.1"
+  resolved "https://a0us.jfrog.io/a0us/api/npm/npm/@auth0/hapi/-/hapi-13.5.1.tgz#21859f0948bc56b96300ccbfbc58b4a1b647ecc6"
+  integrity sha1-IYWfCUi8VrljAMy/vFi0obZH7MY=
+  dependencies:
+    "@auth0/statehood" "^4.1.1"
+    accept "2.x.x"
+    ammo "2.x.x"
+    boom "3.x.x"
+    call "3.x.x"
+    catbox "7.x.x"
+    catbox-memory "2.x.x"
+    cryptiles "3.x.x"
+    heavy "4.x.x"
+    hoek "4.x.x"
+    iron "4.x.x"
+    items "2.x.x"
+    joi "8.x.x"
+    kilt "2.x.x"
+    mimos "3.x.x"
+    peekaboo "2.x.x"
+    shot "3.x.x"
+    subtext "4.x.x"
+    topo "2.x.x"
+
+"@auth0/statehood@^4.1.1":
+  version "4.1.1"
+  resolved "https://a0us.jfrog.io/a0us/api/npm/npm/@auth0/statehood/-/statehood-4.1.1.tgz#d1642a5146e27c0da8c3209d58237f43a1e2cba7"
+  integrity sha1-0WQqUUbifA2owyCdWCN/Q6Hiy6c=
+  dependencies:
+    boom "3.x.x"
+    cryptiles "3.x.x"
+    hoek "4.x.x"
+    iron "4.x.x"
+    items "2.x.x"
+    joi "9.x.x"
+
 "@babel/code-frame@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.44.tgz#2a02643368de80916162be70865c97774f3adbd9"
@@ -965,9 +1002,10 @@ atob@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.0.tgz#ab2b150e51d7b122b9efc8d7340c06b6c41076bc"
 
-auth0-extension-hapi-tools@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/auth0-extension-hapi-tools/-/auth0-extension-hapi-tools-1.2.2.tgz#188c138c1cb0039f4b87e665d82029f9ae21843a"
+auth0-extension-hapi-tools@1.3.1:
+  version "1.3.1"
+  resolved "https://a0us.jfrog.io/a0us/api/npm/npm/auth0-extension-hapi-tools/-/auth0-extension-hapi-tools-1.3.1.tgz#28515f176dd495c90044c643e67eaae2485e30e4"
+  integrity sha1-KFFfF23UlckARMZD5n6q4kheMOQ=
   dependencies:
     auth0-extension-tools "^1.3.0"
     boom "3.2.2"
@@ -3426,30 +3464,6 @@ hapi-auth-jwt2@7.0.1:
     boom "^3.1.3"
     cookie "^0.3.1"
     jsonwebtoken "^7.0.0"
-
-hapi@13.5.0:
-  version "13.5.0"
-  resolved "https://registry.yarnpkg.com/hapi/-/hapi-13.5.0.tgz#a5ffbcac57d370c733c81b1ac074c4f13767ecb3"
-  dependencies:
-    accept "2.x.x"
-    ammo "2.x.x"
-    boom "3.x.x"
-    call "3.x.x"
-    catbox "7.x.x"
-    catbox-memory "2.x.x"
-    cryptiles "3.x.x"
-    heavy "4.x.x"
-    hoek "4.x.x"
-    iron "4.x.x"
-    items "2.x.x"
-    joi "8.x.x"
-    kilt "2.x.x"
-    mimos "3.x.x"
-    peekaboo "2.x.x"
-    shot "3.x.x"
-    statehood "4.x.x"
-    subtext "4.x.x"
-    topo "2.x.x"
 
 har-schema@^1.0.5:
   version "1.0.5"
@@ -6804,17 +6818,6 @@ ssri@^5.2.4:
 stack-trace@0.0.x:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
-
-statehood@4.x.x:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/statehood/-/statehood-4.1.0.tgz#8a2877d13d9850aab6ce877a54b778df0f43acdb"
-  dependencies:
-    boom "3.x.x"
-    cryptiles "3.x.x"
-    hoek "4.x.x"
-    iron "4.x.x"
-    items "2.x.x"
-    joi "9.x.x"
 
 static-extend@^0.1.1:
   version "0.1.2"
