@@ -25,5 +25,18 @@
       "Las cuentas deben tener la misma dirección de correo electrónico. Por favor intenta nuevamente.",
     "identities": "Puedes iniciar sesión con {{identities}} para vincular las cuentas",
     "or": "o"
+  },
+
+  "ja": {
+    "_name": "Japanease",
+    "pageMismatchError": "アクセスに失敗しました。もう一度ログインしてください。",
+    "continue": "続ける",
+    "accountLinking": "アカウントリンク",
+    "introduction":
+    "同じメールアドレスのアカウントが見つかりました。これらのアカウントを統合することを推奨します。",
+    "skipAlternativeLink": "統合せずに新しいアカウントを作成する。 (非推奨)",
+    "sameEmailAddressError": "一致するメールアドレスが見つかりませんでした。もう一度ログインしてください。",
+    "identities": "統合すると{{identities}}でログインできるようになります。",
+    "or": "または"
   }
 }
