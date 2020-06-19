@@ -35,7 +35,7 @@ describe('Stylesheet helper', () => {
     it('links to minified version of file', () => {
       const result = tag('test');
 
-      expect(result).to.match(/\/test\.min.css/);
+      expect(result).to.match(/\/test\.\d+\.\d+\.\d+\.min\.css/);
     });
   });
 });
