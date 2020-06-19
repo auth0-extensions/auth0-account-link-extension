@@ -32,10 +32,10 @@ module.exports = () => ({
     auth: false
   },
   handler: (req, reply) => {
-   if (_.isEmpty(req.query)) {
-    reply.redirect(`${config('PUBLIC_WT_URL')}/admin`);
-    return;
-   }
+    if (_.isEmpty(req.query)) {
+      reply.redirect(`${config('PUBLIC_WT_URL')}/admin`);
+      return;
+    }
     const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
     const stylesheetTag = stylesheetHelper.tag('link');
     const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'));

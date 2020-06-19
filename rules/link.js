@@ -217,6 +217,7 @@ module.exports = ({ extensionURL = '', username = 'Unknown', clientID = '', clie
       redirect_uri: q.redirect_uri,
       scope: q.scope,
       response_type: q.response_type,
+      response_mode: q.response_mode,
       auth0Client: q.auth0Client,
       original_state: q.original_state || q.state,
       nonce: q.nonce,
