@@ -45,6 +45,7 @@ module.exports = function(currentUser, matchingUsers) {
         client_id: params.client_id,
         redirect_uri: params.redirect_uri,
         response_type: params.response_type,
+        response_mode: params.response_mode,
         scope: params.scope,
         state: params.original_state,
         nonce: params.nonce,
