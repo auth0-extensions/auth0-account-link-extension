@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/runtime": "7.10.5",
     "auth0-extensions-cli": "^1.1.2",
+    "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^7.5.0",
     "eslint-config-auth0": "^11.1.0",
