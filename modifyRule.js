@@ -20,7 +20,7 @@ const persistRule = (api, generatedRule) => (rules = []) => {
 const persistConfigRule = (api, config) => (configs = []) =>
   Promise.all(
     Object.keys(config)
-      .filter(key => configs.some(c => c.key === key))
+      .filter(key => !configs.some(c => c.key === key))
       .map(key => api.rulesConfigs.set({ key }, { value: config[key] }))
   );
 
