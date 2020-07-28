@@ -15,10 +15,10 @@ module.exports = server => ({
   handler: (req, reply) => {
     logger.info('Starting rule installation...');
 
-    install(req.pre.auth0.rules, {
-      extensionURL: config('PUBLIC_WT_URL'),
-      clientID: config('AUTH0_CLIENT_ID'),
-      clientSecret: config('AUTH0_CLIENT_SECRET')
+    install(req.pre.auth0, {
+      accountLinkExtentionUrl: config('PUBLIC_WT_URL'),
+      accountLinkClientId: config('AUTH0_CLIENT_ID'),
+      accountLinkSecretId: config('AUTH0_CLIENT_SECRET')
     })
       .then(() => reply().code(204))
       .then(() => {
