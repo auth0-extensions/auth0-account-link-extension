@@ -22,7 +22,9 @@ const decodeToken = token =>
 const fetchUsersFromToken = ({ sub, email }) =>
   findUsersByEmail(email).then(users => ({
     currentUser: users.find(u => u.user_id === sub),
-    matchingUsers: users.filter(u => u.user_id !== sub)
+    matchingUsers: users
+      .filter(u => u.user_id !== sub)
+      .sort((prev, next) => new Date(prev.created_at) - new Date(next.created_at))
   }));
 
 module.exports = () => ({
