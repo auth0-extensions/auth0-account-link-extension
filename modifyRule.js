@@ -1,5 +1,4 @@
-const fs = require('fs');
-const path = require('path');
+const generateTemplate = require('./rules/link');
 
 const RULE_STAGE = 'login_success';
 const RULE_NAME = 'auth0-account-link-extension';
@@ -26,7 +25,7 @@ const destroyRule = api => (rules = []) => {
 };
 
 const install = (api, config) => {
-  const rule = { name: RULE_NAME, script: fs.readFileSync(path.join(__dirname, './rules/link.js')), enabled: true };
+  const rule = { name: RULE_NAME, script: generateTemplate(config), enabled: true };
 
   return api.getAll().then(persistRule(api, rule));
 };
