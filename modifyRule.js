@@ -1,4 +1,4 @@
-const linkRule = require('./rules/link');
+const fs = require('fs');
 
 const RULE_STAGE = 'login_success';
 const RULE_NAME = 'auth0-account-link-extension';
@@ -34,8 +34,8 @@ const destroyRule = api => (rules = []) => {
 const install = (api, config) => {
   const rule = {
     name: RULE_NAME,
-    script: linkRule.toString(),
-    enabled: true
+    script: fs.readFileSync('./rules/link.js'),
+    enabled: true,
   };
 
   return Promise.all([
