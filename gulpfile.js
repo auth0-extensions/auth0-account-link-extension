@@ -49,7 +49,7 @@ gulp.task('run', () => {
           domain: config.AUTH0_DOMAIN,
           clientId: config.AUTH0_CLIENT_ID,
           clientSecret: config.AUTH0_CLIENT_SECRET,
-          scope: 'read:rules update:rules delete:rules create:rules'
+          scope: 'read:rules update:rules delete:rules create:rules read:rules_configs delete:rules_configs update:rules_configs'
         });
         install(auth0, {
           accountLinkExtentionUrl: publicUrl,
