@@ -25,6 +25,6 @@
     "onInstallPath": "/.extensions/on-install",
     "onUpdatePath": "/.extensions/on-install",
     "scopes":
-      "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
+      "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients read:rules_configs delete:rules_configs update:rules_configs"
   }
 }
