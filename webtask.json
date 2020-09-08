@@ -1,6 +1,6 @@
 {
   "title": "Auth0 Account Link (custom v2.7.3)",
-  "name": "auth0-account-link-sortlist-v2.7",
+  "name": "auth0-account-link-sortlist",
   "version": "2.7.3",
   "preVersion": "2.6.0",
   "author": "sortlist",
