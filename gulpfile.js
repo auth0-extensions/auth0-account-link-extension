@@ -3,9 +3,15 @@ const util = require('gulp-util');
 const ngrok = require('ngrok');
 const nodemon = require('gulp-nodemon');
 const { install } = require('./modifyRule');
-const managementAdapter = require('./lib/managementAdapter');
+const path = require('path');
+const { readFile } = require('fs');
+const { promisify } = require('bluebird');
+const { ManagementClient } = require('auth0');
 
-const { ManagementClientAdapter, getCurrentConfig } = managementAdapter;
+async function getCurrentConfig() {
+  const configFilePath = path.join(__dirname, './server/config.json');
+  return JSON.parse(await promisify(readFile)(configFilePath));
+}
 
 gulp.task('run', () => {
   ngrok.connect(3000, (ngrokError, url) => {
@@ -39,12 +45,16 @@ gulp.task('run', () => {
 
       util.log('Patching rule on tenant.');
       getCurrentConfig().then((config) => {
-        const adapter = new ManagementClientAdapter(config);
-        install(adapter, {
-          extensionURL: publicUrl,
-          username: 'Development',
-          clientID: config.AUTH0_CLIENT_ID,
-          clientSecret: config.AUTH0_CLIENT_SECRET
+        const auth0 = new ManagementClient({
+          domain: config.AUTH0_DOMAIN,
+          clientId: config.AUTH0_CLIENT_ID,
+          clientSecret: config.AUTH0_CLIENT_SECRET,
+          scope: 'read:rules update:rules delete:rules create:rules read:rules_configs delete:rules_configs update:rules_configs'
+        });
+        install(auth0, {
+          accountLinkExtentionUrl: publicUrl,
+          accountLinkClientId: config.AUTH0_CLIENT_ID,
+          accountLinkSecretId: config.AUTH0_CLIENT_SECRET
         })
           .then(() => {
             util.log('Rule patched on tenant.');

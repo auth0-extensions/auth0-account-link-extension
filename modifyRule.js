@@ -10,24 +10,38 @@ const persistRule = (api, generatedRule) => (rules = []) => {
   const existingRule = rules.find(rule => rule.name === RULE_NAME);
 
   if (existingRule) {
-    return api.update({ id: existingRule.id }, generatedRule);
+    return api.rules.update({ id: existingRule.id }, generatedRule);
   }
 
-  return api.create({ stage: RULE_STAGE, ...generatedRule });
+  return api.rules.create({ stage: RULE_STAGE, ...generatedRule });
 };
+
+const persistConfigRule = (api, config) => (configs = []) =>
+  Promise.all(
+    Object.keys(config)
+      .filter(key => !configs.some(c => c.key === key))
+      .map(key => api.rulesConfigs.set({ key }, { value: config[key] }))
+  );
 
 const destroyRule = api => (rules = []) => {
   const existingRule = findIn(rules);
 
   if (existingRule) {
-    api.delete({ id: existingRule.id });
+    api.rules.delete({ id: existingRule.id });
   }
 };
 
 const install = (api, config) => {
-  const rule = { name: RULE_NAME, script: generateTemplate(config), enabled: true };
+  const rule = {
+    name: RULE_NAME,
+    script: generateTemplate(config),
+    enabled: true
+  };
 
-  return api.getAll().then(persistRule(api, rule));
+  return Promise.all([
+    api.rules.getAll().then(persistRule(api, rule)),
+    api.rulesConfigs.getAll().then(persistConfigRule(api, config))
+  ]);
 };
 const uninstall = api => api.getAll().then(destroyRule(api));
 

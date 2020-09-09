@@ -4,10 +4,7 @@ const generateTemplate = require('../../rules/link');
 
 describe('Generating Link Rule', function() {
   const args = {
-    username: 'foobarbaz',
-    extensionURL: 'http://someurl.com',
-    clientID: 'myClientID',
-    clientSecret: 'myClientSecret'
+    username: 'foobarbaz'
   };
 
   let template;
@@ -23,8 +20,5 @@ describe('Generating Link Rule', function() {
 
   it('contains replaced variables', function() {
     expect(template).to.match(/foobarbaz/);
-    expect(template).to.match(/someurl\.com/);
-    expect(template).to.match(/myClientID/);
-    expect(template).to.match(/myClientSecret/);
   });
 });
