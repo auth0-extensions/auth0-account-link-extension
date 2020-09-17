@@ -56,7 +56,7 @@ module.exports = () => ({
             getSettings().then((settings) => {
               // if there are multiple matching users, take the oldest one
               const userMetadata = (matchingUsers[0] && matchingUsers[0].user_metadata) || {};
-              const locale = userMetadata.locale || settings.locale;
+              const locale = typeof userMetadata.locale === 'string' ? userMetadata.locale : settings.locale;
               resolveLocale(locale).then((t) => {
                 // FIXME: The "continue" button is always poiting to first user's identity
                 // connection, so we can't show all available alternatives in the introduction
