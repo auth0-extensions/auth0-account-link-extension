@@ -14,7 +14,15 @@ const render = (template, locals = {}) => {
 };
 
 module.exports = ({
-  stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities, locale, params, token
+  stylesheetTag,
+  customCSSTag,
+  currentUser,
+  matchingUsers,
+  dynamicSettings,
+  identities,
+  locale,
+  params,
+  token
 }) =>
   Promise.all([buildAuth0Widget(dynamicSettings, identities, locale), getStorage().read()])
     .then(([widget, data]) => {
