@@ -41,15 +41,16 @@ module.exports = () => ({
     const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
     const stylesheetTag = stylesheetHelper.tag('link');
     const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'));
+    const params = req.query;
 
     const dynamicSettings = {};
 
-    if (req.query.locale) dynamicSettings.locale = req.query.locale;
-    if (req.query.color) dynamicSettings.color = `#${req.query.color}`;
-    if (req.query.title) dynamicSettings.title = req.query.title;
-    if (req.query.logoPath) dynamicSettings.logoPath = req.query.logoPath;
+    if (params.locale) dynamicSettings.locale = params.locale;
+    if (params.color) dynamicSettings.color = `#${params.color}`;
+    if (params.title) dynamicSettings.title = params.title;
+    if (params.logoPath) dynamicSettings.logoPath = params.logoPath;
 
-    decodeToken(req.query.child_token)
+    decodeToken(params.child_token)
       .then((token) => {
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
@@ -78,7 +79,9 @@ module.exports = () => ({
                     matchingUsers,
                     customCSSTag,
                     locale,
-                    identities: humanizedIdentities
+                    identities: humanizedIdentities,
+                    params,
+                    token
                   })
                 );
               });

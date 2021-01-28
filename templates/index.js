@@ -14,7 +14,7 @@ const render = (template, locals = {}) => {
 };
 
 module.exports = ({
-  stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities, locale
+  stylesheetTag, customCSSTag, currentUser, matchingUsers, dynamicSettings, identities, locale, params, token
 }) =>
   Promise.all([buildAuth0Widget(dynamicSettings, identities, locale), getStorage().read()])
     .then(([widget, data]) => {
@@ -24,6 +24,6 @@ module.exports = ({
         ExtensionCSS: stylesheetTag,
         CustomCSS: customCSSTag,
         Auth0Widget: widget,
-        ExtensionScripts: buildExtensionScripts(currentUser, matchingUsers)
+        ExtensionScripts: buildExtensionScripts(currentUser, matchingUsers, params, token)
       });
     });
