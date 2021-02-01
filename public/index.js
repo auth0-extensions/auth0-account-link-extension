@@ -2,11 +2,9 @@
 // Ignoring this file since it has to be written in ES5
 // and eslint is configured to lint ES6.
 
-module.exports = function(currentUser, matchingUsers) {
-  var params = window.Qs.parse(window.location.search, { ignoreQueryPrefix: true });
-
+module.exports = function(currentUser, matchingUsers, params, token) {
   try {
-    loadLinkPage(window.jwt_decode(params.child_token));
+    loadLinkPage(token);
   } catch (e) {
     console.error(e);
     loadInvalidTokenPage();
