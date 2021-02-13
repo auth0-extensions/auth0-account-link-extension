@@ -41,7 +41,7 @@
   },
 
   "zh-TW": {
-    "_name": "Chinese (Taiwan)",
+    "_name": "Traditional Chinese (Taiwan)",
     "pageMismatchError": "您似乎錯誤地到達了此頁面。請重新登入",
     "continue": "繼續",
     "accountLinking": "帳戶連結",
