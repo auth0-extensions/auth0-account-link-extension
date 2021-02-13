@@ -38,5 +38,17 @@
     "sameEmailAddressError": "一致するメールアドレスが見つかりませんでした。もう一度ログインしてください。",
     "identities": "統合すると{{identities}}でログインできるようになります。",
     "or": "または"
+  },
+
+  "zh-TW": {
+    "_name": "Chinese (Taiwan)",
+    "pageMismatchError": "您似乎錯誤地到達了此頁面。請重新登入",
+    "continue": "繼續",
+    "accountLinking": "帳戶連結",
+    "introduction": "您有另一個具有相同電子郵件地址的帳戶。我們建議您連結這些帳戶。",
+    "skipAlternativeLink": "我想跳過此步驟並新增一個新帳戶。（不建議）",
+    "sameEmailAddressError": "帳戶必須具有相同的電子郵件地址。請重試。",
+    "identities": "您可以登入到{{identities}}來進行帳戶連結",
+    "or": "或"
   }
 }
