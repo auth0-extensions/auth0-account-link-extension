@@ -38,5 +38,18 @@
     "sameEmailAddressError": "一致するメールアドレスが見つかりませんでした。もう一度ログインしてください。",
     "identities": "統合すると{{identities}}でログインできるようになります。",
     "or": "または"
+  },
+
+  "pt-BR": {
+    "_name": "Brazilian Portuguese",
+    "pageMismatchError": "Parece que você chegou a essa página devido a um erro. Tente realizar o login novamente",
+    "continue": "Continuar",
+    "accountLinking": "Vinculação de contas",
+    "introduction":
+      "Aparentemente você possui uma outra conta com esse endereço de email. Nós recomendamos que você vincule essas contas.",
+    "skipAlternativeLink": "Desejo pular essa etapa e criar uma nova conta. (Não recomendado)",
+    "sameEmailAddressError": "As contas devem possuir o mesmo endereço de email. Favor tentar novamente.",
+    "identities": "Você pode realizar o login com {{identities}} para vincular as contas",
+    "or": "ou"
   }
 }
