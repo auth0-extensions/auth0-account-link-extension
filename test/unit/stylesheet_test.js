@@ -46,7 +46,7 @@ describe('Stylesheet helper', () => {
     });
 
     it('with absolute URL', () => {
-      const result = tag('htps://custom.css', true);
+      const result = tag('https://custom.css', true);
 
       expect(result).to.equal('<link rel="stylesheet" href="https://custom.css">');
     });
