@@ -40,7 +40,7 @@ module.exports = () => ({
     }
     const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
     const stylesheetTag = stylesheetHelper.tag('link');
-    const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'));
+    const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'), true);
     const params = req.query;
 
     const dynamicSettings = {};
