@@ -63,6 +63,4 @@ yarn run build
 Bundle file (`auth0-account-link.extension.VERSION.js` is found in `/dist`
 Asset CSS files are found in `/dist/assets`
 
-Before continuing, if you want to quickly test backend-only changes in your production tenant, you can use the webtask editor: https://github.com/auth0-extensions/auth0-webtask-editor-opener. Copy and paste the bundle file file contents into the tab that corresponds with the existing extension to override the backend code. 
-
 Follow the instructions in the deployment tool.  This tool will also automatically generate a PR in the `auth0-extensions` repo.  Only after the PR is merged will the extension be available in production.  Before merging the PR you can use this tool to test the upgrade: https://github.com/auth0-extensions/auth0-extension-update-tester by overriding the `extensions.json` file that is fetched by the dashboard.  You will need to clone this repo: https://github.com/auth0/auth0-extensions, update `extensions.json` locally and then run `npx http-server --port 3000 --cors` to serve up the file.  Then configure the extension with `http://localhost:3000/extensions.json` as the path.

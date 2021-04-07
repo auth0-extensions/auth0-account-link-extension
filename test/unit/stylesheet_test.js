@@ -23,6 +23,13 @@ describe('Stylesheet helper', () => {
     expect(result).to.be.empty;
   });
 
+  it('with absolute URL', () => {
+    const { tag } = stylesheet();
+    const result = tag('https://custom.css', true);
+
+    expect(result).to.equal('<link rel="stylesheet" href="https://custom.css">');
+  });
+
   describe('When using cdn', () => {
     const { tag } = stylesheet(true);
 
@@ -36,6 +43,12 @@ describe('Stylesheet helper', () => {
       const result = tag('test');
 
       expect(result).to.match(/\/test\.\d+\.\d+\.\d+\.min\.css/);
+    });
+
+    it('with absolute URL', () => {
+      const result = tag('https://custom.css', true);
+
+      expect(result).to.equal('<link rel="stylesheet" href="https://custom.css">');
     });
   });
 });
