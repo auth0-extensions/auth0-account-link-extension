@@ -1,11 +1,10 @@
 {
-  "title": "Auth0 Account Link",
+  "title": "Auth0 Account Link [AP]",
   "name": "auth0-account-link",
-  "version": "2.6.4",
+  "version": "2.6.5",
   "preVersion": "2.6.3",
   "author": "auth0",
-  "description":
-    "This extension gives Auth0 customers the ability to allow their users to link their accounts",
+  "description": "[AP] This extension gives Auth0 customers the ability to allow their users to link their accounts",
   "type": "application",
   "logoUrl": "https://cdn.auth0.com/extensions/auth0-authz/assets/logo.svg",
   "docsUrl": "https://auth0.com/docs/extensions/account-link",
