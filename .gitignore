@@ -14,3 +14,4 @@ data.json
 *.swp
 yarn-error.log
 secrets
+build
