@@ -11,6 +11,7 @@
     "test": "nyc --all mocha test --recursive --timeout 5000",
     "test:integration": "mocha integration --recursive --timeout 50000",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "serve:dev": "gulp run",
     "client:build": "minify --clean --output dist/assets/link.$npm_package_version.min.css public/css/link.css && minify --clean --output dist/assets/admin.$npm_package_version.min.css public/css/admin.css",
     "extension:build": "a0-ext build:server ./webtask.js ./dist && cp ./dist/auth0-account-link.extension.$npm_package_version.js ./build/bundle.js",
