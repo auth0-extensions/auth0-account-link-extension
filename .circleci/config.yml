@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: node:carbon
+      - image: node:erbium
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
