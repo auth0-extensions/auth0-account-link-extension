@@ -211,9 +211,10 @@ module.exports = ({ extensionURL = '', username = 'Unknown', clientID = '', clie
   // Consider moving this logic out of the rule and into the extension
   function buildRedirectUrl(token, q, errorType) {
     var params = {
+      protocol: context.protocol,
       child_token: token,
       audience: q.audience,
-      client_id: q.client_id,
+      client_id: q.client_id ? q.client_id : context.clientID,
       redirect_uri: q.redirect_uri,
       scope: q.scope,
       response_type: q.response_type,
