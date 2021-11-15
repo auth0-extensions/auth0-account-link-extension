@@ -38,7 +38,8 @@ module.exports = function(currentUser, matchingUsers, params, token) {
       let clientId = qs["client_id"];
       let connection = encodeURIComponent(qs["connection"]);
       let link_account_token = encodeURIComponent(qs["link_account_token"]);
-      window.location = domain + `samlp/${clientId}?connection=${connection}&link_account_token=${link_account_token}&prevent_sign_up=true`;
+      let relayState = encodeURIComponent(qs["RelayState"]);
+      window.location = domain + `samlp/${clientId}?connection=${connection}&link_account_token=${link_account_token}&prevent_sign_up=true&RelayState=${relayState}`;
     };
 
     var updateContinueUrl = function(linkEl, domain, state) {
