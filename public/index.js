@@ -50,6 +50,7 @@ module.exports = function(currentUser, matchingUsers, params, token) {
         authorizeSaml(token.iss, {
           client_id: params.client_id,
           connection: connections[0],
+          RelayState: params.RelayState,
           link_account_token: params.child_token
         });
       } else {

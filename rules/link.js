@@ -222,6 +222,7 @@ module.exports = ({ extensionURL = '', username = 'Unknown', clientID = '', clie
       auth0Client: q.auth0Client,
       original_state: q.original_state || q.state,
       nonce: q.nonce,
+      RelayState: q.RelayState,
       error_type: errorType
     };
 
