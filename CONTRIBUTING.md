@@ -10,4 +10,4 @@
 
 ## Development dependencies
 
-- Usage and running test ßsteps are located in README.md at the root of this repository
+- Usage and running test steps are located in README.md at the root of this repository
