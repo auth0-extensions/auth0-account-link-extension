@@ -1,11 +1,10 @@
 {
-  "title": "Auth0 Account Link",
+  "title": "Martin Auth0 Account Link",
   "name": "auth0-account-link",
   "version": "2.6.5",
   "preVersion": "2.6.3",
   "author": "auth0",
-  "description":
-    "This extension gives Auth0 customers the ability to allow their users to link their accounts",
+  "description": "This extension gives Auth0 customers the ability to allow their users to link their accounts",
   "type": "application",
   "logoUrl": "https://cdn.auth0.com/extensions/auth0-authz/assets/logo.svg",
   "docsUrl": "https://auth0.com/docs/extensions/account-link",
@@ -24,7 +23,6 @@
     "onUninstallPath": "/.extensions/on-uninstall",
     "onInstallPath": "/.extensions/on-install",
     "onUpdatePath": "/.extensions/on-install",
-    "scopes":
-      "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
+    "scopes": "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
   }
 }

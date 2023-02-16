@@ -2,7 +2,7 @@
 // Ignoring this file since it has to be written in ES5
 // and eslint is configured to lint ES6.
 
-module.exports = function(currentUser, matchingUsers, params, token) {
+module.exports = function (currentUser, matchingUsers, params, token) {
   try {
     loadLinkPage(token);
   } catch (e) {
@@ -11,34 +11,34 @@ module.exports = function(currentUser, matchingUsers, params, token) {
   }
 
   function loadLinkPage(token) {
-    var linkEl = document.getElementById('link');
-    var skipEl = document.getElementById('skip');
+    var linkEl = document.getElementById("link");
+    var skipEl = document.getElementById("skip");
     var connections = matchingUsers
-      .reduce(function(acc, user) {
+      .reduce(function (acc, user) {
         return acc.concat(user.identities);
       }, [])
-      .map(function(identity) {
+      .map(function (identity) {
         return identity.connection;
       });
 
-    var authorize = function(domain, qs) {
+    var authorize = function (domain, qs) {
       var query = keysForObject(qs)
-        .filter(function(key) {
+        .filter(function (key) {
           return !!qs[key];
         })
-        .map(function(key) {
-          return key + '=' + encodeURIComponent(qs[key]);
+        .map(function (key) {
+          return key + "=" + encodeURIComponent(qs[key]);
         })
-        .join('&');
+        .join("&");
 
-      window.location = domain + 'authorize?' + query;
+      window.location = domain + "authorize?" + query;
     };
 
-    var updateContinueUrl = function(linkEl, domain, state) {
-      linkEl.href = domain + 'continue?state=' + state;
+    var updateContinueUrl = function (linkEl, domain, state) {
+      linkEl.href = domain + "continue?state=" + state;
     };
 
-    linkEl.addEventListener('click', function(e) {
+    linkEl.addEventListener("click", function (e) {
       authorize(token.iss, {
         client_id: params.client_id,
         redirect_uri: params.redirect_uri,
@@ -49,32 +49,33 @@ module.exports = function(currentUser, matchingUsers, params, token) {
         nonce: params.nonce,
         audience: params.audience,
         link_account_token: params.child_token,
+        login_hint: params.login_hint,
         prevent_sign_up: true,
-        connection: connections[0]
+        connection: connections[0],
       });
     });
 
     updateContinueUrl(skipEl, token.iss, params.state);
 
-    if (params.error_type === 'accountMismatch') {
+    if (params.error_type === "accountMismatch") {
       loadAccountMismatchError();
     }
   }
 
   function loadInvalidTokenPage() {
-    var containerEl = document.getElementById('content-container');
-    var labelEl = document.getElementById('label-value');
-    var linkEl = document.getElementById('link');
+    var containerEl = document.getElementById("content-container");
+    var labelEl = document.getElementById("label-value");
+    var linkEl = document.getElementById("link");
 
-    containerEl.innerHTML = '';
+    containerEl.innerHTML = "";
     containerEl.appendChild(
-      el('div', {}, [
-        el('p', {}, [
+      el("div", {}, [
+        el("p", {}, [
           text(
             window.Auth0AccountLinkingExtension.locale.pageMismatchError ||
-              'You seem to have reached this page in error. Please try logging in again'
-          )
-        ])
+              "You seem to have reached this page in error. Please try logging in again"
+          ),
+        ]),
       ])
     );
 
@@ -82,13 +83,13 @@ module.exports = function(currentUser, matchingUsers, params, token) {
   }
 
   function loadAccountMismatchError() {
-    var messageEl = document.getElementById('error-message');
+    var messageEl = document.getElementById("error-message");
     var msg =
       window.Auth0AccountLinkingExtension.locale.sameEmailAddressError ||
-      'Accounts must have matching email addresses. Please try again.';
+      "Accounts must have matching email addresses. Please try again.";
 
     messageEl.innerHTML = msg;
-    messageEl.style.display = 'block';
+    messageEl.style.display = "block";
   }
 
   function el(tagName, attrs, childEls) {
@@ -123,4 +124,4 @@ module.exports = function(currentUser, matchingUsers, params, token) {
 
     return keys;
   }
-}
+};
