@@ -27,6 +27,20 @@
     "or": "o"
   },
 
+  "fr": {
+    "_name": "French",
+    "pageMismatchError":
+      "Il semblerait que vous êtes arrivé sur cette page par erreur. Veuillez vous connecter à nouveau",
+    "continue": "Continuer",
+    "accountLinking": "Associer ses comptes",
+    "introduction":
+      "Il existe déjà un compte avec cette adresse email. Nous vous recommandons d'associer ces comptes.",
+    "skipAlternativeLink": "Ignorer et créer un nouveau compte. (Non recommandé)",
+    "sameEmailAddressError": "Les comptes doivent avoir la même adresse email. Merci de réessayer",
+    "identities": "Vous pouvez vous connecter avec {{identities}} pour associer vos comptes",
+    "or": "ou"
+  },
+
   "ja": {
     "_name": "Japanease",
     "pageMismatchError": "アクセスに失敗しました。もう一度ログインしてください。",
