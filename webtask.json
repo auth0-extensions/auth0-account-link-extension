@@ -1,6 +1,6 @@
 {
-  "title": "Auth0 Account Link",
-  "name": "auth0-account-link",
+  "title": "Custom Account Link",
+  "name": "custom-auth0-account-link",
   "version": "2.6.5",
   "preVersion": "2.6.3",
   "author": "auth0",
@@ -10,7 +10,7 @@
   "logoUrl": "https://cdn.auth0.com/extensions/auth0-authz/assets/logo.svg",
   "docsUrl": "https://auth0.com/docs/extensions/account-link",
   "initialUrlPath": "/login",
-  "repository": "https://github.com/auth0-extensions/auth0-account-link-extension",
+  "repository": "https://github.com/pjain11/auth0-account-link-extension",
   "keywords": ["auth0", "extension", "account-link"],
   "secrets": {
     "CUSTOM_CSS": {
