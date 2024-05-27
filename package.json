@@ -81,7 +81,7 @@
     "jwks-rsa": "1.1.1",
     "lodash": "^3.10.1",
     "nconf": "^0.8.4",
-    "open": "^0.0.5",
+    "open": "^10.1.0",
     "request": "^2.81.0",
     "webtask-tools": "^3.2.0",
     "winston": "1.0.0"
