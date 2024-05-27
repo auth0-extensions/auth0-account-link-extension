@@ -1987,7 +1987,7 @@ auth0-extensions-cli@^4.0.4:
     webpack-stats-plugin "^0.2.1"
     webtask-json-validator "~4.0.0"
 
-auth0@^2.17.0, auth0@^2.23.0, auth0@^2.8.0:
+auth0@^2.17.0, auth0@^2.23.0:
   version "2.35.1"
   resolved "https://registry.npmjs.org/auth0/-/auth0-2.35.1.tgz#ea869733ffa214c4bdcc23df6d45b40c80c7a8c0"
   integrity sha512-ZmArOoZmrNTyRUenisUMv6G/zsB2OCHF4CquVd0MWyc5G5fJUvr40An8W1UjYZ76R/U6Nq8QZ4ddlGi5H2uL1A==
@@ -2000,6 +2000,14 @@ auth0@^2.17.0, auth0@^2.23.0, auth0@^2.8.0:
     lru-memoizer "^2.1.0"
     rest-facade "^1.13.0"
     retry "^0.12.0"
+
+auth0@^4.3.1:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/auth0/-/auth0-4.4.0.tgz#d57b555ec4ea8037816438799b09c0e6f0356644"
+  integrity sha512-umlAogwQDUYvL1Pd4RnViyps7lkvntZ3+VVDW+/4ML7/GzkJcq6VGJ20Nb60eYosQkxa7up1n9lrA4Of+BZsUg==
+  dependencies:
+    jose "^4.13.2"
+    uuid "^9.0.0"
 
 aws-sign2@~0.7.0:
   version "0.7.0"
@@ -6707,6 +6715,11 @@ joi@^6.10.1:
     isemail "1.x.x"
     moment "2.x.x"
     topo "1.x.x"
+
+jose@^4.13.2:
+  version "4.15.5"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-4.15.5.tgz#6475d0f467ecd3c630a1b5dadd2735a7288df706"
+  integrity sha512-jc7BFxgKPKi94uOvEmzlSWFFe2+vASyXaKUpdQKatWAESU2MWjDfFf0fdfc83CDKcA5QecabZeNLyfhe3yKNkg==
 
 js-base64@^2.1.9:
   version "2.6.4"
@@ -11670,6 +11683,11 @@ uuid@^3.0.0, uuid@^3.1.0, uuid@^3.3.2, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^9.0.0:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
+  integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 v8-compile-cache@^1.1.0:
   version "1.1.2"
