@@ -1011,6 +1011,18 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
+"@hapi/boom@^10.0.0":
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/@hapi/boom/-/boom-10.0.1.tgz#ebb14688275ae150aa6af788dbe482e6a6062685"
+  integrity sha512-ERcCZaEjdH3OgSJlyjVk8pHIFeus91CjKP3v+MpgBNp5IvGzP2l/bRiD78nqYcKPaZdbKkK5vDBVPd2ohHBlsA==
+  dependencies:
+    "@hapi/hoek" "^11.0.2"
+
+"@hapi/hoek@^11.0.2":
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-11.0.4.tgz#42a7f244fd3dd777792bfb74b8c6340ae9182f37"
+  integrity sha512-PnsP5d4q7289pS2T2EgGz147BFJ2Jpb4yrEdkpz2IhgEUzos1S7HTl7ezWh1yfYzYlj89KzLdCRkqsP6SIryeQ==
+
 "@shellscape/koa-send@^4.1.0":
   version "4.1.3"
   resolved "https://registry.npmjs.org/@shellscape/koa-send/-/koa-send-4.1.3.tgz#1a7c8df21f63487e060b7bfd8ed82e1d3c4ae0b0"
@@ -3305,6 +3317,11 @@ cookie@^0.3.1:
   resolved "https://registry.npmjs.org/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
   integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
 
+cookie@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.6.0.tgz#2798b04b071b0ecbff0dbb62a505a8efa4e19051"
+  integrity sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==
+
 cookiejar@^2.0.6, cookiejar@^2.1.0, cookiejar@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/cookiejar/-/cookiejar-2.1.2.tgz#dd8a235530752f988f9a0844f3fc589e3111125c"
@@ -5536,6 +5553,15 @@ handlebars@^4.0.3:
   optionalDependencies:
     uglify-js "^3.1.4"
 
+hapi-auth-jwt2@10.5.1:
+  version "10.5.1"
+  resolved "https://registry.yarnpkg.com/hapi-auth-jwt2/-/hapi-auth-jwt2-10.5.1.tgz#9c42d8b228f82b92ac4c2f0fe39a386242520e37"
+  integrity sha512-ArvG1LOIiB5OEq8E1vy4gxrpXXULE39+NBf+IFHw0RzGLjL+HG8uSvaaFEyq7EeISj5FUrsY0u8CuI0UC8CBAw==
+  dependencies:
+    "@hapi/boom" "^10.0.0"
+    cookie "^0.6.0"
+    jsonwebtoken "^9.0.0"
+
 hapi-auth-jwt2@7.0.1:
   version "7.0.1"
   resolved "https://registry.npmjs.org/hapi-auth-jwt2/-/hapi-auth-jwt2-7.0.1.tgz#78486012bd0b36ca21e5baf227c75a7187fbf184"
@@ -6868,6 +6894,22 @@ jsonwebtoken@^8.1.0, jsonwebtoken@^8.3.0, jsonwebtoken@^8.5.1:
     lodash.once "^4.0.0"
     ms "^2.1.1"
     semver "^5.6.0"
+
+jsonwebtoken@^9.0.0:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-9.0.2.tgz#65ff91f4abef1784697d40952bb1998c504caaf3"
+  integrity sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==
+  dependencies:
+    jws "^3.2.2"
+    lodash.includes "^4.3.0"
+    lodash.isboolean "^3.0.3"
+    lodash.isinteger "^4.0.4"
+    lodash.isnumber "^3.0.3"
+    lodash.isplainobject "^4.0.6"
+    lodash.isstring "^4.0.1"
+    lodash.once "^4.0.0"
+    ms "^2.1.1"
+    semver "^7.5.4"
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -10178,6 +10220,11 @@ semver@^7.3.2:
   integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
   dependencies:
     lru-cache "^6.0.0"
+
+semver@^7.5.4:
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.2.tgz#1e3b34759f896e8f14d6134732ce798aeb0c6e13"
+  integrity sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==
 
 send@0.17.1:
   version "0.17.1"
