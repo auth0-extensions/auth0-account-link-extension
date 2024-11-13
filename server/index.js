@@ -1,8 +1,8 @@
 /* eslint-disable global-require */
 
 const path = require('path');
-const Hapi = require('@auth0/hapi');
-const Inert = require('inert');
+const Hapi = require('@hapi/hapi');
+const Inert = require('@hapi/inert');
 const jwt = require('hapi-auth-jwt2');
 const config = require('../lib/config');
 const logger = require('../lib/logger');
@@ -10,65 +10,60 @@ const routes = require('./routes');
 const defaultHandlers = require('./handlers');
 const auth = require('./auth');
 
-const createServer = (cb, handlers = defaultHandlers) => {
-  const server = new Hapi.Server();
-
-  server.connection({
+const createServer = async (handlers = defaultHandlers) => {
+  const server = Hapi.server({
     host: 'localhost',
     port: config('PORT'),
     routes: {
       cors: true,
-      validate: {},
       files: {
         relativeTo: path.join(__dirname, '../public')
       }
     }
   });
 
-  server.register([jwt, Inert], () => {});
+  // Register plugins
+  await server.register([jwt, Inert]);
 
-  server.route({
-    method: 'GET',
-    path: '/js/{file*}',
-    config: { auth: false },
-    handler: {
-      directory: {
-        path: path.join(__dirname, '../public/js')
+  // Define routes
+  server.route([
+    {
+      method: 'GET',
+      path: '/js/{file*}',
+      options: { auth: false },
+      handler: {
+        directory: {
+          path: path.join(__dirname, '../public/js')
+        }
+      }
+    },
+    {
+      method: 'GET',
+      path: '/css/{file*}',
+      options: { auth: false },
+      handler: {
+        directory: {
+          path: path.join(__dirname, '../public/css')
+        }
       }
     }
-  });
+  ]);
 
-  server.route({
-    method: 'GET',
-    path: '/css/{file*}',
-    config: { auth: false },
-    handler: {
-      directory: {
-        path: path.join(__dirname, '../public/css')
-      }
-    }
-  });
+  // Register additional plugins and routes
+  await server.register([auth, handlers, routes]);
 
-  server.register([auth, handlers, routes], (err) => {
-    // Use the server logger.
-    logger.debug = (...args) => {
-      server.log(['debug'], args.join(' '));
-    };
-    logger.info = (...args) => {
-      server.log(['info'], args.join(' '));
-    };
-    logger.error = (...args) => {
-      server.log(['error'], args.join(' '));
-    };
+  // Configure server logging
+  logger.debug = (...args) => {
+    server.log(['debug'], args.join(' '));
+  };
+  logger.info = (...args) => {
+    server.log(['info'], args.join(' '));
+  };
+  logger.error = (...args) => {
+    server.log(['error'], args.join(' '));
+  };
 
-    if (err) {
-      cb(err);
-    }
-
-    cb(null, server);
-  });
-
-  return server;
+  return server; // Return the server instance directly
 };
 
 module.exports = createServer;
