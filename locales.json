@@ -38,5 +38,29 @@
     "sameEmailAddressError": "一致するメールアドレスが見つかりませんでした。もう一度ログインしてください。",
     "identities": "統合すると{{identities}}でログインできるようになります。",
     "or": "または"
+  },
+
+  "fr": {
+    "_name": "French",
+    "pageMismatchError": "Vous semblez avoir atteint cette page par erreur. Veuillez réessayer de vous connecter",
+    "continue": "Continuer",
+    "accountLinking": "Liaison de compte",
+    "introduction": "Il semble que vous ayez un autre compte avec la même adresse e-mail. Nous vous recommandons de lier ces comptes.",
+    "skipAlternativeLink": "Je veux ignorer cela et créer un nouveau compte. (Non recommandé)",
+    "sameEmailAddressError": "Les comptes doivent avoir des adresses e-mail correspondantes. Veuillez réessayer.",
+    "identities": "Vous pouvez vous connecter avec {{identities}} pour associer les comptes",
+    "or": "ou" 
+  },
+
+  "nl": {
+    "_name": "Dutch",
+    "pageMismatchError": "Je lijkt deze pagina per ongeluk te hebben bereikt. Probeer opnieuw in te loggen",
+    "continue": "Doorgaan",
+    "accountLinking": "Koppeling van accounts",
+    "introduction": "Het lijkt erop dat je een andere account hebt met hetzelfde e-mailadres. We raden je aan deze accounts te koppelen.",
+    "skipAlternativeLink": "Ik wil dit overslaan en een nieuwe account aanmaken. (Niet aanbevolen)",
+    "sameEmailAddressError": "Accounts moeten overeenkomende e-mailadressen hebben. Probeer het opnieuw.",
+    "identities": "Je kunt je aanmelden met {{identities}} om accounts te koppelen",
+    "or": "of"
   }
 }
