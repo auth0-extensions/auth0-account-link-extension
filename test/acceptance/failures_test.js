@@ -15,8 +15,8 @@ describe('Requesting the linking route', function() {
       initStorage(new FileStorageContext(path.join(__dirname, '../../data.json')));
     });
 
-    after(async function() {
-      await server.stop();
+    after(function() {
+      server.stop();
     });
 
     it('returns a 400 with an invalid token', function() {
