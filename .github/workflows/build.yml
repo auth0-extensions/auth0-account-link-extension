@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    # TODO: remove github_actions after we've tested that this works
+    branches: [ master, github_actions ]
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '10'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run Build
+        run: yarn run build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '10'
+
+    - name: Install dependencies
+      run: yarn
+
+    - name: Configure AWS Credentials using OIDC
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.awsIAMS3UploadRole }}
+        role-session-name: github-action-account-link-extension-publish
+        aws-region: us-west-1
+
+    - name: Run Deploy
+      run: sh tools/cdn.sh
