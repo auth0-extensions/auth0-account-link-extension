@@ -44,8 +44,7 @@ jobs:
     - name: Configure AWS Credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        # TODO: retrieve this whole value from github secrets
-        role-to-assume: arn:aws:iam::<ACCOUNT>:role/<UPLOAD_ROLE>
+        role-to-assume: ${{ secrets.awsIAMS3UploadRole }}
         role-session-name: github-action-account-link-extension-publish
         aws-region: us-west-1
 
