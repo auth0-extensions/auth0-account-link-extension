@@ -5,6 +5,10 @@ on:
     # TODO: remove github_actions after we've tested that this works
     branches: [ master, github_actions ]
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
