@@ -34,24 +34,41 @@ module.exports = function(currentUser, matchingUsers, params, token) {
       window.location = domain + 'authorize?' + query;
     };
 
+    var authorizeSaml = function(domain, qs) {
+      let clientId = qs["client_id"];
+      let connection = encodeURIComponent(qs["connection"]);
+      let link_account_token = encodeURIComponent(qs["link_account_token"]);
+      let relayState = encodeURIComponent(qs["RelayState"]);
+      window.location = domain + `samlp/${clientId}?connection=${connection}&link_account_token=${link_account_token}&prevent_sign_up=true&RelayState=${relayState}`;
+    };
+
     var updateContinueUrl = function(linkEl, domain, state) {
       linkEl.href = domain + 'continue?state=' + state;
     };
 
     linkEl.addEventListener('click', function(e) {
-      authorize(token.iss, {
-        client_id: params.client_id,
-        redirect_uri: params.redirect_uri,
-        response_type: params.response_type,
-        response_mode: params.response_mode,
-        scope: params.scope,
-        state: params.original_state,
-        nonce: params.nonce,
-        audience: params.audience,
-        link_account_token: params.child_token,
-        prevent_sign_up: true,
-        connection: connections[0]
-      });
+      if (params.protocol === 'samlp') {
+        authorizeSaml(token.iss, {
+          client_id: params.client_id,
+          connection: connections[0],
+          RelayState: params.RelayState,
+          link_account_token: params.child_token
+        });
+      } else {
+        authorize(token.iss, {
+          client_id: params.client_id,
+          redirect_uri: params.redirect_uri,
+          response_type: params.response_type,
+          response_mode: params.response_mode,
+          scope: params.scope,
+          state: params.original_state,
+          nonce: params.nonce,
+          audience: params.audience,
+          link_account_token: params.child_token,
+          prevent_sign_up: true,
+          connection: connections[0]
+        });
+      }
     });
 
     updateContinueUrl(skipEl, token.iss, params.state);
