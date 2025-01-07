@@ -2,8 +2,7 @@ name: Build
 
 on:
   push:
-    # TODO: remove update_preversion before merging
-    branches: [ master, update_preversion ]
+    branches: [ master ]
 
 permissions:
   id-token: write
