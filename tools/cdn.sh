@@ -20,7 +20,7 @@ else
 fi
 
 if [ ! -z "$ADMIN_CDN_EXISTS" ]; then
-  echo "There is already a admin.$CURRENT_VERSION.min.css in the cdn of. Skipping cdn publish…"
+  echo "There is already a admin.$CURRENT_VERSION.min.css in the cdn. Skipping cdn publish…"
 else
   aws s3 cp dist/assets/admin.$CURRENT_VERSION.min.css s3://assets.us.auth0.com/extensions/$EXTENSION_NAME/assets/admin.$CURRENT_VERSION.min.css --region us-west-1 --cache-control "max-age=86400" --acl public-read
   echo "admin.$CURRENT_VERSION.min.css uploaded to the cdn"
