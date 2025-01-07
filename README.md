@@ -31,7 +31,7 @@ Update the configuration file under `./server/config.json`:
 Then you can run the extension:
 
 ```bash
-nvm use 8
+nvm use 10
 yarn install
 yarn run build
 yarn run serve:dev
@@ -55,7 +55,7 @@ First bump the version in `package.json` and in `webtask.json`
 Then build the extension:
 
 ```bash
-nvm use 8
+nvm use 10
 yarn install
 yarn run build
 ```
