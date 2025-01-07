@@ -2,7 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    # TODO: remove update_preversion before committing
+    branches: [ master, update_preversion ]
 
 permissions:
   id-token: write
