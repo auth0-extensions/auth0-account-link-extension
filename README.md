@@ -1,3 +1,5 @@
+# THIS REPO HAS BEEN ARCHIVED. PLEASE USE https://github.com/auth0-extensions/auth0-account-link-extension INSTEAD.
+
 # Auth0 Account Link Extension
 
 This extension provides a rule and interface for giving users the option of linking a new account
