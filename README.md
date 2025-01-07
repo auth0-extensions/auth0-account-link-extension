@@ -48,7 +48,7 @@ yarn test
 
 ## Release Process
 
-Deployment is currently done using this tool: https://auth0-extensions.us8.webtask.io/extensions-deploy
+Deployment is currently done using this tool: https://auth0-extensions.us.webtask.io/extensions-deploy
 
 First bump the version in `package.json` and in `webtask.json`
 
