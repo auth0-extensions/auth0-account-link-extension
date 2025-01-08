@@ -31,7 +31,7 @@ Update the configuration file under `./server/config.json`:
 Then you can run the extension:
 
 ```bash
-nvm use 8
+nvm use 10
 yarn install
 yarn run build
 yarn run serve:dev
@@ -48,14 +48,14 @@ yarn test
 
 ## Release Process
 
-Deployment is currently done using this tool: https://auth0-extensions.us8.webtask.io/extensions-deploy
+Deployment is currently done using this tool: https://auth0-extensions.us.webtask.io/extensions-deploy
 
 First bump the version in `package.json` and in `webtask.json`
 
 Then build the extension:
 
 ```bash
-nvm use 8
+nvm use 10
 yarn install
 yarn run build
 ```
