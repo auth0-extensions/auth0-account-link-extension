@@ -14,7 +14,7 @@ const defaultCallback = (err) => {
   }
 };
 
-const initServer = (cfg, storageContext, cb) => {
+const initServer = async (cfg, storageContext, cb) => {
   // Set configuration provider.
   config.setProvider(key => cfg(key) || process.env[key]);
 
@@ -26,7 +26,7 @@ const initServer = (cfg, storageContext, cb) => {
   );
 
   // Start the server.
-  return createServer(cb || defaultCallback);
+  return await createServer(cb || defaultCallback);
 };
 
 module.exports = initServer;
