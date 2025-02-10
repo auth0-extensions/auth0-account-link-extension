@@ -1,8 +1,9 @@
 /* eslint-disable global-require */
 
 const path = require('path');
-const Hapi = require('@auth0/hapi');
-const Inert = require('inert');
+const Hapi = require('@hapi/hapi');
+const Inert = require('@hapi/inert');
+const Joi = require('@hapi/joi');
 const jwt = require('hapi-auth-jwt2');
 const config = require('../lib/config');
 const logger = require('../lib/logger');
@@ -10,10 +11,8 @@ const routes = require('./routes');
 const defaultHandlers = require('./handlers');
 const auth = require('./auth');
 
-const createServer = (cb, handlers = defaultHandlers) => {
-  const server = new Hapi.Server();
-
-  server.connection({
+const createServer = async (cb, handlers = defaultHandlers) => {
+  const server = new Hapi.Server({
     host: 'localhost',
     port: config('PORT'),
     routes: {
@@ -24,8 +23,8 @@ const createServer = (cb, handlers = defaultHandlers) => {
       }
     }
   });
-
-  server.register([jwt, Inert], () => {});
+  server.validator(Joi);
+  await server.register([jwt, Inert]);
 
   server.route({
     method: 'GET',
@@ -49,24 +48,36 @@ const createServer = (cb, handlers = defaultHandlers) => {
     }
   });
 
-  server.register([auth, handlers, routes], (err) => {
-    // Use the server logger.
-    logger.debug = (...args) => {
-      server.log(['debug'], args.join(' '));
-    };
-    logger.info = (...args) => {
-      server.log(['info'], args.join(' '));
-    };
-    logger.error = (...args) => {
-      server.log(['error'], args.join(' '));
-    };
+  await server.register([auth, handlers, routes]);
+  
+  logger.debug = (...args) => {
+    server.log(['debug'], args.join(' '));
+  };
+  logger.info = (...args) => {
+    server.log(['info'], args.join(' '));
+  };
+  logger.error = (...args) => {
+    server.log(['error'], args.join(' '));
+  };
 
-    if (err) {
-      cb(err);
-    }
+  // await server.register([auth, handlers, routes], (err) => {
+  //   // Use the server logger.
+  //   logger.debug = (...args) => {
+  //     server.log(['debug'], args.join(' '));
+  //   };
+  //   logger.info = (...args) => {
+  //     server.log(['info'], args.join(' '));
+  //   };
+  //   logger.error = (...args) => {
+  //     server.log(['error'], args.join(' '));
+  //   };
 
-    cb(null, server);
-  });
+  //   if (err) {
+  //     cb(err);
+  //   }
+
+  //   cb(null, server);
+  // });
 
   return server;
 };
