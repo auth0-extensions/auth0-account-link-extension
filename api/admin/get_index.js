@@ -5,12 +5,16 @@ const stylesheet = require('../../lib/stylesheet');
 module.exports = () => ({
   method: 'GET',
   path: '/admin',
-  config: {
+  options: {
     auth: false
   },
-  handler: (req, reply) => {
+  handler: async (req, h) => {
     const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
+    const html = template({
+      stylesheetTag: stylesheetHelper.tag('admin'),
+      baseURL: config('PUBLIC_WT_URL')
+    });
 
-    reply(template({ stylesheetTag: stylesheetHelper.tag('admin'), baseURL: config('PUBLIC_WT_URL') }));
+    return h.response(html).type('text/html');
   }
 });
