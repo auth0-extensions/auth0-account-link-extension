@@ -26,9 +26,8 @@ module.exports = () => ({
     }
   },
   path: '/admin/settings',
-  handler: (req, reply) => {
-    setSettings(req.payload).then((response) => {
-      reply(response);
-    });
+  handler: async (req, h) => {
+    const settings = await setSettings(req.payload);
+    return h.response(settings).code(200);
   }
 });

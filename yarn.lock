@@ -1255,6 +1255,90 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@ngrok/ngrok-android-arm-eabi@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-android-arm-eabi/-/ngrok-android-arm-eabi-1.4.1.tgz#5a5ab818e1fe8ccfe25b6e0f6c7d41b810c89da5"
+  integrity sha512-KQe59T8PhFg5XvWypcOCIgUakk/A9ipD1UvSgGuLI7pYIiVcx6oyW12RxCJr6cfdO0K5GrbUG6dlEXSmDD4jBg==
+
+"@ngrok/ngrok-android-arm64@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-android-arm64/-/ngrok-android-arm64-1.4.1.tgz#16fb6ef2b9a63bc8ef92f2d18eee5dc89a082be9"
+  integrity sha512-WPYJenabIArkGmeVhBcIVtgXmLK297pfJCYHP1Tnw220ANEXFdo7EW4dZoP0AA0gxciFHGYnQUMOn1Meo0IQFQ==
+
+"@ngrok/ngrok-darwin-arm64@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-darwin-arm64/-/ngrok-darwin-arm64-1.4.1.tgz#464309b710e3465c2f5e6dafcad958c2529297e9"
+  integrity sha512-hJW+ZDJ0uV7PieZAdZHdzR/WBRctjOkLzFqHTxSuNbmBr9uIg6PGf1dB2lySszK1wyKZL7wvh4GedQ4vSU5lkw==
+
+"@ngrok/ngrok-darwin-universal@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-darwin-universal/-/ngrok-darwin-universal-1.4.1.tgz#81efe1d0a5fdbdbbbcc005ba94b9f366f38d8e36"
+  integrity sha512-rUZKl/vr2cALpT1Ng91h8Jf5OfDtF+zNEC65AFWthPkHJpPQCLvuEC9hyF8XI52Bv45ORRb1YKR3hdhjZ4WGHQ==
+
+"@ngrok/ngrok-darwin-x64@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-darwin-x64/-/ngrok-darwin-x64-1.4.1.tgz#d3eebbbcc4c690d8349f63570c1ae2d99db777a5"
+  integrity sha512-UKIkRpsGBywAqvwz8L6R8ITz+xxPoZ58LSFhZoMAWm2alGOdA2js1eHZwwVTSz96/tmmSRE/H+r69TvtuL0lXA==
+
+"@ngrok/ngrok-freebsd-x64@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-freebsd-x64/-/ngrok-freebsd-x64-1.4.1.tgz#33413ee3161304592b58795aa045048040c7917c"
+  integrity sha512-v1xXqmu3f4W1PQt+NKlqXgLcpULYCSwStKGRSdgXljg1bRdOnW3ZdjbGzrIdKwQ7OcwZP34KbP13G+hqcTxo5Q==
+
+"@ngrok/ngrok-linux-arm-gnueabihf@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-linux-arm-gnueabihf/-/ngrok-linux-arm-gnueabihf-1.4.1.tgz#dc40f3c6fbe1d74031276a521e9fd8973f7fc775"
+  integrity sha512-yEeiVAGQNUErkSpOI1EZI+X3AkHCGd8yzqfjHamnhEONkwxLcWuTiUfcwFeMVtE9jyLfvQxctldPXXAjvaI/QA==
+
+"@ngrok/ngrok-linux-arm64-gnu@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-linux-arm64-gnu/-/ngrok-linux-arm64-gnu-1.4.1.tgz#8763e281febce49d4622a86d760b70bd0be6681b"
+  integrity sha512-Fb2uju769eO/yOrWdbMvCXNczbXHnqNmN5TCYvqQbPdscFgrsNaJcVr2SmWOfBq+OcLWYbx6mXE1ki5yOZKU9w==
+
+"@ngrok/ngrok-linux-arm64-musl@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-linux-arm64-musl/-/ngrok-linux-arm64-musl-1.4.1.tgz#68ca49fcb07a468dde15337eefd5b007f3fe086f"
+  integrity sha512-nMTTZkUnwCzeIVDkoUdNqBKe6ArYXRWGjC4iXinfPOdENkb/tZ/eAjVdg+8bQ5PJgl/n/TbdZKNj//Jz2x8fdw==
+
+"@ngrok/ngrok-linux-x64-gnu@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-linux-x64-gnu/-/ngrok-linux-x64-gnu-1.4.1.tgz#f2bed3d9b066e63c776c0e62c141fda283f6dc1e"
+  integrity sha512-IfDaYd9ZGk7F0szHql5Tr3rlLBlhuKbbNXDVkujGy/njA4/YnckfsZilGEtgnR7aYgHo3NqppfEw+AOmlDytCw==
+
+"@ngrok/ngrok-linux-x64-musl@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-linux-x64-musl/-/ngrok-linux-x64-musl-1.4.1.tgz#59729bfa9ea58a684bf15c38958029e9f967676b"
+  integrity sha512-Ze6wb2umg6hfJhxOrFQhiyIZOf9YjSRkefnaQdAaONrIKxiFsu5SIKQbp7MQRnm8wabB9i0OI0Q/TVBsxo/HLw==
+
+"@ngrok/ngrok-win32-ia32-msvc@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-win32-ia32-msvc/-/ngrok-win32-ia32-msvc-1.4.1.tgz#0fab1cf1a36ad6ed6c552eadc9f673348448e4e3"
+  integrity sha512-FV3dwGpbh1h2fJ7h+Od8vFRrR9RxqBUAI+ELxQxropDxwYp6rWGKFnfE+JUcT79fEH3OpA0ElULrIDrLgK7bgg==
+
+"@ngrok/ngrok-win32-x64-msvc@1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok-win32-x64-msvc/-/ngrok-win32-x64-msvc-1.4.1.tgz#add9186b672712f33e14123291a482343d162013"
+  integrity sha512-Zr1Dyel4M3cA1kjT/N5ftTiCdoPnVv/VbyE6AKKemP9DDFkTlpdvMwSXikm/ypNtCNFEs/+q8CBZPhhaKktl8A==
+
+"@ngrok/ngrok@^1.4.1":
+  version "1.4.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@ngrok/ngrok/-/ngrok-1.4.1.tgz#92e5026d4b0d27eb3321ae2fbfeb4f0cb536781a"
+  integrity sha512-KZ7/T4UOY3BqJBdweJPeebKW34YzIH+a2y4o7yqTIowoi6dw3sMj140o1Q8FvpPbH5J6lr2TWVCWdgSTYvHNgw==
+  optionalDependencies:
+    "@ngrok/ngrok-android-arm-eabi" "1.4.1"
+    "@ngrok/ngrok-android-arm64" "1.4.1"
+    "@ngrok/ngrok-darwin-arm64" "1.4.1"
+    "@ngrok/ngrok-darwin-universal" "1.4.1"
+    "@ngrok/ngrok-darwin-x64" "1.4.1"
+    "@ngrok/ngrok-freebsd-x64" "1.4.1"
+    "@ngrok/ngrok-linux-arm-gnueabihf" "1.4.1"
+    "@ngrok/ngrok-linux-arm64-gnu" "1.4.1"
+    "@ngrok/ngrok-linux-arm64-musl" "1.4.1"
+    "@ngrok/ngrok-linux-x64-gnu" "1.4.1"
+    "@ngrok/ngrok-linux-x64-musl" "1.4.1"
+    "@ngrok/ngrok-win32-ia32-msvc" "1.4.1"
+    "@ngrok/ngrok-win32-x64-msvc" "1.4.1"
+
 "@puppeteer/browsers@2.7.1":
   version "2.7.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@puppeteer/browsers/-/browsers-2.7.1.tgz#6df07e95d8e22239b77599f3ceaef4041b933e62"
@@ -1291,18 +1375,6 @@
     "@shellscape/koa-send" "^4.1.0"
     debug "^2.6.8"
 
-"@sindresorhus/is@^4.0.0":
-  version "4.6.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@sindresorhus/is/-/is-4.6.0.tgz#3c7c9c46e678feefe7a2e5bb609d3dbd665ffb3f"
-  integrity sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==
-
-"@szmarczak/http-timer@^4.0.5":
-  version "4.0.6"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@szmarczak/http-timer/-/http-timer-4.0.6.tgz#b4a914bb62e7c272d4e5989fe4440f812ab1d807"
-  integrity sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==
-  dependencies:
-    defer-to-connect "^2.0.0"
-
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -1332,16 +1404,6 @@
   dependencies:
     "@types/connect" "*"
     "@types/node" "*"
-
-"@types/cacheable-request@^6.0.1":
-  version "6.0.3"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/cacheable-request/-/cacheable-request-6.0.3.tgz#a430b3260466ca7b5ca5bfd735693b36e7a9d183"
-  integrity sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==
-  dependencies:
-    "@types/http-cache-semantics" "*"
-    "@types/keyv" "^3.1.4"
-    "@types/node" "*"
-    "@types/responselike" "^1.0.0"
 
 "@types/connect@*":
   version "3.4.38"
@@ -1401,11 +1463,6 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/http-cache-semantics@*":
-  version "4.0.4"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/http-cache-semantics/-/http-cache-semantics-4.0.4.tgz#b979ebad3919799c979b17c72621c0bc0a31c6c4"
-  integrity sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==
-
 "@types/http-errors@*":
   version "2.0.4"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/http-errors/-/http-errors-2.0.4.tgz#7eb47726c391b7345a6ec35ad7f4de469cf5ba4f"
@@ -1420,13 +1477,6 @@
   version "0.0.29"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
-
-"@types/keyv@^3.1.4":
-  version "3.1.4"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/keyv/-/keyv-3.1.4.tgz#3ccdb1c6751b0c7e52300bcdacd5bcbf8faa75b6"
-  integrity sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==
-  dependencies:
-    "@types/node" "*"
 
 "@types/mime@^1":
   version "1.3.5"
@@ -1445,11 +1495,6 @@
   dependencies:
     undici-types "~6.20.0"
 
-"@types/node@^8.10.50":
-  version "8.10.66"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/node/-/node-8.10.66.tgz#dd035d409df322acc83dff62a602f12a5783bbb3"
-  integrity sha512-tktOkFUA4kXx2hhhrB8bIFb5TbwzS4uOhKEmwiD+NoiL0qtP2OQ9mFldbgD4dV1djrlBYP6eBuQZiWjuHUpqFw==
-
 "@types/qs@*":
   version "6.9.18"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/qs/-/qs-6.9.18.tgz#877292caa91f7c1b213032b34626505b746624c2"
@@ -1459,13 +1504,6 @@
   version "1.2.7"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/range-parser/-/range-parser-1.2.7.tgz#50ae4353eaaddc04044279812f52c8c65857dbcb"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
-
-"@types/responselike@^1.0.0":
-  version "1.0.3"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/@types/responselike/-/responselike-1.0.3.tgz#cc29706f0a397cfe6df89debfe4bf5cea159db50"
-  integrity sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==
-  dependencies:
-    "@types/node" "*"
 
 "@types/send@*":
   version "0.17.4"
@@ -2967,24 +3005,6 @@ cache-content-type@^1.0.0:
     mime-types "^2.1.18"
     ylru "^1.2.0"
 
-cacheable-lookup@^5.0.3:
-  version "5.0.4"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cacheable-lookup/-/cacheable-lookup-5.0.4.tgz#5a6b865b2c44357be3d5ebc2a467b032719a7005"
-  integrity sha512-2/kNscPhpcxrOigMZzbiWF7dz8ilhb/nIHU3EyZiXWXpeq/au8qJ8VhdftMkty3n7Gj6HIGalQG8oiBNB3AJgA==
-
-cacheable-request@^7.0.2:
-  version "7.0.4"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cacheable-request/-/cacheable-request-7.0.4.tgz#7a33ebf08613178b403635be7b899d3e69bbe817"
-  integrity sha512-v+p6ongsrp0yTGbJXjgxPow2+DL93DASP4kXCDKb8/bwRtt9OEF3whggkkDkGNzgcWy2XaF4a8nZglC7uElscg==
-  dependencies:
-    clone-response "^1.0.2"
-    get-stream "^5.1.0"
-    http-cache-semantics "^4.0.0"
-    keyv "^4.0.0"
-    lowercase-keys "^2.0.0"
-    normalize-url "^6.0.1"
-    responselike "^2.0.0"
-
 caching-transform@^1.0.0:
   version "1.0.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/caching-transform/-/caching-transform-1.0.1.tgz#6dbdb2f20f8d8fbce79f3e94e9d1742dcdf5c0a1"
@@ -2994,10 +3014,18 @@ caching-transform@^1.0.0:
     mkdirp "^0.5.1"
     write-file-atomic "^1.1.4"
 
-call-bind-apply-helpers@^1.0.0, call-bind-apply-helpers@^1.0.1:
+call-bind-apply-helpers@^1.0.0:
   version "1.0.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.1.tgz#32e5892e6361b29b0b545ba6f7763378daca2840"
   integrity sha512-BhYE+WDaywFg2TBWYNXAE+8B1ATnThNBqXHP5nQu0jWJdVvY2hvkpyB3qOmtmDePiS5/BDQ8wASEWGMWRG148g==
+  dependencies:
+    es-errors "^1.3.0"
+    function-bind "^1.1.2"
+
+call-bind-apply-helpers@^1.0.1:
+  version "1.0.2"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz#4b5428c222be985d79c3d82657479dbe0b59b2d6"
+  integrity sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==
   dependencies:
     es-errors "^1.3.0"
     function-bind "^1.1.2"
@@ -3406,13 +3434,6 @@ clone-deep@^4.0.1:
     is-plain-object "^2.0.4"
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
-
-clone-response@^1.0.2:
-  version "1.0.3"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/clone-response/-/clone-response-1.0.3.tgz#af2032aa47816399cf5f0a1d0db902f517abb8c3"
-  integrity sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==
-  dependencies:
-    mimic-response "^1.0.0"
 
 clone-stats@^0.0.1:
   version "0.0.1"
@@ -3986,13 +4007,6 @@ decode-uri-component@^0.2.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
   integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
-decompress-response@^6.0.0:
-  version "6.0.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/decompress-response/-/decompress-response-6.0.0.tgz#ca387612ddb7e104bd16d85aab00d5ecf09c66fc"
-  integrity sha512-aW35yZM6Bb/4oJlZncMH2LCoZtJXTRxES17vE3hoRiowU2kWHaJKFkSBDnDR+cm9J+9QhXmREyIfv0pji9ejCQ==
-  dependencies:
-    mimic-response "^3.1.0"
-
 deep-eql@^4.1.3:
   version "4.1.4"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/deep-eql/-/deep-eql-4.1.4.tgz#d0d3912865911bb8fac5afb4e3acfa6a28dc72b7"
@@ -4058,11 +4072,6 @@ default-resolution@^2.0.0:
   version "2.0.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/default-resolution/-/default-resolution-2.0.0.tgz#bcb82baa72ad79b426a76732f1a81ad6df26d684"
   integrity sha512-2xaP6GiwVwOEbXCGoJ4ufgC76m8cj805jrghScewJC2ZDsb9U0b4BIrba+xt/Uytyd0HvQ6+WymSRTfnYj59GQ==
-
-defer-to-connect@^2.0.0:
-  version "2.0.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/defer-to-connect/-/defer-to-connect-2.0.1.tgz#8016bdb4143e4632b77a3449c6236277de520587"
-  integrity sha512-4tvttepXG1VaYGrRibk5EwJd1t4udunSOVMdLSAL6mId1ix438oPwPZMALY41FCijukO1L0twNcGsdzS7dHgDg==
 
 define-data-property@^1.0.1, define-data-property@^1.1.4:
   version "1.1.4"
@@ -5847,23 +5856,6 @@ gopd@^1.0.1, gopd@^1.2.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/gopd/-/gopd-1.2.0.tgz#89f56b8217bdbc8802bd299df6d7f1081d7e51a1"
   integrity sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==
 
-got@^11.8.5:
-  version "11.8.6"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/got/-/got-11.8.6.tgz#276e827ead8772eddbcfc97170590b841823233a"
-  integrity sha512-6tfZ91bOr7bOXnK7PRDCGBLa1H4U080YHNaAQ2KsMGlLEzRbk44nsZF2E1IeRc3vtJHPVbKCYgdFbaGO2ljd8g==
-  dependencies:
-    "@sindresorhus/is" "^4.0.0"
-    "@szmarczak/http-timer" "^4.0.5"
-    "@types/cacheable-request" "^6.0.1"
-    "@types/responselike" "^1.0.0"
-    cacheable-lookup "^5.0.3"
-    cacheable-request "^7.0.2"
-    decompress-response "^6.0.0"
-    http2-wrapper "^1.0.0-beta.5.2"
-    lowercase-keys "^2.0.0"
-    p-cancelable "^2.0.0"
-    responselike "^2.0.0"
-
 got@^6.7.1:
   version "6.7.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/got/-/got-6.7.1.tgz#240cd05785a9a18e561dc1b44b41c763ef1e8db0"
@@ -6223,11 +6215,6 @@ hpack.js@^2.1.6:
     readable-stream "^2.0.1"
     wbuf "^1.1.0"
 
-hpagent@^0.1.2:
-  version "0.1.2"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/hpagent/-/hpagent-0.1.2.tgz#cab39c66d4df2d4377dbd212295d878deb9bdaa9"
-  integrity sha512-ePqFXHtSQWAFXYmj+JtOTHr84iNrII4/QRlAAPPE+zqnKy4xJo7Ie1Y4kC7AdB+LxLxSTTzBMASsEcy0q8YyvQ==
-
 html-entities@^1.3.1:
   version "1.4.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/html-entities/-/html-entities-1.4.0.tgz#cfbd1b01d2afaf9adca1b10ae7dffab98c71d2dc"
@@ -6240,11 +6227,6 @@ http-assert@^1.3.0:
   dependencies:
     deep-equal "~1.0.1"
     http-errors "~1.8.0"
-
-http-cache-semantics@^4.0.0:
-  version "4.1.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/http-cache-semantics/-/http-cache-semantics-4.1.1.tgz#abe02fcb2985460bf0323be664436ec3476a6d5a"
-  integrity sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==
 
 http-deceiver@^1.2.7:
   version "1.2.7"
@@ -6332,14 +6314,6 @@ http-signature@~1.2.0:
     assert-plus "^1.0.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
-
-http2-wrapper@^1.0.0-beta.5.2:
-  version "1.0.3"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/http2-wrapper/-/http2-wrapper-1.0.3.tgz#b8f55e0c1f25d4ebd08b3b0c2c079f9590800b3d"
-  integrity sha512-V+23sDMr12Wnz7iTcDeJr3O6AIxlnvT/bmaAAAP/Xda35C90p9599p0F1eHR/N1KILWSoWVAiOMFjBBXaXSMxg==
-  dependencies:
-    quick-lru "^5.1.1"
-    resolve-alpn "^1.0.0"
 
 https-browserify@^1.0.0:
   version "1.0.0"
@@ -7267,11 +7241,6 @@ jsesc@~3.0.2:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/jsesc/-/jsesc-3.0.2.tgz#bb8b09a6597ba426425f2e4a07245c3d00b9343e"
   integrity sha512-xKqzzWXDttJuOcawBt4KnKHHIf5oQ/Cxax+0PWFG+DFDgHNAdi+TXECADI+RYiFUMmx8792xsMbbgXj4CwnP4g==
 
-json-buffer@3.0.1:
-  version "3.0.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/json-buffer/-/json-buffer-3.0.1.tgz#9338802a30d3b6605fbe0613e094008ca8c05a13"
-  integrity sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==
-
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -7483,13 +7452,6 @@ keygrip@~1.1.0:
   integrity sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==
   dependencies:
     tsscmp "1.0.6"
-
-keyv@^4.0.0:
-  version "4.5.4"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/keyv/-/keyv-4.5.4.tgz#a879a99e29452f942439f2a405e3af8b31d4de93"
-  integrity sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==
-  dependencies:
-    json-buffer "3.0.1"
 
 killable@^1.0.0, killable@^1.0.1:
   version "1.0.1"
@@ -8027,11 +7989,6 @@ lowercase-keys@^1.0.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/lowercase-keys/-/lowercase-keys-1.0.1.tgz#6f9e30b47084d971a7c820ff15a6c5167b74c26f"
   integrity sha512-G2Lj61tXDnVFFOi8VZds+SoQjtQC3dgokKdDG2mTm1tx4m50NUHBOZSBwQQHyy0V12A0JTG4icfZQH+xPyh8VA==
 
-lowercase-keys@^2.0.0:
-  version "2.0.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
-  integrity sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==
-
 lru-cache@6.0.0:
   version "6.0.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
@@ -8339,16 +8296,6 @@ mimic-fn@^1.0.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-mimic-response@^1.0.0:
-  version "1.0.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mimic-response/-/mimic-response-1.0.1.tgz#4923538878eef42063cb8a3e3b0798781487ab1b"
-  integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
-
-mimic-response@^3.1.0:
-  version "3.1.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mimic-response/-/mimic-response-3.1.0.tgz#2d1d59af9c1b129815accc2c46a022a5ce1fa3c9"
-  integrity sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==
-
 mini-css-extract-plugin@^0.5.0:
   version "0.5.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mini-css-extract-plugin/-/mini-css-extract-plugin-0.5.0.tgz#ac0059b02b9692515a637115b0cc9fed3a35c7b0"
@@ -8655,20 +8602,6 @@ next-tick@^1.1.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-ngrok@^4.3.3:
-  version "4.3.3"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/ngrok/-/ngrok-4.3.3.tgz#c51a1c4af2271ac3c9092ede3b0975caf7833217"
-  integrity sha512-a2KApnkiG5urRxBPdDf76nNBQTnNNWXU0nXw0SsqsPI+Kmt2lGf9TdVYpYrHMnC+T9KhcNSWjCpWqBgC6QcFvw==
-  dependencies:
-    "@types/node" "^8.10.50"
-    extract-zip "^2.0.1"
-    got "^11.8.5"
-    lodash.clonedeep "^4.5.0"
-    uuid "^7.0.0 || ^8.0.0"
-    yaml "^1.10.0"
-  optionalDependencies:
-    hpagent "^0.1.2"
-
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -8778,11 +8711,6 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
-
-normalize-url@^6.0.1:
-  version "6.1.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/normalize-url/-/normalize-url-6.1.0.tgz#40d0885b535deffe3f3147bec877d05fe4c5668a"
-  integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
 
 now-and-later@^2.0.0:
   version "2.0.1"
@@ -9106,11 +9034,6 @@ own-keys@^1.0.1:
     get-intrinsic "^1.2.6"
     object-keys "^1.1.1"
     safe-push-apply "^1.0.0"
-
-p-cancelable@^2.0.0:
-  version "2.1.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/p-cancelable/-/p-cancelable-2.1.1.tgz#aab7fbd416582fa32a3db49859c122487c5ed2cf"
-  integrity sha512-BZOr3nRQHOntUjTrH8+Lh54smKHoHyur8We1V8DSMVrl5A2malOOwuJRnKRDjSnkoeBh4at6BwEnb5I7Jl31wg==
 
 p-finally@^1.0.0:
   version "1.0.0"
@@ -9926,11 +9849,6 @@ quick-lru@^1.0.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
   integrity sha512-tRS7sTgyxMXtLum8L65daJnHUhfDUgboRdcWW2bR9vBfrj2+O5HSMbQOJfJJjIVSPFqbBCF37FpwWXGitDc5tA==
 
-quick-lru@^5.1.1:
-  version "5.1.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
-  integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
-
 randomatic@^3.0.0:
   version "3.1.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"
@@ -10323,11 +10241,6 @@ requires-port@^1.0.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
-resolve-alpn@^1.0.0:
-  version "1.2.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/resolve-alpn/-/resolve-alpn-1.2.1.tgz#b7adbdac3546aaaec20b45e7d8265927072726f9"
-  integrity sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g==
-
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
@@ -10400,13 +10313,6 @@ resolve@^2.0.0-next.5:
     is-core-module "^2.13.0"
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
-
-responselike@^2.0.0:
-  version "2.0.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/responselike/-/responselike-2.0.1.tgz#9a0bc8fdc252f3fb1cca68b016591059ba1422bc"
-  integrity sha512-4gl03wn3hj1HP3yzgdI7d3lCkF95F21Pz4BPGvKHinyQzALR5CapwC8yIi0Rh58DEMQ/SguC03wFj2k0M/mHhw==
-  dependencies:
-    lowercase-keys "^2.0.0"
 
 rest-facade@^1.12.0, rest-facade@^1.16.3:
   version "1.16.4"
@@ -12178,7 +12084,7 @@ uuid@^3.1.0, uuid@^3.3.2:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
-"uuid@^7.0.0 || ^8.0.0", uuid@^8.3.2:
+uuid@^8.3.2:
   version "8.3.2"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
@@ -12793,11 +12699,6 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
-
-yaml@^1.10.0:
-  version "1.10.2"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
-  integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
 yargs-parser@^13.1.2:
   version "13.1.2"

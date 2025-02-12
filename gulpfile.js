@@ -1,23 +1,22 @@
 const gulp = require('gulp');
 const util = require('gulp-util');
-const ngrok = require('ngrok');
+const ngrok = require('@ngrok/ngrok');
 const nodemon = require('gulp-nodemon');
 const { install } = require('./modifyRule');
 const managementAdapter = require('./lib/managementAdapter');
 
 const { ManagementClientAdapter, getCurrentConfig } = managementAdapter;
-function connectNgrok () {
-  console.log("HELLOOOO")
-  ngrok.connect(3000, (ngrokError, url) => {
-    if (ngrokError) {
-      throw ngrokError;
-    }
 
+async function connectNgrok() {
+  try {
+    const config = await getCurrentConfig()
+    const listener = await ngrok.forward({ addr: 3000, authtoken: config.NGROK_TOKEN });
+    const url = listener.url();
     nodemon({
       script: './index.js',
       ext: 'js json',
       env: {
-        EXTENSION_SECRET: 'a-random-secret',
+        EXTENSION_SECRET: config.EXTENSION_SECRET,
         AUTH0_RTA: 'https://auth0.auth0.com',
         NODE_ENV: 'development',
         WT_URL: url,
@@ -32,11 +31,9 @@ function connectNgrok () {
         'node_modules/'
       ]
     });
-
     setTimeout(() => {
       const publicUrl = `${url.replace('https://', 'http://')}`;
       util.log('Public Url:', publicUrl);
-
       util.log('Patching rule on tenant.');
       getCurrentConfig().then((config) => {
         const adapter = new ManagementClientAdapter(config);
@@ -54,57 +51,9 @@ function connectNgrok () {
           });
       });
     }, 4000);
-  });
+  } catch (error) {
+    throw error;
+  }
 }
 
 gulp.task('run', connectNgrok);
-
-// gulp.task('run', () => {
-  // ngrok.connect(3000, (ngrokError, url) => {
-  //   if (ngrokError) {
-  //     throw ngrokError;
-  //   }
-
-  //   nodemon({
-  //     script: './index.js',
-  //     ext: 'js json',
-  //     env: {
-  //       EXTENSION_SECRET: 'a-random-secret',
-  //       AUTH0_RTA: 'https://auth0.auth0.com',
-  //       NODE_ENV: 'development',
-  //       WT_URL: url,
-  //       PUBLIC_WT_URL: url
-  //     },
-  //     ignore: [
-  //       'assets/app/',
-  //       'build/webpack',
-  //       'server/data.json',
-  //       'client/',
-  //       'tests/',
-  //       'node_modules/'
-  //     ]
-  //   });
-
-  //   setTimeout(() => {
-  //     const publicUrl = `${url.replace('https://', 'http://')}`;
-  //     util.log('Public Url:', publicUrl);
-
-  //     util.log('Patching rule on tenant.');
-  //     getCurrentConfig().then((config) => {
-  //       const adapter = new ManagementClientAdapter(config);
-  //       install(adapter, {
-  //         extensionURL: publicUrl,
-  //         username: 'Development',
-  //         clientID: config.AUTH0_CLIENT_ID,
-  //         clientSecret: config.AUTH0_CLIENT_SECRET
-  //       })
-  //         .then(() => {
-  //           util.log('Rule patched on tenant.');
-  //         })
-  //         .catch((error) => {
-  //           util.log("Couldn't patch rule in tenant:", error);
-  //         });
-  //     });
-  //   }, 4000);
-  // });
-// });

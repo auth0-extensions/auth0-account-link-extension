@@ -6,10 +6,8 @@ module.exports = () => ({
   config: {
     auth: 'jwt'
   },
-  handler: (req, reply) => {
-    reply({
-      email: req.auth.credentials.email,
-      avatar: avatarUrl(req.auth.credentials.email)
-    });
-  }
+  handler: (req, h) => h.response({
+    email: req.auth.credentials.email,
+    avatar: avatarUrl(req.auth.credentials.email)
+  }).code(200)
 });
