@@ -12,19 +12,16 @@ module.exports = server => ({
       server.handlers.managementClient
     ]
   },
-  handler: (req, reply) => {
+  handler: async (req, h) => {
     logger.info('Starting uninstall...');
 
-    Promise.all([
-      uninstall(req.pre.auth0.rules),
-      req.pre.auth0.deleteClient({ client_id: config('AUTH0_CLIENT_ID') })
-    ])
-      .then(() => reply().code(204))
-      .catch((err) => {
-        logger.error('Something went wrong while uninstalling Account Link Extension: ', err);
-
-        // Swallow the error so we do not break the experience for the user
-        reply().code(204);
-      });
+    try {
+      await uninstall(req.pre.auth0.rules);
+      await req.pre.auth0.deleteClient({ client_id: config('AUTH0_CLIENT_ID') });
+      return h.response().code(204);
+    } catch (err) {
+      logger.error('Something went wrong while uninstalling Account Link Extension: ', err);
+      return h.response().code(204);
+    }
   }
 });

@@ -9,7 +9,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "body-parser": "^1.16.1",
+    "body-parser": "1.20.3",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -17,10 +17,10 @@
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
     "express-session": "^1.11.3",
-    "morgan": "^1.8.1",
+    "morgan": "1.9.1",
     "passport": "^0.3.0",
     "passport-auth0": "^0.6.0",
-    "pug": "~2.0.0-beta11",
+    "pug": "3.0.1",
     "serve-favicon": "^2.4.0"
   }
 }

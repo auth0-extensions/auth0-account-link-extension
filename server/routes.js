@@ -12,22 +12,20 @@ const getUserDetails = require('../api/admin/get_user_details');
 
 const createRoute = (route, server) => server.route(route(server));
 
-const register = (server, options, next) => {
-  createRoute(linkRoute, server);
-  createRoute(onInstall, server);
-  createRoute(onUninstall, server);
-  createRoute(metaRoute, server);
-  createRoute(getAdminIndex, server);
-  createRoute(getAdminSettings, server);
-  createRoute(putAdminSettings, server);
-  createRoute(getUserDetails, server);
-  createRoute(getLocaleAdminIndex, server);
-  createRoute(getLocales, server);
-  createRoute(putLocales, server);
-
-  next();
+module.exports = {
+  name: 'routes',
+  // eslint-disable-next-line no-unused-vars
+  async register(server, options) {
+    createRoute(linkRoute, server);
+    createRoute(onInstall, server);
+    createRoute(onUninstall, server);
+    createRoute(metaRoute, server);
+    createRoute(getAdminIndex, server);
+    createRoute(getAdminSettings, server);
+    createRoute(putAdminSettings, server);
+    createRoute(getUserDetails, server);
+    createRoute(getLocaleAdminIndex, server);
+    createRoute(getLocales, server);
+    createRoute(putLocales, server);
+  }
 };
-
-register.attributes = { name: 'routes' };
-
-module.exports = register;

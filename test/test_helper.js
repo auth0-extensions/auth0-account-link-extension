@@ -48,7 +48,7 @@ const createRequest = options =>
     });
   });
 
-const mockHandlers = (server, options, next) => {
+const mockHandlers = { name: 'handlers', register: async (server, options) => {
   server.decorate('server', 'handlers', {
     managementClient: {
       assign: 'auth0',
@@ -62,11 +62,8 @@ const mockHandlers = (server, options, next) => {
       config('EXTENSION_SECRET')
     )
   });
+} };
 
-  next();
-};
-
-mockHandlers.attributes = { name: 'handlers' };
 
 const createServer = (configFile = '../server/config.test.json') => {
   nconf
