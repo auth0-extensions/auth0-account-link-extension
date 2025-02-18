@@ -26,5 +26,6 @@
     "onUpdatePath": "/.extensions/on-install",
     "scopes":
       "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
-  }
+  },
+  "codeUrl": "https://raw.githubusercontent.com/bengimbel/auth0-account-link-extension/master/index.js"
 }
