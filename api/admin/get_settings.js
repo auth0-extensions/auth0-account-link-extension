@@ -8,15 +8,13 @@ module.exports = () => ({
     auth: 'jwt'
   },
   path: '/admin/settings',
-  handler: async (req, reply) => {
+  handler: async (req, h) => {
     const locales = await getLocales();
     const availableLocales = Object.keys(locales).map(locale => ({
       code: locale,
       name: locales[locale]._name
     }));
-
-    getSettings().then((settings) => {
-      reply({ ...settings, availableLocales });
-    });
+    const settings = await getSettings();
+    return h.response({ ...settings, availableLocales }).code(200);
   }
 });

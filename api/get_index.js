@@ -33,10 +33,9 @@ module.exports = () => ({
   config: {
     auth: false
   },
-  handler: (req, reply) => {
+  handler: (req, h) => {
     if (_.isEmpty(req.query)) {
-      reply.redirect(`${config('PUBLIC_WT_URL')}/admin`);
-      return;
+      return h.redirect(`${config('PUBLIC_WT_URL')}/admin`);
     }
     const stylesheetHelper = stylesheet(config('NODE_ENV') === 'production');
     const stylesheetTag = stylesheetHelper.tag('link');
@@ -50,7 +49,7 @@ module.exports = () => ({
     if (params.title) dynamicSettings.title = params.title;
     if (params.logoPath) dynamicSettings.logoPath = params.logoPath;
 
-    decodeToken(params.child_token)
+    return decodeToken(params.child_token)
       .then((token) => {
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
@@ -58,7 +57,7 @@ module.exports = () => ({
               // if there are multiple matching users, take the oldest one
               const userMetadata = (matchingUsers[0] && matchingUsers[0].user_metadata) || {};
               const locale = typeof userMetadata.locale === 'string' ? userMetadata.locale : settings.locale;
-              resolveLocale(locale).then((t) => {
+              resolveLocale(locale).then(async (t) => {
                 // FIXME: The "continue" button is always poiting to first user's identity
                 // connection, so we can't show all available alternatives in the introduction
                 // text: "You may sign in with IdP1 or IdP2 or..."
@@ -70,20 +69,19 @@ module.exports = () => ({
                   .map(id => id.provider)
                   .map(getIdentityProviderPublicName);
                 const humanizedIdentities = humanizeArray(identities, t('or'));
+                const template = await indexTemplate({
+                  dynamicSettings,
+                  stylesheetTag,
+                  currentUser,
+                  matchingUsers,
+                  customCSSTag,
+                  locale,
+                  identities: humanizedIdentities,
+                  params,
+                  token
+                });
 
-                reply(
-                  indexTemplate({
-                    dynamicSettings,
-                    stylesheetTag,
-                    currentUser,
-                    matchingUsers,
-                    customCSSTag,
-                    locale,
-                    identities: humanizedIdentities,
-                    params,
-                    token
-                  })
-                );
+                return h.response(template).type('text/html');
               });
             });
           })
@@ -96,21 +94,21 @@ module.exports = () => ({
               }`
             );
 
-            reply.redirect(`${token.iss}continue?state=${state}`);
+            return h.redirect(`${token.iss}continue?state=${state}`);
           });
       })
-      .catch((err) => {
+      .catch(async (err) => {
         logger.error('An invalid token was provided', err);
 
-        indexTemplate({
+        const template = await indexTemplate({
           dynamicSettings,
           stylesheetTag,
           currentUser: null,
           matchingUsers: [],
           customCSSTag
-        }).then((template) => {
-          reply(template).code(400);
         });
+
+        return h.response(template).type('text/html').code(400);
       });
   }
 });
