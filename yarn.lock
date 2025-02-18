@@ -2289,7 +2289,7 @@ atob@^2.1.2:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-auth0-extension-hapi-tools@1.3.1:
+auth0-extension-hapi-tools@^1.3.1:
   version "1.3.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/auth0-extension-hapi-tools/-/auth0-extension-hapi-tools-1.3.1.tgz#28515f176dd495c90044c643e67eaae2485e30e4"
   integrity sha512-T6oPieNqu2JgIlZNaVC40xOq+Xv7pklT/fitJ5cHczM1OF//VApbEqtof55fG458s5Czf4F5a4O8M023PUfMjA==
