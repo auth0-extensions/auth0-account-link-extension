@@ -2267,7 +2267,7 @@ async@2.1.2:
   dependencies:
     lodash "^4.14.0"
 
-async@^1.4.0, async@^1.5.2:
+async@^1.4.0:
   version "1.5.2"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha512-nSVgobk4rv61R9PUSDtYt7mPVB2olxNR5RWJcAsH676/ef11bUZwvu7+RGYrYauVdDPcO519v68wRhXQtxsV9w==
@@ -2300,25 +2300,7 @@ auth0-extension-hapi-tools@1.3.1:
     jsonwebtoken "7.1.9"
     webtask-tools "^3.1.1"
 
-auth0-extension-tools@1.4.0:
-  version "1.4.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/auth0-extension-tools/-/auth0-extension-tools-1.4.0.tgz#0eff14a243cc288fe6807ea4e8697eaeba8835b1"
-  integrity sha512-AUq8EiufhArREklZxpk9V6uHAjRFs+B+TCnXmCwcs4/FU6HK9yvGtdMA9p+15fNGUHFIrDLz5OxZhFfrgVvUwQ==
-  dependencies:
-    async "2.1.2"
-    auth0 "^2.17.0"
-    bluebird "^3.4.1"
-    jsonwebtoken "^8.3.0"
-    jwks-rsa "^1.1.1"
-    lodash "^4.15.0"
-    lru-memoizer "^1.7.0"
-    ms "^0.7.1"
-    node-uuid "^1.4.7"
-    promise-retry "^1.1.1"
-    superagent "^2.2.0"
-    webtask-tools "^3.2.0"
-
-auth0-extension-tools@^1.3.0:
+auth0-extension-tools@^1.3.0, auth0-extension-tools@^1.5.2:
   version "1.5.2"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/auth0-extension-tools/-/auth0-extension-tools-1.5.2.tgz#21c444ca0595f48892276c69cf6d1cbfc44ad8cf"
   integrity sha1-IcREygWV9IiSJ2xpz20cv8RK2M8=
@@ -2394,7 +2376,7 @@ auth0@2.27.1:
     rest-facade "^1.12.0"
     retry "^0.12.0"
 
-auth0@^2.17.0, auth0@^2.23.0:
+auth0@^2.23.0:
   version "2.44.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/auth0/-/auth0-2.44.1.tgz#2833a0c59dbbde8522161bc226bd303d36e2e2e1"
   integrity sha512-+/lloZ2YGa8Epf2e1TRhyeXNEN1xHd4mw7arhYvD0ZY83ZOZxsHtaVyaOXuSL+rp0uqXHjyNjAbkGeyYxTUe7Q==
@@ -3535,7 +3517,7 @@ colors@1.4.0, colors@^1.1.2, colors@^1.2.1:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
   integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
 
-combined-stream@^1.0.5, combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
+combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -3691,7 +3673,7 @@ cookie@^1.0.1:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cookie/-/cookie-1.0.2.tgz#27360701532116bd3f1f9416929d176afe1e4610"
   integrity sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==
 
-cookiejar@^2.0.6, cookiejar@^2.1.0, cookiejar@^2.1.2, cookiejar@^2.1.3:
+cookiejar@^2.1.0, cookiejar@^2.1.2, cookiejar@^2.1.3:
   version "2.1.4"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cookiejar/-/cookiejar-2.1.4.tgz#ee669c1fea2cf42dc31585469d193fef0d65771b"
   integrity sha512-LDx6oHrK+PhzLKJU9j5S7/Y3jM/mUHvD/DeI1WQmJn652iPC5Y4TBzC9l+5OMOXlyTTA+SmVUPm0HQUwpD5Jqw==
@@ -5426,15 +5408,6 @@ forever-agent@~0.6.1:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==
 
-form-data@1.0.0-rc4:
-  version "1.0.0-rc4"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-1.0.0-rc4.tgz#05ac6bc22227b43e4461f488161554699d4f8b5e"
-  integrity sha512-HSbGQ2uxT2+Mi1E0KP5lM5lv/r88xkGCpiLdq546q/3vXz94egfIIBpY45NTWMjMzb4nLopsfkG1A3suNa5qUg==
-  dependencies:
-    async "^1.5.2"
-    combined-stream "^1.0.5"
-    mime-types "^2.1.10"
-
 form-data@^2.3.1, form-data@^2.3.3:
   version "2.5.2"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-2.5.2.tgz#dc653743d1de2fcc340ceea38079daf6e9069fd2"
@@ -5472,7 +5445,7 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formidable@^1.0.17, formidable@^1.1.1, formidable@^1.2.0:
+formidable@^1.1.1, formidable@^1.2.0:
   version "1.2.6"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/formidable/-/formidable-1.2.6.tgz#d2a51d60162bbc9b4a055d8457a7c75315d1a168"
   integrity sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==
@@ -7422,7 +7395,7 @@ jwks-rsa@1.2.0:
     ms "^2.0.0"
     request "^2.73.0"
 
-jwks-rsa@^1.1.1, jwks-rsa@^1.12.1, jwks-rsa@^1.8.0:
+jwks-rsa@^1.12.1, jwks-rsa@^1.8.0:
   version "1.12.3"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/jwks-rsa/-/jwks-rsa-1.12.3.tgz#40232f85d16734cb82837f38bb3e350a34435400"
   integrity sha512-cFipFDeYYaO9FhhYJcZWX/IyZgc0+g316rcHnDpT2dNRNIE/lMOmWKKqp09TkJoYlNFzrEVODsR4GgXJMgWhnA==
@@ -7913,7 +7886,7 @@ lodash@^3.10.1:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
   integrity sha512-9mDDwqVIma6OZX79ZlDACZl8sBm0TEnkf99zV3iMA4GzkIT/9hiqP5mY0HoT1iNLCrKc/R1HByV+yJfRWVJryQ==
 
-lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
+lodash@^4.1.0, lodash@^4.14.0, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.21"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -8034,7 +8007,7 @@ lru-memoizer@1.11.2:
     lru-cache "~4.0.0"
     very-fast-args "^1.1.0"
 
-lru-memoizer@^1.6.0, lru-memoizer@^1.7.0:
+lru-memoizer@^1.6.0:
   version "1.13.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/lru-memoizer/-/lru-memoizer-1.13.0.tgz#1469529911602c13df43bca6730640b96072fac8"
   integrity sha512-q0wMolfI7yimhZ36kBAfMLOIuDBpRkieN9do0YPjSzCaiy6r73s8wOEq7Ue/B95VSRbXzfnOr1O1QdJc5UIqaw==
@@ -8274,14 +8247,14 @@ mime-db@1.52.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mime-db/-/mime-db-1.53.0.tgz#3cb63cd820fc29896d9d4e8c32ab4fcd74ccb447"
   integrity sha512-oHlN/w+3MQ3rba9rqFr6V/ypF10LSkdwUysQL7GkXoTgIWeV+tcXGA852TBxH+gsh8UWoyhR1hKcoMJTuWflpg==
 
-mime-types@^2.1.10, mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.34:
+mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.34:
   version "2.1.35"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mime-types/-/mime-types-2.1.35.tgz#381a871b62a734450660ae3deee44813f70d959a"
   integrity sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==
   dependencies:
     mime-db "1.52.0"
 
-mime@1.6.0, mime@^1.3.4, mime@^1.4.1:
+mime@1.6.0, mime@^1.4.1:
   version "1.6.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
@@ -9822,7 +9795,7 @@ qs@6.13.0:
   dependencies:
     side-channel "^1.0.6"
 
-qs@^6.1.0, qs@^6.10.3, qs@^6.11.0, qs@^6.12.3, qs@^6.5.1, qs@^6.6.0:
+qs@^6.10.3, qs@^6.11.0, qs@^6.12.3, qs@^6.5.1, qs@^6.6.0:
   version "6.14.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/qs/-/qs-6.14.0.tgz#c63fa40680d2c5c941412a0e899c89af60c0a930"
   integrity sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==
@@ -11267,22 +11240,6 @@ superagent@3.8.1:
     methods "^1.1.1"
     mime "^1.4.1"
     qs "^6.5.1"
-    readable-stream "^2.0.5"
-
-superagent@^2.2.0:
-  version "2.3.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/superagent/-/superagent-2.3.0.tgz#703529a0714e57e123959ddefbce193b2e50d115"
-  integrity sha512-N69X9pPoRaWV4cOOrARHE7khxLz1F53GvZmRHf+J6TlI+wWiJwi7BVYIdwmWQCeoXdsqHDzFXuGh23kWRx5V7g==
-  dependencies:
-    component-emitter "^1.2.0"
-    cookiejar "^2.0.6"
-    debug "^2.2.0"
-    extend "^3.0.0"
-    form-data "1.0.0-rc4"
-    formidable "^1.0.17"
-    methods "^1.1.1"
-    mime "^1.3.4"
-    qs "^6.1.0"
     readable-stream "^2.0.5"
 
 superagent@^3.8.3:
