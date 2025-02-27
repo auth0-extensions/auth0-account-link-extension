@@ -43,7 +43,7 @@
       "iconv-lite@0.4.10",
       "@hapi/inert@7.1.0",
       "jade@1.10.0",
-      "@hapi/joi@17.17.1",
+      "@hapi/joi@17.1.1",
       "jsonwebtoken@9.0.0",
       "jwks-rsa@1.1.1",
       "lodash@3.10.1",
