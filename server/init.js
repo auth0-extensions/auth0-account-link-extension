@@ -14,7 +14,7 @@ const defaultCallback = (err) => {
   }
 };
 
-const initServer = async (cfg, storageContext, cb) => {
+const initServer = (cfg, storageContext, cb) => {
   // Set configuration provider.
   config.setProvider(key => cfg(key) || process.env[key]);
 
