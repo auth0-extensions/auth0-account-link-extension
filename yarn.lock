@@ -3104,9 +3104,9 @@ camelcase@^5.0.0:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30001688:
-  version "1.0.30001699"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/caniuse-lite/-/caniuse-lite-1.0.30001699.tgz#a102cf330d153bf8c92bfb5be3cd44c0a89c8c12"
-  integrity sha512-b+uH5BakXZ9Do9iK+CkDmctUSEqZl+SP056vc5usa0PL+ev5OHw003rZXcnjNDv3L8P5j6rwT6C0BPKSikW08w==
+  version "1.0.30001700"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/caniuse-lite/-/caniuse-lite-1.0.30001700.tgz#26cd429cf09b4fd4e745daf4916039c794d720f6"
+  integrity sha512-2S6XIXwaE7K7erT8dY+kLQcpa5ms63XlRkMkReXjle+kf6c5g38vyMl+Z5y8dSxOFDhcFe+nxnn261PLxBSQsQ==
 
 caporal@^1.4.0:
   version "1.4.0"
@@ -3668,10 +3668,10 @@ cookie@^0.3.1:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
   integrity sha512-+IJOX0OqlHCszo2mBUq+SrEbCj6w7Kpffqx60zYbPTFaO4+yYgRjHwcZNpWvaTylDHaV7PPmBHzSecZiMhtPgw==
 
-cookie@^1.0.1:
-  version "1.0.2"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cookie/-/cookie-1.0.2.tgz#27360701532116bd3f1f9416929d176afe1e4610"
-  integrity sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==
+cookie@^0.6.0:
+  version "0.6.0"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/cookie/-/cookie-0.6.0.tgz#2798b04b071b0ecbff0dbb62a505a8efa4e19051"
+  integrity sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==
 
 cookiejar@^2.1.0, cookiejar@^2.1.2, cookiejar@^2.1.3:
   version "2.1.4"
@@ -4315,9 +4315,9 @@ ejs@^2.5.7:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.5.73:
-  version "1.5.100"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/electron-to-chromium/-/electron-to-chromium-1.5.100.tgz#c99b7cfe49ec72c5e22237f036bb8b1d8b7f0621"
-  integrity sha512-u1z9VuzDXV86X2r3vAns0/5ojfXBue9o0+JDUDBKYqGLjxLkSqsSUoPU/6kW0gx76V44frHaf6Zo+QF74TQCMg==
+  version "1.5.102"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/electron-to-chromium/-/electron-to-chromium-1.5.102.tgz#81a452ace8e2c3fa7fba904ea4fed25052c53d3f"
+  integrity sha512-eHhqaja8tE/FNpIiBrvBjFV/SSKpyWHLvxuR9dPTdo+3V9ppdLmFB7ZZQ98qNovcngPLYIz0oOBF9P0FfZef5Q==
 
 elliptic@^6.5.3, elliptic@^6.5.5:
   version "6.6.1"
@@ -5409,31 +5409,34 @@ forever-agent@~0.6.1:
   integrity sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==
 
 form-data@^2.3.1, form-data@^2.3.3:
-  version "2.5.2"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-2.5.2.tgz#dc653743d1de2fcc340ceea38079daf6e9069fd2"
-  integrity sha512-GgwY0PS7DbXqajuGf4OYlsrIu3zgxD6Vvql43IBhm6MahqA5SK/7mwhtNj2AdH2z35YR34ujJ7BN+3fFC3jP5Q==
+  version "2.5.3"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-2.5.3.tgz#f9bcf87418ce748513c0c3494bb48ec270c97acc"
+  integrity sha512-XHIrMD0NpDrNM/Ckf7XJiBbLl57KEhT3+i3yY+eWm+cqYZJQTZrKo8Y8AWKnuV5GT4scfuUGt9LzNoIx3dU1nQ==
   dependencies:
     asynckit "^0.4.0"
-    combined-stream "^1.0.6"
-    mime-types "^2.1.12"
+    combined-stream "^1.0.8"
+    es-set-tostringtag "^2.1.0"
+    mime-types "^2.1.35"
     safe-buffer "^5.2.1"
 
 form-data@^3.0.0, form-data@^3.0.1:
-  version "3.0.2"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-3.0.2.tgz#83ad9ced7c03feaad97e293d6f6091011e1659c8"
-  integrity sha512-sJe+TQb2vIaIyO783qN6BlMYWMw3WBOHA1Ay2qxsnjuafEOQFJ2JakedOQirT6D5XPRxDvS7AHYyem9fTpb4LQ==
+  version "3.0.3"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-3.0.3.tgz#349c8f2c9d8f8f0c879ee0eb7cc0d300018d6b09"
+  integrity sha512-q5YBMeWy6E2Un0nMGWMgI65MAKtaylxfNJGJxpGh45YDciZB4epbWpaAfImil6CPAPTYB4sh0URQNDRIZG5F2w==
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
-    mime-types "^2.1.12"
+    es-set-tostringtag "^2.1.0"
+    mime-types "^2.1.35"
 
 form-data@^4.0.0:
-  version "4.0.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-4.0.1.tgz#ba1076daaaa5bfd7e99c1a6cb02aa0a5cff90d48"
-  integrity sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==
+  version "4.0.2"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/form-data/-/form-data-4.0.2.tgz#35cabbdd30c3ce73deb2c42d3c8d3ed9ca51794c"
+  integrity sha512-hGfm/slu0ZabnNt4oaRZ6uREyfCj6P4fT/n6A1rGV+Z0VdGXjfOhVUpkn6qVQONHGIFwmveGXyDs75+nr6FM8w==
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
+    es-set-tostringtag "^2.1.0"
     mime-types "^2.1.12"
 
 form-data@~2.3.2:
@@ -5970,6 +5973,15 @@ handlebars@^4.0.3:
   optionalDependencies:
     uglify-js "^3.1.4"
 
+hapi-auth-jwt2@10.5.1:
+  version "10.5.1"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/hapi-auth-jwt2/-/hapi-auth-jwt2-10.5.1.tgz#9c42d8b228f82b92ac4c2f0fe39a386242520e37"
+  integrity sha512-ArvG1LOIiB5OEq8E1vy4gxrpXXULE39+NBf+IFHw0RzGLjL+HG8uSvaaFEyq7EeISj5FUrsY0u8CuI0UC8CBAw==
+  dependencies:
+    "@hapi/boom" "^10.0.0"
+    cookie "^0.6.0"
+    jsonwebtoken "^9.0.0"
+
 hapi-auth-jwt2@7.0.1:
   version "7.0.1"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/hapi-auth-jwt2/-/hapi-auth-jwt2-7.0.1.tgz#78486012bd0b36ca21e5baf227c75a7187fbf184"
@@ -5978,15 +5990,6 @@ hapi-auth-jwt2@7.0.1:
     boom "^3.1.3"
     cookie "^0.3.1"
     jsonwebtoken "^7.0.0"
-
-hapi-auth-jwt2@^11.0.0:
-  version "11.0.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/hapi-auth-jwt2/-/hapi-auth-jwt2-11.0.0.tgz#770545989f469b8ac85fccf3623589f9ad666d54"
-  integrity sha512-zikQOlFvTBLKgDQRA+57T9VObSn4bUAImcJwDWrHmE3xPcLsX6UYgtfwZZhiFRpbbacs9AP/Xe4pabAUo34gGA==
-  dependencies:
-    "@hapi/boom" "^10.0.0"
-    cookie "^1.0.1"
-    jsonwebtoken "^9.0.0"
 
 har-schema@^2.0.0:
   version "2.0.0"
@@ -8247,7 +8250,7 @@ mime-db@1.52.0:
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mime-db/-/mime-db-1.53.0.tgz#3cb63cd820fc29896d9d4e8c32ab4fcd74ccb447"
   integrity sha512-oHlN/w+3MQ3rba9rqFr6V/ypF10LSkdwUysQL7GkXoTgIWeV+tcXGA852TBxH+gsh8UWoyhR1hKcoMJTuWflpg==
 
-mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.34:
+mime-types@^2.1.12, mime-types@^2.1.18, mime-types@^2.1.35, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.34:
   version "2.1.35"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/mime-types/-/mime-types-2.1.35.tgz#381a871b62a734450660ae3deee44813f70d959a"
   integrity sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==
@@ -9071,9 +9074,9 @@ p-try@^2.0.0:
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
 pac-proxy-agent@^7.1.0:
-  version "7.1.0"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/pac-proxy-agent/-/pac-proxy-agent-7.1.0.tgz#da7c3b5c4cccc6655aaafb701ae140fb23f15df2"
-  integrity sha512-Z5FnLVVZSnX7WjBg0mhDtydeRZ1xMcATZThjySQUHqr+0ksP8kqaw23fNKkaaN/Z8gwLUs/W7xdl0I75eP2Xyw==
+  version "7.2.0"
+  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/pac-proxy-agent/-/pac-proxy-agent-7.2.0.tgz#9cfaf33ff25da36f6147a20844230ec92c06e5df"
+  integrity sha512-TEB8ESquiLMc0lV8vcd5Ql/JAKAoyzHFXaStwjkzpOpC5Yv+pIzLfHvjTSdf3vpa2bMiUQrg9i6276yn8666aA==
   dependencies:
     "@tootallnate/quickjs-emscripten" "^0.23.0"
     agent-base "^7.1.2"
@@ -12394,7 +12397,7 @@ webtask-json-validator@~4.0.0:
     ajv "^6.5.2"
     ajv-errors "^1.0.0"
 
-webtask-tools@^3.1.1, webtask-tools@^3.2.0, webtask-tools@^3.4.1:
+webtask-tools@^3.1.1, webtask-tools@^3.4.1:
   version "3.5.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/webtask-tools/-/webtask-tools-3.5.0.tgz#8685ec110c8299e18c76c4ed220794f93ade42af"
   integrity sha512-2r+19TrhQ1kmUUFfcvOIp8jFUkxfItrhUcDycU7SD3dcBIUZGWpBZR2W8mxyUFRmnfB13cswgvTpEY5R+b+pBg==

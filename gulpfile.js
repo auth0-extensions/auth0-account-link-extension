@@ -9,7 +9,7 @@ const { ManagementClientAdapter, getCurrentConfig } = managementAdapter;
 
 async function connectNgrok() {
   try {
-    const config = await getCurrentConfig()
+    const config = await getCurrentConfig();
     const listener = await ngrok.forward({ addr: 3000, authtoken: config.NGROK_TOKEN });
     const url = listener.url();
     nodemon({
@@ -31,25 +31,22 @@ async function connectNgrok() {
         'node_modules/'
       ]
     });
-    setTimeout(() => {
-      const publicUrl = `${url.replace('https://', 'http://')}`;
-      util.log('Public Url:', publicUrl);
-      util.log('Patching rule on tenant.');
-      getCurrentConfig().then((config) => {
+    setTimeout(async () => {
+      try {
+        const publicUrl = `${url.replace('https://', 'http://')}`;
+        util.log('Public Url:', publicUrl);
+        util.log('Patching rule on tenant.');
         const adapter = new ManagementClientAdapter(config);
-        install(adapter, {
+        await install(adapter, {
           extensionURL: publicUrl,
           username: 'Development',
           clientID: config.AUTH0_CLIENT_ID,
           clientSecret: config.AUTH0_CLIENT_SECRET
-        })
-          .then(() => {
-            util.log('Rule patched on tenant.');
-          })
-          .catch((error) => {
-            util.log("Couldn't patch rule in tenant:", error);
-          });
-      });
+        });
+        util.log('Rule patched on tenant.');
+      } catch (error) {
+        util.log("Couldn't patch rule in tenant:", error);
+      }
     }, 4000);
   } catch (error) {
     throw error;
