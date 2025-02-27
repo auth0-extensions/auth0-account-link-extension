@@ -10,8 +10,10 @@ const hapiApp = require('./server/init');
 const logger = require('./lib/logger');
 const config = require('./lib/config');
 const tools = require('auth0-extension-tools');
+const urlHelpers = require('./server/session/urlHelpers');
 
 const createServer = createWebtaskServer((wtConfig, wtStorage) => {
+  console.log(wtConfig, wtStorage, 'WT CONFIG AND STORAGE');
   logger.info('Starting Account Link Extension - Version:', process.env.CLIENT_VERSION);
   logger.info(' > WT_URL:', wtConfig('WT_URL'));
   logger.info(' > PUBLIC_WT_URL:', wtConfig('PUBLIC_WT_URL'));
@@ -21,7 +23,7 @@ const createServer = createWebtaskServer((wtConfig, wtStorage) => {
 module.exports = (context, req, res) => {
   const publicUrl = (req.x_wt && req.x_wt.ectx && req.x_wt.ectx.PUBLIC_WT_URL) || false;
   if (!publicUrl) {
-    config.setValue('PUBLIC_WT_URL', tools.urlHelpers.getWebtaskUrl(req));
+    config.setValue('PUBLIC_WT_URL', urlHelpers.getWebtaskUrl(req));
   }
 
   createServer(context, req, res);
