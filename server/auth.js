@@ -4,7 +4,7 @@ const Boom = require('boom');
 const jwksRsa = require('jwks-rsa');
 const jwt = require('jsonwebtoken');
 const config = require('../lib/config');
-const registerSession = require('./session/session');
+const registerSession = require('../lib/session');
 
 const scopes = [{ value: 'openid' }, { value: 'profile' }];
 
