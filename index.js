@@ -37,6 +37,7 @@ let server;
     await startServer(server);
   } catch (err) {
     logger.error(err);
+    console.log(err, "ERERE")
     logger.error('Server could not be started. Aborting...');
     process.exit(1);
   }

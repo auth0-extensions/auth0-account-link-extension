@@ -3,11 +3,10 @@
 const Boom = require('boom');
 const jwksRsa = require('jwks-rsa');
 const jwt = require('jsonwebtoken');
-const tools = require('auth0-extension-hapi-tools');
 const config = require('../lib/config');
+const registerSession = require('./session/session');
 
 const scopes = [{ value: 'openid' }, { value: 'profile' }];
-
 
 module.exports = {
   name: 'auth',
@@ -23,7 +22,7 @@ module.exports = {
         }
       },
       resourceServer: {
-        key: jwksRsa.hapiJwt2Key({
+        key: jwksRsa.hapiJwt2KeyAsync({
           cache: true,
           rateLimit: true,
           jwksRequestsPerMinute: 2,
@@ -36,8 +35,8 @@ module.exports = {
         }
       }
     };
+
     server.auth.strategy('jwt', 'jwt', {
-      // Get the complete decoded token, because we need info from the header (the kid)
       complete: true,
       validate: async (decoded, req, callback) => {
         if (!decoded) {
@@ -56,7 +55,6 @@ module.exports = {
               if (keyErr) {
                 return callback(Boom.wrap(keyErr), null, null);
               }
-
               return jwt.verify(token, key, jwtOptions.resourceServer.verifyOptions, (err) => {
                 if (err) {
                   return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
@@ -102,8 +100,10 @@ module.exports = {
       }
     });
     server.auth.default('jwt');
+
     const session = {
-      register: tools.plugins.dashboardAdminSession,
+      name: 'session',
+      register: registerSession.register,
       options: {
         stateKey: 'account-linking-admin-state',
         sessionStorageKey: 'com.auth0.account_linking.admin_ui.session_token',
@@ -125,16 +125,7 @@ module.exports = {
         }
       }
     };
-    
-    // these will not work, need a way to register the session
 
-    // await server.register(session);
-
-    // server.register(session, (err) => {
-    //   if (err) {
-    //     next(err);
-    //   }
-    //   next();
-    // });
+    await server.register(session);
   }
-}
+};
