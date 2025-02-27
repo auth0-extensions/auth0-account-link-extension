@@ -15,6 +15,7 @@ with an existing registered with the same email address from a different provide
 
 ## Running in Development
 
+> **NOTE:** You will need your own NGROK_TOKEN. You can sign up for a free account at: https://dashboard.ngrok.com/signup
 Update the configuration file under `./server/config.json`:
 
 ```json
@@ -24,7 +25,8 @@ Update the configuration file under `./server/config.json`:
   "AUTH0_CLIENT_ID": "myclientid",
   "AUTH0_CLIENT_SECRET": "myclientsecret",
   "WT_URL": "http://localhost:3000",
-  "AUTH0_CALLBACK_URL": "http://localhost:3000/callback"
+  "AUTH0_CALLBACK_URL": "http://localhost:3000/callback",
+  "NGROK_TOKEN": "myngroktoken"
 }
 ```
 
