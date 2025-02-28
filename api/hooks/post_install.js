@@ -5,7 +5,7 @@ const logger = require('../../lib/logger');
 module.exports = server => ({
   method: 'POST',
   path: '/.extensions/on-install',
-  config: {
+  options: {
     auth: false,
     pre: [
       server.handlers.validateHookToken('/.extensions/on-install'),

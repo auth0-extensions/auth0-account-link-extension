@@ -30,7 +30,7 @@ const fetchUsersFromToken = ({ sub, email }) =>
 module.exports = () => ({
   method: 'GET',
   path: '/',
-  config: {
+  options: {
     auth: false
   },
   handler: async (req, h) => {

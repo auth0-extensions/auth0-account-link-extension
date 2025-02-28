@@ -3,7 +3,7 @@ const avatarUrl = require('../../lib/avatar');
 module.exports = () => ({
   method: 'GET',
   path: '/admin/user',
-  config: {
+  options: {
     auth: 'jwt'
   },
   handler: (req, h) => h.response({

@@ -8,7 +8,7 @@ const colorRegex = /^#[A-Fa-f0-9]{6}/;
 
 module.exports = () => ({
   method: 'PUT',
-  config: {
+  options: {
     auth: 'jwt',
     validate: {
       payload: {

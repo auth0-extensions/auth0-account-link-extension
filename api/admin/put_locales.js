@@ -4,7 +4,7 @@ const { setLocales } = require('../../lib/storage');
 
 module.exports = () => ({
   method: 'PUT',
-  config: {
+  options: {
     auth: 'jwt'
   },
   path: '/admin/locales',

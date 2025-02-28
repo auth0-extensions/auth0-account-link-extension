@@ -5,7 +5,7 @@ const stylesheet = require('../../lib/stylesheet');
 module.exports = () => ({
   method: 'GET',
   path: '/admin/locale',
-  config: {
+  options: {
     auth: false
   },
   handler: (req, h) => {

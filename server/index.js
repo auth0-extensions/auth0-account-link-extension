@@ -29,7 +29,7 @@ const createServer = async (cb, handlers = defaultHandlers) => {
   server.route({
     method: 'GET',
     path: '/js/{file*}',
-    config: { auth: false },
+    options: { auth: false },
     handler: {
       directory: {
         path: path.join(__dirname, '../public/js')
@@ -40,7 +40,7 @@ const createServer = async (cb, handlers = defaultHandlers) => {
   server.route({
     method: 'GET',
     path: '/css/{file*}',
-    config: { auth: false },
+    options: { auth: false },
     handler: {
       directory: {
         path: path.join(__dirname, '../public/css')
