@@ -28,5 +28,5 @@
       "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients"
   },
   "codeUrl": "https://raw.githubusercontent.com/bengimbel/auth0-account-link-extension/master/build/bundle.js",
-  "runtime": "node18"
+  "runtime": "node22"
 }
