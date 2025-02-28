@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
-
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const jwksRsa = require('jwks-rsa');
 const jwt = require('jsonwebtoken');
 const config = require('../lib/config');
@@ -53,7 +52,7 @@ module.exports = {
           ) {
             return jwtOptions.resourceServer.key(decoded, (keyErr, key) => {
               if (keyErr) {
-                return callback(Boom.wrap(keyErr), null, null);
+                return callback(Boom.boomify(keyErr), null, null);
               }
               return jwt.verify(token, key, jwtOptions.resourceServer.verifyOptions, (err) => {
                 if (err) {

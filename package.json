@@ -77,7 +77,6 @@
     "@ngrok/ngrok": "^1.4.1",
     "auth0": "2.27.1",
     "auth0-extension-tools": "^1.5.2",
-    "boom": "3.2.2",
     "hapi-auth-jwt2": "10.5.1",
     "jsonwebtoken": "9.0.0",
     "jwks-rsa": "3.0.1",

@@ -2779,13 +2779,6 @@ bonjour@^3.5.0:
     multicast-dns "^6.0.1"
     multicast-dns-service-types "^1.1.0"
 
-boom@3.2.2:
-  version "3.2.2"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/boom/-/boom-3.2.2.tgz#0f0cc5d04adc5003b8c7d71f42cca7271fef0e78"
-  integrity sha512-yQ2/XD/jDLDwhWMX4Pl/fGhkRaNqHwJZ8wsGsEvj9QufQuvDr/BX9jvZrIqzs8OTDnHc9QY/iTn7XJ9Y+HvFHg==
-  dependencies:
-    hoek "4.x.x"
-
 boom@^7.2.0:
   version "7.3.0"
   resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/boom/-/boom-7.3.0.tgz#733a6d956d33b0b1999da3fe6c12996950d017b9"
@@ -6216,11 +6209,6 @@ hmac-drbg@^1.0.1:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
-
-hoek@4.x.x:
-  version "4.3.1"
-  resolved "https://a0us.jfrog.io/artifactory/api/npm/npm/hoek/-/hoek-4.3.1.tgz#1d2ea831857e4ecdce7fd5ffe07acdf8eb368cca"
-  integrity sha512-v7E+yIjcHECn973i0xHm4kJkEpv3C8sbYS4344WXbzYqRyiDD7rjnnKo4hsJkejQBAFdRMUGNHySeSPKSH9Rqw==
 
 hoek@6.x.x:
   version "6.1.3"
