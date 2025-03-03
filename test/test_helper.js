@@ -2,7 +2,7 @@ const nconf = require('nconf');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
-const { handlers } = require('auth0-extension-hapi-tools');
+const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
 const config = require('../lib/config');
 
@@ -48,7 +48,7 @@ const createRequest = options =>
     });
   });
 
-const mockHandlers = (server, options, next) => {
+const mockHandlers = { name: 'handlers', register: async (server, options) => {
   server.decorate('server', 'handlers', {
     managementClient: {
       assign: 'auth0',
@@ -56,17 +56,14 @@ const mockHandlers = (server, options, next) => {
         res(fakeApiClient());
       }
     },
-    validateHookToken: handlers.validateHookToken(
+    validateHookToken: handlerUtils.validateHookToken(
       config('AUTH0_DOMAIN'),
       config('WT_URL'),
       config('EXTENSION_SECRET')
     )
   });
+} };
 
-  next();
-};
-
-mockHandlers.attributes = { name: 'handlers' };
 
 const createServer = (configFile = '../server/config.test.json') => {
   nconf
