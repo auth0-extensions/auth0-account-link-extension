@@ -18,40 +18,28 @@ nconf
 
 const createServer = require('./server/init');
 
-const startServer = (server) =>
+const startServer = server =>
   new Promise((resolve, reject) => {
     server.start((err) => {
       if (err) {
-        console.log(err, "ERERERE")
         reject(err);
       }
-      console.log(err, "ERERERE")
       resolve(server);
-      console.log(server, 'FSDSFF')
       logger.info(`Server running at: ${server.info.uri}`);
     });
   });
 
 let server;
-  (async () => {
-    try {
-      server = await createServer(key => nconf.get(key), null);
-      logger.info("HEYYYYYYYY")
 
-      await startServer(server);
-    } catch (err) {
-      logger.error(err);
-      logger.error('Server could not be started. Aborting...');
-      process.exit(1);
-    }
-  })();
-// const server = createServer(key => nconf.get(key), null);
-// console.log(server, "SERVER")
-// startServer(server).catch((err) => {
-//   logger.error(err);
-//   logger.error('Server could not be started. Aborting...');
-
-//   process.exit(1);
-// });
+(async () => {
+  try {
+    server = await createServer(key => nconf.get(key), null);
+    await startServer(server);
+  } catch (err) {
+    logger.error(err);
+    logger.error('Server could not be started. Aborting...');
+    process.exit(1);
+  }
+})();
 
 module.exports = server;

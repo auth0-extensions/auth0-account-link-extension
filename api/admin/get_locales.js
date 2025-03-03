@@ -4,9 +4,9 @@ const { getLocales } = require('../../lib/storage');
 
 module.exports = () => ({
   method: 'GET',
-  config: {
+  options: {
     auth: 'jwt'
   },
   path: '/admin/locales',
-  handler: (req, reply) => getLocales().then(reply)
+  handler: (req, h) => getLocales().then(h.response)
 });
