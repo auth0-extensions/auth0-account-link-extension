@@ -107,7 +107,7 @@ const createToken = (user) => {
   const options = {
     expiresIn: '5m',
     audience: config('AUTH0_CLIENT_ID'),
-    issuer: 'https://auth0.example.com'
+    issuer: `https://${config('AUTH0_DOMAIN')}/`
   };
 
   const userSub = {

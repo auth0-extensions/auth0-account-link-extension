@@ -9,7 +9,10 @@ const colorRegex = /^#[A-Fa-f0-9]{6}/;
 module.exports = () => ({
   method: 'PUT',
   options: {
-    auth: 'jwt',
+    auth: {
+      strategies: ['jwt'],
+      scope: ['profile']
+    },
     validate: {
       payload: {
         template: Joi.string().required(),
