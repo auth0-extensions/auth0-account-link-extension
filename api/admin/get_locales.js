@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-
-const { getLocales } = require('../../lib/storage');
+const Boom = require('@hapi/boom');
+const storage = require('../../lib/storage');
 
 module.exports = () => ({
   method: 'GET',
@@ -11,5 +11,13 @@ module.exports = () => ({
     }
   },
   path: '/admin/locales',
-  handler: (req, h) => getLocales().then(h.response)
+  handler: async (req, h) => {
+    try {
+      const locales = await storage.getLocales();
+
+      return h.response(locales);
+    } catch (error) {
+      return Boom.serverUnavailable(error);
+    }
+  }
 });

@@ -103,7 +103,7 @@ const startServer = (configFile = '../server/config.test.json') =>
     });
   });
 
-const createToken = (user) => {
+const createAuth0Token = (user) => {
   const options = {
     expiresIn: '5m',
     audience: config('AUTH0_CLIENT_ID'),
@@ -113,10 +113,36 @@ const createToken = (user) => {
   const userSub = {
     sub: user.user_id,
     email: user.email,
-    base: 'auth0.example.com/api/v2'
+    base: 'auth0.example.com/api/v2',
+    scope: []
   };
 
   return sign(userSub, config('AUTH0_CLIENT_SECRET'), options);
 };
 
-module.exports = { startServer, request: createRequest, createServer, createToken };
+const createWebtaskToken = (user) => {
+  const options = {
+    expiresIn: '5m',
+    audience: 'urn:api-account-linking',
+    issuer: config('PUBLIC_WT_URL')
+  };
+
+  const userSub = {
+    sub: user.user_id,
+    email: user.email,
+    base: 'auth0.example.com/api/v2',
+    scope: [],
+    access_token: 'abc123'
+  };
+
+  return sign(userSub, config('EXTENSION_SECRET'), options);
+};
+
+
+module.exports = { 
+  startServer, 
+  request: createRequest, 
+  createServer, 
+  createAuth0Token, 
+  createWebtaskToken
+};
