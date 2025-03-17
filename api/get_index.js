@@ -1,31 +1,14 @@
-const { decode } = require('jsonwebtoken');
+/* eslint-disable consistent-return */
 const _ = require('lodash');
 const config = require('../lib/config');
-const findUsersByEmail = require('../lib/findUsersByEmail');
 const indexTemplate = require('../templates/index');
 const logger = require('../lib/logger');
 const stylesheet = require('../lib/stylesheet');
 const getIdentityProviderPublicName = require('../lib/idProviders');
 const humanizeArray = require('../lib/humanize');
-const { resolveLocale } = require('../lib/locale');
-const { getSettings } = require('../lib/storage');
-
-const decodeToken = token =>
-  new Promise((resolve, reject) => {
-    try {
-      resolve(decode(token));
-    } catch (e) {
-      reject(e);
-    }
-  });
-
-const fetchUsersFromToken = ({ sub, email }) =>
-  findUsersByEmail(email).then(users => ({
-    currentUser: users.find(u => u.user_id === sub),
-    matchingUsers: users
-      .filter(u => u.user_id !== sub)
-      .sort((prev, next) => new Date(prev.created_at) - new Date(next.created_at))
-  }));
+const locales = require('../lib/locale');
+const storage = require('../lib/storage');
+const handlerUtils = require('../lib/handlerUtils');
 
 module.exports = () => ({
   method: 'GET',
@@ -41,21 +24,19 @@ module.exports = () => ({
     const stylesheetTag = stylesheetHelper.tag('link');
     const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'), true);
     const params = req.query;
-
     const dynamicSettings = {};
-
     if (params.locale) dynamicSettings.locale = params.locale;
     if (params.color) dynamicSettings.color = `#${params.color}`;
     if (params.title) dynamicSettings.title = params.title;
     if (params.logoPath) dynamicSettings.logoPath = params.logoPath;
     try {
-      const token = await decodeToken(params.child_token);
+      const token = await handlerUtils.decodeToken(params.child_token);
       try {
-        const { currentUser, matchingUsers } = await fetchUsersFromToken(token);
-        const settings = await getSettings();
+        const { currentUser, matchingUsers } = await handlerUtils.fetchUsersFromToken(token);
+        const settings = await storage.getSettings();
         const userMetadata = (matchingUsers[0] && matchingUsers[0].user_metadata) || {};
         const locale = typeof userMetadata.locale === 'string' ? userMetadata.locale : settings.locale;
-        const t = await resolveLocale(locale);
+        const t = await locales.resolveLocale(locale);
         // FIXME: The "continue" button is always poiting to first user's identity
         // connection, so we can't show all available alternatives in the introduction
         // text: "You may sign in with IdP1 or IdP2 or..."
@@ -64,7 +45,7 @@ module.exports = () => ({
         const rawIdentities = matchingUsers.length > 0 ? [matchingUsers[0].identities[0]] : [];
         const identities = rawIdentities.map(id => id.provider).map(getIdentityProviderPublicName);
         const humanizedIdentities = humanizeArray(identities, t('or'));
-        const template = await indexTemplate({
+        const template = await indexTemplate.renderTemplate({
           dynamicSettings,
           stylesheetTag,
           currentUser,
@@ -76,7 +57,7 @@ module.exports = () => ({
           token
         });
 
-        return h.response(template).type('text/html');
+        return h.response(template).type('text/html').code(200);
       } catch (error) {
         const state = req.query.state;
         logger.error('An error was encountered: ', error);
@@ -91,7 +72,7 @@ module.exports = () => ({
     } catch (tokenError) {
       logger.error('An invalid token was provided', tokenError);
 
-      const template = await indexTemplate({
+      const template = await indexTemplate.renderTemplate({
         dynamicSettings,
         stylesheetTag,
         currentUser: null,
