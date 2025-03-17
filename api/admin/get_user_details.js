@@ -1,13 +1,23 @@
+const Boom = require('@hapi/boom');
 const avatarUrl = require('../../lib/avatar');
 
 module.exports = () => ({
   method: 'GET',
   path: '/admin/user',
   options: {
-    auth: 'jwt'
+    auth: {
+      strategies: ['jwt'],
+      scope: ['profile', 'email']
+    }
   },
-  handler: (req, h) => h.response({
-    email: req.auth.credentials.email,
-    avatar: avatarUrl(req.auth.credentials.email)
-  }).code(200)
+  handler: async (req, h) => {
+    try {
+      return h.response({
+        email: req.auth.credentials.email,
+        avatar: avatarUrl(req.auth.credentials.email)
+      }).code(200);
+    } catch (error) {
+      return Boom.serverUnavailable(error);
+    }
+  }
 });

@@ -3,6 +3,12 @@ const { request, createServer, createWebtaskToken } = require('../test_helper');
 const { sign } = require('jsonwebtoken');
 const config = require('../../lib/config');
 const metadata = require('../../webtask.json');
+const handlerUtils = require('../../lib/handlerUtils')
+const storage = require('../../lib/storage')
+const { createAuth0Token, createServer, createWebtaskToken } = require('../test_helper');
+const users = require('./test_data/users.json')
+const indexTemplate = require('../../templates');
+const allLocales = require('../../locales.json');
 
 describe('Requesting the metadata route', function() {
   let server;

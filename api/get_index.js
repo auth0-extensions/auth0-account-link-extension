@@ -24,9 +24,7 @@ module.exports = () => ({
     const stylesheetTag = stylesheetHelper.tag('link');
     const customCSSTag = stylesheetHelper.tag(config('CUSTOM_CSS'), true);
     const params = req.query;
-
     const dynamicSettings = {};
-
     if (params.locale) dynamicSettings.locale = params.locale;
     if (params.color) dynamicSettings.color = `#${params.color}`;
     if (params.title) dynamicSettings.title = params.title;
@@ -96,7 +94,7 @@ module.exports = () => ({
           token
         });
 
-        return h.response(template).type('text/html');
+        return h.response(template).type('text/html').code(200);
       } catch (error) {
         const state = req.query.state;
         logger.error('An error was encountered: ', error);
@@ -111,7 +109,7 @@ module.exports = () => ({
     } catch (tokenError) {
       logger.error('An invalid token was provided', tokenError);
 
-      const template = await indexTemplate({
+      const template = await indexTemplate.renderTemplate({
         dynamicSettings,
         stylesheetTag,
         currentUser: null,

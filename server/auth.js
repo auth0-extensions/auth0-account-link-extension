@@ -1,16 +1,17 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
+const { promisify } = require('util');
 const Boom = require('@hapi/boom');
 const jwksRsa = require('jwks-rsa');
 const jwt = require('jsonwebtoken');
 const config = require('../lib/config');
-const registerSession = require('../lib/session');
+const plugin = require('../lib/session');
 
-const scopes = [{ value: 'openid' }, { value: 'profile' }];
+const scopes = [{ value: 'openid' }, { value: 'profile' }, { value: 'email' }];
 
 module.exports = {
   name: 'auth',
-  // eslint-disable-next-line no-unused-vars
-  async register(server, options) {
+  async register(server) {
     const jwtOptions = {
       dashboardAdmin: {
         key: config('EXTENSION_SECRET'),
@@ -37,72 +38,73 @@ module.exports = {
 
     server.auth.strategy('jwt', 'jwt', {
       complete: true,
-      validate: async (decoded, req, callback) => {
-        if (!decoded) {
-          return callback(null, false);
-        }
-
-        const header = req.headers.authorization;
-        if (header && header.indexOf('Bearer ') === 0) {
+      verify: async (decoded, req) => {
+        try {
+          if (!decoded) {
+            return { isValid: false };
+          }
+          const header = req.headers.authorization;
+          if (!header || !header.indexOf('Bearer ') === 0) {
+            return { isValid: false };
+          }
           const token = header.split(' ')[1];
-          if (
-            decoded &&
-            decoded.payload &&
-            decoded.payload.iss === `https://${config('AUTH0_DOMAIN')}/`
-          ) {
-            return jwtOptions.resourceServer.key(decoded, (keyErr, key) => {
-              if (keyErr) {
-                return callback(Boom.boomify(keyErr), null, null);
-              }
-              return jwt.verify(token, key, jwtOptions.resourceServer.verifyOptions, (err) => {
-                if (err) {
-                  return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
-                }
+          const isApiRequest = decoded && decoded.payload && decoded.payload.iss === `https://${config('AUTH0_DOMAIN')}/`;
+          const isDashboardAdminRequest = decoded && decoded.payload && decoded.payload.iss === config('PUBLIC_WT_URL');
 
-                if (decoded.payload.gty && decoded.payload.gty !== 'client-credentials') {
-                  return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
-                }
+          const getKeyAsync = promisify(jwtOptions.resourceServer.key);
+          const jwtVerifyAsync = promisify(jwt.verify);
 
-                if (!decoded.payload.sub.endsWith('@clients')) {
-                  return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
-                }
+          if (isApiRequest) {
+            if (decoded.payload.gty && decoded.payload.gty !== 'client-credentials') {
+              return { isValid: false };
+            }
 
-                if (decoded.payload.scope && typeof decoded.payload.scope === 'string') {
-                  decoded.payload.scope = decoded.payload.scope.split(' '); // eslint-disable-line no-param-reassign
-                }
+            if (!decoded.payload.sub.endsWith('@clients')) {
+              return { isValid: false };
+            }
 
-                return callback(null, true, decoded.payload);
-              });
-            });
-          } else if (decoded && decoded.payload && decoded.payload.iss === config('PUBLIC_WT_URL')) {
-            return jwt.verify(
+            const resourceServerKey = await getKeyAsync(decoded);
+
+            if (!resourceServerKey) {
+              return { isValid: false };
+            }
+
+            // this can throw if there is an error
+            await jwtVerifyAsync(token, resourceServerKey, jwtOptions.resourceServer.verifyOptions);
+
+            if (decoded.payload.scope && typeof decoded.payload.scope === 'string') {
+              decoded.payload.scope = decoded.payload.scope.split(' '); // eslint-disable-line no-param-reassign
+            }
+
+            return { credentials: decoded.payload, isValid: true };
+          }
+          if (isDashboardAdminRequest) {
+            if (!decoded.payload.access_token || !decoded.payload.access_token.length) {
+              return { isValid: false };
+            }
+
+            // this can throw if there is an error
+            await jwtVerifyAsync(
               token,
               jwtOptions.dashboardAdmin.key,
-              jwtOptions.dashboardAdmin.verifyOptions,
-              (err) => {
-                if (err) {
-                  return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
-                }
-
-                if (!decoded.payload.access_token || !decoded.payload.access_token.length) {
-                  return callback(Boom.unauthorized('Invalid token', 'Token'), null, null);
-                }
-
-                decoded.payload.scope = scopes.map(scope => scope.value);
-                return callback(null, true, decoded.payload);
-              }
+              jwtOptions.dashboardAdmin.verifyOptions
             );
-          }
-        }
 
-        return callback(null, false);
+            decoded.payload.scope = scopes.map(
+              scope => scope.value
+            ); // eslint-disable-line no-param-reassign
+
+            return { credentials: decoded.payload, isValid: true };
+          }
+        } catch (error) {
+          return { isValid: false };
+        }
       }
     });
     server.auth.default('jwt');
 
     const session = {
-      name: 'session',
-      register: registerSession.register,
+      plugin,
       options: {
         stateKey: 'account-linking-admin-state',
         sessionStorageKey: 'com.auth0.account_linking.admin_ui.session_token',
@@ -113,14 +115,15 @@ module.exports = {
         audience: 'urn:api-account-linking',
         secret: config('EXTENSION_SECRET'),
         clientName: 'auth0-account-link',
-        onLoginSuccess: (decoded, req, callback) => {
+        // eslint-disable-next-line no-unused-vars
+        onLoginSuccess: (decoded, req) => {
           if (decoded) {
-            // eslint-disable-next-line no-param-reassign
-            decoded.scope = scopes.map(scope => scope.value);
-            return callback(null, true, decoded);
+            decoded.scope = scopes.map(
+              scope => scope.value
+            ); // eslint-disable-line no-param-reassign
+            return decoded;
           }
-
-          return callback(null, false);
+          throw Boom.unauthorized('Invalid token', 'Token');
         }
       }
     };
