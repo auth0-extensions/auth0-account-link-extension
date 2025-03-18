@@ -14,8 +14,7 @@ const createRoute = (route, server) => server.route(route(server));
 
 module.exports = {
   name: 'routes',
-  // eslint-disable-next-line no-unused-vars
-  async register(server, options) {
+  async register(server) {
     createRoute(linkRoute, server);
     createRoute(onInstall, server);
     createRoute(onUninstall, server);
