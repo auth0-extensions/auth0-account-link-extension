@@ -1,5 +1,5 @@
 const {expect} = require('chai');
-const { request, createServer, createToken } = require('../test_helper');
+const { request, createServer, createWebtaskToken } = require('../test_helper');
 const { sign } = require('jsonwebtoken');
 const config = require('../../lib/config');
 const metadata = require('../../webtask.json');
@@ -27,7 +27,7 @@ describe('Requesting the metadata route', function() {
   describe('With valid token', function() {
     it('returns a 200 on linking page', function() {
       const headers = {
-        Authorization: `Bearer ${createToken({user_id: 1, email: 'foo@example.com'})}`
+        Authorization: `Bearer ${createWebtaskToken({user_id: 1, email: 'foo@example.com'})}`
       };
 
       return server.inject({ method: 'GET', url: '/meta', headers }).then(res => {
