@@ -12,19 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Setup JFrog CLI
-      id: setup-jfrog-cli
-      uses: jfrog/setup-jfrog-cli@f0a84f35b0e0bd21838c5fb3e6788072d6540d13
-      env:
-        JF_URL: https://a0us.jfrog.io
-      with:
-        oidc-provider-name: atko-cic
-    - name: Setup NPM
-      env:
-        ARTIFACTORY_USER: ${{ steps.setup-jfrog-cli.outputs.oidc-user }}
-        ARTIFACTORY_API_TOKEN: ${{ steps.setup-jfrog-cli.outputs.oidc-token }}
-      run: curl -u $ARTIFACTORY_USER:$ARTIFACTORY_API_TOKEN https://a0us.jfrog.io/artifactory/api/npm/npm > ~/.npmrc
-
     - name: Checkout
       uses: actions/checkout@v4
 
