@@ -7,6 +7,7 @@ const createServer = tools.createServer((wtConfig, wtStorage) => {
   logger.info('Starting Account Link Extension - Version:', process.env.CLIENT_VERSION);
   logger.info(' > WT_URL:', wtConfig('WT_URL'));
   logger.info(' > PUBLIC_WT_URL:', wtConfig('PUBLIC_WT_URL'));
+  logger.info('hello from forked webtask.js');
   return hapiApp(wtConfig, wtStorage);
 });
 
