@@ -7,7 +7,7 @@ const getIdentityProviderPublicName = require('../lib/idProviders');
 const humanizeArray = require('../lib/humanize');
 const { resolveLocale } = require('../lib/locale');
 const { getSettings } = require('../lib/storage');
-const { validateAuth0Token, fetchUsersFromToken } = require('../lib/handlerUtils');
+const { validateAuth0Token, fetchUsersFromToken } = require('../lib/linkingJwtUtils');
 
 
 module.exports = () => ({
@@ -35,6 +35,8 @@ module.exports = () => ({
 
     validateAuth0Token(params.child_token)
       .then((token) => {
+        console.log(`${JSON.stringify(token)}: token`);
+        logger.info(`${JSON.stringify(token)}: token`);
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
             getSettings().then((settings) => {
