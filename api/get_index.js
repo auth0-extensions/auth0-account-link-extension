@@ -35,8 +35,6 @@ module.exports = () => ({
 
     validateAuth0Token(params.child_token)
       .then((token) => {
-        console.log(`${JSON.stringify(token)}: token`);
-        logger.info(`${JSON.stringify(token)}: token`);
         fetchUsersFromToken(token)
           .then(({ currentUser, matchingUsers }) => {
             getSettings().then((settings) => {
