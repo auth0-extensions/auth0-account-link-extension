@@ -1,0 +1,69 @@
+{
+    "usersByEmail": [
+        {
+          "created_at": "2025-03-13T16:15:36.552Z",
+          "email": "ben1@acme.com",
+          "email_verified": false,
+          "identities": [
+            {
+              "connection": "Username-Password-Authentication",
+              "user_id": "67d304a8b5dd1267e87c53ba",
+              "provider": "auth0",
+              "isSocial": false
+            }
+          ],
+          "name": "ben1@acme.com",
+          "nickname": "ben1",
+          "picture": "https://s.gravatar.com/avatar/282d73d0c2e13b3336c852e728f1624b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fbe.png",
+          "updated_at": "2025-03-13T16:15:36.552Z",
+          "user_id": "auth0|67d304a8b5dd1267e87c53ba",
+          "user_metadata": {
+            "locale": {
+              "_name": "English",
+              "pageMismatchError": "You seem to have reached this page in error. Please try logging in again",
+              "continue": "Continue",
+              "accountLinking": "Account Linking",
+              "introduction":
+                "It looks like you have another account with the same email address. We recommend you link these accounts.",
+              "skipAlternativeLink": "I want to skip this and create a new account. (Not recommended)",
+              "sameEmailAddressError": "Accounts must have matching email addresses. Please try again.",
+              "identities": "You may sign in with {{identities}} to link accounts",
+              "or": "or"
+            }
+          }
+        },
+        {
+          "created_at": "2025-03-13T16:16:09.071Z",
+          "email": "ben1@acme.com",
+          "email_verified": false,
+          "identities": [
+            {
+              "connection": "test1",
+              "user_id": "67d304c9b5dd1267e87c53be",
+              "provider": "auth0",
+              "isSocial": false
+            }
+          ],
+          "name": "ben1@acme.com",
+          "nickname": "ben1",
+          "picture": "https://s.gravatar.com/avatar/282d73d0c2e13b3336c852e728f1624b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fbe.png",
+          "updated_at": "2025-03-13T16:16:09.071Z",
+          "user_id": "auth0|67d304c9b5dd1267e87c53be",
+          "username": "ben1",
+          "user_metadata": {
+            "locale": {
+              "_name": "English",
+              "pageMismatchError": "You seem to have reached this page in error. Please try logging in again",
+              "continue": "Continue",
+              "accountLinking": "Account Linking",
+              "introduction":
+                "It looks like you have another account with the same email address. We recommend you link these accounts.",
+              "skipAlternativeLink": "I want to skip this and create a new account. (Not recommended)",
+              "sameEmailAddressError": "Accounts must have matching email addresses. Please try again.",
+              "identities": "You may sign in with {{identities}} to link accounts",
+              "or": "or"
+            }
+          }
+        }
+      ]
+}
