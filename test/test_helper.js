@@ -64,7 +64,6 @@ const mockHandlers = { name: 'handlers', register: async (server, options) => {
   });
 } };
 
-
 const createServer = (configFile = '../server/config.test.json') => {
   nconf
     .argv()
@@ -137,7 +136,6 @@ const createWebtaskToken = (user) => {
 
   return sign(userSub, config('EXTENSION_SECRET'), options);
 };
-
 
 module.exports = { 
   startServer, 

@@ -8,7 +8,7 @@ const getIdentityProviderPublicName = require('../lib/idProviders');
 const humanizeArray = require('../lib/humanize');
 const locales = require('../lib/locale');
 const storage = require('../lib/storage');
-const handlerUtils = require('../lib/handlerUtils');
+const linkingJwtUtils = require('../lib/linkingJwtUtils');
 
 module.exports = () => ({
   method: 'GET',
@@ -30,9 +30,9 @@ module.exports = () => ({
     if (params.title) dynamicSettings.title = params.title;
     if (params.logoPath) dynamicSettings.logoPath = params.logoPath;
     try {
-      const token = await handlerUtils.decodeToken(params.child_token);
+      const token = await linkingJwtUtils.validateAuth0Token(params.child_token);
       try {
-        const { currentUser, matchingUsers } = await handlerUtils.fetchUsersFromToken(token);
+        const { currentUser, matchingUsers } = await linkingJwtUtils.fetchUsersFromToken(token);
         const settings = await storage.getSettings();
         const userMetadata = (matchingUsers[0] && matchingUsers[0].user_metadata) || {};
         const locale = typeof userMetadata.locale === 'string' ? userMetadata.locale : settings.locale;
