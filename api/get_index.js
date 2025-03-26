@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 const _ = require('lodash');
 const config = require('../lib/config');
 const indexTemplate = require('../templates/index');

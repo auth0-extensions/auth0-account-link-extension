@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const queryString = require('querystring');
 const metadata = require('../../webtask.json');
-const handlerUtils = require('../../lib/handlerUtils')
+const linkingJwtUtils = require('../../lib/linkingJwtUtils')
 const storage = require('../../lib/storage')
 const { createAuth0Token, createServer, createWebtaskToken } = require('../test_helper');
 const users = require('./test_data/users.json')
@@ -32,7 +32,7 @@ describe('Requesting the metadata route', function() {
   describe('With valid token', function() {
     describe('/ (account linking) endpoint', function() {
       beforeEach(async function() {
-        sinon.stub(handlerUtils, 'fetchUsersFromToken').resolves({ currentUser: users.usersByEmail[0], matchingUsers: [users.usersByEmail[1]] });
+        sinon.stub(linkingJwtUtils, 'fetchUsersFromToken').resolves({ currentUser: users.usersByEmail[0], matchingUsers: [users.usersByEmail[1]] });
         sinon.stub(storage, 'getSettings').resolves('en');
         sinon.stub(storage, 'getLocales').resolves({ en: { 'or': 'or'}});
         sinon.stub(indexTemplate, 'renderTemplate').resolves('<html>Mock Template</html>');
