@@ -34,7 +34,7 @@ Update the configuration file under `./server/config.json`:
 Then you can run the extension:
 
 ```bash
-nvm use 10
+nvm use 22
 yarn install
 yarn run build
 yarn run serve:dev
