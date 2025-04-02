@@ -1,13 +1,10 @@
 /* eslint-disable consistent-return */
-/* eslint-disable no-param-reassign */
 const { promisify } = require('util');
 const Boom = require('@hapi/boom');
 const jwksRsa = require('jwks-rsa');
 const jwt = require('jsonwebtoken');
 const config = require('../lib/config');
 const plugin = require('../lib/session');
-
-const scopes = [{ value: 'openid' }, { value: 'profile' }, { value: 'email' }];
 
 module.exports = {
   name: 'auth',
@@ -90,10 +87,6 @@ module.exports = {
               jwtOptions.dashboardAdmin.verifyOptions
             );
 
-            decoded.payload.scope = scopes.map(
-              scope => scope.value
-            ); // eslint-disable-line no-param-reassign
-
             return { credentials: decoded.payload, isValid: true };
           }
         } catch (error) {
@@ -118,9 +111,6 @@ module.exports = {
         // eslint-disable-next-line no-unused-vars
         onLoginSuccess: (decoded, req) => {
           if (decoded) {
-            decoded.scope = scopes.map(
-              scope => scope.value
-            ); // eslint-disable-line no-param-reassign
             return decoded;
           }
           throw Boom.unauthorized('Invalid token', 'Token');
