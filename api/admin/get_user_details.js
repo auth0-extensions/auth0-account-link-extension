@@ -6,8 +6,7 @@ module.exports = () => ({
   path: '/admin/user',
   options: {
     auth: {
-      strategies: ['jwt'],
-      scope: ['profile', 'email']
+      strategies: ['jwt']
     }
   },
   handler: async (req, h) => {

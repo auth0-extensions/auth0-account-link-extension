@@ -11,8 +11,7 @@ module.exports = () => ({
   method: 'PUT',
   options: {
     auth: {
-      strategies: ['jwt'],
-      scope: ['profile']
+      strategies: ['jwt']
     },
     validate: {
       payload: {
