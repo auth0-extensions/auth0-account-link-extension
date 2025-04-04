@@ -1,17 +1,14 @@
-VERSION="version"
-MAJORMINOR="majorminor"
 
-CURRENT_VERSION=$(node tools/attribute.js $VERSION)
+CURRENT_VERSION=$(node tools/attribute.js version)
+MAJORMINOR_VERSION_ONLY=$(node tools/attribute.js version ../package.json majorminor)
 EXTENSION_NAME="auth0-account-link"
-PACKAGE_JSON='../package.json'
-MAJORMINOR_VERSION=$(node tools/attribute.js $VERSION $PACKAGE_JSON $MAJORMINOR)
 
 deploy_bundle() {
   if [ -z "$1" ]; then
     echo "No version provided. Skipping cdn publish…"
     exit 1
   fi
-  
+
   BUNDLE_EXISTS=$(aws s3 ls s3://assets.us.auth0.com/extensions/$EXTENSION_NAME/ | grep "$EXTENSION_NAME-$1.js")
   CDN_EXISTS=$(aws s3 ls s3://assets.us.auth0.com/extensions/$EXTENSION_NAME/assets/ | grep "link.$1.min.css")
   ADMIN_CDN_EXISTS=$(aws s3 ls s3://assets.us.auth0.com/extensions/$EXTENSION_NAME/assets/ | grep "admin.$1.min.css")
@@ -41,5 +38,5 @@ deploy_bundle() {
 deploy_bundle $CURRENT_VERSION
 echo "Finished deploying $CURRENT_VERSION.js to the cdn"
 
-deploy_bundle $MAJORMINOR_VERSION
-echo "Finished deploying $MAJORMINOR_VERSION.js to the cdn"
+deploy_bundle $MAJORMINOR_VERSION_ONLY
+echo "Finished deploying $MAJORMINOR_VERSION_ONLY.js to the cdn"
