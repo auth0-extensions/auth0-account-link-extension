@@ -13,5 +13,6 @@
   "WT_URL": "http://localhost:3001",
   "AUTH0_CALLBACK_URL": "http://localhost:3001/callback",
   "EXTENSION_SECRET": "d2h8f03wghjti404-gjfeqihu0cre",
-  "PUBLIC_WT_URL": "testWebtask"
+  "PUBLIC_WT_URL": "testWebtask",
+  "NGROK_TOKEN": ""
 }
