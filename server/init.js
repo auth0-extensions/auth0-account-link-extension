@@ -26,7 +26,7 @@ const initServer = async (cfg, storageContext, cb) => {
   );
 
   // Start the server.
-  return await createServer(cb || defaultCallback);
+  return createServer(cb || defaultCallback);
 };
 
 module.exports = initServer;

@@ -1,12 +1,22 @@
 /* eslint-disable no-useless-escape */
-
-const { setLocales } = require('../../lib/storage');
+const Boom = require('@hapi/boom');
+const storage = require('../../lib/storage');
 
 module.exports = () => ({
   method: 'PUT',
-  config: {
-    auth: 'jwt'
+  options: {
+    auth: {
+      strategies: ['jwt']
+    }
   },
   path: '/admin/locales',
-  handler: (req, reply) => setLocales(req.payload).then(reply)
+  handler: async (req, h) => {
+    try {
+      const updatedLocales = await storage.setLocales(req.payload);
+
+      return h.response(updatedLocales).code(200);
+    } catch (error) {
+      return Boom.serverUnavailable(error);
+    }
+  }
 });

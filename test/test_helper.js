@@ -2,7 +2,7 @@ const nconf = require('nconf');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
-const { handlers } = require('auth0-extension-hapi-tools');
+const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
 const config = require('../lib/config');
 
@@ -48,7 +48,7 @@ const createRequest = options =>
     });
   });
 
-const mockHandlers = (server, options, next) => {
+const mockHandlers = { name: 'handlers', register: async (server, options) => {
   server.decorate('server', 'handlers', {
     managementClient: {
       assign: 'auth0',
@@ -56,17 +56,13 @@ const mockHandlers = (server, options, next) => {
         res(fakeApiClient());
       }
     },
-    validateHookToken: handlers.validateHookToken(
+    validateHookToken: handlerUtils.validateHookToken(
       config('AUTH0_DOMAIN'),
       config('WT_URL'),
       config('EXTENSION_SECRET')
     )
   });
-
-  next();
-};
-
-mockHandlers.attributes = { name: 'handlers' };
+} };
 
 const createServer = (configFile = '../server/config.test.json') => {
   nconf
@@ -106,20 +102,45 @@ const startServer = (configFile = '../server/config.test.json') =>
     });
   });
 
-const createToken = (user) => {
+const createAuth0Token = (user) => {
   const options = {
     expiresIn: '5m',
     audience: config('AUTH0_CLIENT_ID'),
-    issuer: 'https://auth0.example.com'
+    issuer: `https://${config('AUTH0_DOMAIN')}/`
   };
 
   const userSub = {
     sub: user.user_id,
     email: user.email,
-    base: 'auth0.example.com/api/v2'
+    base: 'auth0.example.com/api/v2',
+    scope: []
   };
 
   return sign(userSub, config('AUTH0_CLIENT_SECRET'), options);
 };
 
-module.exports = { startServer, request: createRequest, createServer, createToken };
+const createWebtaskToken = (user) => {
+  const options = {
+    expiresIn: '5m',
+    audience: 'urn:api-account-linking',
+    issuer: config('PUBLIC_WT_URL')
+  };
+
+  const userSub = {
+    sub: user.user_id,
+    email: user.email,
+    base: 'auth0.example.com/api/v2',
+    scope: [],
+    access_token: 'abc123'
+  };
+
+  return sign(userSub, config('EXTENSION_SECRET'), options);
+};
+
+module.exports = { 
+  startServer, 
+  request: createRequest, 
+  createServer, 
+  createAuth0Token, 
+  createWebtaskToken
+};

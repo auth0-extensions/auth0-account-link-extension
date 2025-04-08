@@ -29,7 +29,7 @@ const createServer = async (cb, handlers = defaultHandlers) => {
   server.route({
     method: 'GET',
     path: '/js/{file*}',
-    config: { auth: false },
+    options: { auth: false },
     handler: {
       directory: {
         path: path.join(__dirname, '../public/js')
@@ -40,7 +40,7 @@ const createServer = async (cb, handlers = defaultHandlers) => {
   server.route({
     method: 'GET',
     path: '/css/{file*}',
-    config: { auth: false },
+    options: { auth: false },
     handler: {
       directory: {
         path: path.join(__dirname, '../public/css')
@@ -49,7 +49,7 @@ const createServer = async (cb, handlers = defaultHandlers) => {
   });
 
   await server.register([auth, handlers, routes]);
-  
+
   logger.debug = (...args) => {
     server.log(['debug'], args.join(' '));
   };
@@ -59,25 +59,6 @@ const createServer = async (cb, handlers = defaultHandlers) => {
   logger.error = (...args) => {
     server.log(['error'], args.join(' '));
   };
-
-  // await server.register([auth, handlers, routes], (err) => {
-  //   // Use the server logger.
-  //   logger.debug = (...args) => {
-  //     server.log(['debug'], args.join(' '));
-  //   };
-  //   logger.info = (...args) => {
-  //     server.log(['info'], args.join(' '));
-  //   };
-  //   logger.error = (...args) => {
-  //     server.log(['error'], args.join(' '));
-  //   };
-
-  //   if (err) {
-  //     cb(err);
-  //   }
-
-  //   cb(null, server);
-  // });
 
   return server;
 };

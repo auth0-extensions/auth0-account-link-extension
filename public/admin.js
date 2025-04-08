@@ -348,4 +348,4 @@ module.exports = function() {
   } else if (path.endsWith('/admin/locale')) {
     return localeAdminPanel();
   } 
-}
+};

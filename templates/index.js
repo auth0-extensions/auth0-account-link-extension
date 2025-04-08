@@ -13,7 +13,7 @@ const render = (template, locals = {}) => {
   return template.replace(VAR_REGEX, (match, name) => locals[name] || '');
 };
 
-module.exports = ({
+const renderTemplate = ({
   stylesheetTag,
   customCSSTag,
   currentUser,
@@ -35,3 +35,7 @@ module.exports = ({
         ExtensionScripts: buildExtensionScripts(currentUser, matchingUsers, params, token)
       });
     });
+
+module.exports = {
+  renderTemplate
+};
