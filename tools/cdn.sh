@@ -2,8 +2,6 @@
 CURRENT_VERSION=$(node tools/attribute.js version)
 MAJORMINOR_VERSION_ONLY=$(node tools/attribute.js version ../package.json majorminor)
 EXTENSION_NAME="auth0-account-link"
-PACKAGE_JSON='../package.json'
-MAJORMINOR_VERSION=$(node tools/attribute.js $VERSION $PACKAGE_JSON $MAJORMINOR)
 
 deploy_bundle() {
   if [ -z "$1" ]; then
