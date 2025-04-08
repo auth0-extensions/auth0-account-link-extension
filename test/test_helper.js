@@ -2,7 +2,7 @@ const nconf = require('nconf');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
-const { handlers } = require('auth0-extension-hapi-tools');
+const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
 const config = require('../lib/config');
 
@@ -48,25 +48,21 @@ const createRequest = options =>
     });
   });
 
-  const mockHandlers = (server, options, next) => {
-    server.decorate('server', 'handlers', {
-      managementClient: {
-        assign: 'auth0',
-        method(req, res) {
-          res(fakeApiClient());
-        }
-      },
-      validateHookToken: handlers.validateHookToken(
-        config('AUTH0_DOMAIN'),
-        config('WT_URL'),
-        config('EXTENSION_SECRET')
-      )
-    });
-  
-    next();
-  };
-  
-  mockHandlers.attributes = { name: 'handlers' };
+const mockHandlers = { name: 'handlers', register: async (server, options) => {
+  server.decorate('server', 'handlers', {
+    managementClient: {
+      assign: 'auth0',
+      method(req, res) {
+        res(fakeApiClient());
+      }
+    },
+    validateHookToken: handlerUtils.validateHookToken(
+      config('AUTH0_DOMAIN'),
+      config('WT_URL'),
+      config('EXTENSION_SECRET')
+    )
+  });
+} };
 
 const createServer = (configFile = '../server/config.test.json') => {
   nconf
@@ -141,4 +137,10 @@ const createWebtaskToken = (user) => {
   return sign(userSub, config('EXTENSION_SECRET'), options);
 };
 
-module.exports = { startServer, request: createRequest, createServer, createAuth0Token, createWebtaskToken };
+module.exports = { 
+  startServer, 
+  request: createRequest, 
+  createServer, 
+  createAuth0Token, 
+  createWebtaskToken
+};
