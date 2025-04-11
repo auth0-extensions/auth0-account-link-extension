@@ -12,6 +12,7 @@ const mgmtApi = new ManagementClient({
   domain: config.AUTH0_DOMAIN,
   clientId: config.AUTH0_CLIENT_ID,
   clientSecret: config.AUTH0_CLIENT_SECRET,
+  audience: `https://${config.AUTH0_DOMAIN}/api/v2/`,
   scope: 'read:users create:users delete:users read:email_provider read:connections'
 });
 

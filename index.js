@@ -24,20 +24,22 @@ const startServer = server =>
       if (err) {
         reject(err);
       }
-
       resolve(server);
-
       logger.info(`Server running at: ${server.info.uri}`);
     });
   });
 
-const server = createServer(key => nconf.get(key), null);
+let server;
 
-startServer(server).catch((err) => {
-  logger.error(err);
-  logger.error('Server could not be started. Aborting...');
-
-  process.exit(1);
-});
+(async () => {
+  try {
+    server = await createServer(key => nconf.get(key), null);
+    await startServer(server);
+  } catch (err) {
+    logger.error(err);
+    logger.error('Server could not be started. Aborting...');
+    process.exit(1);
+  }
+})();
 
 module.exports = server;
