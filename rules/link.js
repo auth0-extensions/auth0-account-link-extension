@@ -28,7 +28,7 @@ module.exports = ({ extensionURL = '', username = 'Unknown', clientID = '', clie
     token: {
       clientId: '${clientID}',
       clientSecret: '${clientSecret}',
-      issuer: auth0.domain
+      issuer: 'goodbye.acmetest.org'
     }
   };
 
