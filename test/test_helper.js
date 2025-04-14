@@ -2,7 +2,6 @@ const nconf = require('nconf');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
-// const nock = require('nock');
 const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
 const config = require('../lib/config');
