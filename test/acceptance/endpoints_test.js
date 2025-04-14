@@ -1,6 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const queryString = require('querystring');
+const nock = require('nock');
 const metadata = require('../../webtask.json');
 const linkingJwtUtils = require('../../lib/linkingJwtUtils')
 const storage = require('../../lib/storage')
@@ -8,8 +9,11 @@ const { createAuth0Token, createServer, createWebtaskToken, createApiRequestToke
 const users = require('./test_data/users.json')
 const indexTemplate = require('../../templates');
 const allLocales = require('../../locales.json');
+const config = require('../../lib/config');
+const certs = require('./test_data/certs.json');
 
-describe('Requesting the metadata route', function() {
+const cert = certs.test;
+describe('Endpoint tests', function() {
   let server;
 
   before(async function() {
@@ -29,7 +33,7 @@ describe('Requesting the metadata route', function() {
     });
   });
 
-  describe('With valid token', function() {
+  describe('With valid token isDashbardAdminRequest token', function() {
     describe('/ (account linking) endpoint', function() {
       beforeEach(async function() {
         sinon.stub(linkingJwtUtils, 'fetchUsersFromToken').resolves({ currentUser: users.usersByEmail[0], matchingUsers: [users.usersByEmail[1]] });
@@ -70,14 +74,6 @@ describe('Requesting the metadata route', function() {
         expect(res.statusCode).to.equal(200);
         expect(res.result).to.deep.equal(metadata);
       });
-      it('returns a 200 on meta page isApiRequest', async function() {
-        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
-        const headers = { Authorization: `Bearer ${token}` };
-        const options = { method: 'GET', url: '/meta', headers };
-        const res = await server.inject(options);
-        expect(res.statusCode).to.equal(200);
-        expect(res.result).to.deep.equal(metadata);
-      });
     });
     describe('/admin/locales endpoint', function() {
       beforeEach(async function() {
@@ -107,14 +103,6 @@ describe('Requesting the metadata route', function() {
         expect(res.statusCode).to.equal(200);
         expect(res.result).to.deep.equal({ status: 'ok' });
       });
-      it('GET /admin/locales returns 200 isApiRequest', async function() {
-        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
-        const headers = { Authorization: `Bearer ${token}` };
-        const options = { method: 'GET', url: '/admin/locales', headers };
-
-        const res = await server.inject(options);
-        expect(res.statusCode).to.equal(200);
-      });
     });
     describe('/admin/settings endpoint', function() {
       beforeEach(async function() {
@@ -129,23 +117,6 @@ describe('Requesting the metadata route', function() {
 
       it('GET /admin/settings returns 200 isDashboardAdminRequest', async function() {
         const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
-        const headers = { Authorization: `Bearer ${token}` };
-        const options = { method: 'GET', url: '/admin/settings', headers };
-
-        const res = await server.inject(options);
-        expect(res.statusCode).to.equal(200);
-        expect(res.result).to.deep.equal({
-          availableLocales: [
-            { code: 'en', name: 'English' },
-            { code: 'es', name: 'Spanish' },
-            { code: 'ja', name: 'Japanease' },
-            { code: 'fr', name: 'French' },
-            { code: 'nl', name: 'Dutch' }
-          ]
-        })
-      });
-      it('GET /admin/settings returns 200 isApiRequest', async function() {
-        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
         const headers = { Authorization: `Bearer ${token}` };
         const options = { method: 'GET', url: '/admin/settings', headers };
 
@@ -188,16 +159,99 @@ describe('Requesting the metadata route', function() {
           expect(res.statusCode).to.equal(200);
           expect(res.result).to.have.keys(['email', 'avatar'])
         });
-        it('returns 200 isApiRequest', async function() {
-          const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
-          const headers = { Authorization: `Bearer ${token}` };
-          const options = { method: 'GET', url: '/admin/user', headers };
-  
-          const res = await server.inject(options);
-          expect(res.statusCode).to.equal(200);
-          expect(res.result).to.have.keys(['email', 'avatar'])
-        });
       });
     });
   });
+  describe('With valid API request token', function() {
+    beforeEach(async function() {
+      nock.cleanAll();
+
+      nock(`https://${config('AUTH0_DOMAIN')}`)
+      .get('/.well-known/jwks.json')
+      .reply(200, {
+        keys: [
+          {
+            alg: 'RS256',
+            use: 'sig',
+            kty: 'RSA',
+            x5c: [ cert.cert.match(/-----BEGIN CERTIFICATE-----([\s\S]*)-----END CERTIFICATE-----/i)[1].replace('\n', '') ],
+            kid: 'key2',
+            n: cert.modulus,
+            e: cert.exponent,
+            x5t: cert.fingerprint
+          }
+        ]
+      });
+    });
+    afterEach(async function() {
+      nock.cleanAll();
+    });
+    describe('meta endpoint', function() {
+      it('returns a 200 on meta page isApiRequest', async function() {
+        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
+        const headers = { Authorization: `Bearer ${token}` };
+        const options = { method: 'GET', url: '/meta', headers };
+        const res = await server.inject(options);
+        expect(res.statusCode).to.equal(200);
+        expect(res.result).to.deep.equal(metadata);
+      });
+    })
+    describe('admin/locales endpoint', function() {
+      beforeEach(async function() {
+        sinon.stub(storage, 'getLocales').resolves(allLocales);
+        sinon.stub(storage, 'setLocales').resolves({ status: 'ok' });
+      });
+
+      afterEach(async function() {
+        sinon.restore();
+      });
+      it('GET /admin/locales returns 200 isApiRequest', async function() {
+        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
+        const headers = { Authorization: `Bearer ${token}` };
+        const options = { method: 'GET', url: '/admin/locales', headers };
+
+        const res = await server.inject(options);
+        expect(res.statusCode).to.equal(200);
+      });
+    })
+    describe('admin/settings endpoint', function() {
+      beforeEach(async function() {
+        sinon.stub(storage, 'getLocales').resolves(allLocales);
+        sinon.stub(storage, 'getSettings').resolves({});
+        sinon.stub(storage, 'setSettings').resolves({ status: 'ok' });
+      });
+
+      afterEach(async function() {
+        sinon.restore();
+      });
+      it('GET /admin/settings returns 200 isApiRequest', async function() {
+        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
+        const headers = { Authorization: `Bearer ${token}` };
+        const options = { method: 'GET', url: '/admin/settings', headers };
+
+        const res = await server.inject(options);
+        expect(res.statusCode).to.equal(200);
+        expect(res.result).to.deep.equal({
+          availableLocales: [
+            { code: 'en', name: 'English' },
+            { code: 'es', name: 'Spanish' },
+            { code: 'ja', name: 'Japanease' },
+            { code: 'fr', name: 'French' },
+            { code: 'nl', name: 'Dutch' }
+          ]
+        })
+      });
+    })
+    describe('admin/user endpoint', function() {
+      it('returns 200 isApiRequest', async function() {
+        const token = createApiRequestToken('client-credentials', '@clients', [], 'key2');
+        const headers = { Authorization: `Bearer ${token}` };
+        const options = { method: 'GET', url: '/admin/user', headers };
+
+        const res = await server.inject(options);
+        expect(res.statusCode).to.equal(200);
+        expect(res.result).to.have.keys(['email', 'avatar'])
+      });
+    })
+  })
 });

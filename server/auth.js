@@ -9,30 +9,6 @@ const plugin = require('../lib/session');
 module.exports = {
   name: 'auth',
   async register(server) {
-    const jwtOptions = {
-      dashboardAdmin: {
-        key: config('EXTENSION_SECRET'),
-        verifyOptions: {
-          audience: 'urn:api-account-linking',
-          issuer: config('PUBLIC_WT_URL'),
-          algorithms: ['HS256']
-        }
-      },
-      resourceServer: {
-        key: jwksRsa.hapiJwt2KeyAsync({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 2,
-          jwksUri: `https://${config('AUTH0_DOMAIN')}/.well-known/jwks.json`
-        }),
-        verifyOptions: {
-          audience: 'urn:auth0-account-linking-api',
-          issuer: `https://${config('AUTH0_DOMAIN')}/`,
-          algorithms: ['RS256']
-        }
-      }
-    };
-
     server.auth.strategy('jwt', 'jwt', {
       complete: true,
       verify: async (decoded, req) => {
@@ -57,13 +33,38 @@ module.exports = {
               return { isValid: false };
             }
 
-            const resourceServerKey = await jwtOptions.resourceServer.key(decoded);
+            const client = jwksRsa({
+              jwksUri: `https://${config('AUTH0_DOMAIN')}/.well-known/jwks.json`
+            });
+            const getKey = (jwtHeader, cb) => {
+              client.getSigningKey(jwtHeader.kid, (err, key) => {
+                if (err) {
+                  return cb(err);
+                }
+                const signingKey = key.publicKey || key.rsaPublicKey;
+                cb(null, signingKey);
+              });
+            };
 
-            if (!resourceServerKey) {
-              return { isValid: false };
-            }
+            return new Promise((resolve) => {
+              jwt.verify(
+                token,
+                getKey,
+                {
+                  audience: 'urn:auth0-account-linking-api',
+                  issuer: `https://${config('AUTH0_DOMAIN')}/`,
+                  algorithms: ['RS256'],
+                  complete: true
+                },
+                (err, decodedToken) => {
+                  if (err) {
+                    return resolve({ isValid: false });
+                  }
 
-            return { credentials: decoded.payload, isValid: true };
+                  return resolve({ credentials: decodedToken.payload, isValid: true });
+                }
+              );
+            });
           }
           if (isDashboardAdminRequest) {
             const jwtVerifyAsync = promisify(jwt.verify);
@@ -75,12 +76,19 @@ module.exports = {
             // this can throw if there is an error
             await jwtVerifyAsync(
               token,
-              jwtOptions.dashboardAdmin.key,
-              jwtOptions.dashboardAdmin.verifyOptions
+              config('EXTENSION_SECRET'),
+              {
+                audience: 'urn:api-account-linking',
+                issuer: config('PUBLIC_WT_URL'),
+                algorithms: ['HS256'],
+                complete: true
+              }
             );
 
             return { credentials: decoded.payload, isValid: true };
           }
+          // If the token is not from Auth0, we don't know how to handle it
+          return { isValid: false };
         } catch (error) {
           return { isValid: false };
         }

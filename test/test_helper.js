@@ -2,7 +2,7 @@ const nconf = require('nconf');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
-const nock = require('nock');
+// const nock = require('nock');
 const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
 const config = require('../lib/config');
@@ -10,23 +10,6 @@ const certs = require('./acceptance/test_data/certs.json');
 
 const cert = certs.test;
 
-const wellKnownEndpoint = () => 
-  nock(`https://${config('AUTH0_DOMAIN')}`)
-  .get('/.well-known/jwks.json')
-  .reply(200, {
-    keys: [
-      {
-        alg: 'RS256',
-        use: 'sig',
-        kty: 'RSA',
-        x5c: [ cert.cert.match(/-----BEGIN CERTIFICATE-----([\s\S]*)-----END CERTIFICATE-----/i)[1].replace('\n', '') ],
-        kid: 'key2',
-        n: cert.modulus,
-        e: cert.exponent,
-        x5t: cert.fingerprint
-      }
-    ]
-  });
   
 
 const fakeApiClient = () => {
@@ -108,8 +91,6 @@ const createServer = (configFile = '../server/config.test.json') => {
     });
 
   config.setProvider(key => nconf.get(key));
-  
-  wellKnownEndpoint();
 
   return initServer(() => {}, mockHandlers);
 };
@@ -179,7 +160,8 @@ const createApiRequestToken = (gty, sub, scope, kid = 'key2') => {
       kid 
     }, 
     algorithm: 'RS256', 
-    expiresIn: '5m'}
+    expiresIn: '5m'
+  };
   
   return sign(userSub, cert.privateKey, options)
 }

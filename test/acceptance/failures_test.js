@@ -1,11 +1,16 @@
 const path = require('path');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const nock = require('nock');
 const { FileStorageContext } = require('auth0-extension-tools');
 const { createServer, createAuth0Token, createWebtaskToken, createApiRequestToken } = require('../test_helper');
 const initStorage = require('../../lib/db').init;
 const storage = require('../../lib/storage')
+const config = require('../../lib/config');
+const certs = require('./test_data/certs.json');
+const jwt = require('jsonwebtoken');
 
+const cert = certs.test;
 describe('Endpoint Failures', function() {
   let server;
   
@@ -16,6 +21,29 @@ describe('Endpoint Failures', function() {
 
   after(function() {
     server.stop();
+  });
+  beforeEach(async function() {
+    nock.cleanAll();
+
+    nock(`https://${config('AUTH0_DOMAIN')}`)
+    .get('/.well-known/jwks.json')
+    .reply(200, {
+      keys: [
+        {
+          alg: 'RS256',
+          use: 'sig',
+          kty: 'RSA',
+          x5c: [ cert.cert.match(/-----BEGIN CERTIFICATE-----([\s\S]*)-----END CERTIFICATE-----/i)[1].replace('\n', '') ],
+          kid: 'key2',
+          n: cert.modulus,
+          e: cert.exponent,
+          x5t: cert.fingerprint
+        }
+      ]
+    });
+  });
+  afterEach(async function() {
+    nock.cleanAll();
   });
   describe('With an invalid token', function() {
     it('returns a 400 with an invalid token', async function() {
@@ -38,7 +66,7 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
-    it('GET /admin/settings returns 401 invalid token isDashboardAdminRequest', async function() {
+    it('GET /admin/settings returns 401 invalid token isDashboardAdminRequest token', async function() {
       const token = createAuth0Token({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
       const headers = { Authorization: `Bearer ${token}` };
       const options = { method: 'GET', url: '/admin/settings', headers };
@@ -52,7 +80,7 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
-    it('GET /admin/settings returns 401 invalid token isApiRequest with wrong kid', async function() {
+    it('GET /admin/settings returns 401 invalid token isApiRequest token with wrong kid', async function() {
       const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
       const headers = { Authorization: `Bearer ${token}` };
       const options = { method: 'GET', url: '/admin/settings', headers };
@@ -66,7 +94,7 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
-    it('GET /admin/user returns 401 invalid token isDashboardAdminRequest', async function() {
+    it('GET /admin/user returns 401 invalid token isDashboardAdminRequest token', async function() {
       const token = createAuth0Token({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
       const headers = { Authorization: `Bearer ${token}` };
       const options = { method: 'GET', url: '/admin/user', headers };
@@ -80,7 +108,7 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
-    it('GET /admin/user returns 401 invalid token isApiRequest with wrong kid', async function() {
+    it('GET /admin/user returns 401 invalid token isApiRequest token with wrong kid', async function() {
       const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
       const headers = { Authorization: `Bearer ${token}` };
       const options = { method: 'GET', url: '/admin/user', headers };
@@ -94,7 +122,7 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
-    it('GET /admin/locales returns 401 invalid token isDashboardAdminRequest', async function() {
+    it('GET /admin/locales returns 401 invalid token isDashboardAdminRequest token', async function() {
       const token = createAuth0Token({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
       const headers = { Authorization: `Bearer ${token}` };
       const options = { method: 'GET', url: '/admin/locales', headers };
@@ -108,11 +136,73 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
-    it('GET /admin/locales returns 401 invalid token isApiRequest with wrong kid', async function() {
+    it('GET /admin/locales returns 401 invalid token isApiRequest token with wrong kid', async function() {
       const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
       const headers = { Authorization: `Bearer ${token}` };
       const options = { method: 'GET', url: '/admin/locales', headers };
   
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/settings returns 401 for a token with incorrect claims', async function() {
+      const token = jwt.sign(
+        { sub: 'user@clients', iss: 'https://wrong-issuer/', },
+        cert.privateKey, 
+        { algorithm: 'RS256', header: { 
+          kid: 'key2'
+        }, 
+        algorithm: 'RS256', 
+        expiresIn: '5m' 
+      }
+      );
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+    
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/settings returns 401 for a token with an invalid signature', async function() {
+      const token = jwt.sign(
+        { sub: 'user@clients', iss: `https://${config('AUTH0_DOMAIN')}/` },
+        cert.privateKey + "123",
+        { algorithm: 'RS256', keyid: 'mocked-key-id' }
+      );
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+    
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/settings returns 401 for an expired token', async function() {
+      const token = jwt.sign(
+        { sub: 'user@clients', iss: `https://${config('AUTH0_DOMAIN')}/`, exp: Math.floor(Date.now() / 1000) - 60 },
+        cert.privateKey, 
+        { algorithm: 'RS256', header: { 
+          kid: 'key2'
+        },
+        algorithm: 'RS256', 
+      });
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+    
       const res = await server.inject(options);
       expect(res.statusCode).to.equal(401);
       expect(res.result).to.deep.equal({
