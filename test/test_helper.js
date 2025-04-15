@@ -2,9 +2,12 @@ const nconf = require('nconf');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
-const { handlers } = require('auth0-extension-hapi-tools');
+const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
 const config = require('../lib/config');
+const certs = require('./acceptance/test_data/certs.json');
+
+const cert = certs.certOne;
 
 const fakeApiClient = () => {
   const defaultUsers = {};
@@ -48,25 +51,21 @@ const createRequest = options =>
     });
   });
 
-  const mockHandlers = (server, options, next) => {
-    server.decorate('server', 'handlers', {
-      managementClient: {
-        assign: 'auth0',
-        method(req, res) {
-          res(fakeApiClient());
-        }
-      },
-      validateHookToken: handlers.validateHookToken(
-        config('AUTH0_DOMAIN'),
-        config('WT_URL'),
-        config('EXTENSION_SECRET')
-      )
-    });
-  
-    next();
-  };
-  
-  mockHandlers.attributes = { name: 'handlers' };
+const mockHandlers = { name: 'handlers', register: async (server, options) => {
+  server.decorate('server', 'handlers', {
+    managementClient: {
+      assign: 'auth0',
+      method(req, res) {
+        res(fakeApiClient());
+      }
+    },
+    validateHookToken: handlerUtils.validateHookToken(
+      config('AUTH0_DOMAIN'),
+      config('WT_URL'),
+      config('EXTENSION_SECRET')
+    )
+  });
+} };
 
 const createServer = (configFile = '../server/config.test.json') => {
   nconf
@@ -141,4 +140,35 @@ const createWebtaskToken = (user) => {
   return sign(userSub, config('EXTENSION_SECRET'), options);
 };
 
-module.exports = { startServer, request: createRequest, createServer, createAuth0Token, createWebtaskToken };
+// This token is to test the isApiRequest JWT strategy path
+const createApiRequestToken = (gty, sub, scope, kid = 'key2') => {
+  const userSub = {
+    iss: `https://${config('AUTH0_DOMAIN')}/`,
+    aud: 'urn:auth0-account-linking-api',
+    sub: `auth0@${sub}`,
+    azp: '123',
+    email: 'ben1@acme.com',
+    gty,
+    scope
+  };
+
+  const options = { 
+    header: { 
+      kid 
+    }, 
+    algorithm: 'RS256', 
+    expiresIn: '5m'
+  };
+  
+  return sign(userSub, cert.privateKey, options)
+}
+
+
+module.exports = { 
+  startServer, 
+  request: createRequest, 
+  createServer, 
+  createAuth0Token, 
+  createWebtaskToken,
+  createApiRequestToken
+};
