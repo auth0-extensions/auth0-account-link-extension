@@ -12,6 +12,32 @@ module.exports = {
     server.auth.strategy('jwt', 'jwt', {
       complete: true,
       verify: async (decoded, req) => {
+        const jwtOptions = {
+          dashboardAdmin: {
+            key: config('EXTENSION_SECRET'),
+            verifyOptions: {
+              audience: 'urn:api-account-linking',
+              issuer: config('PUBLIC_WT_URL'),
+              algorithms: ['HS256'],
+              complete: true
+            }
+          },
+          resourceServer: {
+            key: jwksRsa.hapiJwt2KeyAsync({
+              cache: true,
+              rateLimit: true,
+              jwksRequestsPerMinute: 2,
+              jwksUri: `https://${config('AUTH0_DOMAIN')}/.well-known/jwks.json`
+            }),
+            verifyOptions: {
+              audience: 'urn:auth0-account-linking-api',
+              issuer: `https://${config('AUTH0_DOMAIN')}/`,
+              algorithms: ['RS256'],
+              complete: true
+            }
+          }
+        };
+
         try {
           if (!decoded) {
             return { isValid: false };
@@ -23,6 +49,7 @@ module.exports = {
           const token = header.split(' ')[1];
           const isApiRequest = decoded && decoded.payload && decoded.payload.iss === `https://${config('AUTH0_DOMAIN')}/`;
           const isDashboardAdminRequest = decoded && decoded.payload && decoded.payload.iss === config('PUBLIC_WT_URL');
+          const jwtVerifyAsync = promisify(jwt.verify);
 
           if (isApiRequest) {
             if (decoded.payload.gty && decoded.payload.gty !== 'client-credentials') {
@@ -33,59 +60,39 @@ module.exports = {
               return { isValid: false };
             }
 
-            const client = jwksRsa({
-              jwksUri: `https://${config('AUTH0_DOMAIN')}/.well-known/jwks.json`
-            });
-            const getKey = (jwtHeader, cb) => {
-              client.getSigningKey(jwtHeader.kid, (err, key) => {
-                if (err) {
-                  return cb(err);
-                }
-                const signingKey = key.publicKey || key.rsaPublicKey;
-                cb(null, signingKey);
-              });
-            };
+            const resourceServerKey = await jwtOptions.resourceServer.key(decoded);
+            if (!resourceServerKey) {
+              return { isValid: false };
+            }
 
-            return new Promise((resolve) => {
-              jwt.verify(
-                token,
-                getKey,
-                {
-                  audience: 'urn:auth0-account-linking-api',
-                  issuer: `https://${config('AUTH0_DOMAIN')}/`,
-                  algorithms: ['RS256'],
-                  complete: true
-                },
-                (err, decodedToken) => {
-                  if (err) {
-                    return resolve({ isValid: false });
-                  }
+            const decodedToken = await jwtVerifyAsync(
+              token,
+              resourceServerKey,
+              jwtOptions.resourceServer.verifyOptions,
+            );
 
-                  return resolve({ credentials: decodedToken.payload, isValid: true });
-                }
-              );
-            });
+            if (!decodedToken) {
+              return { isValid: false };
+            }
+
+            return { credentials: decodedToken.payload, isValid: true };
           }
           if (isDashboardAdminRequest) {
-            const jwtVerifyAsync = promisify(jwt.verify);
-
             if (!decoded.payload.access_token || !decoded.payload.access_token.length) {
               return { isValid: false };
             }
 
             // this can throw if there is an error
-            await jwtVerifyAsync(
+            const decodedToken = await jwtVerifyAsync(
               token,
-              config('EXTENSION_SECRET'),
-              {
-                audience: 'urn:api-account-linking',
-                issuer: config('PUBLIC_WT_URL'),
-                algorithms: ['HS256'],
-                complete: true
-              }
+              jwtOptions.dashboardAdmin.key,
+              jwtOptions.dashboardAdmin.verifyOptions
             );
 
-            return { credentials: decoded.payload, isValid: true };
+            if (!decodedToken) {
+              return { isValid: false };
+            }
+            return { credentials: decodedToken.payload, isValid: true };
           }
           // If the token is not from Auth0, we don't know how to handle it
           return { isValid: false };
