@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../lib/config');
 const plugin = require('../lib/session');
 
+const jwtVerifyAsync = promisify(jwt.verify);
+
 module.exports = {
   name: 'auth',
   async register(server) {
@@ -49,7 +51,6 @@ module.exports = {
           const token = header.split(' ')[1];
           const isApiRequest = decoded && decoded.payload && decoded.payload.iss === `https://${config('AUTH0_DOMAIN')}/`;
           const isDashboardAdminRequest = decoded && decoded.payload && decoded.payload.iss === config('PUBLIC_WT_URL');
-          const jwtVerifyAsync = promisify(jwt.verify);
 
           if (isApiRequest) {
             if (decoded.payload.gty && decoded.payload.gty !== 'client-credentials') {
