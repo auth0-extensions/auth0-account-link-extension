@@ -7,6 +7,7 @@ const config = require('../lib/config');
 const plugin = require('../lib/session');
 
 const jwtVerifyAsync = promisify(jwt.verify);
+const foo = 'bar';
 
 module.exports = {
   name: 'auth',
