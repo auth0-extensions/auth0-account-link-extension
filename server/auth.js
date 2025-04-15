@@ -6,38 +6,38 @@ const jwt = require('jsonwebtoken');
 const config = require('../lib/config');
 const plugin = require('../lib/session');
 
+const jwtOptions = {
+  dashboardAdmin: {
+    key: config('EXTENSION_SECRET'),
+    verifyOptions: {
+      audience: 'urn:api-account-linking',
+      issuer: config('PUBLIC_WT_URL'),
+      algorithms: ['HS256'],
+      complete: true
+    }
+  },
+  resourceServer: {
+    key: jwksRsa.hapiJwt2KeyAsync({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 2,
+      jwksUri: `https://${config('AUTH0_DOMAIN')}/.well-known/jwks.json`
+    }),
+    verifyOptions: {
+      audience: 'urn:auth0-account-linking-api',
+      issuer: `https://${config('AUTH0_DOMAIN')}/`,
+      algorithms: ['RS256'],
+      complete: true
+    }
+  }
+};
+
 module.exports = {
   name: 'auth',
   async register(server) {
     server.auth.strategy('jwt', 'jwt', {
       complete: true,
       verify: async (decoded, req) => {
-        const jwtOptions = {
-          dashboardAdmin: {
-            key: config('EXTENSION_SECRET'),
-            verifyOptions: {
-              audience: 'urn:api-account-linking',
-              issuer: config('PUBLIC_WT_URL'),
-              algorithms: ['HS256'],
-              complete: true
-            }
-          },
-          resourceServer: {
-            key: jwksRsa.hapiJwt2KeyAsync({
-              cache: true,
-              rateLimit: true,
-              jwksRequestsPerMinute: 2,
-              jwksUri: `https://${config('AUTH0_DOMAIN')}/.well-known/jwks.json`
-            }),
-            verifyOptions: {
-              audience: 'urn:auth0-account-linking-api',
-              issuer: `https://${config('AUTH0_DOMAIN')}/`,
-              algorithms: ['RS256'],
-              complete: true
-            }
-          }
-        };
-
         try {
           if (!decoded) {
             return { isValid: false };
