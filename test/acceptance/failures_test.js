@@ -25,7 +25,7 @@ describe('Endpoint Failures', function() {
   after(function() {
     server.stop();
   });
-  describe('with correct certificate', function() {
+  describe('with correct certificate but failing validation', function() {
     beforeEach(async function() {
       nock.cleanAll();
   
@@ -154,7 +154,7 @@ describe('Endpoint Failures', function() {
       });
     });
   })
-  describe('with wrong certificate', function() {
+  describe('with wrong certificate and failing validation', function() {
     beforeEach(async function() {
       nock.cleanAll();
   
@@ -192,111 +192,111 @@ describe('Endpoint Failures', function() {
         attributes: { error: 'Invalid credentials' }
       });
     });
+    it('GET /admin/settings returns 401 invalid token isApiRequest validating against wrong cert private key', async function() {
+      const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+  
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/user returns 401 invalid token isApiRequest validating against wrong cert private key', async function() {
+      const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/user', headers };
+  
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/locales returns 401 invalid isApiRequest token validating wrong cert private key', async function() {
+      const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/locales', headers };
+  
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/settings returns 401 for a token with incorrect claims and validating wrong cert private key', async function() {
+      const token = jwt.sign(
+        { sub: 'user@clients', iss: 'https://wrong-issuer/', },
+        certOne.privateKey, 
+        { algorithm: 'RS256', header: { 
+          kid: 'key2'
+        }, 
+        algorithm: 'RS256', 
+        expiresIn: '5m' 
+      }
+      );
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+    
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/settings returns 401 for a token with an invalid signature and validating wrong cert private key', async function() {
+      const token = jwt.sign(
+        { sub: 'user@clients', iss: `https://${config('AUTH0_DOMAIN')}/` },
+        certOne.privateKey + "123",
+        { algorithm: 'RS256', keyid: 'mocked-key-id' }
+      );
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+    
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
+    it('GET /admin/settings returns 401 for an expired token and validating wrong cert private key', async function() {
+      const token = jwt.sign(
+        { sub: 'user@clients', iss: `https://${config('AUTH0_DOMAIN')}/`, exp: Math.floor(Date.now() / 1000) - 60 },
+        certOne.privateKey, 
+        { algorithm: 'RS256', header: { 
+          kid: 'key2'
+        },
+        algorithm: 'RS256', 
+      });
+      const headers = { Authorization: `Bearer ${token}` };
+      const options = { method: 'GET', url: '/admin/settings', headers };
+    
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(401);
+      expect(res.result).to.deep.equal({
+        statusCode: 401,
+        error: 'Unauthorized',
+        message: 'Invalid credentials',
+        attributes: { error: 'Invalid credentials' }
+      });
+    });
   })
-  it('GET /admin/settings returns 401 invalid token isApiRequest validating against wrong cert private key', async function() {
-    const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
-    const headers = { Authorization: `Bearer ${token}` };
-    const options = { method: 'GET', url: '/admin/settings', headers };
-
-    const res = await server.inject(options);
-    expect(res.statusCode).to.equal(401);
-    expect(res.result).to.deep.equal({
-      statusCode: 401,
-      error: 'Unauthorized',
-      message: 'Invalid credentials',
-      attributes: { error: 'Invalid credentials' }
-    });
-  });
-  it('GET /admin/user returns 401 invalid token isApiRequest validating against wrong cert private key', async function() {
-    const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
-    const headers = { Authorization: `Bearer ${token}` };
-    const options = { method: 'GET', url: '/admin/user', headers };
-
-    const res = await server.inject(options);
-    expect(res.statusCode).to.equal(401);
-    expect(res.result).to.deep.equal({
-      statusCode: 401,
-      error: 'Unauthorized',
-      message: 'Invalid credentials',
-      attributes: { error: 'Invalid credentials' }
-    });
-  });
-  it('GET /admin/locales returns 401 invalid isApiRequest token validating wrong cert private key', async function() {
-    const token = createApiRequestToken('client-credentials', '@clients', [], 'key1');
-    const headers = { Authorization: `Bearer ${token}` };
-    const options = { method: 'GET', url: '/admin/locales', headers };
-
-    const res = await server.inject(options);
-    expect(res.statusCode).to.equal(401);
-    expect(res.result).to.deep.equal({
-      statusCode: 401,
-      error: 'Unauthorized',
-      message: 'Invalid credentials',
-      attributes: { error: 'Invalid credentials' }
-    });
-  });
-  it('GET /admin/settings returns 401 for a token with incorrect claims and validating wrong cert private key', async function() {
-    const token = jwt.sign(
-      { sub: 'user@clients', iss: 'https://wrong-issuer/', },
-      certOne.privateKey, 
-      { algorithm: 'RS256', header: { 
-        kid: 'key2'
-      }, 
-      algorithm: 'RS256', 
-      expiresIn: '5m' 
-    }
-    );
-    const headers = { Authorization: `Bearer ${token}` };
-    const options = { method: 'GET', url: '/admin/settings', headers };
-  
-    const res = await server.inject(options);
-    expect(res.statusCode).to.equal(401);
-    expect(res.result).to.deep.equal({
-      statusCode: 401,
-      error: 'Unauthorized',
-      message: 'Invalid credentials',
-      attributes: { error: 'Invalid credentials' }
-    });
-  });
-  it('GET /admin/settings returns 401 for a token with an invalid signature and validating wrong cert private key', async function() {
-    const token = jwt.sign(
-      { sub: 'user@clients', iss: `https://${config('AUTH0_DOMAIN')}/` },
-      certOne.privateKey + "123",
-      { algorithm: 'RS256', keyid: 'mocked-key-id' }
-    );
-    const headers = { Authorization: `Bearer ${token}` };
-    const options = { method: 'GET', url: '/admin/settings', headers };
-  
-    const res = await server.inject(options);
-    expect(res.statusCode).to.equal(401);
-    expect(res.result).to.deep.equal({
-      statusCode: 401,
-      error: 'Unauthorized',
-      message: 'Invalid credentials',
-      attributes: { error: 'Invalid credentials' }
-    });
-  });
-  it('GET /admin/settings returns 401 for an expired token and validating wrong cert private key', async function() {
-    const token = jwt.sign(
-      { sub: 'user@clients', iss: `https://${config('AUTH0_DOMAIN')}/`, exp: Math.floor(Date.now() / 1000) - 60 },
-      certOne.privateKey, 
-      { algorithm: 'RS256', header: { 
-        kid: 'key2'
-      },
-      algorithm: 'RS256', 
-    });
-    const headers = { Authorization: `Bearer ${token}` };
-    const options = { method: 'GET', url: '/admin/settings', headers };
-  
-    const res = await server.inject(options);
-    expect(res.statusCode).to.equal(401);
-    expect(res.result).to.deep.equal({
-      statusCode: 401,
-      error: 'Unauthorized',
-      message: 'Invalid credentials',
-      attributes: { error: 'Invalid credentials' }
-    });
-  });
   describe('With an invalid token dashboard admin token', function() {
     it('returns a 400 with an invalid token', async function() {
       const options = { method: 'GET', url: '/?foo=bar', payload: {} }
