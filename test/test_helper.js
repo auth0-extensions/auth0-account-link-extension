@@ -7,9 +7,7 @@ const initServer = require('../server/index');
 const config = require('../lib/config');
 const certs = require('./acceptance/test_data/certs.json');
 
-const cert = certs.test;
-
-  
+const cert = certs.certOne;
 
 const fakeApiClient = () => {
   const defaultUsers = {};

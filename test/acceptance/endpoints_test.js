@@ -12,7 +12,7 @@ const allLocales = require('../../locales.json');
 const config = require('../../lib/config');
 const certs = require('./test_data/certs.json');
 
-const cert = certs.test;
+const cert = certs.certOne;
 describe('Endpoint tests', function() {
   let server;
 
@@ -162,7 +162,7 @@ describe('Endpoint tests', function() {
       });
     });
   });
-  describe('With valid API request token', function() {
+  describe('With valid API request token validating against correct cert', function() {
     beforeEach(async function() {
       nock.cleanAll();
 
