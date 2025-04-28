@@ -25,6 +25,10 @@ const initServer = async (cfg, storageContext, cb) => {
       : new FileStorageContext(path.join(__dirname, '../data.json'))
   );
 
+  storageContext.get((error, data) => {
+    console.log('Here is what we currently have in data:', JSON.stringify(data, null, 2));
+  });
+
   // Start the server.
   return createServer(cb || defaultCallback);
 };
