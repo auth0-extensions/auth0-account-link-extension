@@ -427,7 +427,25 @@ describe('Endpoint Failures', function() {
         title: "title1",
         color: "#000000",
         logoPath: "https://example.com/logo.png",
-        removeOverlay: false
+        removeOverlay: false,
+        customDomain: 'hey.abc.com'
+      };
+      const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+ 
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(400);
+      expect(res.result).to.deep.equal({ 
+        error: 'Bad Request', 
+        message: 'Invalid request payload input', 
+        statusCode: 400 
+      });
+    });
+    it('returns a 400 with an invalid payload - missing multiple properties', async function() {
+      const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+      const headers = { Authorization: `Bearer ${token}` };
+      const payload = {
+        template: "template1",
+        customDomain: 'hey.abc.com'
       };
       const options = { method: 'PUT', url: '/admin/settings', headers, payload };
  
