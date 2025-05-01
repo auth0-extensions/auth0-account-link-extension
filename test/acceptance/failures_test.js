@@ -9,6 +9,7 @@ const storage = require('../../lib/storage')
 const config = require('../../lib/config');
 const certs = require('./test_data/certs.json');
 const jwt = require('jsonwebtoken');
+const linkingJwtUtils = require('../../lib/linkingJwtUtils')
 
 const certOne = certs.certOne;
 const wrongCert = certs.certTwo;
@@ -590,6 +591,7 @@ describe('Endpoint Failures', function() {
   describe('PUT /admin/settings endpoint failures', function() {
     beforeEach(async function() {
       sinon.stub(storage, 'setSettings').rejects(new Error('Failed to set settings'));
+      sinon.stub(linkingJwtUtils, 'fetchRegisteredCustomDomain').rejects(new Error('Failed to set settings'));
     });
 
     afterEach(async function() {

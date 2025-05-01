@@ -109,6 +109,7 @@ describe('Endpoint tests', function() {
         sinon.stub(storage, 'getLocales').resolves(allLocales);
         sinon.stub(storage, 'getSettings').resolves({});
         sinon.stub(storage, 'setSettings').resolves({ status: 'ok' });
+        // sinon.stub(linkingJwtUtils, 'fetchRegisteredCustomDomain').resolves('abc.example.com');
       });
 
       afterEach(async function() {
@@ -149,18 +150,28 @@ describe('Endpoint tests', function() {
         expect(res.statusCode).to.equal(200);
         expect(res.result).to.deep.equal({ status: 'ok' });
       });
-      it('PUT /admin/settings returns 200 and satisfies endpoint with only customDomain', async function() {
-        const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
-        const headers = { Authorization: `Bearer ${token}` };
-        const payload = {
-          customDomain: "abc.example.com"
-        };
-        const options = { method: 'PUT', url: '/admin/settings', headers, payload };
-   
-        const res = await server.inject(options);
-        expect(res.statusCode).to.equal(200);
-        expect(res.result).to.deep.equal({ status: 'ok' });
-      });
+
+      describe('PUT /admin/settings with customDomain', function() {
+        beforeEach(async function() {
+          sinon.stub(linkingJwtUtils, 'fetchRegisteredCustomDomain').resolves('abc.example.com');
+        });
+  
+        afterEach(async function() {
+          sinon.restore();
+        });
+        it('PUT /admin/settings returns 200 and satisfies endpoint with only customDomain', async function() {
+          const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+          const headers = { Authorization: `Bearer ${token}` };
+          const payload = {
+            customDomain: "abc.example.com"
+          };
+          const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+     
+          const res = await server.inject(options);
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.deep.equal({ status: 'ok' });
+        });
+      })
       describe('/admin/user endpoint', function() {
         it('returns 200 isDashboardAdminRequest', async function() {
           const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
