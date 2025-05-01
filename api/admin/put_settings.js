@@ -28,7 +28,8 @@ const processSettings = async (payload) => {
 
 // For validation, keep existing required
 // fields, but let users send a customDomain
-// only if they'd like
+// only if they'd like.
+// we allow empty string to remove the custom domain
 module.exports = () => ({
   method: 'PUT',
   options: {
