@@ -28,7 +28,6 @@ const processSettings = async (payload) => {
 // For validation, keep existing required
 // fields, but let users send a customDomain
 // only if they'd like.
-// we allow empty string to remove the custom domain
 module.exports = () => ({
   method: 'PUT',
   options: {
@@ -45,7 +44,7 @@ module.exports = () => ({
           .regex(logoPathRegex)
           .allow(''),
         removeOverlay: Joi.bool().default(false),
-        customDomain: Joi.string().allow('')
+        customDomain: Joi.string().allow('') // we allow empty strings to unset the custom domain
       }).and('template', 'locale', 'title', 'color') // If one exists, all are required
     }
   },
