@@ -6,7 +6,6 @@ const storage = require('../../lib/storage');
 
 const logoPathRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
 const colorRegex = /^#[A-Fa-f0-9]{6}/;
-const customDomainRegex = /^(?!www\.)[\w.-]+\.[a-z]{2,}$/i;
 
 const processSettings = async (payload) => {
   const { customDomain } = payload;
@@ -46,9 +45,7 @@ module.exports = () => ({
           .regex(logoPathRegex)
           .allow(''),
         removeOverlay: Joi.bool().default(false),
-        customDomain: Joi.string()
-          .regex(customDomainRegex)
-          .allow('')
+        customDomain: Joi.string().allow('')
       }).and('template', 'locale', 'title', 'color') // If one exists, all are required
     }
   },
