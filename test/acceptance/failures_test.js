@@ -9,7 +9,7 @@ const storage = require('../../lib/storage')
 const config = require('../../lib/config');
 const certs = require('./test_data/certs.json');
 const jwt = require('jsonwebtoken');
-const linkingJwtUtils = require('../../lib/linkingJwtUtils')
+const settingsUtils = require('../../lib/settingsUtils');
 
 const certOne = certs.certOne;
 const wrongCert = certs.certTwo;
@@ -591,7 +591,7 @@ describe('Endpoint Failures', function() {
   describe('PUT /admin/settings endpoint failures', function() {
     beforeEach(async function() {
       sinon.stub(storage, 'setSettings').rejects(new Error('Failed to set settings'));
-      sinon.stub(linkingJwtUtils, 'fetchRegisteredCustomDomain').rejects(new Error('Failed to set settings'));
+      sinon.stub(settingsUtils, 'fetchRegisteredCustomDomain').rejects(new Error('Failed to set settings'));
     });
 
     afterEach(async function() {
@@ -607,6 +607,38 @@ describe('Endpoint Failures', function() {
         color: "#000000",
         logoPath: "https://example.com/logo.png",
         removeOverlay: false
+      };
+      const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+ 
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(500);
+      expect(res.result).to.deep.equal({
+        statusCode: 500,
+        error: 'Internal Server Error',
+        message: 'An internal server error occurred'
+      });
+    });
+  });
+  describe('PUT /admin/settings endpoint failures with custom domain check', function() {
+    beforeEach(async function() {
+      sinon.stub(storage, 'setSettings').rejects(new Error('Failed to set settings'));
+      sinon.stub(settingsUtils, 'fetchRegisteredCustomDomain').rejects(new Error(`Custom domain abc.def.com not found`));
+    });
+
+    afterEach(async function() {
+      sinon.restore();
+    });
+    it('fails to find a matching custom domain', async function() {
+      const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+      const headers = { Authorization: `Bearer ${token}` };
+      const payload = {
+        template: "template1",
+        locale: "en",
+        title: "title1",
+        color: "#000000",
+        logoPath: "https://example.com/logo.png",
+        removeOverlay: false,
+        customDomain: 'abc.deffff.com'
       };
       const options = { method: 'PUT', url: '/admin/settings', headers, payload };
  

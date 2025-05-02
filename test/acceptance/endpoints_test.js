@@ -4,6 +4,7 @@ const queryString = require('querystring');
 const nock = require('nock');
 const metadata = require('../../webtask.json');
 const linkingJwtUtils = require('../../lib/linkingJwtUtils')
+const settingsUtils = require('../../lib/settingsUtils');
 const storage = require('../../lib/storage')
 const { createAuth0Token, createServer, createWebtaskToken, createApiRequestToken } = require('../test_helper');
 const users = require('./test_data/users.json')
@@ -152,7 +153,8 @@ describe('Endpoint tests', function() {
 
       describe('PUT /admin/settings with customDomain', function() {
         beforeEach(async function() {
-          sinon.stub(linkingJwtUtils, 'fetchRegisteredCustomDomain').resolves('abc.example.com');
+          sinon.stub(settingsUtils, 'fetchRegisteredCustomDomain').resolves('abc.example.com');
+          sinon.stub(settingsUtils, 'configureSettingsPayload').resolves({ status: 'ok'});
         });
   
         afterEach(async function() {
