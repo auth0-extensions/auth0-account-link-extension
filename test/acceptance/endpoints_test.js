@@ -109,7 +109,6 @@ describe('Endpoint tests', function() {
         sinon.stub(storage, 'getLocales').resolves(allLocales);
         sinon.stub(storage, 'getSettings').resolves({});
         sinon.stub(storage, 'setSettings').resolves({ status: 'ok' });
-        // sinon.stub(linkingJwtUtils, 'fetchRegisteredCustomDomain').resolves('abc.example.com');
       });
 
       afterEach(async function() {
