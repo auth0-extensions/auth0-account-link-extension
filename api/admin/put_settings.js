@@ -3,7 +3,7 @@
 const Joi = require('@hapi/joi');
 const storage = require('../../lib/storage');
 
-const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
 const colorRegex = /^#[A-Fa-f0-9]{6}/;
 
 module.exports = () => ({
