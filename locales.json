@@ -8,7 +8,7 @@
       "It looks like you have another account with the same email address. We recommend you link these accounts.",
     "skipAlternativeLink": "I want to skip this and create a new account. (Not recommended)",
     "sameEmailAddressError": "Accounts must have matching email addresses. Please try again.",
-    "identities": "You may sign in with {{identities}} to link accounts",
+    "identities": "You may sign in with {{identities}} to link accounts.",
     "or": "or"
   },
 
@@ -23,7 +23,7 @@
     "skipAlternativeLink": "Quiero saltar esto y crear una nueva cuenta. (No recomendado)",
     "sameEmailAddressError":
       "Las cuentas deben tener la misma dirección de correo electrónico. Por favor intenta nuevamente.",
-    "identities": "Puedes iniciar sesión con {{identities}} para vincular las cuentas",
+    "identities": "Puedes iniciar sesión con {{identities}} para vincular las cuentas.",
     "or": "o"
   },
 
