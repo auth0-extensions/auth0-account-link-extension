@@ -226,7 +226,6 @@ describe('Endpoint tests', function() {
             const options = { method: 'PUT', url: '/admin/settings', headers, payload };
        
             const res = await server.inject(options);
-            console.log(res.result);
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.deep.equal({ status: 'ok' });
           });
