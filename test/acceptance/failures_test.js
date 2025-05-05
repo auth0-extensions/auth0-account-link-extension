@@ -621,12 +621,27 @@ describe('Endpoint Failures', function() {
   });
   describe('PUT /admin/settings endpoint failures with custom domain check', function() {
     beforeEach(async function() {
-      sinon.stub(storage, 'setSettings').rejects(new Error('Failed to set settings'));
-      sinon.stub(settingsUtils, 'fetchRegisteredCustomDomain').rejects(new Error(`Custom domain abc.def.com not found`));
+      nock.cleanAll();
+      nock(`https://${config('AUTH0_DOMAIN')}`)
+      .post(`/oauth/token`)
+      .reply(200, { 
+        access_token: createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' }), 
+        token_type: 'Bearer',
+        expires_in: 86400
+      });
+      nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+      .get(`/custom-domains`)
+      .reply(200, [
+          {
+            domain: 'abc.def.com',
+            status: 'active',
+            verification_status: 'verified'
+          }
+        ]
+      );
     });
-
     afterEach(async function() {
-      sinon.restore();
+      nock.cleanAll();
     });
     it('fails to find a matching custom domain', async function() {
       const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
@@ -638,11 +653,12 @@ describe('Endpoint Failures', function() {
         color: "#000000",
         logoPath: "https://example.com/logo.png",
         removeOverlay: false,
-        customDomain: 'abc.deffff.com'
+        customDomain: 'abc.defff.com' // This domain does not exist in the mocked response
       };
       const options = { method: 'PUT', url: '/admin/settings', headers, payload };
  
       const res = await server.inject(options);
+      console.log(res.result);
       expect(res.statusCode).to.equal(500);
       expect(res.result).to.deep.equal({
         statusCode: 500,

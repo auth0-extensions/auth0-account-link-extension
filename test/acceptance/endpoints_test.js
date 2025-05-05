@@ -184,6 +184,50 @@ describe('Endpoint tests', function() {
           expect(res.result).to.have.keys(['email', 'avatar'])
         });
       });
+        describe('PUT /admin/settings endpoint success with custom domain check', function() {
+          beforeEach(async function() {
+            nock.cleanAll();
+            nock(`https://${config('AUTH0_DOMAIN')}`)
+            .post(`/oauth/token`)
+            .reply(200, { 
+              access_token: createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' }), 
+              token_type: 'Bearer',
+              expires_in: 86400
+            });
+            nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+            .get(`/custom-domains`)
+            .reply(200, [
+                {
+                  domain: 'abc.def.com',
+                  status: 'active',
+                  verification_status: 'verified'
+                }
+              ]
+            );
+          });
+          afterEach(async function() {
+            nock.cleanAll();
+          });
+          it('fails to find a matching custom domain', async function() {
+            const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+            const headers = { Authorization: `Bearer ${token}` };
+            const payload = {
+              template: "template1",
+              locale: "en",
+              title: "title1",
+              color: "#000000",
+              logoPath: "https://example.com/logo.png",
+              removeOverlay: false,
+              customDomain: 'abc.def.com' // This domain matches domain in the mocked response
+            };
+            const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+       
+            const res = await server.inject(options);
+            console.log(res.result);
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.deep.equal({ status: 'ok' });
+          });
+        });
     });
   });
   describe('With valid API request token validating against correct cert', function() {
