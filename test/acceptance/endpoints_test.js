@@ -124,7 +124,6 @@ describe('Endpoint tests', function() {
           nock.cleanAll();
         });
         beforeEach(async function() {
-          // sinon.stub(storage, 'getLocales').resolves(allLocales);
           sinon.stub(storage, 'getSettings').resolves({ customDomain: 'abc.def.com'});
           sinon.stub(storage, 'setSettings').resolves({ status: 'ok' });
         });
