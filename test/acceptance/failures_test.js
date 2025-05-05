@@ -630,6 +630,9 @@ describe('Endpoint Failures', function() {
         expires_in: 86400
       });
       nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+      .put(`/rules-configs/AUTH0_ACCOUNT_LINKING_EXTENSION_CUSTOM_DOMAIN`)
+      .reply(200, {});
+      nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
       .get(`/custom-domains`)
       .reply(200, [
           {

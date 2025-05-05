@@ -25,7 +25,7 @@
     "onInstallPath": "/.extensions/on-install",
     "onUpdatePath": "/.extensions/on-install",
     "scopes":
-      "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients read:custom_domains"
+      "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients read:custom_domains update:rules_configs"
   },
   "runtime": "node22"
 }
