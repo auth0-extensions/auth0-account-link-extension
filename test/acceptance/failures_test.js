@@ -9,6 +9,7 @@ const storage = require('../../lib/storage')
 const config = require('../../lib/config');
 const certs = require('./test_data/certs.json');
 const jwt = require('jsonwebtoken');
+const settingsUtils = require('../../lib/settingsUtils');
 
 const certOne = certs.certOne;
 const wrongCert = certs.certTwo;
@@ -427,7 +428,25 @@ describe('Endpoint Failures', function() {
         title: "title1",
         color: "#000000",
         logoPath: "https://example.com/logo.png",
-        removeOverlay: false
+        removeOverlay: false,
+        customDomain: 'hey.abc.com'
+      };
+      const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+ 
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(400);
+      expect(res.result).to.deep.equal({ 
+        error: 'Bad Request', 
+        message: 'Invalid request payload input', 
+        statusCode: 400 
+      });
+    });
+    it('returns a 400 with an invalid payload - missing multiple properties', async function() {
+      const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+      const headers = { Authorization: `Bearer ${token}` };
+      const payload = {
+        template: "template1",
+        customDomain: 'hey.abc.com'
       };
       const options = { method: 'PUT', url: '/admin/settings', headers, payload };
  
@@ -572,6 +591,7 @@ describe('Endpoint Failures', function() {
   describe('PUT /admin/settings endpoint failures', function() {
     beforeEach(async function() {
       sinon.stub(storage, 'setSettings').rejects(new Error('Failed to set settings'));
+      sinon.stub(settingsUtils, 'fetchRegisteredCustomDomain').rejects(new Error('Failed to set settings'));
     });
 
     afterEach(async function() {
@@ -587,6 +607,56 @@ describe('Endpoint Failures', function() {
         color: "#000000",
         logoPath: "https://example.com/logo.png",
         removeOverlay: false
+      };
+      const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+ 
+      const res = await server.inject(options);
+      expect(res.statusCode).to.equal(500);
+      expect(res.result).to.deep.equal({
+        statusCode: 500,
+        error: 'Internal Server Error',
+        message: 'An internal server error occurred'
+      });
+    });
+  });
+  describe('PUT /admin/settings endpoint failures with custom domain check', function() {
+    beforeEach(async function() {
+      nock.cleanAll();
+      nock(`https://${config('AUTH0_DOMAIN')}`)
+      .post(`/oauth/token`)
+      .reply(200, { 
+        access_token: createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' }), 
+        token_type: 'Bearer',
+        expires_in: 86400
+      });
+      nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+      .put(`/rules-configs/AUTH0_ACCOUNT_LINKING_EXTENSION_CUSTOM_DOMAIN`)
+      .reply(200, {});
+      nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+      .get(`/custom-domains`)
+      .reply(200, [
+          {
+            domain: 'abc.def.com',
+            status: 'active',
+            verification_status: 'verified'
+          }
+        ]
+      );
+    });
+    afterEach(async function() {
+      nock.cleanAll();
+    });
+    it('fails to find a matching custom domain', async function() {
+      const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+      const headers = { Authorization: `Bearer ${token}` };
+      const payload = {
+        template: "template1",
+        locale: "en",
+        title: "title1",
+        color: "#000000",
+        logoPath: "https://example.com/logo.png",
+        removeOverlay: false,
+        customDomain: 'abc.defff.com' // This domain does not exist in the mocked response
       };
       const options = { method: 'PUT', url: '/admin/settings', headers, payload };
  

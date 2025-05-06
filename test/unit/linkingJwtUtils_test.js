@@ -1,11 +1,20 @@
 const { expect } = require('chai');
+const sinon = require('sinon');
 const linkingJwtUtils = require('../../lib/linkingJwtUtils')
 const { createAuth0Token, createWebtaskToken } = require('../test_helper');
+const storage = require('../../lib/storage');
 
 describe('Linking JWT Utils Tests', () => {
+  beforeEach(async function() {
+    sinon.stub(storage, 'getSettings').resolves({ customDomain: '' });
+  });
+
+  afterEach(async function() {
+    sinon.restore();
+  });
     it('validates a token successfully', async () => {
         const token = createAuth0Token({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
-        const decoded = await linkingJwtUtils.validateAuth0Token(token)
+        const decoded = await linkingJwtUtils.validateAuth0Token(token);
 
         expect(decoded.sub).to.deep.equal('auth0|67d304a8b5dd1267e87c53ba');
         expect(decoded.email).to.deep.equal('ben1@acme.com');

@@ -28,6 +28,7 @@ module.exports = () => ({
     if (params.color) dynamicSettings.color = `#${params.color}`;
     if (params.title) dynamicSettings.title = params.title;
     if (params.logoPath) dynamicSettings.logoPath = params.logoPath;
+    if (params.customDomain) dynamicSettings.customDomain = params.customDomain;
     try {
       const token = await linkingJwtUtils.validateAuth0Token(params.child_token);
       try {

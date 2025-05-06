@@ -4,6 +4,7 @@ const queryString = require('querystring');
 const nock = require('nock');
 const metadata = require('../../webtask.json');
 const linkingJwtUtils = require('../../lib/linkingJwtUtils')
+const settingsUtils = require('../../lib/settingsUtils');
 const storage = require('../../lib/storage')
 const { createAuth0Token, createServer, createWebtaskToken, createApiRequestToken } = require('../test_helper');
 const users = require('./test_data/users.json')
@@ -105,6 +106,51 @@ describe('Endpoint tests', function() {
       });
     });
     describe('/admin/settings endpoint', function() {
+      describe('PUT /admin/settings endpoint success unset custom domain', function() {
+        beforeEach(async function() {
+          nock.cleanAll();
+          nock(`https://${config('AUTH0_DOMAIN')}`)
+          .post(`/oauth/token`)
+          .reply(200, { 
+            access_token: createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' }), 
+            token_type: 'Bearer',
+            expires_in: 86400
+          });
+          nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+          .delete(`/rules-configs/AUTH0_ACCOUNT_LINKING_EXTENSION_CUSTOM_DOMAIN`)
+          .reply(204, {});
+        });
+        afterEach(async function() {
+          nock.cleanAll();
+        });
+        beforeEach(async function() {
+          sinon.stub(storage, 'getSettings').resolves({ customDomain: 'abc.def.com'});
+          sinon.stub(storage, 'setSettings').resolves({ status: 'ok' });
+        });
+  
+        afterEach(async function() {
+          sinon.restore();
+        });
+        it('successfully unsets custom domain and deletes settings config key', async function() {
+          const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+          const headers = { Authorization: `Bearer ${token}` };
+          const payload = {
+            template: "template1",
+            locale: "en",
+            title: "title1",
+            color: "#000000",
+            logoPath: "https://example.com/logo.png",
+            removeOverlay: false,
+            customDomain: '' // unsetting custom domain
+          };
+          const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+     
+          const res = await server.inject(options);
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.deep.equal({ status: 'ok' });
+        });
+      });
+    describe('PUT /admin/settings endpoint success without custom domain', async function () {
       beforeEach(async function() {
         sinon.stub(storage, 'getLocales').resolves(allLocales);
         sinon.stub(storage, 'getSettings').resolves({});
@@ -149,6 +195,30 @@ describe('Endpoint tests', function() {
         expect(res.statusCode).to.equal(200);
         expect(res.result).to.deep.equal({ status: 'ok' });
       });
+    });
+
+      describe('PUT /admin/settings with customDomain', function() {
+        beforeEach(async function() {
+          sinon.stub(settingsUtils, 'fetchRegisteredCustomDomain').resolves('abc.example.com');
+          sinon.stub(settingsUtils, 'configureSettingsPayload').resolves({ status: 'ok'});
+        });
+  
+        afterEach(async function() {
+          sinon.restore();
+        });
+        it('PUT /admin/settings returns 200 and satisfies endpoint with only customDomain', async function() {
+          const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+          const headers = { Authorization: `Bearer ${token}` };
+          const payload = {
+            customDomain: "abc.example.com"
+          };
+          const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+     
+          const res = await server.inject(options);
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.deep.equal({ status: 'ok' });
+        });
+      })
       describe('/admin/user endpoint', function() {
         it('returns 200 isDashboardAdminRequest', async function() {
           const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
@@ -160,6 +230,60 @@ describe('Endpoint tests', function() {
           expect(res.result).to.have.keys(['email', 'avatar'])
         });
       });
+        describe('PUT /admin/settings endpoint success with custom domain check', function() {
+          beforeEach(async function() {
+            nock.cleanAll();
+            nock(`https://${config('AUTH0_DOMAIN')}`)
+            .post(`/oauth/token`)
+            .reply(200, { 
+              access_token: createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' }), 
+              token_type: 'Bearer',
+              expires_in: 86400
+            });
+            nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+            .put(`/rules-configs/AUTH0_ACCOUNT_LINKING_EXTENSION_CUSTOM_DOMAIN`)
+            .reply(200, {});
+            nock(`https://${config('AUTH0_DOMAIN')}/api/v2`)
+            .get(`/custom-domains`)
+            .reply(200, [
+                {
+                  domain: 'abc.def.com',
+                  status: 'active',
+                  verification_status: 'verified'
+                }
+              ]
+            );
+          });
+          afterEach(async function() {
+            nock.cleanAll();
+          });
+          beforeEach(async function() {
+            sinon.stub(storage, 'getSettings').resolves({});
+            sinon.stub(storage, 'setSettings').resolves({ status: 'ok' });
+          });
+    
+          afterEach(async function() {
+            sinon.restore();
+          });
+          it('successfully finds custom domain and sets it with correct rule config setting key', async function() {
+            const token = createWebtaskToken({ user_id: 'auth0|67d304a8b5dd1267e87c53ba', email: 'ben1@acme.com' });
+            const headers = { Authorization: `Bearer ${token}` };
+            const payload = {
+              template: "template1",
+              locale: "en",
+              title: "title1",
+              color: "#000000",
+              logoPath: "https://example.com/logo.png",
+              removeOverlay: false,
+              customDomain: 'abc.def.com' // This domain matches domain in the mocked response
+            };
+            const options = { method: 'PUT', url: '/admin/settings', headers, payload };
+       
+            const res = await server.inject(options);
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.deep.equal({ status: 'ok' });
+          });
+        });
     });
   });
   describe('With valid API request token validating against correct cert', function() {
