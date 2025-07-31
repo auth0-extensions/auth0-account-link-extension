@@ -74,5 +74,17 @@
     "sameEmailAddressError": "Konton måste ha matchande e-postadresser. Försök igen.",
     "identities": "Du kan logga in med {{identities}} för att länka konton",
     "or": "eller"
+  },
+
+  "pl": {
+    "_name": "Polish",
+    "pageMismatchError": "Wygląda na to, że jesteś tutaj przez pomyłkę. Spróbuj ponownie.",
+    "continue": "Kontynuuj",
+    "accountLinking": "Łączenie kont",
+    "introduction": "Wygląda na to, że masz już konto powiązane z tym adresem e-mail. Zalecamy ich połączenie.",
+    "skipAlternativeLink": "Chcę pominąć ten krok i utworzyć nowe konto (niezalecane).",
+    "sameEmailAddressError": "Konta muszą mieć ten sam adres e-mail. Spróbuj ponownie.",
+    "identities": "Możesz zalogować się za pomocą {{identities}}, aby połączyć konta.",
+    "or": "lub"
   }
 }

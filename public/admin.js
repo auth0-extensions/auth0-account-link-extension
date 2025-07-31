@@ -45,6 +45,7 @@ module.exports = function() {
     var $saveChangesBtn = $('#save-changes');
     var $saveResult = $('#save-result');
     var $logoutBtn = $('#logout-btn');
+    var $customDomainInput = $('#custom_domain_input')
 
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
       lineNumbers: true,
@@ -124,6 +125,7 @@ module.exports = function() {
         $titleInput.val(data.title);
         $colorInput.val(data.color);
         $logoPathInput.val(data.logoPath);
+        $customDomainInput.val(data.customDomain);
 
         $removeOverlayCheck.prop('checked', data.removeOverlay || false);
       })
@@ -147,7 +149,8 @@ module.exports = function() {
           logoPath: $logoPathInput.val(),
           color: $colorInput.val(),
           title: $titleInput.val(),
-          removeOverlay: $removeOverlayCheck.is(':checked')
+          removeOverlay: $removeOverlayCheck.is(':checked'),
+          customDomain: $customDomainInput.val()
         },
         headers: {
           Authorization: 'Bearer ' + token
@@ -348,4 +351,4 @@ module.exports = function() {
   } else if (path.endsWith('/admin/locale')) {
     return localeAdminPanel();
   } 
-}
+};

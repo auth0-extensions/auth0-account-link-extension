@@ -23,7 +23,7 @@ describe('Management API adapter', () => {
 
       expect(typeof adapter.client).to.equal('object');
 
-      const clientOptions = adapter.client.tokenProvider.options;
+      const clientOptions = adapter.client.configuration;
 
       expect(clientOptions.domain).to.equal(config.AUTH0_DOMAIN);
       expect(clientOptions.clientId).to.equal(config.AUTH0_CLIENT_ID);
