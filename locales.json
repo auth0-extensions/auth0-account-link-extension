@@ -63,7 +63,19 @@
     "identities": "Je kunt je aanmelden met {{identities}} om accounts te koppelen",
     "or": "of"
   },
-  
+
+  "sv": {
+    "_name": "Swedish",
+    "pageMismatchError": "Du verkar ha kommit till denna sida av misstag. Försök att logga in igen",
+    "continue": "Fortsätt",
+    "accountLinking": "Kontolänkning",
+    "introduction": "Det verkar som att du har ett annat konto med samma e-postadress. Vi rekommenderar att du länkar dessa konton.",
+    "skipAlternativeLink": "Jag vill hoppa över detta och skapa ett nytt konto. (Ej rekommenderat)",
+    "sameEmailAddressError": "Konton måste ha matchande e-postadresser. Försök igen.",
+    "identities": "Du kan logga in med {{identities}} för att länka konton",
+    "or": "eller"
+  },
+
   "pl": {
     "_name": "Polish",
     "pageMismatchError": "Wygląda na to, że jesteś tutaj przez pomyłkę. Spróbuj ponownie.",
