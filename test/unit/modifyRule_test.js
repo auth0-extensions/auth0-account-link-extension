@@ -39,6 +39,7 @@ describe('Modifying Rules', function() {
   function getStubApi(fail = false) {
     const result = (value) => fail ? Promise.reject(new Error('nope')) : Promise.resolve(value);
     let existingRules = [];
+    let existingRulesConfig = {};
     let currentId = 1;
 
     return {
@@ -64,6 +65,14 @@ describe('Modifying Rules', function() {
         existingRules = existingRules.filter(r => r.id !== rule.id);
 
         return result(existingRules);
+      },
+      updateRulesConfig(key, value) {
+        existingRulesConfig[key] = value;
+        return result(existingRulesConfig);
+      },
+      deleteRulesConfig(key) {
+        delete existingRulesConfig[key];
+        return result(existingRulesConfig);
       }
     };
   };
