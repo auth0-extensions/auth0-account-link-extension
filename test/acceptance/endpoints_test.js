@@ -174,7 +174,9 @@ describe('Endpoint tests', function() {
             { code: 'es', name: 'Spanish' },
             { code: 'ja', name: 'Japanease' },
             { code: 'fr', name: 'French' },
-            { code: 'nl', name: 'Dutch' }
+            { code: 'nl', name: 'Dutch' },
+            { code: 'sv', name: 'Swedish' },
+            { code: 'pl', name: 'Polish' },
           ]
         })
       });
@@ -361,7 +363,9 @@ describe('Endpoint tests', function() {
             { code: 'es', name: 'Spanish' },
             { code: 'ja', name: 'Japanease' },
             { code: 'fr', name: 'French' },
-            { code: 'nl', name: 'Dutch' }
+            { code: 'nl', name: 'Dutch' },
+            { code: 'sv', name: 'Swedish' },
+            { code: 'pl', name: 'Polish' },
           ]
         })
       });
