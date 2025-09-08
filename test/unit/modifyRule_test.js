@@ -1,43 +1,73 @@
-const {expect} = require('chai');
-const { install, uninstall } = require('../../modifyRule');
+const { expect } = require("chai");
+const { install, uninstall } = require("../../modifyRule");
 
-describe('Modifying Rules', function() {
-  describe('Installing a rule', function() {
-    it('successfully creates a rule when not found in collection', function() {
+describe("Modifying Rules", function () {
+  describe("Installing a rule", function () {
+    it("successfully creates a rule when not found in collection", function () {
       let api = getStubApi();
 
-      return install(api, {})
+      return install(api, { clientSecret: "shhh" })
         .then(api.getAll)
-        .then(function(rules) {
-          expect(rules.map(r => r.id)).to.contain(1);
+        .then(function (rules) {
+          expect(rules.map((r) => r.id)).to.contain(1);
         });
     });
 
-    it('successfully updates a rule when found in collection', function() {
+    it("successfully updates a rule when found in collection", function () {
       let api = getStubApi();
 
-      return install(api, {})
-        .then(_ => install(api, {}))
-        .then(x => api.getAll())
-        .then(function(rules) {
-          expect(rules.map(r => r.id)).to.contain(1);
+      return install(api, { clientSecret: "one" })
+        .then((_) => install(api, { clientSecret: "two" }))
+        .then((x) => api.getAll())
+        .then(function (rules) {
+          expect(rules.map((r) => r.id)).to.contain(1);
         });
     });
 
-    it('gracefully handles errors with the API', function() {
+    it("gracefully handles errors with the API", function () {
       let api = getStubApi(true);
 
       return install(api, {})
-        .then(function() {
-          throw new Error('Promise should have been rejected');
-        }).catch(function(err) {
-          expect(err.message).to.eq('nope');
+        .then(function () {
+          throw new Error("Promise should have been rejected");
+        })
+        .catch(function (err) {
+          expect(err.message).to.eq("nope");
+        });
+    });
+
+    it("stores the client secret as a rule config", function () {
+      let api = getStubApi();
+
+      return install(api, { clientSecret: "secret123" })
+        .then(() => api.getRulesConfig())
+        .then((cfg) => {
+          expect(cfg.AUTH0_ACCOUNT_LINKING_EXTENSION_CLIENT_SECRET).to.equal(
+            "secret123"
+          );
+        });
+    });
+  });
+
+  describe("Uninstalling a rule", function () {
+    it("removes rule and associated rule config", function () {
+      let api = getStubApi();
+
+      return install(api, { clientSecret: "secret123" })
+        .then(() => uninstall(api))
+        .then(() => Promise.all([api.getAll(), api.getRulesConfig()]))
+        .then(([rules, cfg]) => {
+          expect(rules.length).to.equal(0);
+          expect(cfg.AUTH0_ACCOUNT_LINKING_EXTENSION_CLIENT_SECRET).to.equal(
+            undefined
+          );
         });
     });
   });
 
   function getStubApi(fail = false) {
-    const result = (value) => fail ? Promise.reject(new Error('nope')) : Promise.resolve(value);
+    const result = (value) =>
+      fail ? Promise.reject(new Error("nope")) : Promise.resolve(value);
     let existingRules = [];
     let existingRulesConfig = {};
     let currentId = 1;
@@ -53,16 +83,20 @@ describe('Modifying Rules', function() {
         return result(existingRules);
       },
       update(existingRule, updatedRule) {
-        const index = existingRules.findIndex(r => r.id === existingRule.id);
+        const index = existingRules.findIndex((r) => r.id === existingRule.id);
 
         if (index !== -1) {
-          existingRules[index] = Object.assign({}, existingRules[index], updatedRule);
+          existingRules[index] = Object.assign(
+            {},
+            existingRules[index],
+            updatedRule
+          );
         }
 
         return result(existingRules);
       },
       delete(rule) {
-        existingRules = existingRules.filter(r => r.id !== rule.id);
+        existingRules = existingRules.filter((r) => r.id !== rule.id);
 
         return result(existingRules);
       },
@@ -73,7 +107,10 @@ describe('Modifying Rules', function() {
       deleteRulesConfig(key) {
         delete existingRulesConfig[key];
         return result(existingRulesConfig);
-      }
+      },
+      getRulesConfig() {
+        return result(existingRulesConfig);
+      },
     };
-  };
+  }
 });
