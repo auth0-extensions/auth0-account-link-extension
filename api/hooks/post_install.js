@@ -15,7 +15,8 @@ module.exports = server => ({
   handler: async (req, h) => {
     logger.info('Starting rule installation...');
     try {
-      await install(req.pre.auth0.rules, {
+  // Pass full management client (not just .rules) so we can set rules-config.
+  await install(req.pre.auth0, {
         extensionURL: config('PUBLIC_WT_URL'),
         clientID: config('AUTH0_CLIENT_ID'),
         clientSecret: config('AUTH0_CLIENT_SECRET')

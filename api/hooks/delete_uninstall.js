@@ -16,7 +16,7 @@ module.exports = server => ({
     logger.info('Starting uninstall...');
 
     try {
-      await uninstall(req.pre.auth0.rules);
+  await uninstall(req.pre.auth0);
       await req.pre.auth0.deleteClient({ client_id: config('AUTH0_CLIENT_ID') });
       return h.response().code(204);
     } catch (err) {
