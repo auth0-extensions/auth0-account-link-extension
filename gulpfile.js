@@ -3,9 +3,9 @@ const util = require('gulp-util');
 const ngrok = require('@ngrok/ngrok');
 const nodemon = require('gulp-nodemon');
 const { install } = require('./modifyRule');
-const managementAdapter = require('./lib/managementAdapter');
+const managementWrapper = require('./lib/managementWrapper');
 
-const { ManagementClientAdapter, getCurrentConfig } = managementAdapter;
+const { ManagementClientWrapper, getCurrentConfig } = managementWrapper;
 
 async function connectNgrok() {
   const config = await getCurrentConfig();
@@ -35,8 +35,8 @@ async function connectNgrok() {
       const publicUrl = `${url.replace('https://', 'http://')}`;
       util.log('Public Url:', publicUrl);
       util.log('Patching rule on tenant.');
-      const adapter = new ManagementClientAdapter(config);
-      await install(adapter, {
+      const wrapper = new ManagementClientWrapper(config);
+      await install(wrapper, {
         extensionURL: publicUrl,
         username: 'Development',
         clientID: config.AUTH0_CLIENT_ID,

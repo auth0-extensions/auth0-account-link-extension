@@ -7,9 +7,8 @@ describe('Modifying Rules', function() {
       let api = getStubApi();
 
       return install(api, {})
-        .then(() => api.client.getRules())
+        .then(() => api.client.rules.getAll())
         .then(function(rules) {
-          console.log({rules})
           expect(rules.map(r => r.id)).to.contain(1);
         });
     });
@@ -19,9 +18,8 @@ describe('Modifying Rules', function() {
 
       return install(api, {})
         .then(_ => install(api, {}))
-        .then(x => api.client.getRules())
+        .then(x => api.client.rules.getAll())
         .then(function(rules) {
-          console.log({rules})
           expect(rules.map(r => r.id)).to.contain(1);
         });
     });
@@ -46,38 +44,41 @@ describe('Modifying Rules', function() {
 
     return {
       client: {
-        getRules() {
-          console.log({existingRules})
-          return Promise.resolve(existingRules);
-        },
-        createRule(rule) {
-          existingRules.push({ id: currentId, ...rule });
-          currentId = currentId + 1;
+        rules: {
+          getAll() {
+            return Promise.resolve(existingRules);
+          },
+          create(rule) {
+            existingRules.push({ id: currentId, ...rule });
+            currentId = currentId + 1;
 
-          return result(existingRules);
-        },
-        updateRule({ id }, updatedRule) {
-          const index = existingRules.findIndex(r => r.id === id);
+            return result(existingRules);
+          },
+          update({ id }, updatedRule) {
+            const index = existingRules.findIndex(r => r.id === id);
 
-          if (index !== -1) {
-            existingRules[index] = Object.assign({}, existingRules[index], updatedRule);
+            if (index !== -1) {
+              existingRules[index] = Object.assign({}, existingRules[index], updatedRule);
+            }
+
+            return result(existingRules);
+          },
+          delete({ id }) {
+            existingRules = existingRules.filter(r => r.id !== id);
+
+            return result(existingRules);
+          },
+        },
+        rulesConfigs: {
+          set({ key }, { value }) {
+            existingRuleConfigs.push({ key, value });
+            return result(existingRuleConfigs);
+          },
+          delete({ key }) {
+            existingRuleConfigs = existingRuleConfigs.filter((c) => c.key !== key);
           }
-
-          return result(existingRules);
         },
-        deleteRule({ id }) {
-          existingRules = existingRules.filter(r => r.id !== id);
-
-          return result(existingRules);
-        },
-        setRulesConfig({ key }, { value }) {
-          existingRuleConfigs.push({ key, value });
-          return result(existingRuleConfigs);
-        },
-        deleteRulesConfig({ key }) {
-          existingRuleConfigs = existingRuleConfigs.filter((c) => c.key !== key);
-        }
-      }
+      },
     };
   };
 });

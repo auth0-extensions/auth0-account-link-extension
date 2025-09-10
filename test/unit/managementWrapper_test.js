@@ -2,11 +2,11 @@
 
 const path = require('path');
 const { expect } = require('chai');
-const { ManagementClientAdapter, getCurrentConfig } = require('../../lib/managementAdapter');
+const { ManagementClientWrapper, getCurrentConfig } = require('../../lib/managementWrapper');
 
 const configPath = path.join(__dirname, '../../server/config.test.json');
 
-describe('Management API adapter', () => {
+describe('Management API wrapper', () => {
   it('Config has needed properties', (done) => {
     getCurrentConfig(configPath).then((config) => {
       expect(config.hasOwnProperty('AUTH0_DOMAIN')).to.equal(true);
@@ -17,13 +17,13 @@ describe('Management API adapter', () => {
     });
   });
 
-  it('Adapter initializes correctly', (done) => {
+  it('Management client wrapper initializes correctly', (done) => {
     getCurrentConfig(configPath).then((config) => {
-      const adapter = new ManagementClientAdapter(config);
+      const wrapper = new ManagementClientWrapper(config);
 
-      expect(typeof adapter.client).to.equal('object');
+      expect(typeof wrapper.client).to.equal('object');
 
-      const clientOptions = adapter.client.configuration;
+      const clientOptions = wrapper.client.configuration;
 
       expect(clientOptions.domain).to.equal(config.AUTH0_DOMAIN);
       expect(clientOptions.clientId).to.equal(config.AUTH0_CLIENT_ID);
