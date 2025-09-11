@@ -1,7 +1,7 @@
 {
   "title": "Auth0 Account Link",
   "name": "auth0-account-link",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "preVersion": "3.0.0",
   "author": "auth0",
   "description":
