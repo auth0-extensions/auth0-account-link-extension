@@ -87,7 +87,7 @@ module.exports = (dynamicSettings, identities, locale = 'en') =>
                                             <div class="auth0-lock-form" id="content-container">
                                                 <div>
                                                 <p id="message">
-                                                    ${t('introduction')} ${t('identities').replace(identitiesRegex, identities)}.
+                                                    ${t('introduction')} ${t('identities').replace(identitiesRegex, identities)}
                                                 </p>
                                                 <p class="auth0-lock-alternative">
                                                     <a class="auth0-lock-alternative-link" id="skip" href="#">
