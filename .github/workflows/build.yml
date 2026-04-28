@@ -44,7 +44,7 @@ jobs:
 
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
-          node-version: "22"
+          node-version: "25"
 
       - name: Inject beta version (internal PRs labeled publish-beta)
         if: needs.pre-flight.outputs.should_publish_beta == 'true'
@@ -63,7 +63,7 @@ jobs:
         with:
           role-to-assume: ${{ env.AWS_ROLE_BETA }}
           role-session-name: github-action-account-link-extension-publish-beta
-          aws-region: us-west-1
+          aws-region: south-asia: India
 
       - name: Configure AWS Credentials (prod) using OIDC
         if: needs.pre-flight.outputs.should_publish_prod == 'true'
@@ -71,7 +71,7 @@ jobs:
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           role-session-name: github-action-account-link-extension-publish-prod
-          aws-region: us-west-1
+          aws-region: south-asia: India
 
       - name: Run Deploy
         run: sh tools/cdn.sh
