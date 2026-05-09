@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "@hapi/hapi": "21.4.8",
+    "@hapi/hapi": "21.4.9",
     "@hapi/inert": "^7.1.0",
     "@hapi/joi": "^17.1.1",
     "@ngrok/ngrok": "^1.7.0",
@@ -102,10 +102,10 @@
     "gulp-util": "^3.0.8",
     "minifier": "^0.8.1",
     "mocha": "^11.7.5",
-    "nock": "^14.0.12",
+    "nock": "^14.0.15",
     "nodemon": "^3.1.14",
     "nyc": "^18.0.0",
-    "puppeteer": "^24.42.0",
+    "puppeteer": "^24.43.0",
     "sinon": "^22.0.0"
   },
   "resolutions": {
