@@ -75,7 +75,7 @@
     "@hapi/inert": "^7.1.0",
     "@hapi/joi": "^17.1.1",
     "@ngrok/ngrok": "^1.7.0",
-    "auth0": "5.8.0",
+    "auth0": "5.9.1",
     "auth0-extension-tools": "^1.5.2",
     "hapi-auth-jwt2": "11.0.0",
     "jsonwebtoken": "9.0.3",
