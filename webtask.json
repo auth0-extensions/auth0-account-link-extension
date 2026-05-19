@@ -1,7 +1,7 @@
 {
   "title": "Auth0 Account Link",
   "name": "auth0-account-link",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "preVersion": "3.0.0",
   "author": "auth0",
   "description":
@@ -25,7 +25,7 @@
     "onInstallPath": "/.extensions/on-install",
     "onUpdatePath": "/.extensions/on-install",
     "scopes":
-      "read:connections read:users read:rules create:rules update:rules delete:rules delete:clients read:custom_domains update:rules_configs delete:rules_configs"
+      "read:users read:rules create:rules update:rules delete:rules delete:clients read:custom_domains update:rules_configs delete:rules_configs"
   },
   "runtime": "node22"
 }
