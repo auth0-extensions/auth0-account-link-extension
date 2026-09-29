@@ -21,3 +21,20 @@ jobs:
 
     - name: Run Tests
       run: yarn run test
+
+  integration-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+
+    - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
+      with:
+        node-version: '22'
+
+    - name: Install dependencies
+      run: yarn
+
+    - name: Run Integration Tests
+      run: yarn run test:integration

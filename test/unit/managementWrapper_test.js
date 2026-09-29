@@ -1,37 +1,26 @@
 /* eslint-disable no-prototype-builtins */
 
-const path = require('path');
 const { expect } = require('chai');
-const { ManagementClientWrapper, getCurrentConfig } = require('../../lib/managementWrapper');
+const { ManagementClientWrapper } = require('../../lib/managementWrapper');
 
-const configPath = path.join(__dirname, '../../server/config.test.json');
+const fakeConfig = {
+  AUTH0_DOMAIN: 'example.auth0.com',
+  AUTH0_CLIENT_ID: 'fake-client-id',
+  AUTH0_CLIENT_SECRET: 'fake-client-secret',
+};
 
 describe('Management API wrapper', () => {
-  it('Config has needed properties', (done) => {
-    getCurrentConfig(configPath).then((config) => {
-      expect(config.hasOwnProperty('AUTH0_DOMAIN')).to.equal(true);
-      expect(config.hasOwnProperty('AUTH0_CLIENT_ID')).to.equal(true);
-      expect(config.hasOwnProperty('AUTH0_CLIENT_SECRET')).to.equal(true);
+  it('Management client wrapper initializes correctly', () => {
+    const wrapper = new ManagementClientWrapper(fakeConfig);
 
-      done();
-    });
-  });
+    expect(typeof wrapper.client).to.equal('object');
 
-  it('Management client wrapper initializes correctly', (done) => {
-    getCurrentConfig(configPath).then((config) => {
-      const wrapper = new ManagementClientWrapper(config);
+    const clientOptions = wrapper.client.configuration;
 
-      expect(typeof wrapper.client).to.equal('object');
-
-      const clientOptions = wrapper.client.configuration;
-
-      expect(clientOptions.domain).to.equal(config.AUTH0_DOMAIN);
-      expect(clientOptions.clientId).to.equal(config.AUTH0_CLIENT_ID);
-      expect(clientOptions.clientSecret).to.equal(config.AUTH0_CLIENT_SECRET);
-      expect(clientOptions.audience).to.equal(`https://${config.AUTH0_DOMAIN}/api/v2/`);
-
-      done();
-    });
+    expect(clientOptions.domain).to.equal(fakeConfig.AUTH0_DOMAIN);
+    expect(clientOptions.clientId).to.equal(fakeConfig.AUTH0_CLIENT_ID);
+    expect(clientOptions.clientSecret).to.equal(fakeConfig.AUTH0_CLIENT_SECRET);
+    expect(clientOptions.audience).to.equal(`https://${fakeConfig.AUTH0_DOMAIN}/api/v2/`);
   });
 
   describe('Unwrapping behavior', () => {

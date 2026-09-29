@@ -1,9 +1,12 @@
 const nconf = require('nconf');
+const os = require('os');
 const path = require('path');
 const request = require('request');
 const { sign } = require('jsonwebtoken');
+const { FileStorageContext } = require('auth0-extension-tools');
 const handlerUtils = require('../lib/handlerUtils');
 const initServer = require('../server/index');
+const initDb = require('../lib/db').init;
 const config = require('../lib/config');
 const certs = require('./acceptance/test_data/certs.json');
 
@@ -67,11 +70,10 @@ const mockHandlers = { name: 'handlers', register: async (server, options) => {
   });
 } };
 
-const createServer = (configFile = '../server/config.test.json') => {
+const createServer = () => {
   nconf
     .argv()
     .env()
-    .file(path.join(__dirname, configFile))
     .defaults({
       AUTH0_RTA: 'auth0.auth0.com',
       DATA_CACHE_MAX_AGE: 1000 * 10,
@@ -81,18 +83,22 @@ const createServer = (configFile = '../server/config.test.json') => {
       USE_OAUTH2: false,
       LOG_COLOR: true,
       AUTH0_DOMAIN: 'test.local.dev',
-      AUTH0_CLIENT_ID: 'AUTHO_CLIENT_ID',
-      AUTH0_CLIENT_SECRET: 'AUTHO_CLIENT_SECRET',
+      AUTH0_CLIENT_ID: 'AUTH0_CLIENT_ID',
+      AUTH0_CLIENT_SECRET: 'AUTH0_CLIENT_SECRET',
       WT_URL: 'localhost:3001',
+      PUBLIC_WT_URL: 'testWebtask',
       EXTENSION_SECRET: 'EXTENSION_SECRET'
     });
 
   config.setProvider(key => nconf.get(key));
 
+  const tmpDb = path.join(os.tmpdir(), `auth0-ext-test-${process.pid}.json`);
+  initDb(new FileStorageContext(tmpDb, { force: 1 }));
+
   return initServer(() => {}, mockHandlers);
 };
 
-const startServer = (configFile = '../server/config.test.json') =>
+const startServer = () =>
   new Promise((resolve, reject) => {
     const server = createServer();
 
