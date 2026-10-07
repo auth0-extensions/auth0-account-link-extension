@@ -72,7 +72,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "21.3.3",
-    "@hapi/inert": "^7.1.0",
+    "@hapi/inert": "^7.1.1",
     "@hapi/joi": "^17.1.1",
     "@ngrok/ngrok": "^1.4.1",
     "auth0": "4.9.0",
